@@ -1,10 +1,11 @@
-#' KLEE - Kozachenko-Leonenko Estimator of Entropy
+#' KLEE1 - Kozachenko-Leonenko Estimator of Entropy, dimension = 1
 #' 
 #' Uses the kth Nearest Neighbour method, expanded by Kozachenko and Leonenko to generate a constsitent and asymptotically unbiased estimator for entropy
+#' Only considers the 1 dimensional case
 #' @param X a vector of samples from a known/unknown distribution
-#'        d the dimension of the euclidean space
 #'        k the degree of nearest neigbour to estimate by
 #' @export KLEE
+#' @import knn.dist from FNN
 
 
 # The Gamma function
@@ -21,36 +22,30 @@ GammaFun <- function(m) {
 }
 
 
-# The volume of the unit d-dimensional Euclidean ball
-Vd <- function(d) {
-  (pi^(d/2))/GammaFun(1 + d/2)
-}
+# The volume of the unit 1-dimensional Euclidean ball
+V1 <- (pi^(1/2))/GammaFun(3/2)
 
-# The Euler-Mascheroni constant
-gam <- 0.577216
-
-
-# The DiGamma function
-DiGammaFun <- function(k) {
-  # check that k is an integer, as k
-  stopifnot(is.integer(k))
-  j <- (1:(k-1))
-  -gam + sum(1/j)
-}
 
 
 # The kth NN function
-Roe <- function(X, k, d) {
-  n <- length(x)
+Roe <- function(X, k) {
+  NNdist <- knn.dist(data=X, k=k)
+  n <- length(X)
+  res <- rep(0, n)
+  for (i in 1:n) {
+    res[i] <- NNdist[i, 1]
+  }
   
-  
+  res
 }
 
 
-
-KLEE <- function(X, k, d) {
+# The actual KLEE estimator function
+KLEE <- function(X, k) {
+  k <- as.integer(k)
   n <- length(X)
   i <- (1:n)
+  NN <- Roe(X, k)
   
-  (1/n)*sum(log((Roe(X, k, d)*Vd(n-1))/exp(DiGammaFun(k))))
+  (1/n)*sum(log((NN[i]*V1*(n-1))/exp(digamma(k))))
 }
