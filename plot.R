@@ -18,7 +18,7 @@ library(ggplot2)
 
 g <- ggplot() +
   geom_point(aes(k, Ent)) +
-  geom_hline(yintercept = ActEnt) +
+  #geom_hline(yintercept = ActEnt) +
   ggtitle("kth Nearest Neighbour Entropy for normal distribution with sd=1")
 
 g
