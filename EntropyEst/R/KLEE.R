@@ -7,6 +7,7 @@
 #' @export KLEE
 #' @import knn.dist from FNN
 
+library(FNN)
 
 # The Gamma function
 GammaFun <- function(m) {
