@@ -2,16 +2,16 @@
 % Please edit documentation in R/KLEE.R
 \name{GammaFun}
 \alias{GammaFun}
-\title{KLEE - Kozachenko-Leonenko Estimator of Entropy}
+\title{KLEE1 - Kozachenko-Leonenko Estimator of Entropy, dimension = 1}
 \usage{
 GammaFun(m)
 }
 \arguments{
 \item{X}{a vector of samples from a known/unknown distribution
-d the dimension of the euclidean space
 k the degree of nearest neigbour to estimate by}
 }
 \description{
 Uses the kth Nearest Neighbour method, expanded by Kozachenko and Leonenko to generate a constsitent and asymptotically unbiased estimator for entropy
+Only considers the 1 dimensional case
 }
 

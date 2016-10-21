@@ -4,10 +4,8 @@
 #' Only considers the 1 dimensional case
 #' @param X a vector of samples from a known/unknown distribution
 #'        k the degree of nearest neigbour to estimate by
-#' @export KLEE
+#' @export
 #' @import knn.dist from FNN
-
-library(FNN)
 
 # The Gamma function
 GammaFun <- function(m) {
@@ -24,29 +22,29 @@ GammaFun <- function(m) {
 
 
 # The volume of the unit 1-dimensional Euclidean ball
-V1 <- (pi^(1/2))/GammaFun(3/2)
-
+#V1 <- (pi^(1/2))/GammaFun(3/2)
+V1 <- 2
 
 
 # The kth NN function
 Roe <- function(X, k) {
+  # creating the matrix of kth nn distances for X
   NNdist <- knn.dist(data=X, k=k)
   n <- length(X)
-  res <- rep(0, n)
-  for (i in 1:n) {
-    res[i] <- NNdist[i, 1]
-  }
+  # check that k is not larger than the length of the vector
+  stopifnot(n > k)
   
-  res
+  # return the kth column of the matrix
+  NNdist[,k]
 }
-
 
 # The actual KLEE estimator function
 KLEE <- function(X, k) {
-  k <- as.integer(k)
   n <- length(X)
-  i <- (1:n)
+  
+  # define the vector Roe of nearest neighbour distances
   NN <- Roe(X, k)
   
-  (1/n)*sum(log((NN[i]*V1*(n-1))/exp(digamma(k))))
+  (1/n)*sum(log((NN*V1*(n-1))/exp(digamma(k))))
 }
+
