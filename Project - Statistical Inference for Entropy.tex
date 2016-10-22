@@ -14,12 +14,49 @@
 
 
 \section{Entropies and Properties}
-Entropy can be thought of as a representation of the average information content of an observation; sometimes referred to as a measure of unpredictability.
+Entropy can be thought of as a representation of the average information content of an observation; sometimes referred to as a measure of unpredictability. 
+
+The differential entropy of a random vector X with density function f is given by H;
+\begin{align}
+H &= - \mathbb{E} \{log(f(x))\} \\
+&= - \int_{x : f(x) > 0} f(x) log(f(x)) dx
+\end{align}
 
 \section{Estimation of Entropy}
 
 \subsection{Kozachenko-Leonenko Estimator}
 
+We now wish to introduce the Kozachenko-Leonenko estimator of the entropy H. Let $X_{1}, X_{2}, ... ,X_{n}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
+ 
+\begin{itemize}
+
+\item For $i = 1, 2, ..., n$, let $X_{(1), i}, X_{(2), i}, .., X_{(n-1), i}$ denote an order of the $X_{k}$ for $k = \{1, 2, ..., n\} \setminus \{i\}$, such that $\| X_{(1), i} - X_{i}\| \leq \cdots \leq \|  X_{(n-1), i} - X_{i}\| $. Let the metric $\rho$, defined as;
+\begin{equation}
+\rho_{(k), i} = \| X_{(k), i} - X_{i}\|
+\end{equation} denote the kth nearest neighbour or $X_{i}$.
+
+\item  For dimension d, the volume of the unit d-dimensional Euclidean ball is defined as;
+\begin{equation}
+V_{d} = \frac{\pi^\frac{d}{2}}{\Gamma(1 + \frac{d}{2})}
+\end{equation}
+
+\item For the kth nearest neighbour, the digamma function is defined as;
+\begin{equation}
+\Psi(k) = -\gamma + \sum_{j=1}^{k-1} \frac{1}{j}
+\end{equation}
+where $\gamma = 0.577216$ is the Euler-Mascheroni constant (where the digamma function is chosen so that $\frac{e^{\Psi(k)}}{k}\to1$ as $k \to \infty$).
+
+\end{itemize} Then the Kozachenko-Leonenko estimator for entropy, H is given by;
+\begin{equation} \label{KLest}
+\hat{H}_{n} = \frac{1}{n} \sum_{i=1}^{n} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (n-1)}{e^{\Psi(k)}} \right]
+\end{equation} This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, this estimator satisfies;
+\begin{equation} \label{efficiency}
+n \mathbb{E} {(\hat{H}_{n} - H)^2} \to 0 \quad  (n \to \infty)
+\end{equation} so $\hat{H}_{n}$ is efficient in the sense that the asymptotic variance is the best attainable; $n^{\frac{1}{2}}(\hat{H}_{n} - H) \xrightarrow{d} N(0, Var[log(f(x))])$.
+
+Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$ equation \ref{efficiency}, no longer holds but the estimator $\hat{H}_{n}$, defined by \ref{KLest}, is still root-n consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of k. 
+
+There is a new proposed estimator, formed as a weighted average of $\hat{H}_{n}$ for different values of k, explored in ... . Moreover, as this paper only considers $d=1, 2$, this will not be examined here.
 
 \section{Monte-Carlo Simulations}
 
