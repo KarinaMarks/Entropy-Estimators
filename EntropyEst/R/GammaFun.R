@@ -1,8 +1,7 @@
 #' The Gamma function
 #'
 #'
-#' this function does something cool
-#' @param m
+#' @param m the number to take the gamma function of
 #' @export
 #'
 
