@@ -1,6 +1,6 @@
 #' KLEE1 - Kozachenko-Leonenko Estimator of Entropy
 #' 
-#' Uses the kth Nearest Neighbour method, expanded by Kozachenko and Leonenko to generate a constsitent and asymptotically unbiased estimator for entropy
+#' Uses the kth Nearest Neighbour method, expanded by Kozachenko and Leonenko to generate a constsitent and asymptotically unbiased estimator for entropy.
 #' Only considers the 1 dimensional case (so far)
 #' @param X a vector of samples from a known/unknown distribution
 #' @param k the degree of nearest neigbour to estimate by

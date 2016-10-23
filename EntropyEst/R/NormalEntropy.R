@@ -7,5 +7,5 @@
 
 
 NormalEnt <- function(sd){
-  ((1/2)*log(2*pi*sd)+1/2)
+  (log(sqrt(2*pi*exp(1))*sd))
 }
