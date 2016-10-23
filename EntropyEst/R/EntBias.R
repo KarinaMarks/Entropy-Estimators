@@ -14,5 +14,5 @@ EntBias <- function(X, k, sd){
   # working out the actual value of entropy for this distribution
   Act <- NormalEnt(sd)
   # the bias
-  Est - Act
+  Mod(Est - Act)
 }
