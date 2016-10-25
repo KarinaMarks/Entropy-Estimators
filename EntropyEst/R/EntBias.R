@@ -13,6 +13,6 @@ EntBias <- function(X, k, sd){
   Est <- KLEE(X, k)
   # working out the actual value of entropy for this distribution
   Act <- NormalEnt(sd)
-  # the bias
+  # modulus of the bias
   Mod(Est - Act)
 }
