@@ -6,8 +6,6 @@
 #' @param k the degree of nearest neigbour to estimate by
 #' @param d the dimension of the sample
 #' @export
-#' @import knn.dist from FNN
-
 
 # The actual KLEE estimator function
 KLEE <- function(X, k, d=1) {

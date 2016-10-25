@@ -10,20 +10,20 @@
 #' @param sd the standard deviation for the normal distribution that the 
 #' sample is from, default 1
 #' @export
-#' @import ggplot2
+#' @import ggplot2 dplyr
 
-BiasRegression <- function(k = 1, N = 50000, sd = 1){
-  # create the vector of N
-  n <- seq(500, N, 500)
-  # initialise the vector for the bias 
-  Bias <- numeric(0)
-  # for each value of N, creating the Bias of the estimator at N
-  for (i in 1:length(n)){
-    Bias[i] <- EntBias(rnorm(n[i], sd=sd), k=k, sd=sd)
-  }
+BiasRegression <- function(k = 1, N = 5000, sd = 1){
+  # creating a dataframe with values of n, grouped by n
+  grouped_n <- data.frame(n = seq(100, N, 100)) %>% 
+    group_by(n) 
   
-  # creating a dataframe with this information
-  df <- data.frame(log_N = log(n), log_Bias = log(Bias))
+  # creating a new dataframe with the Bias for each n
+  newdf <- summarise(grouped_n, 
+                     Bias = EntBias(X=rnorm(n=n, mean=0, sd=sd), sd=sd, k=k))
+  
+  # creating a new dataframe with the log of n and bias
+  df <- data.frame(n = newdf$n, Bias = newdf$Bias) %>% 
+    transmute(log_N = log(n), log_Bias = log(Bias))
   
   # creating the plot of the log(N) against log(Bias(H))
   glogreg <- ggplot(aes(x=log_N, y=log_Bias), data=df) +
@@ -36,15 +36,14 @@ BiasRegression <- function(k = 1, N = 50000, sd = 1){
     ylab("log(Bias(H))")
   
   # finding the regression model for this sample
-  reg <- lm(log(Bias) ~ log(n))
+  reg <- lm(df$log_Bias ~ df$log_N)
   
   c <- round(exp(reg$coefficients[["(Intercept)"]]), 4)
-  a <- round(-reg$coefficients[["log(n)"]], 4)
+  a <- round(-reg$coefficients[["df$log_N"]], 4)
   
   # summarising important findings from this investigation
-  Info <- paste0("c = ", c ,  " and a = ", a, 
-                 ". So we have regression formula Bias(H) = ", 
-                c, "/(N^", a, ")")
+  Info <- paste0("c = ", c ,  " and a = ", a,
+                 ". So Bias(H) = ", c, "/(N^", a, ")")
   
   # returning the graph and information summary
   return(list(glogreg, Info))

@@ -4,6 +4,7 @@
 #' @param k the order of nearest neighbour to be used
 #' @param d the dimension of the sample
 #' @export
+#' @import FNN
 
 
 # The kth NN function

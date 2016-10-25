@@ -4,7 +4,7 @@
 \alias{BiasRegression}
 \title{A function to plot simulations for the Kozachenko-Leonenko entropy estimator}
 \usage{
-BiasRegression(k = 1, N = 50000, sd = 1)
+BiasRegression(k = 1, N = 5000, sd = 1)
 }
 \arguments{
 \item{k}{the number for nearest neighbour, default 1}
