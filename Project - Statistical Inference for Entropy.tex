@@ -92,8 +92,22 @@ I will begin by exploring entropy of samples from the normal distribution $N(0, 
 H = log(\sqrt{(2\pi e)}\sigma)
 \end{equation}
 
+The motivation for these simulations is to explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. We believe this relationship is of the form;
+\begin{equation}
+|Bias(\hat{H}_{N, k})| = \frac{c}{N^a}
+\end{equation}
+for $a, c > 0$. By taking the logarithm of this, we can see that this relationship is infact linear;
+\begin{equation}
+log|Bias(\hat{H}_{N, k})| = log(c) - a [log(N)]
+\end{equation}
+We will investigate the consistency of this estimator for a sample from the normal distribution, dependent on the value of $k$.
+
 \subsection{1-dimensional Normal Distribution}
 
+\subsubsection{k=1}
+
+
+\subsubsection{k=2}
 
 
 
