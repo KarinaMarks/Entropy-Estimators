@@ -15,25 +15,25 @@
 BiasRegression <- function(k = 1, N = 5000, sd = 1){
   # creating a dataframe with values of n, grouped by n
   grouped_n <- data.frame(n = seq(100, N, 100)) %>% 
-    group_by(n) 
+    dplyr::group_by(n) 
   
   # creating a new dataframe with the Bias for each n
-  newdf <- summarise(grouped_n, 
+  newdf <- dplyr::summarise(grouped_n, 
                      Bias = EntBias(X=rnorm(n=n, mean=0, sd=sd), sd=sd, k=k))
   
   # creating a new dataframe with the log of n and bias
   df <- data.frame(n = newdf$n, Bias = newdf$Bias) %>% 
-    transmute(log_N = log(n), log_Bias = log(Bias))
+    dplyr::transmute(log_N = log(n), log_Bias = log(Bias))
   
   # creating the plot of the log(N) against log(Bias(H))
-  glogreg <- ggplot(aes(x=log_N, y=log_Bias), data=df) +
-    geom_point() +
-    geom_smooth(method='lm', se = FALSE) +
-    ggtitle(paste0("Simulation from normal distribution (m = 0, sd = ", sd, "), 
+  glogreg <- ggplot2::ggplot(aes(x=log_N, y=log_Bias), data=df) +
+    ggplot2::geom_point() +
+    ggplot2::geom_smooth(method='lm', se = FALSE) +
+    ggplot2::ggtitle(paste0("Simulation from normal distribution (m = 0, sd = ", sd, "), 
   for bias of the K-L entropy estimator at varying sample sizes, 
   up to N = ", N, ", for the kth nearest neighbour (k =", k, ").")) +
-    xlab("log(N)") +
-    ylab("log(Bias(H))")
+    ggplot2::xlab("log(N)") +
+    ggplot2::ylab("log(Bias(H))")
   
   # finding the regression model for this sample
   reg <- lm(df$log_Bias ~ df$log_N)
