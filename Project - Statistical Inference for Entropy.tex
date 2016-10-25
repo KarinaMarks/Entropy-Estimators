@@ -36,18 +36,17 @@ Tsallis entropy
 \begin{equation} \label{TsaEnt}
 H_{q} = \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  \quad (q \neq 1)
 \end{equation}
-
 When the order of the entropy $q \to 1$, both the Renyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}). 
 
 \section{Estimation of Entropy}
 
 \subsection{Kozachenko-Leonenko Estimator}
 
-We now wish to introduce the Kozachenko-Leonenko estimator of the entropy H. Let $X_{1}, X_{2}, ... ,X_{n}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
+We now wish to introduce the Kozachenko-Leonenko estimator of the entropy H. Let $X_{1}, X_{2}, ... ,X_{N}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
  
 \begin{itemize}
 
-\item For $i = 1, 2, ..., n$, let $X_{(1), i}, X_{(2), i}, .., X_{(n-1), i}$ denote an order of the $X_{k}$ for $k = \{1, 2, ..., n\} \setminus \{i\}$, such that $\| X_{(1), i} - X_{i}\| \leq \cdots \leq \|  X_{(n-1), i} - X_{i}\| $. Let the metric $\rho$, defined as;
+\item For $i = 1, 2, ..., N$, let $X_{(1), i}, X_{(2), i}, .., X_{(N-1), i}$ denote an order of the $X_{k}$ for $k = \{1, 2, ..., N\} \setminus \{i\}$, such that $\| X_{(1), i} - X_{i}\| \leq \cdots \leq \|  X_{(N-1), i} - X_{i}\| $. Let the metric $\rho$, defined as;
 \begin{equation}
 \rho_{(k), i} = \| X_{(k), i} - X_{i}\|
 \end{equation} denote the kth nearest neighbour or $X_{i}$.
@@ -65,21 +64,31 @@ where $\gamma = 0.577216$ is the Euler-Mascheroni constant (where the digamma fu
 
 \end{itemize} Then the Kozachenko-Leonenko estimator for entropy, H, is given by;
 \begin{equation} \label{KLest}
-\hat{H}_{n} = \frac{1}{n} \sum_{i=1}^{n} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (n-1)}{e^{\Psi(k)}} \right]
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (N-1)}{e^{\Psi(k)}} \right]
 \end{equation} This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, this estimator satisfies;
 \begin{equation} \label{efficiency}
-n \mathbb{E} {(\hat{H}_{n} - H)^2} \to 0 \quad  (n \to \infty)
-\end{equation} so $\hat{H}_{n}$ is efficient in the sense that the asymptotic variance is the best attainable; $n^{\frac{1}{2}}(\hat{H}_{n} - H) \xrightarrow{d} N(0, Var[log(f(x))])$.
+N \mathbb{E} {(\hat{H}_{N, k} - H)^2} \to 0 \quad  (N \to \infty)
+\end{equation} so $\hat{H}_{N, k}$ is efficient in the sense that the asymptotic variance is the best attainable; $N^{\frac{1}{2}}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, Var[log(f(x))])$, the normal distribution with 0 mean and variance as shown.
 
-Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equation \ref{efficiency} no longer holds but the estimator $\hat{H}_{n}$, defined by \ref{KLest}, is still root-n consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of k. 
+Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equation( \ref{efficiency}) no longer holds but the estimator $\hat{H}_{N, k}$, defined by (\ref{KLest}), is still root-N consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of k. 
 
-There is a new proposed estimator, formed as a weighted average of $\hat{H}_{n}$ for different values of k, explored in ... . Moreover, as this paper only considers $d=1, 2$, this will not be examined here.
+There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of k, explored in ...SOMEONE... . Moreover, this will not be examined here as this paper focuses only on the 1-dimensional samples;
+\begin{equation} \label{KLestd=1}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i} V_{1} (N-1)}{e^{\Psi(k)}} \right]
+\end{equation}
+and the 2-dimensional;
+\begin{equation} \label{KLestd=2}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{2} V_{2} (N-1)}{e^{\Psi(k)}} \right]
+\end{equation}
+
+
 
 \subsection{Bias of the K-L estimator}
-$\hat{H}_{n}$ is approximately an unbiased estimator for H; we wish to explore how approximate this is, by considering the bias of the estimator for entropy;
+$\hat{H}_{N, k}$ is approximately an unbiased estimator for H; we wish to explore how approximate this is, by considering the bias of the estimator for entropy;
 \begin{equation} \label{Bias}
-Bias(\hat{H}_{n} ) = \mathbb{E}(\hat{H}_{n}) - H = \mathbb{E}(\hat{H}_{n} - H)
+Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H = \mathbb{E}(\hat{H}_{N, k} - H)
 \end{equation}
+To do this we consider the consistency and asymptotic bias of the estimator $\hat{H}_{N, k}$, ...SOMEONE... has explored this in detail thus the following theorems hold.
 
 
 
@@ -96,7 +105,7 @@ The motivation for these simulations is to explore the consistency of this estim
 \begin{equation}
 |Bias(\hat{H}_{N, k})| = \frac{c}{N^a}
 \end{equation}
-for $a, c > 0$. By taking the logarithm of this, we can see that this relationship is infact linear;
+for $a, c > 0$. By taking the logarithm of this, we can see that this relationship is in fact linear;
 \begin{equation}
 log|Bias(\hat{H}_{N, k})| = log(c) - a [log(N)]
 \end{equation}
