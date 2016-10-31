@@ -61,5 +61,5 @@ BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 5000,
                  a, ")  for samples from the ", dist, " distribution.")
   
   # returning the graph and information summary
-  return(list(glogreg, Info))
+  return(list(graph = glogreg, a = a, c = c, summary = Info))
 }
