@@ -4,20 +4,27 @@
 \alias{BiasRegression}
 \title{A function to plot simulations for the Kozachenko-Leonenko entropy estimator}
 \usage{
-BiasRegression(k = 1, N = 5000, sd = 1)
+BiasRegression(dist = c("normal", "uniform"), k = 1, N = 5000, sd = 1,
+  min = 0, max = 1)
 }
 \arguments{
+\item{dist, }{the distribution for the simulation to come from, either 
+normal or uniform}
+
 \item{k}{the number for nearest neighbour, default 1}
 
 \item{N}{the size of the largest sample to be considered, default 50000}
 
 \item{sd}{the standard deviation for the normal distribution that the 
-sample is from, default 1}
+sample is from, default 1, given the distribution is "normal"}
+
+\item{max/min, }{the parameters for the unifrom distribution, provided
+that the distribution is "uniform", default is min=0, max=1}
 }
 \description{
 This function considers the logarithm of the Bias of entropy estimator for a 
-sample from the normal distribution, against the logarithm of the size of 
-this sample. It also plots a regression line and returns information about
-the linear regression equation; Bias(H) = c/(N^a)
+sample from the normal or uniform distribution, against the logarithm of 
+the size of this sample. It also plots a regression line and returns 
+information about the linear regression equation; Bias(H) = c/(N^a)
 }
 

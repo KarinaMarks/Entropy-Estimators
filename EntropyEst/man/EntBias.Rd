@@ -4,17 +4,24 @@
 \alias{EntBias}
 \title{Bias of entropy estimator}
 \usage{
-EntBias(X, k, sd)
+EntBias(X, k, dist = c("normal", "uniform"), sd = 1, min = 0, max = 1)
 }
 \arguments{
 \item{X}{the sample}
 
 \item{k}{the order of nearest neighbour distances to work out}
 
-\item{sd}{the standard deviation of the normal distribution the sample is from}
+\item{dist, }{the distribution which to work out the bias from}
+
+\item{sd}{the standard deviation of the normal distribution the 
+sample is from, given that distribution is "normal"}
+
+\item{max/min, }{the parameters for the unifrom distribution, provided
+that the distribution is "uniform"}
 }
 \description{
 Works out the bias of the Kozachenko Leonenko estimator for entropy against
-the actual value, given that the sample is from a normal distribution
+the actual value, given that the sample is from a normal or uniform
+distribution
 }
 

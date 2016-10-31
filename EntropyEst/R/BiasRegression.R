@@ -1,25 +1,40 @@
 #' A function to plot simulations for the Kozachenko-Leonenko entropy estimator
 #' 
 #' This function considers the logarithm of the Bias of entropy estimator for a 
-#' sample from the normal distribution, against the logarithm of the size of 
-#' this sample. It also plots a regression line and returns information about
-#' the linear regression equation; Bias(H) = c/(N^a)
+#' sample from the normal or uniform distribution, against the logarithm of 
+#' the size of this sample. It also plots a regression line and returns 
+#' information about the linear regression equation; Bias(H) = c/(N^a)
 #'
+#' @param dist, the distribution for the simulation to come from, either 
+#' normal or uniform
 #' @param k the number for nearest neighbour, default 1
 #' @param N the size of the largest sample to be considered, default 50000
 #' @param sd the standard deviation for the normal distribution that the 
-#' sample is from, default 1
+#' sample is from, default 1, given the distribution is "normal"
+#' @param max/min, the parameters for the unifrom distribution, provided
+#' that the distribution is "uniform", default is min=0, max=1
 #' @export
 #' @import ggplot2 dplyr
 
-BiasRegression <- function(k = 1, N = 5000, sd = 1){
+BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 5000, 
+                           sd = 1, min = 0, max = 1){
   # creating a dataframe with values of n, grouped by n
   grouped_n <- data.frame(n = seq(100, N, 100)) %>% 
     dplyr::group_by(n) 
   
-  # creating a new dataframe with the Bias for each n
-  newdf <- dplyr::summarise(grouped_n, 
-                     Bias = EntBias(X=rnorm(n=n, mean=0, sd=sd), sd=sd, k=k))
+  dist <- match.arg(dist)
+  
+  if (dist == "normal"){
+    # creating a new dataframe with the Bias for each n
+    newdf <- dplyr::summarise(grouped_n, 
+                              Bias = EntBias(X=rnorm(n=n, mean=0, sd=sd), 
+                                             sd=sd, k=k, dist="normal"))
+  } else if (dist == "uniform"){
+    # creating a new dataframe with the Bias for each n
+    newdf <- dplyr::summarise(grouped_n, 
+                              Bias = EntBias(X=runif(n=n, max=max, min=min), 
+                                             k=k, dist="uniform"))
+  }
   
   # creating a new dataframe with the log of n and bias
   df <- data.frame(n = newdf$n, Bias = newdf$Bias) %>% 
@@ -29,9 +44,9 @@ BiasRegression <- function(k = 1, N = 5000, sd = 1){
   glogreg <- ggplot2::ggplot(aes(x=log_N, y=log_Bias), data=df) +
     ggplot2::geom_point() +
     ggplot2::geom_smooth(method='lm', se = FALSE) +
-    ggplot2::ggtitle(paste0("Simulation from normal distribution (m = 0, sd = ", sd, "), 
+    ggplot2::ggtitle(paste0("Simulation from ", dist, " distribution, 
   for bias of the K-L entropy estimator at varying sample sizes, 
-  up to N = ", N, ", for the kth nearest neighbour (k =", k, ").")) +
+  up to N = ", as.numeric(N), ", for the kth nearest neighbour (k =", k, ").")) +
     ggplot2::xlab("log(N)") +
     ggplot2::ylab("log(Bias(H))")
   
@@ -42,8 +57,8 @@ BiasRegression <- function(k = 1, N = 5000, sd = 1){
   a <- round(-reg$coefficients[["df$log_N"]], 4)
   
   # summarising important findings from this investigation
-  Info <- paste0("c = ", c ,  " and a = ", a,
-                 ". So Bias(H) = ", c, "/(N^", a, ")")
+  Info <- paste0("c = ", c ,  " and a = ", a,". So Bias(H) = ", c, "/(N^", 
+                 a, ")  for samples from the ", dist, " distribution.")
   
   # returning the graph and information summary
   return(list(glogreg, Info))
