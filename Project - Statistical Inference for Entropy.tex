@@ -171,24 +171,25 @@ For varying values of N we get the following table;
  \begin{adjustwidth}{-2cm}{}
 \begin{tabular}{|l|l|l|l|}
 \hline
-N & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & Variance of $\hat{H}_{N, 1}$ \\
+N & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & Variance of $|Bias(\hat{H}_{N, 1})|$ \\
 \hline
-5,000 & $\hat{H}_{5000, 1} \approx 1.418289$ &  $|Bias(\hat{H}_{5000, 1})| \approx 0.000649703 $  & $Var(\hat{H}_{5000, 1}) \approx 0.0005185365 $\\
-10,000 & $\hat{H}_{10000, 1} \approx $ &  $|Bias(\hat{H}_{10000, 1})| \approx   $ &  $Var(\hat{H}_{10000, 1}) \approx $\\
-50,000 & $\hat{H}_{50000, 1} \approx $ &  $|Bias(\hat{H}_{50000, 1})| \approx   $ &  $Var(\hat{H}_{50000, 1}) \approx $\\
-75,000 & $\hat{H}_{75000, 1} \approx $ &  $|Bias(\hat{H}_{75000, 1})| \approx  $  &  $Var(\hat{H}_{75000, 1}) \approx $\\
-100,000 & $\hat{H}_{100000, 1} \approx $ &  $|Bias(\hat{H}_{100000, 1})| \approx  $ & $Var(\hat{H}_{100000, 1}) \approx $\\
-150,000 & $\hat{H}_{150000, 1} \approx $ &  $|Bias(\hat{H}_{150000, 1})| \approx  $ & $Var(\hat{H}_{150000, 1}) \approx $\\
-200,000 & $\hat{H}_{200000, 1} \approx $ &  $|Bias(\hat{H}_{200000, 1})| \approx  $ & $Var(\hat{H}_{200000, 1}) \approx $\\
-250,000 & $\hat{H}_{250000, 1} \approx $ &  $|Bias(\hat{H}_{250000, 1})| \approx  $ & $Var(\hat{H}_{250000, 1}) \approx $\\
+5,000 & $\hat{H}_{5000, 1} \approx 1.418289$ & $|Bias(\hat{H}_{5000, 1})| \approx 0.000649703$ & $Var(|Bias(\hat{H}_{5000, 1})|) \approx 0.0005185365 $\\
+10,000 & $\hat{H}_{10000, 1} \approx $ & $|Bias(\hat{H}_{10000, 1})| \approx $ & $Var(|Bias(\hat{H}_{10000, 1})|) \approx $\\
+50,000 & $\hat{H}_{50000, 1} \approx $ & $|Bias(\hat{H}_{50000, 1})| \approx $ & $Var(|Bias(\hat{H}_{50000, 1})|) \approx $\\
+75,000 & $\hat{H}_{75000, 1} \approx $ & $|Bias(\hat{H}_{75000, 1})| \approx $ & $Var(|Bias(\hat{H}_{75000, 1})|) \approx $\\
+100,000 & $\hat{H}_{100000, 1} \approx $ & $|Bias(\hat{H}_{100000, 1})| \approx $ & $Var(|Bias(\hat{H}_{100000, 1})|) \approx $\\
+150,000 & $\hat{H}_{150000, 1} \approx $ & $|Bias(\hat{H}_{150000, 1})| \approx $ & $Var(|Bias(\hat{H}_{150000, 1})|) \approx $\\
+200,000 & $\hat{H}_{200000, 1} \approx $ & $|Bias(\hat{H}_{200000, 1})| \approx $ & $Var(|Bias(\hat{H}_{200000, 1})|) \approx $\\
+250,000 & $\hat{H}_{250000, 1} \approx $ & $|Bias(\hat{H}_{250000, 1})| \approx $ & $Var(|Bias(\hat{H}_{250000, 1})|) \approx $\\
 \hline
 \end{tabular}
 \caption{\label{fig:normalK=1} summary for simulations from the normal distribution with k=1}
  \end{adjustwidth}
 \end{figure}
 
-As we can see for the larger value of N, the Bias of the estimator becomes much smaller, as one would expect for an estimator to satisfy the consistent condition (\ref{efficiency})
+As we can see for the larger value of N, the Bias of the estimator becomes much smaller, as one would expect for an estimator to satisfy the consistent condition (\ref{efficiency}), we can also see that the variance of the bias ... as N increases implying that...
 
+This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, shown in equation (\ref{bias}), can be computed for these sample sizes. I have created a graph of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ for the samples above, and have found the corresponding regression line and coefficients a and c as shown in figure \ref{}. The coefficients found from this relationship are;
 
 \subsubsection{k=2}
 
