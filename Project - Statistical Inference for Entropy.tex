@@ -156,19 +156,31 @@ H = log(\sqrt{(2\pi e)}) \approx 1.418939
 
 I consider 1000 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. 
 
-By considering the situation outline above, with $N=50000$ I have worked out the estimator for entropy;
+By considering the situation outline above, with $N=5000$ I have worked out the estimator for entropy;
 \begin{equation}
-\hat{H}_{50000, 1} \approx 1.418784
+\hat{H}_{5000, 1} \approx 1.41856
 \end{equation}
 Thus,
 \begin{equation}
-|Bias(\hat{H}_{50000, 1})| = |\hat{H}_{50000, 1} - H| \approx 0.0001546303
+|Bias(\hat{H}_{5000, 1})| = |\hat{H}_{5000, 1} - H| \approx 0.0003782577 
 \end{equation}
-
 For varying values of N we get the following table;
 
+\begin{tabular}{|l|l|l|}
+\hline
+N & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ \\
+\hline
+5,000 & $\hat{H}_{5000, 1} \approx 1.41856$ &  $|Bias(\hat{H}_{5000, 1})| \approx 0.0003782577 $  \\
+50,000 & $\hat{H}_{50000, 1} \approx 1.418784 $ &  $|Bias(\hat{H}_{50000, 1})| \approx 0.0001546303  $  \\
+100,000 & $\hat{H}_{100000, 1} \approx 1.419097 $ &  $|Bias(\hat{H}_{100000, 1})| \approx 0.0001583482  $  \\
+500,000 & $\hat{H}_{500000, 1} \approx  $ &  $|Bias(\hat{H}_{500000, 1})| \approx   $  \\
+1,000,000 & $\hat{H}_{1000000, 1} \approx  $ &  $|Bias(\hat{H}_{1000000, 1})| \approx   $  \\
+5,000,000 & $\hat{H}_{5000000, 1} \approx  $ &  $|Bias(\hat{H}_{5000000, 1})| \approx   $  \\
+10,000,000 & $\hat{H}_{10000000, 1} \approx  $ &  $|Bias(\hat{H}_{10000000, 1})| \approx   $  \\
+\hline
+\end{tabular}
 
-
+As we can see for the larger value of N, the Bias of the estimator becomes much smaller, as one would expect for an estimator to satisfy the consistent condition (\ref{efficiency})
 
 
 \subsubsection{k=2}
