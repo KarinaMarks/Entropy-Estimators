@@ -4,7 +4,7 @@
 \alias{BiasRegression}
 \title{A function to plot simulations for the Kozachenko-Leonenko entropy estimator}
 \usage{
-BiasRegression(dist = c("normal", "uniform"), k = 1, N = 5000, sd = 1,
+BiasRegression(dist = c("normal", "uniform"), k = 1, N = 250000, sd = 1,
   min = 0, max = 1)
 }
 \arguments{
@@ -13,10 +13,10 @@ normal or uniform}
 
 \item{k}{the number for nearest neighbour, default 1}
 
-\item{N}{the size of the largest sample to be considered, default 50000}
+\item{N}{the size of the largest sample to be considered, default 250000}
 
 \item{sd}{the standard deviation for the normal distribution that the 
-sample is from, default 1, given the distribution is "normal"}
+sample is from, given the distribution is "normal", default 1}
 
 \item{max/min, }{the parameters for the unifrom distribution, provided
 that the distribution is "uniform", default is min=0, max=1}

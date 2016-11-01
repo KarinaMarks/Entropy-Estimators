@@ -8,18 +8,18 @@
 #' @param dist, the distribution for the simulation to come from, either 
 #' normal or uniform
 #' @param k the number for nearest neighbour, default 1
-#' @param N the size of the largest sample to be considered, default 50000
+#' @param N the size of the largest sample to be considered, default 250000
 #' @param sd the standard deviation for the normal distribution that the 
-#' sample is from, default 1, given the distribution is "normal"
+#' sample is from, given the distribution is "normal", default 1
 #' @param max/min, the parameters for the unifrom distribution, provided
 #' that the distribution is "uniform", default is min=0, max=1
 #' @export
 #' @import ggplot2 dplyr
 
-BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 5000, 
+BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 250000, 
                            sd = 1, min = 0, max = 1){
   # creating a dataframe with values of n, grouped by n
-  grouped_n <- data.frame(n = seq(100, N, 100)) %>% 
+  grouped_n <- data.frame(n = seq(1000, N, 1000)) %>% 
     dplyr::group_by(n) 
   
   dist <- match.arg(dist)
@@ -33,7 +33,8 @@ BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 5000,
     # creating a new dataframe with the Bias for each n
     newdf <- dplyr::summarise(grouped_n, 
                               Bias = EntBias(X=runif(n=n, max=max, min=min), 
-                                             k=k, dist="uniform"))
+                                             k=k, dist="uniform", max=max, 
+                                             min=min))
   }
   
   # creating a new dataframe with the log of n and bias
