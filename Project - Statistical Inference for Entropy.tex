@@ -23,23 +23,43 @@ Entropy can be thought of as a representation of the average information content
 
 \subsection{Shannon Entropy}
 The Shannon entropy of a random vector X with density function f is given by;
-\begin{equation} \label{ShaEnt}
-H = - \mathbb{E} \{log(f(x))\} = - \int_{x : f(x) > 0} f(x) log(f(x)) dx
-\end{equation}
+\begin{align} \label{ShaEnt}
+H &= - \mathbb{E} \{log(f(x))\} \\
+&= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \\
+&= - \sum_{x \in \mathbb{R}^{d}} f(x) log(f(x))
+\end{align}
 
 \subsection{ R\'enyi and Tsallis Entropy}
 These entropies are for the order $q \neq 1$ and the construction of them relies upon the generalisation of the Shannon entropy \ref{ShaEnt}. For a random vector $X \in \mathbb{R}^d$ with density function f, we define;
 
 R\'enyi entropy
-\begin{equation} \label{RenEnt}
-H_{q}^{*} = \frac{1}{1-q} log \left( \int_{\mathbb{R}^d} f^q (x) dx \right) \quad  \quad (q \neq 1)
-\end{equation}
+\begin{align} \label{RenEnt}
+H_{q}^{*} &= \frac{1}{1-q} log \left( \int_{\mathbb{R}^d} f^q (x) dx \right) \quad  \quad (q \neq 1) \\
+&=  \frac{1}{1-q} log \left( \sum_{x \in \mathbb{R}^{d}} f^q (x) \right)
+\end{align}
 
 Tsallis entropy
-\begin{equation} \label{TsaEnt}
-H_{q} = \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  \quad (q \neq 1)
+\begin{align} \label{TsaEnt}
+H_{q} &= \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  \quad (q \neq 1) \\
+&=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{R}^d} f^q (x) \right)
+\end{align}
+
+When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. There are also other special cases, sometimes the R\'enyi entropy is considered for the special case, $q=2$, and known as the quadratic R\'enyi entropy;
+\begin{align} \label{QuadRenEnt}
+H_{2}^{*} &= - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right)\\
+&= - log \left( \sum_{x \in \mathbb{R}^d} f^2 (x) \right)
+\end{align}
+As $q \to \infty$, the limit of the R\'enyi entropy exists, and is defined as the minimum entropy, since it's the smallest possible value of $H_{q}^{*}$;
+\begin{equation}
+H_{\infty}^{*} = - \log \sup_{x \in \mathbb{R}^d} f (x)
 \end{equation}
-When the order of the entropy $q \to 1$, both the Renyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}). 
+Thus, it follows that; $H_{\infty}^{*} \leq H_{2}^{*} \leq 2H_{\infty}^{*}$.
+
+There is also an approximate relationship between the Shannon entropy and the quadratic R\'enyi entropy;
+\begin{equation}
+H_{2}^{*} \leq H \leq \log(d) + \frac{1}{d} - e^{-H_{2}^{*}}
+\end{equation}
+where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the Shannon entropy (\ref{ShaEnt}) and d is the dimension of the distribution.
 
 \section{Estimation of Entropy}
 
@@ -86,7 +106,7 @@ and the 2-dimensional;
 
 
 
-\subsection{Bias of the K-L estimator}
+\subsubsection{Bias of the K-L estimator}
 $\hat{H}_{N, k}$ is approximately an unbiased estimator for H; we wish to explore how approximate this is, by considering the bias of the estimator for entropy;
 \begin{equation} \label{Bias}
 Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H = \mathbb{E}(\hat{H}_{N, k} - H)
@@ -123,11 +143,18 @@ Then $\hat{H}_{N, k}$ for $N \to \infty$ is a consistent estimator of H.
 \end{theorem}
 
 
+\subsection{Other Estimators}
+\begin{itemize}
+\item The estimator for $H_{2}^{*}$ from paper 5
+
+\item The estimator for higher dimensions $d$, from paper 4
+\end{itemize}
+
 \section{Monte-Carlo Simulations}
 
 In this section I will explore simulations of the bias of estimator (\ref{KLest}) in comparison to the size of the sample estimated from, with respect to different values of k; firstly exploring 1-dimensional distributions and then progressing onto 2-dimensional.
 
-The motivation for these simulations is to explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. We believe this relationship is of the form;
+The motivation for these simulations is to explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. Throughout this analysis we will be considering the absolute value of this bias, since when considering its logarithm, we need a positive value. We believe the relationship between these two variables is of the form;
 \begin{equation} \label{bias}
 |Bias(\hat{H}_{N, k})| = \frac{c}{N^a}
 \end{equation}
@@ -137,13 +164,21 @@ log|Bias(\hat{H}_{N, k})| = log(c) - a [log(N)]
 \end{equation}
 I will investigate the consistency of this estimator for a sample from the normal distribution, dependent on the value of $k$. I wish to find the optimum value of $k$ for which $|Bias(\hat{H}_{N, k})| \to 0$ for $N \to \infty$. For the relationship in (\ref{bias}), this will happen for large values of $a$ and relatively small $c$. I will also examine the dependence of the value of $c$ on the value of $k$.
 
+As I wish to consider the difference in accuracy of the estimator when using different values of k, let us denote the approximate values for $a$ and $c$ dependent on $k$ as $a_{k}$ and $c_{k}$.
+
 
 \subsection{1-dimensional Normal Distribution}
 
-I will begin by exploring entropy of samples from the normal distribution $N(0, \sigma^2)$, where without loss of generality we can use the mean $\mu = 0$ and change the variance $\sigma^2$ as needed. The normal distribution has an exact formula to work out the entropy, given the variance $\sigma^2$. Using equation (\ref{ShaEnt}) and the density function for the normal distribution $f(x) = \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$, we can write the exact entropy for the normal distribution;
-\begin{equation}
-H = log(\sqrt{(2\pi e)}\sigma)
-\end{equation}
+I will begin by exploring entropy of samples from the normal distribution $N(0, \sigma^2)$, where without loss of generality we can use the mean $\mu = 0$ and change the variance $\sigma^2$ as needed. The normal distribution has an exact formula to work out the entropy, given the variance $\sigma^2$. Using equation (\ref{ShaEnt}) and the density function for the normal distribution $f(x) = \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$. We can write the exact entropy for the normal distribution, using equation (\ref{ShaEnt});
+\begin{align}
+H &= - \int_{\mathbb{R}} \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} log \left[\frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \right] dx \\
+&=  \int_{\mathbb{R}} \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \left( log(\sqrt{(2\pi)}\sigma) +  \frac{x^2}{2\sigma^2} \right) \\
+&= \frac{log(\sqrt{(2\pi)}\sigma)}{\sqrt{(2\pi)} \sigma} \int_{\mathbb{R}} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx +  \frac{1}{2\sqrt{(2\pi)} \sigma} \int_{\mathbb{R}} \frac{x^2}{2\sigma^2}  \exp{ \left( \frac{-x^2}{\sigma^2} \right)} dx \\
+&=  log(\sqrt{(2\pi)}\sigma) + \frac{1}{2} \\
+&=  log(\sqrt{(2\pi e)}\sigma)
+\end{align}
+
+Thus the exact entropy for the normal distribution is given by $H =  log(\sqrt{(2\pi e)}\sigma)$. 
 
 The normal distribution has the properties which automatically satisfy the conditions above.... condition 1 since ... condition 2 since...
 
@@ -155,45 +190,119 @@ I will first explore the 1-dimensional standard normal distribution with mean $\
 H = log(\sqrt{(2\pi e)}) \approx 1.418939
 \end{equation}
 
-I consider 1000 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. 
-
-By considering the situation outline above, with $N=5000$ I have worked out the estimator for entropy;
+Since I am considering k=1, the estimator will take the form
 \begin{equation}
-\hat{H}_{5000, 1} \approx 1.41856
+\hat{H}_{N, 1} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(1),i}^{d} V_{d} (N-1)}{e^{\Psi(1)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(1),i}^{d} V_{d} (N-1)}{e^{-\gamma}} \right]
 \end{equation}
-Thus,
-\begin{equation}
-|Bias(\hat{H}_{5000, 1})| = |\hat{H}_{5000, 1} - H| \approx 0.0003782577 
-\end{equation}
-For varying values of N we get the following table;
 
-\begin{figure}
+I will consider 500 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. For varying values of N we get the table in Figure \ref{fig:normal_k=1}. As we can see for a larger value of N, the Bias of the estimator becomes much smaller, as one would expect for an estimator to satisfy the consistent condition (\ref{efficiency}), we can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy,  also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
+
+
+\begin{figure} 
  \begin{adjustwidth}{-2cm}{}
 \begin{tabular}{|l|l|l|l|}
 \hline
 N & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & Variance of $|Bias(\hat{H}_{N, 1})|$ \\
 \hline
+100 & $\hat{H}_{100, 1} \approx 1.4005$ & $|Bias(\hat{H}_{100, 1})| \approx 0.1277576$ & $Var(|Bias(\hat{H}_{100, 1})|) \approx 0.0103719$\\
+200 & $\hat{H}_{200, 1} \approx 1.40468$ & $|Bias(\hat{H}_{200, 1})| \approx 0.0955115$ & $Var(|Bias(\hat{H}_{200, 1})|) \approx 0.005237138$\\
+500 & $\hat{H}_{500, 1} \approx 1.416559$ & $|Bias(\hat{H}_{500, 1})| \approx 0.05513945$ & $Var(|Bias(\hat{H}_{500, 1})|) \approx 0.00185589$\\
+1,000 & $\hat{H}_{1000, 1} \approx 1.41675$ & $|Bias(\hat{H}_{1000, 1})| \approx 0.04126499$ & $Var(|Bias(\hat{H}_{1000, 1})|) \approx 0.0008685067$\\
 5,000 & $\hat{H}_{5000, 1} \approx 1.418289$ & $|Bias(\hat{H}_{5000, 1})| \approx 0.000649703$ & $Var(|Bias(\hat{H}_{5000, 1})|) \approx 0.0005185365 $\\
-10,000 & $\hat{H}_{10000, 1} \approx $ & $|Bias(\hat{H}_{10000, 1})| \approx $ & $Var(|Bias(\hat{H}_{10000, 1})|) \approx $\\
-50,000 & $\hat{H}_{50000, 1} \approx $ & $|Bias(\hat{H}_{50000, 1})| \approx $ & $Var(|Bias(\hat{H}_{50000, 1})|) \approx $\\
-75,000 & $\hat{H}_{75000, 1} \approx $ & $|Bias(\hat{H}_{75000, 1})| \approx $ & $Var(|Bias(\hat{H}_{75000, 1})|) \approx $\\
-100,000 & $\hat{H}_{100000, 1} \approx $ & $|Bias(\hat{H}_{100000, 1})| \approx $ & $Var(|Bias(\hat{H}_{100000, 1})|) \approx $\\
-150,000 & $\hat{H}_{150000, 1} \approx $ & $|Bias(\hat{H}_{150000, 1})| \approx $ & $Var(|Bias(\hat{H}_{150000, 1})|) \approx $\\
-200,000 & $\hat{H}_{200000, 1} \approx $ & $|Bias(\hat{H}_{200000, 1})| \approx $ & $Var(|Bias(\hat{H}_{200000, 1})|) \approx $\\
-250,000 & $\hat{H}_{250000, 1} \approx $ & $|Bias(\hat{H}_{250000, 1})| \approx $ & $Var(|Bias(\hat{H}_{250000, 1})|) \approx $\\
+10,000 & $\hat{H}_{10000, 1} \approx 1.418916$ & $|Bias(\hat{H}_{10000, 1})| \approx 0.01327136$ & $Var(|Bias(\hat{H}_{10000, 1})|) \approx 0.0001016049$\\
+25,000 & $\hat{H}_{25000, 1} \approx 1.419647$ & $|Bias(\hat{H}_{25000, 1})| \approx 0.008195638$ & $Var(|Bias(\hat{H}_{25000, 1})|) \approx 0.00003700078$\\
+50,000 & $\hat{H}_{50000, 1} \approx 1.419416$ & $|Bias(\hat{H}_{50000, 1})| \approx 0.005903308$ & $Var(|Bias(\hat{H}_{50000, 1})|) \approx 0.00002064492$\\
 \hline
 \end{tabular}
-\caption{\label{fig:normalK=1} summary for simulations from the normal distribution with k=1}
+\caption{\label{fig:normal_k=1} summary for simulations from the normal distribution with $k=1$, and varying $N$}
  \end{adjustwidth}
 \end{figure}
 
-As we can see for the larger value of N, the Bias of the estimator becomes much smaller, as one would expect for an estimator to satisfy the consistent condition (\ref{efficiency}), we can also see that the variance of the bias ... as N increases implying that...
-
-This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, shown in equation (\ref{bias}), can be computed for these sample sizes. I have created a graph of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ for the samples above, and have found the corresponding regression line and coefficients a and c as shown in figure \ref{}. The coefficients found from this relationship are;
+This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{graph_k=1}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ for the samples above, with a fitted regression line. I have also found the corresponding coefficients a and c for the relationship shown in (\ref{bias}); $a = $ and $c = $. On their own these coefficients show that there is a negative relationship between $|Bias(\hat{H}_{N, 1})|$ and $N$, but for them to have more meaning we must compare them to coefficients of the regression relationship for different values of $k$, and for different distributions.
 
 \subsubsection{k=2}
+I am now considering k=2, thus the Kozachenko-Leonenko estimator will take the form
+\begin{equation}
+\hat{H}_{N, 2} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(2),i}^{d} V_{d} (N-1)}{e^{\Psi(2)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(2),i}^{d} V_{d} (N-1)}{e^{-\gamma + 1}} \right]
+\end{equation}
+
+I wish to explore, in a similar manner as for k=1, the changes in the bias of the estimator depending on a change in N. Additionally, later i will make the comparison between the regression coefficients for different values of k.
+
+I will again consider 500 samples of size N from the 1-dimensional standard normal distribution $N(0, 1)$, the results from the analysis is shown in the table in Figure (\ref{fig:normal_k=2}).
+
+\begin{figure} 
+ \begin{adjustwidth}{-2cm}{}
+\begin{tabular}{|l|l|l|l|}
+\hline
+N & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & Variance of $|Bias(\hat{H}_{N, 2})|$ \\
+\hline
+100 & $\hat{H}_{100, 2} \approx 1.404102$ & $|Bias(\hat{H}_{100, 2})| \approx 0.09696776$ & $Var(|Bias(\hat{H}_{100, 2})|) \approx 0.005354366$\\
+200 & $\hat{H}_{200, 2} \approx 1.416022$ & $|Bias(\hat{H}_{200, 2})| \approx 0.07164508$ & $Var(|Bias(\hat{H}_{200, 2})|) \approx 0.003037111$\\
+500 & $\hat{H}_{500, 2} \approx 1.4415159$ & $|Bias(\hat{H}_{500, 2})| \approx 0.04286876$ & $Var(|Bias(\hat{H}_{500, 2})|) \approx 0.001083868$\\
+1,000 & $\hat{H}_{1000, 2} \approx 1.416211$ & $|Bias(\hat{H}_{1000, 2})| \approx 0.03056964$ & $Var(|Bias(\hat{H}_{1000, 2})|) \approx 0.0005165147$\\
+5,000 & $\hat{H}_{5000, 2} \approx 1.418589$ & $|Bias(\hat{H}_{5000, 2})| \approx 0.01322525$ & $Var(|Bias(\hat{H}_{5000, 2})|) \approx 0.00009693512$\\
+10,000 & $\hat{H}_{10000, 2} \approx 1.418323$ & $|Bias(\hat{H}_{10000, 2})| \approx 0.009492$ & $Var(|Bias(\hat{H}_{10000, 2})|) \approx 0.00005560607$\\
+25,000 & $\hat{H}_{25000, 2} \approx 1.418986$ & $|Bias(\hat{H}_{25000, 2})| \approx 0.006037769$ & $Var(|Bias(\hat{H}_{25000, 2})|) \approx 0.00002110012$\\
+50,000 & $\hat{H}_{50000, 2} \approx 1.419212$ & $|Bias(\hat{H}_{50000, 2})| \approx 0.004504959$ & $Var(|Bias(\hat{H}_{50000, 2})|) \approx 0.00001236801$\\
+\hline
+\end{tabular}
+\caption{\label{fig:normal_k=2} summary for simulations from the normal distribution with k=2 and varying N}
+ \end{adjustwidth}
+\end{figure}
 
 
+\subsubsection{k=3}
+
+
+
+\begin{figure} 
+ \begin{adjustwidth}{-2cm}{}
+\begin{tabular}{|l|l|l|l|}
+\hline
+N & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & Variance of $|Bias(\hat{H}_{N, 3})|$ \\
+\hline
+100 & $\hat{H}_{100, 3} \approx 1.396819$ & $|Bias(\hat{H}_{100, 3})| \approx 0.08063608$ & $Var(|Bias(\hat{H}_{100, 3})|) \approx 0.003750528$\\
+200 & $\hat{H}_{200, 3} \approx 1.407153$ & $|Bias(\hat{H}_{200, 3})| \approx 0.05938714$ & $Var(|Bias(\hat{H}_{200, 3})|) \approx 0.002145324$\\
+500 & $\hat{H}_{500, 3} \approx 1.418022$ & $|Bias(\hat{H}_{500, 3})| \approx 0.0373923$ & $Var(|Bias(\hat{H}_{500, 3})|) \approx 0.0007464306$\\
+1,000 & $\hat{H}_{1000, 3} \approx 1.418596$ & $|Bias(\hat{H}_{1000, 3})| \approx 0.02636523$ & $Var(|Bias(\hat{H}_{1000, 3})|) \approx 0.000432176$\\
+5,000 & $\hat{H}_{5000, 3} \approx 1.41799$ & $|Bias(\hat{H}_{5000, 3})| \approx 0.01165431$ & $Var(|Bias(\hat{H}_{5000, 3})|) \approx 0.00007221805$\\
+10,000 & $\hat{H}_{10000, 3} \approx 1.418454$ & $|Bias(\hat{H}_{10000, 3})| \approx 0.009006306$ & $Var(|Bias(\hat{H}_{10000, 3})|) \approx 0.00004969628$\\
+25,000 & $\hat{H}_{25000, 3} \approx 1.418685$ & $|Bias(\hat{H}_{25000, 3})| \approx 0.005304324$ & $Var(|Bias(\hat{H}_{25000, 3})|) \approx 0.00001522065$\\
+50,000 & $\hat{H}_{50000, 3} \approx 1.418678$ & $|Bias(\hat{H}_{50000, 3})| \approx 0.003799854$ & $Var(|Bias(\hat{H}_{50000, 3})|) \approx 0.000008950053$\\
+\hline
+\end{tabular}
+\caption{\label{fig:normal_k=3} summary for simulations from the normal distribution with k=3 and varying N}
+ \end{adjustwidth}
+\end{figure}
+
+
+\subsubsection{k=5}
+
+
+
+\begin{figure} 
+ \begin{adjustwidth}{-2cm}{}
+\begin{tabular}{|l|l|l|l|}
+\hline
+N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & Variance of $|Bias(\hat{H}_{N, 5})|$ \\
+\hline
+100 & $\hat{H}_{100, 5} \approx $ & $|Bias(\hat{H}_{100, 5})| \approx $ & $Var(|Bias(\hat{H}_{100, 5})|) \approx $\\
+200 & $\hat{H}_{200, 5} \approx $ & $|Bias(\hat{H}_{200, 5})| \approx $ & $Var(|Bias(\hat{H}_{200, 5})|) \approx $\\
+500 & $\hat{H}_{500, 5} \approx $ & $|Bias(\hat{H}_{500, 5})| \approx $ & $Var(|Bias(\hat{H}_{500, 5})|) \approx $\\
+1,000 & $\hat{H}_{1000, 5} \approx $ & $|Bias(\hat{H}_{1000, 5})| \approx $ & $Var(|Bias(\hat{H}_{1000, 5})|) \approx $\\
+5,000 & $\hat{H}_{5000, 5} \approx $ & $|Bias(\hat{H}_{5000, 5})| \approx $ & $Var(|Bias(\hat{H}_{5000, 5})|) \approx $\\
+10,000 & $\hat{H}_{10000, 5} \approx $ & $|Bias(\hat{H}_{10000, 5})| \approx $ & $Var(|Bias(\hat{H}_{10000, 5})|) \approx $\\
+25,000 & $\hat{H}_{25000, 5} \approx $ & $|Bias(\hat{H}_{25000, 5})| \approx $ & $Var(|Bias(\hat{H}_{25000, 5})|) \approx $\\
+50,000 & $\hat{H}_{50000, 5} \approx $ & $|Bias(\hat{H}_{50000, 5})| \approx $ & $Var(|Bias(\hat{H}_{50000, 5})|) \approx $\\
+\hline
+\end{tabular}
+\caption{\label{fig:normal_k=5} summary for simulations from the normal distribution with k=5 and varying N}
+ \end{adjustwidth}
+\end{figure}
+
+\subsubsection{k=10}
+
+\subsubsection{Comparison of k}
 
 
 \end{document}
