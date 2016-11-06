@@ -16,10 +16,10 @@
 #' @export
 #' @import ggplot2 dplyr
 
-BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 250000, 
-                           sd = 1, min = 0, max = 1){
+BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 25000, 
+                           sd = 1, min = 0, max = 1, M=500){
   # creating a dataframe with values of n, grouped by n
-  grouped_n <- data.frame(n = seq(1000, N, 1000)) %>% 
+  grouped_n <- data.frame(n = seq(50, N, 50)) %>% 
     dplyr::group_by(n) 
   
   dist <- match.arg(dist)
@@ -27,14 +27,13 @@ BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 250000,
   if (dist == "normal"){
     # creating a new dataframe with the Bias for each n
     newdf <- dplyr::summarise(grouped_n, 
-                              Bias = EntBias(X=rnorm(n=n, mean=0, sd=sd), 
-                                             sd=sd, k=k, dist="normal"))
+                              Bias = SamplesMean(N=n, dist="normal", k=k, 
+                                                 M=M, sd=sd))
   } else if (dist == "uniform"){
     # creating a new dataframe with the Bias for each n
     newdf <- dplyr::summarise(grouped_n, 
-                              Bias = EntBias(X=runif(n=n, max=max, min=min), 
-                                             k=k, dist="uniform", max=max, 
-                                             min=min))
+                              Bias = SamplesMean(N=n, dist="uniform", k=k, 
+                                                 M=M, min=min, max=max))
   }
   
   # creating a new dataframe with the log of n and bias
@@ -43,7 +42,7 @@ BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 250000,
   
   # creating the plot of the log(N) against log(Bias(H))
   glogreg <- ggplot2::ggplot(aes(x=log_N, y=log_Bias), data=df) +
-    ggplot2::geom_point() +
+    ggplot2::geom_point(shape="o") +
     ggplot2::geom_smooth(method='lm', se = FALSE) +
     ggplot2::ggtitle(paste0("Simulation from ", dist, " distribution, 
   for bias of the K-L entropy estimator at varying sample sizes, 
