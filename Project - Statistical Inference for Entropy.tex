@@ -23,41 +23,41 @@ Entropy can be thought of as a representation of the average information content
 
 \subsection{Shannon Entropy}
 The Shannon entropy of a random vector X with density function f is given by;
-\begin{align} \label{ShaEnt}
-H &= - \mathbb{E} \{log(f(x))\} \\
-&= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \\
-&= - \sum_{x \in \mathbb{R}^{d}} f(x) log(f(x))
-\end{align}
+\begin{align} 
+H &= - \mathbb{E} \{log(f(x))\} \nonumber \\
+&= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \nonumber \\
+&= - \sum_{x \in \mathbb{R}^{d}} f(x) log(f(x)) \label{ShaEnt}
+\end{align} 
 
 \subsection{ R\'enyi and Tsallis Entropy}
 These entropies are for the order $q \neq 1$ and the construction of them relies upon the generalisation of the Shannon entropy \ref{ShaEnt}. For a random vector $X \in \mathbb{R}^d$ with density function f, we define;
 
 R\'enyi entropy
-\begin{align} \label{RenEnt}
-H_{q}^{*} &= \frac{1}{1-q} log \left( \int_{\mathbb{R}^d} f^q (x) dx \right) \quad  \quad (q \neq 1) \\
-&=  \frac{1}{1-q} log \left( \sum_{x \in \mathbb{R}^{d}} f^q (x) \right)
+\begin{align} 
+H_{q}^{*} &= \frac{1}{1-q} log \left( \int_{\mathbb{R}^d} f^q (x) dx \right) \quad  \quad (q \neq 1) \label{RenEnt} \\
+&=  \frac{1}{1-q} log \left( \sum_{x \in \mathbb{R}^{d}} f^q (x) \right) \nonumber 
 \end{align}
 
 Tsallis entropy
-\begin{align} \label{TsaEnt}
-H_{q} &= \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  \quad (q \neq 1) \\
-&=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{R}^d} f^q (x) \right)
+\begin{align} 
+H_{q} &= \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  \quad (q \neq 1) \label{TsaEnt} \\
+&=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{R}^d} f^q (x) \right) \nonumber 
 \end{align}
 
 When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. There are also other special cases, sometimes the R\'enyi entropy is considered for the special case, $q=2$, and known as the quadratic R\'enyi entropy;
-\begin{align} \label{QuadRenEnt}
-H_{2}^{*} &= - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right)\\
-&= - log \left( \sum_{x \in \mathbb{R}^d} f^2 (x) \right)
+\begin{align} 
+H_{2}^{*} &= - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right) \label{QuadRenEnt} \\
+&= - log \left( \sum_{x \in \mathbb{R}^d} f^2 (x) \right) \nonumber 
 \end{align}
 As $q \to \infty$, the limit of the R\'enyi entropy exists, and is defined as the minimum entropy, since it's the smallest possible value of $H_{q}^{*}$;
 \begin{equation}
-H_{\infty}^{*} = - \log \sup_{x \in \mathbb{R}^d} f (x)
+H_{\infty}^{*} = - \log \sup_{x \in \mathbb{R}^d} f (x) \nonumber
 \end{equation}
 Thus, it follows that; $H_{\infty}^{*} \leq H_{2}^{*} \leq 2H_{\infty}^{*}$.
 
 There is also an approximate relationship between the Shannon entropy and the quadratic R\'enyi entropy;
 \begin{equation}
-H_{2}^{*} \leq H \leq \log(d) + \frac{1}{d} - e^{-H_{2}^{*}}
+H_{2}^{*} \leq H \leq \log(d) + \frac{1}{d} - e^{-H_{2}^{*}} \nonumber
 \end{equation}
 where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the Shannon entropy (\ref{ShaEnt}) and d is the dimension of the distribution.
 
@@ -70,17 +70,17 @@ We now wish to introduce the Kozachenko-Leonenko estimator of the entropy H. Let
 \begin{itemize}
 
 \item For $i = 1, 2, ..., N$, let $X_{(1), i}, X_{(2), i}, .., X_{(N-1), i}$ denote an order of the $X_{k}$ for $k = \{1, 2, ..., N\} \setminus \{i\}$, such that $\| X_{(1), i} - X_{i}\| \leq \cdots \leq \|  X_{(N-1), i} - X_{i}\| $. Let the metric $\rho$, defined as;
-\begin{equation}
+\begin{equation} \label{Rho}
 \rho_{(k), i} = \| X_{(k), i} - X_{i}\|
 \end{equation} denote the kth nearest neighbour or $X_{i}$.
 
 \item  For dimension d, the volume of the unit d-dimensional Euclidean ball is defined as;
-\begin{equation}
+\begin{equation} \label{Volume}
 V_{d} = \frac{\pi^\frac{d}{2}}{\Gamma(1 + \frac{d}{2})}
 \end{equation}
 
 \item For the kth nearest neighbour, the digamma function is defined as;
-\begin{equation}
+\begin{equation} \label{Psi}
 \Psi(k) = -\gamma + \sum_{j=1}^{k-1} \frac{1}{j}
 \end{equation}
 where $\gamma = 0.577216$ is the Euler-Mascheroni constant (where the digamma function is chosen so that $\frac{e^{\Psi(k)}}{k}\to1$ as $k \to \infty$).
@@ -88,19 +88,19 @@ where $\gamma = 0.577216$ is the Euler-Mascheroni constant (where the digamma fu
 \end{itemize} Then the Kozachenko-Leonenko estimator for entropy, H, is given by;
 \begin{equation} \label{KLest}
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (N-1)}{e^{\Psi(k)}} \right]
-\end{equation} This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, satisfies;
+\end{equation} where, $\rho_{(k),i}^{d}$ is defined in (\ref{Rho}), $V_{d}$ is defined in (\ref{Volume}) and $\Psi(k)$ is defined in (\ref{Psi}).This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, satisfies;
 \begin{equation} \label{efficiency}
 N \mathbb{E} {(\hat{H}_{N, k} - H)^2} \to 0 \quad  (N \to \infty)
 \end{equation} so $\hat{H}_{N, k}$ is efficient in the sense that the asymptotic variance is the best attainable; $N^{\frac{1}{2}}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, Var[log(f(x))])$, the normal distribution with 0 mean and variance as shown.
 
 Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equation( \ref{efficiency}) no longer holds but the estimator $\hat{H}_{N, k}$, defined by (\ref{KLest}), is still root-N consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of k. 
 
-There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of k, explored in ...SOMEONE... . Moreover, this will not be examined here as this paper focuses only on the 1-dimensional samples;
-\begin{equation} \label{KLestd=1}
+There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of k, explored in ...SOMEONE... . Moreover, this will not be examined here as this paper focuses only on the 1-dimensional samples, with estimator fo the form;
+\begin{equation} \nonumber
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i} V_{1} (N-1)}{e^{\Psi(k)}} \right]
 \end{equation}
-and the 2-dimensional;
-\begin{equation} \label{KLestd=2}
+and the 2-dimensional samples, with estimator of the form;
+\begin{equation} \nonumber
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{2} V_{2} (N-1)}{e^{\Psi(k)}} \right]
 \end{equation}
 
@@ -171,14 +171,15 @@ As I wish to consider the difference in accuracy of the estimator when using dif
 
 I will begin by exploring entropy of samples from the normal distribution $N(0, \sigma^2)$, where without loss of generality we can use the mean $\mu = 0$ and change the variance $\sigma^2$ as needed. The normal distribution has an exact formula to work out the entropy, given the variance $\sigma^2$. Using equation (\ref{ShaEnt}) and the density function for the normal distribution $f(x) = \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$. We can write the exact entropy for the normal distribution, using equation (\ref{ShaEnt});
 \begin{align}
-H &= - \int_{\mathbb{R}} \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} log \left[\frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \right] dx \\
-&=  \int_{\mathbb{R}} \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \left( log(\sqrt{(2\pi)}\sigma) +  \frac{x^2}{2\sigma^2} \right) \\
-&= \frac{log(\sqrt{(2\pi)}\sigma)}{\sqrt{(2\pi)} \sigma} \int_{\mathbb{R}} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx +  \frac{1}{2\sqrt{(2\pi)} \sigma} \int_{\mathbb{R}} \frac{x^2}{2\sigma^2}  \exp{ \left( \frac{-x^2}{\sigma^2} \right)} dx \\
-&=  log(\sqrt{(2\pi)}\sigma) + \frac{1}{2} \\
-&=  log(\sqrt{(2\pi e)}\sigma)
+H &= - \int_{\mathbb{R}} \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} log \left[\frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \right] dx \nonumber \\
+&=  \int_{\mathbb{R}} \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \left( log(\sqrt{(2\pi)}\sigma) +  \frac{x^2}{2\sigma^2} \right) \nonumber \\
+&= \frac{log(\sqrt{(2\pi)}\sigma)}{\sqrt{(2\pi)} \sigma} \int_{\mathbb{R}} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx +  \frac{1}{2\sqrt{(2\pi)} \sigma} \int_{\mathbb{R}} \frac{x^2}{2\sigma^2}  \exp{ \left( \frac{-x^2}{\sigma^2} \right)} dx \nonumber \\
+&=  log(\sqrt{(2\pi)}\sigma) + \frac{1}{2} \nonumber 
 \end{align}
-
-Thus the exact entropy for the normal distribution is given by $H =  log(\sqrt{(2\pi e)}\sigma)$. 
+Thus the exact entropy for the normal distribution is given by 
+\begin{equation}\label{NormalEnt}
+H =  log(\sqrt{(2\pi e)}\sigma) 
+\end{equation}
 
 The normal distribution has the properties which automatically satisfy the conditions above.... condition 1 since ... condition 2 since...
 
@@ -189,14 +190,12 @@ I will first explore the 1-dimensional standard normal distribution with mean $\
 \begin{equation}
 H = log(\sqrt{(2\pi e)}) \approx 1.418939
 \end{equation}
-
-Since I am considering k=1, the estimator will take the form
-\begin{equation}
+and, since I am considering k=1, the estimator will take the form;
+\begin{equation} \label{KLEstK=1}
 \hat{H}_{N, 1} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(1),i}^{d} V_{d} (N-1)}{e^{\Psi(1)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(1),i}^{d} V_{d} (N-1)}{e^{-\gamma}} \right]
 \end{equation}
 
-I will consider 500 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. For varying values of N we get the table in Figure \ref{fig:normal_k=1}. As we can see for a larger value of N, the Bias of the estimator becomes much smaller, as one would expect for an estimator to satisfy the consistent condition (\ref{efficiency}), we can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy,  also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
-
+I will consider 500 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. For varying values of N we get the table in Figure \ref{fig:normal_k=1}. As we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.1278$ to $\approx 0.0059$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to satisfy the consistent condition (\ref{?}). We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy,  also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
 
 \begin{figure} 
  \begin{adjustwidth}{-2cm}{}
@@ -221,14 +220,17 @@ N & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & Variance of $|Bias(\hat{H}_{N,
 This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{graph_k=1}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ for the samples above, with a fitted regression line. I have also found the corresponding coefficients a and c for the relationship shown in (\ref{bias}); $a = $ and $c = $. On their own these coefficients show that there is a negative relationship between $|Bias(\hat{H}_{N, 1})|$ and $N$, but for them to have more meaning we must compare them to coefficients of the regression relationship for different values of $k$, and for different distributions.
 
 \subsubsection{k=2}
-I am now considering k=2, thus the Kozachenko-Leonenko estimator will take the form
+
+I am now going to examine the case where k=2 in the Kozachenko-Leonenko estimator, to compare the results of simulations from this estimator, with that of (\ref{KLEstK=1}) for k=1. Here the estimator will take the form
 \begin{equation}
 \hat{H}_{N, 2} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(2),i}^{d} V_{d} (N-1)}{e^{\Psi(2)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(2),i}^{d} V_{d} (N-1)}{e^{-\gamma + 1}} \right]
 \end{equation}
 
-I wish to explore, in a similar manner as for k=1, the changes in the bias of the estimator depending on a change in N. Additionally, later i will make the comparison between the regression coefficients for different values of k.
+I wish to explore, in a similar manner as for k=1, the changes in the bias of the estimator depending on a change in N. Additionally, later I will make the comparison between the regression coefficients for different values of k.
 
 I will again consider 500 samples of size N from the 1-dimensional standard normal distribution $N(0, 1)$, the results from the analysis is shown in the table in Figure (\ref{fig:normal_k=2}).
+
+We can see that, as expected, the Bias of the estimator decreases from $\approx 0.0969$ when $N=100$ to $\approx 0.0045$ when $N=50,000$, showing clearly that the consistency condition is being met here; as $N \to \infty$ we have $|Bias(\hat{H}_{N, 2})| \to 0$, which is equivalent to saying $\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H$, Theorem (\ref{Paper1Thm1}).
 
 \begin{figure} 
  \begin{adjustwidth}{-2cm}{}
