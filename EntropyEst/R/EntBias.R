@@ -27,6 +27,6 @@ EntBias <- function(X, k, dist = c("normal", "uniform"), sd = 1, min = 0, max = 
     Act <- UniformEnt(min=min, max=max)
   } 
   
-  # modulus of the bias
-  return(Mod(Est - Act))
+  # The bias
+  return(Est - Act)
 }
