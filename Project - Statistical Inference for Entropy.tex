@@ -195,31 +195,27 @@ and, since I am considering k=1, the estimator will take the form;
 \hat{H}_{N, 1} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(1),i}^{d} V_{d} (N-1)}{e^{\Psi(1)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(1),i}^{d} V_{d} (N-1)}{e^{-\gamma}} \right]
 \end{equation}
 
-<<<<<<< HEAD
-I will consider 500 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. For varying values of N we get the table in Figure \ref{fig:normal_k=1}. As we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.1278$ to $\approx 0.0059$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to satisfy the consistency condition (\ref{?}). We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy,  also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
-=======
-I will consider 500 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. For varying values of N we get the table in Figure \ref{fig:normal_k=1}. As we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.1278$ to $\approx 0.0059$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to satisfy the consistent condition (\ref{?}). We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy,  also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
->>>>>>> 8d51ae1c7ed87affa57637fe03395d3f03b30e66
+I will consider 500 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. For varying values of N we get the table below;
 
-\begin{figure} 
- \begin{adjustwidth}{-2cm}{}
-\begin{tabular}{|l|l|l|l|}
+\begin{tabular}{|l|l|l|l|} 
 \hline
-N & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & Variance of $|Bias(\hat{H}_{N, 1})|$ \\
+$N$ & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & $Var(Bias(\hat{H}_{N, 1}))$ \\
 \hline
-100 & $\hat{H}_{100, 1} \approx 1.4005$ & $|Bias(\hat{H}_{100, 1})| \approx 0.1277576$ & $Var(|Bias(\hat{H}_{100, 1})|) \approx 0.0103719$\\
-200 & $\hat{H}_{200, 1} \approx 1.40468$ & $|Bias(\hat{H}_{200, 1})| \approx 0.0955115$ & $Var(|Bias(\hat{H}_{200, 1})|) \approx 0.005237138$\\
-500 & $\hat{H}_{500, 1} \approx 1.416559$ & $|Bias(\hat{H}_{500, 1})| \approx 0.05513945$ & $Var(|Bias(\hat{H}_{500, 1})|) \approx 0.00185589$\\
-1,000 & $\hat{H}_{1000, 1} \approx 1.41675$ & $|Bias(\hat{H}_{1000, 1})| \approx 0.04126499$ & $Var(|Bias(\hat{H}_{1000, 1})|) \approx 0.0008685067$\\
-5,000 & $\hat{H}_{5000, 1} \approx 1.418289$ & $|Bias(\hat{H}_{5000, 1})| \approx 0.000649703$ & $Var(|Bias(\hat{H}_{5000, 1})|) \approx 0.0005185365 $\\
-10,000 & $\hat{H}_{10000, 1} \approx 1.418916$ & $|Bias(\hat{H}_{10000, 1})| \approx 0.01327136$ & $Var(|Bias(\hat{H}_{10000, 1})|) \approx 0.0001016049$\\
-25,000 & $\hat{H}_{25000, 1} \approx 1.419647$ & $|Bias(\hat{H}_{25000, 1})| \approx 0.008195638$ & $Var(|Bias(\hat{H}_{25000, 1})|) \approx 0.00003700078$\\
-50,000 & $\hat{H}_{50000, 1} \approx 1.419416$ & $|Bias(\hat{H}_{50000, 1})| \approx 0.005903308$ & $Var(|Bias(\hat{H}_{50000, 1})|) \approx 0.00002064492$\\
+100     & 1.405890     & 0.01304883282     & 0.0275142086  \\
+200     & 1.411070     & 0.00786872927     & 0.0128689734  \\
+500     & 1.416666     & 0.00227293433     & 0.0051416433  \\
+1000    & 1.419401     & 0.00046261516     & 0.0028127916  \\
+5000    & 1.418469     & 0.00046981107     & 0.0005147810  \\
+10000   & 1.417998     & 0.00094067533     & 0.0002472848  \\
+25000   & 1.418877     & 0.00006147045     & 0.0001088641  \\
+50000   & 1.419286     & 0.00034705584     & 0.0000496450  \\
 \hline
 \end{tabular}
-\caption{\label{fig:normal_k=1} summary for simulations from the normal distribution with $k=1$, and varying $N$}
- \end{adjustwidth}
-\end{figure}
+
+
+NEED TO LABEL AND CAPTION ABOVE TABLE (and all tables) AND SORT OUT SPACING AROUND TABLES
+
+As we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.0130$ to $\approx 0.0003$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to satisfy the consistency condition (\ref{?}). We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy,  also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
 
 This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{graph_k=1}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ for the samples above, with a fitted regression line. I have also found the corresponding coefficients a and c for the relationship shown in (\ref{bias}); $a = $ and $c = $. On their own these coefficients show that there is a negative relationship between $|Bias(\hat{H}_{N, 1})|$ and $N$, but for them to have more meaning we must compare them to coefficients of the regression relationship for different values of $k$, and for different distributions.
 
@@ -232,83 +228,150 @@ I am now going to examine the case where k=2 in the Kozachenko-Leonenko estimato
 
 I wish to explore, in a similar manner as for k=1, the changes in the bias of the estimator depending on a change in N. Additionally, later I will make the comparison between the regression coefficients for different values of k.
 
-I will again consider 500 samples of size N from the 1-dimensional standard normal distribution $N(0, 1)$, the results from the analysis is shown in the table in Figure (\ref{fig:normal_k=2}).
+I will again consider 500 samples of size N from the 1-dimensional standard normal distribution $N(0, 1)$, the results from the analysis is shown in the table below;
 
-We can see that, as expected, the Bias of the estimator decreases from $\approx 0.0969$ when $N=100$ to $\approx 0.0045$ when $N=50,000$, showing clearly that the consistency condition is being met here; as $N \to \infty$ we have $|Bias(\hat{H}_{N, 2})| \to 0$, which is equivalent to saying $\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H$, Theorem (\ref{Paper1Thm1}).
-
-\begin{figure} 
- \begin{adjustwidth}{-2cm}{}
 \begin{tabular}{|l|l|l|l|}
 \hline
-N & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & Variance of $|Bias(\hat{H}_{N, 2})|$ \\
+N & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ \\
 \hline
-100 & $\hat{H}_{100, 2} \approx 1.404102$ & $|Bias(\hat{H}_{100, 2})| \approx 0.09696776$ & $Var(|Bias(\hat{H}_{100, 2})|) \approx 0.005354366$\\
-200 & $\hat{H}_{200, 2} \approx 1.416022$ & $|Bias(\hat{H}_{200, 2})| \approx 0.07164508$ & $Var(|Bias(\hat{H}_{200, 2})|) \approx 0.003037111$\\
-500 & $\hat{H}_{500, 2} \approx 1.4415159$ & $|Bias(\hat{H}_{500, 2})| \approx 0.04286876$ & $Var(|Bias(\hat{H}_{500, 2})|) \approx 0.001083868$\\
-1,000 & $\hat{H}_{1000, 2} \approx 1.416211$ & $|Bias(\hat{H}_{1000, 2})| \approx 0.03056964$ & $Var(|Bias(\hat{H}_{1000, 2})|) \approx 0.0005165147$\\
-5,000 & $\hat{H}_{5000, 2} \approx 1.418589$ & $|Bias(\hat{H}_{5000, 2})| \approx 0.01322525$ & $Var(|Bias(\hat{H}_{5000, 2})|) \approx 0.00009693512$\\
-10,000 & $\hat{H}_{10000, 2} \approx 1.418323$ & $|Bias(\hat{H}_{10000, 2})| \approx 0.009492$ & $Var(|Bias(\hat{H}_{10000, 2})|) \approx 0.00005560607$\\
-25,000 & $\hat{H}_{25000, 2} \approx 1.418986$ & $|Bias(\hat{H}_{25000, 2})| \approx 0.006037769$ & $Var(|Bias(\hat{H}_{25000, 2})|) \approx 0.00002110012$\\
-50,000 & $\hat{H}_{50000, 2} \approx 1.419212$ & $|Bias(\hat{H}_{50000, 2})| \approx 0.004504959$ & $Var(|Bias(\hat{H}_{50000, 2})|) \approx 0.00001236801$\\
+100     & 1.408856     & 0.0100827948     & 0.01357417708  \\
+200     & 1.411165     & 0.0077730666     & 0.00688250329  \\
+500     & 1.419158     & 0.0002199163     & 0.00296693934  \\
+1000    & 1.415719     & 0.0032197158     & 0.00141616592  \\
+5000    & 1.418236     & 0.0007026416     & 0.00028872533  \\
+10000   & 1.418656     & 0.0002824567     & 0.00014348493  \\
+25000   & 1.418376     & 0.0005620780     & 0.00005791073  \\
+50000   & 1.418681     & 0.0002574343     & 0.00002956529  \\
 \hline
 \end{tabular}
-\caption{\label{fig:normal_k=2} summary for simulations from the normal distribution with k=2 and varying N}
- \end{adjustwidth}
-\end{figure}
+
+We can see that, as expected, the Bias of the estimator decreases from $\approx .....$ when $N=100$ to $\approx ....$ when $N=50,000$, showing clearly that the consistency condition is being met here; as $N \to \infty$ we have $|Bias(\hat{H}_{N, 2})| \to 0$, which is equivalent to saying $\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H$, Theorem (\ref{Paper1Thm1}). We also have that the variance of the bias of these estimators DOES SMTH as $N \to \infty$, as expected.
+
 
 
 \subsubsection{k=3}
 
+Again, for k=3, I will examine 500 samples of size N from the same distribution as before, and the results are displayed in the table below;
 
-
-\begin{figure} 
- \begin{adjustwidth}{-2cm}{}
 \begin{tabular}{|l|l|l|l|}
 \hline
-N & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & Variance of $|Bias(\hat{H}_{N, 3})|$ \\
+N & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ \\
 \hline
-100 & $\hat{H}_{100, 3} \approx 1.396819$ & $|Bias(\hat{H}_{100, 3})| \approx 0.08063608$ & $Var(|Bias(\hat{H}_{100, 3})|) \approx 0.003750528$\\
-200 & $\hat{H}_{200, 3} \approx 1.407153$ & $|Bias(\hat{H}_{200, 3})| \approx 0.05938714$ & $Var(|Bias(\hat{H}_{200, 3})|) \approx 0.002145324$\\
-500 & $\hat{H}_{500, 3} \approx 1.418022$ & $|Bias(\hat{H}_{500, 3})| \approx 0.0373923$ & $Var(|Bias(\hat{H}_{500, 3})|) \approx 0.0007464306$\\
-1,000 & $\hat{H}_{1000, 3} \approx 1.418596$ & $|Bias(\hat{H}_{1000, 3})| \approx 0.02636523$ & $Var(|Bias(\hat{H}_{1000, 3})|) \approx 0.000432176$\\
-5,000 & $\hat{H}_{5000, 3} \approx 1.41799$ & $|Bias(\hat{H}_{5000, 3})| \approx 0.01165431$ & $Var(|Bias(\hat{H}_{5000, 3})|) \approx 0.00007221805$\\
-10,000 & $\hat{H}_{10000, 3} \approx 1.418454$ & $|Bias(\hat{H}_{10000, 3})| \approx 0.009006306$ & $Var(|Bias(\hat{H}_{10000, 3})|) \approx 0.00004969628$\\
-25,000 & $\hat{H}_{25000, 3} \approx 1.418685$ & $|Bias(\hat{H}_{25000, 3})| \approx 0.005304324$ & $Var(|Bias(\hat{H}_{25000, 3})|) \approx 0.00001522065$\\
-50,000 & $\hat{H}_{50000, 3} \approx 1.418678$ & $|Bias(\hat{H}_{50000, 3})| \approx 0.003799854$ & $Var(|Bias(\hat{H}_{50000, 3})|) \approx 0.000008950053$\\
+100     & 1.398784     & 0.0201546812     & 0.01210622150  \\
+200     & 1.412908     & 0.0060302660     & 0.00530612702  \\
+500     & 1.414035     & 0.0049035937     & 0.00223855589  \\
+1000    & 1.416105     & 0.0028340080     & 0.00107754839  \\
+5000    & 1.420184     & 0.0012459298     & 0.00022320970  \\
+10000   & 1.418351     & 0.0005874791     & 0.00011630350  \\
+25000   & 1.419115     & 0.0001760980     & 0.00004286406  \\
+50000   & 1.418853     & 0.0000851863     & 0.00002257717  \\
 \hline
 \end{tabular}
-\caption{\label{fig:normal_k=3} summary for simulations from the normal distribution with k=3 and varying N}
- \end{adjustwidth}
-\end{figure}
 
+This shows again, that the Kozachenko-Leonenko estimator for entropy tends to 0, $\hat{H}_{N, 3} \to 0$, as $N \to \infty$.
 
 \subsubsection{k=5}
 
+This analysis is done again, but for k=5, and the results are as follows;
 
-
-\begin{figure} 
- \begin{adjustwidth}{-2cm}{}
 \begin{tabular}{|l|l|l|l|}
 \hline
-N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & Variance of $|Bias(\hat{H}_{N, 5})|$ \\
+N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & $Var(Bias(\hat{H}_{N, 5}))$ \\
 \hline
-100 & $\hat{H}_{100, 5} \approx $ & $|Bias(\hat{H}_{100, 5})| \approx $ & $Var(|Bias(\hat{H}_{100, 5})|) \approx $\\
-200 & $\hat{H}_{200, 5} \approx $ & $|Bias(\hat{H}_{200, 5})| \approx $ & $Var(|Bias(\hat{H}_{200, 5})|) \approx $\\
-500 & $\hat{H}_{500, 5} \approx $ & $|Bias(\hat{H}_{500, 5})| \approx $ & $Var(|Bias(\hat{H}_{500, 5})|) \approx $\\
-1,000 & $\hat{H}_{1000, 5} \approx $ & $|Bias(\hat{H}_{1000, 5})| \approx $ & $Var(|Bias(\hat{H}_{1000, 5})|) \approx $\\
-5,000 & $\hat{H}_{5000, 5} \approx $ & $|Bias(\hat{H}_{5000, 5})| \approx $ & $Var(|Bias(\hat{H}_{5000, 5})|) \approx $\\
-10,000 & $\hat{H}_{10000, 5} \approx $ & $|Bias(\hat{H}_{10000, 5})| \approx $ & $Var(|Bias(\hat{H}_{10000, 5})|) \approx $\\
-25,000 & $\hat{H}_{25000, 5} \approx $ & $|Bias(\hat{H}_{25000, 5})| \approx $ & $Var(|Bias(\hat{H}_{25000, 5})|) \approx $\\
-50,000 & $\hat{H}_{50000, 5} \approx $ & $|Bias(\hat{H}_{50000, 5})| \approx $ & $Var(|Bias(\hat{H}_{50000, 5})|) \approx $\\
+100     & 1.391834     & 0.02710439666     & 0.00807261026  \\
+200     & 1.405356     & 0.01358205942     & 0.00425419382  \\
+500     & 1.411436     & 0.00750282472     & 0.00168848112  \\
+1000    & 1.415091     & 0.00384740080     & 0.00091927735  \\
+5000    & 1.418150     & 0.00078877480     & 0.00018941496  \\
+10000   & 1.418648     & 0.00029099525     & 0.00008767553  \\
+25000   & 1.418879     & 0.00005917171     & 0.00003243503  \\
+50000   & 1.418644     & 0.00029451951     & 0.00001705529  \\
 \hline
 \end{tabular}
-\caption{\label{fig:normal_k=5} summary for simulations from the normal distribution with k=5 and varying N}
- \end{adjustwidth}
-\end{figure}
+
+Here, the  $|Bias(\hat{H}_{N, 5})|$ decreases as $N$ goes from $100 \to 25,000$, but at $50,000$ this jumps to a larger number. Up to $25,000$ indicates that the estimator is becoming closer to the actual value, the jump at $50,000$  could be due to a number of reasons. 
+
+Firstly, this could indicate that for $k=5$, this estimator becomes less efficient, and doesn't satisfy the property ...  as strongly as smaller values of $k$ have done so far.
+
+Secondly,this could just be an error in the data for $|Bias(\hat{H}_{50000, 5})|$ ; since we are only considering a relative small number of samples, 500, and are taking the average of this, we could have just found an outlier. 
+
+Lastly, there could be an error in the previous two data points,  $|Bias(\hat{H}_{25000, 5})|$ and $|Bias(\hat{H}_{10000, 5})|$, causing us to either believe it is decreasing, when it isn't - satisfyin the first reason. Or, this could mean that the second condition isn't correct.... YADA YADA
+
+To determine the reason for this jump of Bias in the wrong direction, I will examine $|Bias(\hat{H}_{50000, 5})|$ and $Var(Bias(\hat{H}_{50000, 5}))$ for 5,000 samples and see if this is consistent with the previous findings. I have found this number to be; 
+\begin{equation}
+|Bias(\hat{H}_{50000, 5})|  \approx ...
+\end{equation}
+Thus, YADA YADA 
+
+
 
 \subsubsection{k=10}
 
+
+
+\begin{tabular}{|l|l|l|l|}
+\hline
+N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$ \\
+\hline
+100     & 1.375699     & 0.0432399931     & 0.00678770166  \\
+200     & 1.391934     & 0.0270050257     & 0.00293164825  \\
+500     & 1.407625     & 0.0113137866     & 0.00148669638  \\
+1000    & 1.411684     & 0.0072549983     & 0.00067990485  \\
+5000    & 1.417306     & 0.0016322988     & 0.00013650841  \\
+10000   & 1.418196     & 0.0007429215     & 0.00006783354  \\
+25000   & 1.418356     & 0.0005825702     & 0.00003162161  \\
+50000   & 1.418790     & 0.0001488755     & 0.00001318863  \\
+\hline
+\end{tabular}
+
 \subsubsection{Comparison of k}
+
+The above analysis, sections ... to ..., is done to examine the difference in the bias of the estimator for different values of k. Considering the above samples, for $N=25,000$ and $N=50,000$, we can create a table to compare the different k;
+
+\begin{tabular}{|l||l|l||l|l|}
+\hline 
+k & $|Bias(\hat{H}_{25000, k})|$ & $Var(Bias(\hat{H}_{25000, k}))$ & $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
+\hline
+\hline
+1    & 0.00006147045   & 0.0001088641     & 0.00034705584   & 0.0000496450   \\
+2    & 0.0005620780     & 0.00005791073   & 0.0002574343     & 0.00002956529 \\
+3    & 0.0001760980     & 0.00004286406   & 0.0000851863     & 0.00002257717 \\
+5    & 0.00005917171   & 0.00003243503   & 0.00029451951   & 0.00001705529 \\
+10  & 0.0005825702     & 0.00003162161   & 0.0001488755     & 0.00001318863 \\
+\hline
+\end{tabular}
+
+These results are inconclusive in determining if larger/smaller values of k generate better estimators, with smaller bias. However, these results are consistent in showing that for the larger value of N, the smaller the variance in the estimator; thus, we know that .... The results for the Bias are not conclusive because for when $N=25,000$ we can see that for $k=1, 5$ and possibly $k=3$ have a slight smaller bias than the others. However, when $N=50,000$ we find that for $k=3, 10$ we have the smallest values of bias. These are inconsistent with one and other. To further examine this, I will now generate a table for values $k=1, 2, ..., 10$ with $N=50,000$ in all cases. Moreover, this time I will consider $5,000$ samples of this size, not the $500$ considered before, and will find the mean and variance of the bias of this estimator.
+
+\begin{tabular}{|l|l|l|}
+\hline
+k &  $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
+\hline
+
+\hline
+\end{tabular}
+
+
+
+
+\subsection{1-dimensional Uniform distribution}
+
+I will now explore the entropy of samples from the 1-dimensional uniform distribution, $U[a b]$. This distribution also has an exact formula to work out the entropy for. We can find this formula by considering the density function, $f$, from the uniform distribution, which is given by;
+\begin{equation}
+f(x) = ... \quad a \leq x \leq b
+\end{equation}
+ Using the definition of Shannon entropy given in equation (\ref{ShaEnt}), we can work this out;
+\begin{align}
+H &= ... \nonumber \\
+\end{align}
+Thus, the actual value of entropy for the uniform disrtibution is given by;
+\begin{equation} \label{UnifEnt}
+H = 
+\end{equation}
+
+In our samples we will be consider the uniform distribution $U[0,100]$; this is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems since the pdf would be $f(x) = \frac{1}{50000} \approx 0.00002$, which would incur working on a very small scale.
+
+
 
 
 \end{document}
