@@ -341,13 +341,17 @@ k & $|Bias(\hat{H}_{25000, k})|$ & $Var(Bias(\hat{H}_{25000, k}))$ & $|Bias(\hat
 \hline
 \end{tabular}
 
-These results are inconclusive in determining if larger/smaller values of k generate better estimators, with smaller bias. However, these results are consistent in showing that for the larger value of N, the smaller the variance in the estimator; thus, we know that .... The results for the Bias are not conclusive because for when $N=25,000$ we can see that for $k=1, 5$ and possibly $k=3$ have a slight smaller bias than the others. However, when $N=50,000$ we find that for $k=3, 10$ we have the smallest values of bias. These are inconsistent with one and other. To further examine this, I will now generate a table for values $k=1, 2, ..., 10$ with $N=50,000$ in all cases. Moreover, this time I will consider $5,000$ samples of this size, not the $500$ considered before, and will find the mean and variance of the bias of this estimator.
+These results are inconclusive in determining if larger/smaller values of k generate better estimators, with smaller bias. However, these results are consistent in showing that for the larger value of N, the smaller the variance in the estimator; thus, we know that .... The results for the Bias are not conclusive because for when $N=25,000$ we can see that for $k=1, 5$ and possibly $k=3$ have a slight smaller bias than the others. However, when $N=50,000$ we find that for $k=3, 10$ we have the smallest values of bias. These are inconsistent with one and other. To further examine this, I will now generate a table for values $k=1, 2, 3, 5 and 10$ with $N=50,000$ in all cases. Moreover, this time I will consider $3,000$ samples of this size, not the $500$ considered before, and will find the mean and variance of the bias of this estimator.
 
 \begin{tabular}{|l|l|l|}
 \hline
 k &  $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
 \hline
-
+1      & 0.00013495546     & 0.00005116758  \\
+2      & 0.00012647214     & 0.00002868082  \\
+3      & 0.00003478968     & 0.00002299754  \\
+5      & 0.00006034936     & 0.00001733369  \\
+10    & 0.00022455715     & 0.00001409080  \\
 \hline
 \end{tabular}
 

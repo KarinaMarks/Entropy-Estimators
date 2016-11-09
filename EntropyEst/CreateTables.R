@@ -39,7 +39,7 @@ for (i in 1:5){
   k <- c(1, 2, 3, 5, 10)
   
   # generate the SamplesBias for each different value of N
-  P <- SamplesBias(N=50000, k=k[i], dist=dist, M=5000)
+  P <- SamplesBias(N=50000, k=k[i], dist=dist, M=3000)
   
   # add these values into the data frame
   df2[i,2] <- P$Bias$mean
