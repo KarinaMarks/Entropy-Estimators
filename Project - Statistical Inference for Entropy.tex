@@ -3,11 +3,7 @@
 \title{Statistical Inference for Entropy}
 \author{Karina Marks}
 
-\usepackage{amsmath}
-\usepackage{amsfonts}
-\usepackage{graphicx}
-\usepackage{listings}
-\usepackage{changepage}
+\usepackage{amsmath, amsfonts, graphicx, listings, caption, Booktabs}
 
 \newtheorem{theorem}{Theorem}
 
@@ -183,24 +179,28 @@ H =  log(\sqrt{(2\pi e)}\sigma)
 
 The normal distribution has the properties which automatically satisfy the conditions above.... condition 1 since ... condition 2 since...
 
-
-
-\subsubsection{k=1}
 I will first explore the 1-dimensional standard normal distribution with mean $\mu = 0$ and variance $\sigma^2 = 1$, $N(0, 1)$. The exact entropy of this distribution is given by;
 \begin{equation}
 H = log(\sqrt{(2\pi e)}) \approx 1.418939
 \end{equation}
-and, since I am considering k=1, the estimator will take the form;
+
+
+
+\subsubsection{k=1}
+I will be considering k=1 for the estimator of entropy; thus, the estimator will take the form;
 \begin{equation} \label{KLEstK=1}
 \hat{H}_{N, 1} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(1),i}^{d} V_{d} (N-1)}{e^{\Psi(1)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(1),i}^{d} V_{d} (N-1)}{e^{-\gamma}} \right]
 \end{equation}
 
-I will consider 500 samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c. For varying values of N we get the table below;
+I will consider $500$ samples of size $N$ from this distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator, shown in table \ref{normal_k=1_table}. We will then consider the relationship show in (\ref{logbias}) for each sample and again work out the average for the values of a and c, shown in \ref{normal_k=1_graph}.
 
-\begin{tabular}{|l|l|l|l|} 
-\hline
+\begin{table}
+\caption{1-dimensional normal distribution, $k=1$} \label{normal_k=1_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
 $N$ & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & $Var(Bias(\hat{H}_{N, 1}))$ \\
-\hline
+\midrule[1pt]
 100     & 1.405890     & 0.01304883282     & 0.0275142086  \\
 200     & 1.411070     & 0.00786872927     & 0.0128689734  \\
 500     & 1.416666     & 0.00227293433     & 0.0051416433  \\
@@ -211,29 +211,30 @@ $N$ & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & $Var(Bias(\hat{H}_{N, 1}))$ 
 50000   & 1.419286     & 0.00034705584     & 0.0000496450  \\
 \hline
 \end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
 
+Considering table \ref{normal_k=1_table}, we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.0130$ to $\approx 0.0003$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to satisfy the consistency condition (\ref{?}). We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy, also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
 
-NEED TO LABEL AND CAPTION ABOVE TABLE (and all tables) AND SORT OUT SPACING AROUND TABLES
-
-As we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.0130$ to $\approx 0.0003$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to satisfy the consistency condition (\ref{?}). We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy,  also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
-
-This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{graph_k=1}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ for the samples above, with a fitted regression line. I have also found the corresponding coefficients a and c for the relationship shown in (\ref{bias}); $a = $ and $c = $. On their own these coefficients show that there is a negative relationship between $|Bias(\hat{H}_{N, 1})|$ and $N$, but for them to have more meaning we must compare them to coefficients of the regression relationship for different values of $k$, and for different distributions.
+This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{normal_k=1_graph}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ for the samples above, with a fitted regression line. I have also found the corresponding coefficients a and c for the relationship shown in (\ref{bias}); $a = $ and $c = $. On their own these coefficients show that there is a negative relationship between $|Bias(\hat{H}_{N, 1})|$ and $N$, but for them to have more meaning we must compare them to coefficients of the regression relationship for different values of $k$, and for different distributions.
 
 \subsubsection{k=2}
 
-I am now going to examine the case where k=2 in the Kozachenko-Leonenko estimator, to compare the results of simulations from this estimator, with that of (\ref{KLEstK=1}) for k=1. Here the estimator will take the form
+I am now going to examine the case where k=2 in the Kozachenko-Leonenko estimator, to compare the results of simulations from this estimator with that of (\ref{KLEstK=1}) for k=1. Here the estimator will take the form
 \begin{equation}
 \hat{H}_{N, 2} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(2),i}^{d} V_{d} (N-1)}{e^{\Psi(2)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(2),i}^{d} V_{d} (N-1)}{e^{-\gamma + 1}} \right]
 \end{equation}
 
-I wish to explore, in a similar manner as for k=1, the changes in the bias of the estimator depending on a change in N. Additionally, later I will make the comparison between the regression coefficients for different values of k.
+I wish to explore, in a similar manner as for k=1, the changes in the bias of the estimator depending on a change in N. Additionally, later I will make the comparison between the regression coefficients for different values of k. I will again consider 500 samples of size N from the 1-dimensional standard normal distribution $N(0, 1)$, the results from the analysis is shown in table \ref{normal_k=2_table}.
 
-I will again consider 500 samples of size N from the 1-dimensional standard normal distribution $N(0, 1)$, the results from the analysis is shown in the table below;
-
-\begin{tabular}{|l|l|l|l|}
-\hline
-N & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ \\
-\hline
+\begin{table}
+\caption{1-dimensional normal distribution, $k=2$} \label{normal_k=2_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
+$N$ & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ \\
+\midrule[1pt]
 100     & 1.408856     & 0.0100827948     & 0.01357417708  \\
 200     & 1.411165     & 0.0077730666     & 0.00688250329  \\
 500     & 1.419158     & 0.0002199163     & 0.00296693934  \\
@@ -244,19 +245,30 @@ N & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ \\
 50000   & 1.418681     & 0.0002574343     & 0.00002956529  \\
 \hline
 \end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
 
-We can see that, as expected, the Bias of the estimator decreases from $\approx .....$ when $N=100$ to $\approx ....$ when $N=50,000$, showing clearly that the consistency condition is being met here; as $N \to \infty$ we have $|Bias(\hat{H}_{N, 2})| \to 0$, which is equivalent to saying $\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H$, Theorem (\ref{Paper1Thm1}). We also have that the variance of the bias of these estimators DOES SMTH as $N \to \infty$, as expected.
 
+We can see that, as expected, the Bias of the estimator decreases from $\approx 0.0100$ when $N=100$ to $\approx 0.0002$ when $N=50,000$, showing clearly that the consistency condition is being met here. This is true since as $N \to \infty$ we have $|Bias(\hat{H}_{N, 2})| \to 0$, which is equivalent to saying $\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H$, Theorem (\ref{Paper1Thm1}). We also have that the variance of the bias of these estimators decrease as $N \to \infty$, as expected. In comparison to $k=1$, we can see that the bias of this estimator for $k=2$ decreases at a similar pace as $N \to \infty$; $|Bias(\hat{H}_{N, 1})| \approx 0.0130 \to 0.0003$ and $|Bias(\hat{H}_{N, 2})| \approx 0.0101 \to 0.0002$. 
 
+CONSIDER THE GRAPH...
 
 \subsubsection{k=3}
 
-Again, for k=3, I will examine 500 samples of size N from the same distribution as before, and the results are displayed in the table below;
+Again, for $k=3$, I will examine $500$ samples of size $N$ from the standard normal distribution considered before; with estimator of the form;
+\begin{equation}
+\hat{H}_{N, 3} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(3),i}^{d} V_{d} (N-1)}{e^{\Psi(3)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(3),i}^{d} V_{d} (N-1)}{e^{-\gamma + 1 + \frac{1}{2}}} \right]
+\end{equation}
+The results are displayed in table \ref{normal_k=3_table}. 
 
-\begin{tabular}{|l|l|l|l|}
-\hline
-N & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ \\
-\hline
+\begin{table}
+\caption{1-dimensional normal distribution, $k=3$} \label{normal_k=3_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
+$N$ & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ \\
+\midrule[1pt]
 100     & 1.398784     & 0.0201546812     & 0.01210622150  \\
 200     & 1.412908     & 0.0060302660     & 0.00530612702  \\
 500     & 1.414035     & 0.0049035937     & 0.00223855589  \\
@@ -267,17 +279,27 @@ N & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ \\
 50000   & 1.418853     & 0.0000851863     & 0.00002257717  \\
 \hline
 \end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
 
-This shows again, that the Kozachenko-Leonenko estimator for entropy tends to 0, $\hat{H}_{N, 3} \to 0$, as $N \to \infty$.
+This shows again, that the Kozachenko-Leonenko estimator for entropy tends to 0, $\hat{H}_{N, 3} \to 0$, as $N \to \infty$. However, comparing these results to those for $k=1, 2$, which had similar bias as $N \to \infty$, we can see that for $k=3$, $|Bias(\hat{H}_{N, 3})| \approx 0.0202 \to 0.00009$. So for larger $N$, the estimator with $k=1 or 2$ would be less appropriate to use, since the bias is slightly larger than for the estimator using $k=3$.
+
+CONSIDER THE GRAPH...
+
 
 \subsubsection{k=5}
 
-This analysis is done again, but for k=5, and the results are as follows;
+This analysis is done again, but for k=5, and the results are shown in table \ref{normal_k=5_table}
 
-\begin{tabular}{|l|l|l|l|}
-\hline
+
+\begin{table}
+\caption{1-dimensional normal distribution, $k=5$} \label{normal_k=5_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
 N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & $Var(Bias(\hat{H}_{N, 5}))$ \\
-\hline
+\midrule[1pt]
 100     & 1.391834     & 0.02710439666     & 0.00807261026  \\
 200     & 1.405356     & 0.01358205942     & 0.00425419382  \\
 500     & 1.411436     & 0.00750282472     & 0.00168848112  \\
@@ -288,6 +310,9 @@ N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & $Var(Bias(\hat{H}_{N, 5}))$ \\
 50000   & 1.418644     & 0.00029451951     & 0.00001705529  \\
 \hline
 \end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
 
 Here, the  $|Bias(\hat{H}_{N, 5})|$ decreases as $N$ goes from $100 \to 25,000$, but at $50,000$ this jumps to a larger number. Up to $25,000$ indicates that the estimator is becoming closer to the actual value, the jump at $50,000$  could be due to a number of reasons. 
 
@@ -307,12 +332,13 @@ Thus, YADA YADA
 
 \subsubsection{k=10}
 
-
-
-\begin{tabular}{|l|l|l|l|}
-\hline
+\begin{table}
+\caption{1-dimensional normal distribution, $k=10$} \label{normal_k=10_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
 N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$ \\
-\hline
+\midrule[1pt]
 100     & 1.375699     & 0.0432399931     & 0.00678770166  \\
 200     & 1.391934     & 0.0270050257     & 0.00293164825  \\
 500     & 1.407625     & 0.0113137866     & 0.00148669638  \\
@@ -323,16 +349,22 @@ N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$
 50000   & 1.418790     & 0.0001488755     & 0.00001318863  \\
 \hline
 \end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
+
 
 \subsubsection{Comparison of k}
 
 The above analysis, sections ... to ..., is done to examine the difference in the bias of the estimator for different values of k. Considering the above samples, for $N=25,000$ and $N=50,000$, we can create a table to compare the different k;
 
-\begin{tabular}{|l||l|l||l|l|}
-\hline 
-k & $|Bias(\hat{H}_{25000, k})|$ & $Var(Bias(\hat{H}_{25000, k}))$ & $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
-\hline
-\hline
+\begin{table}
+\caption{1-dimensional normal distribution, comparison of $k$} \label{normal_kcompare_table}
+\begin{center}
+\begin{tabular}{| l | c c c c|} 
+\toprule
+$k$ & $|Bias(\hat{H}_{25000, k})|$ & $Var(Bias(\hat{H}_{25000, k}))$ & $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}) )$ \\
+\midrule[1pt]
 1    & 0.00006147045   & 0.0001088641     & 0.00034705584   & 0.0000496450   \\
 2    & 0.0005620780     & 0.00005791073   & 0.0002574343     & 0.00002956529 \\
 3    & 0.0001760980     & 0.00004286406   & 0.0000851863     & 0.00002257717 \\
@@ -340,13 +372,20 @@ k & $|Bias(\hat{H}_{25000, k})|$ & $Var(Bias(\hat{H}_{25000, k}))$ & $|Bias(\hat
 10  & 0.0005825702     & 0.00003162161   & 0.0001488755     & 0.00001318863 \\
 \hline
 \end{tabular}
+\\[10pt]
+\caption*{This table is comparing the values of $|Bias(\hat{H}_{N, k})|$ for the values of $k$ explored in tables \ref{normal_k=1_table}, \ref{normal_k=2_table}, \ref{normal_k=3_table}, \ref{normal_k=5_table} and  \ref{normal_k=10_table} with $N=25,000$ and $N=50,000$, when the estimator is taken over $500$ samples}
+\end{center}
+\end{table}
 
-These results are inconclusive in determining if larger/smaller values of k generate better estimators, with smaller bias. However, these results are consistent in showing that for the larger value of N, the smaller the variance in the estimator; thus, we know that .... The results for the Bias are not conclusive because for when $N=25,000$ we can see that for $k=1, 5$ and possibly $k=3$ have a slight smaller bias than the others. However, when $N=50,000$ we find that for $k=3, 10$ we have the smallest values of bias. These are inconsistent with one and other. To further examine this, I will now generate a table for values $k=1, 2, 3, 5 and 10$ with $N=50,000$ in all cases. Moreover, this time I will consider $3,000$ samples of this size, not the $500$ considered before, and will find the mean and variance of the bias of this estimator.
+The results shown in table \ref{normal_kcompare_table} are inconclusive in determining if larger/smaller values of k generate better estimators, with smaller bias. However, these results are consistent in showing that for the larger value of N, the smaller the variance in the estimator; thus, we know that .... The results for the Bias are not conclusive because for when $N=25,000$ we can see that for $k=1, 5$ and possibly $k=3$ have a slight smaller bias than the others. However, when $N=50,000$ we find that for $k=3, 10$ we have the smallest values of bias. These are inconsistent with one and other. To further examine this, I will now generate a table for values $k=1, 2, 3, 5 and 10$ with $N=50,000$ in all cases. Moreover, this time I will consider $3,000$ samples of this size, not the $500$ considered before, and will find the mean and variance of the bias of this estimator.
 
-\begin{tabular}{|l|l|l|}
-\hline
-k &  $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
-\hline
+\begin{table}
+\caption{1-dimensional normal distribution, comparison of $k$} \label{normal_kcompare2_table}
+\begin{center}
+\begin{tabular}{| l | c c |} 
+\toprule
+$k$ &  $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
+\midrule[1pt]
 1      & 0.00013495546     & 0.00005116758  \\
 2      & 0.00012647214     & 0.00002868082  \\
 3      & 0.00003478968     & 0.00002299754  \\
@@ -354,8 +393,12 @@ k &  $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
 10    & 0.00022455715     & 0.00001409080  \\
 \hline
 \end{tabular}
+\\[10pt]
+\caption*{This table is comparing the values of $|Bias(\hat{H}_{N, k})|$ for the values of $k$ explored before now with only $N=50,000$ and the estimator being taken over $3,000$ samples}
+\end{center}
+\end{table}
 
-
+From the results in table \ref{normal_kcompare2_table}, we can see that  $|Bias(\hat{H}_{N, k})|$ is the smallest, for sample size $N=50,000$, when $k=3$, which is consistent with the results found in table \ref{normal_kcompare_table}. So from these simulations, we can conclude that for large $N$, the consistency condition is best satisfied when $k=3$. Interestingly, the $Var(Bias(\hat{H}_{50000, k})) \to 0$ for $k \to 10$, but this is to be expected, as by the definition of the estimator using the nearest neighbour method. Taking a larger $k$ in the nearest neighbour method will produce less varied results, this is because more smoothing takes place for a larger $k$, eventually - if $k$ is made large enough - the output will be constant and the variance negligible regardless of the inputted values. Thus, considering the variance of the bias of the estimator is not necessarily informative.
 
 
 \subsection{1-dimensional Uniform distribution}
