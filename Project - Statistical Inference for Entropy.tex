@@ -229,7 +229,7 @@ On their own these coefficients show that there is a negative relationship betwe
   \begin{center}
     \includegraphics[width=\textwidth]{./Graphs/Normal_k=1_plot.png}
   \end{center}
-  \caption{Graph of simulations from the 1-dimensional standard normal distribution, considering the logarithm of the Bias of the estimator for entropy against the logarithm of N.} 
+  \caption{Graph of simulations from the 1-dimensional standard normal distribution, considering the logarithm of the Bias of the estimator for entropy, with k=1, against the logarithm of N.} 
   \label{normal_k=1_graph}
 \end{figure}
 
@@ -266,7 +266,29 @@ $N$ & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ 
 
 We can see that, as expected, the Bias of the estimator decreases from $\approx 0.0100$ when $N=100$ to $\approx 0.0002$ when $N=50,000$. This is showing that the consistency condition is being met since as $N \to \infty$ we have $|Bias(\hat{H}_{N, 2})| \to 0$, which is equivalent to saying $\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H$, Theorem (\ref{Paper1Thm1}). We also have that the variance of the bias of these estimators decrease as $N \to \infty$, as expected. In relation to $k=1$, we can see that the bias of this estimator for $k=2$ decreases at a similar pace as $N \to \infty$; $|Bias(\hat{H}_{N, 1})| \approx 0.0130 \to 0.0003$ and $|Bias(\hat{H}_{N, 2})| \approx 0.0101 \to 0.0002$, implying that from this analysis we cannot decide which value of $k$ generates a better estimator.
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Normal_k=2_plot.png}
+  \end{center}
+  \caption{Graph of simulations from the 1-dimensional standard normal distribution, considering the logarithm of the Bias of the estimator for entropy, with k=2, against the logarithm of N.} 
+  \label{normal_k=2_graph}
+\end{figure}
+
+
+
 CONSIDER THE GRAPH...
+
+
+
+a
+[1] 0.6009
+
+c
+[1] 0.0795
+
+summary
+$"c = 0.0795 and a = 0.6009. So Bias(H) = 0.0795/(N^0.6009)  for samples from the normal distribution."$
+
 
 \subsubsection{k=3} \label{N_k=3}
 
@@ -299,6 +321,17 @@ $N$ & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ 
 This shows again, that the Kozachenko-Leonenko estimator for entropy tends to 0, $\hat{H}_{N, 3} \to 0$, as $N \to \infty$. However, comparing these results to those for $k=1, 2$, which had similar bias as $N \to \infty$, we can see that for $k=3$, $|Bias(\hat{H}_{N, 3})| \approx 0.0202 \to 0.00009$. So for larger $N$, the estimator with $k=1$ or $k=2$ would be less appropriate to use, since the bias is slightly larger than for the estimator using $k=3$.
 
 CONSIDER THE GRAPH...
+
+
+a
+0.7565
+
+c
+[1] 0.3435
+
+summary
+$[1] "c = 0.3435 and a = 0.7565. So Bias(H) = 0.3435/(N^0.7565)  for samples from the normal distribution."$
+
 
 
 \subsubsection{k=5} \label{N_k=5}
