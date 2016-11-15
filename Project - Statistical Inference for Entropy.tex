@@ -278,16 +278,14 @@ We can see that, as expected, the Bias of the estimator decreases from $\approx 
 
 CONSIDER THE GRAPH...
 
-
-
 a
-[1] 0.6009
+[1] 0.5998
 
 c
-[1] 0.0795
+[1] 0.0746
 
-summary
-$"c = 0.0795 and a = 0.6009. So Bias(H) = 0.0795/(N^0.6009)  for samples from the normal distribution."$
+$summary
+[1] "c = 0.0746 and a = 0.5998. So Bias(H) = 0.0746/(N^0.5998)  for samples from the normal distribution."$
 
 
 \subsubsection{k=3} \label{N_k=3}
@@ -322,16 +320,17 @@ This shows again, that the Kozachenko-Leonenko estimator for entropy tends to 0,
 
 CONSIDER THE GRAPH...
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Normal_k=3_plot.png}
+  \end{center}
+  \caption{Graph of simulations from the 1-dimensional standard normal distribution, considering the logarithm of the Bias of the estimator for entropy, with k=3, against the logarithm of N.} 
+  \label{normal_k=3_graph}
+\end{figure}
 
-a
-0.7565
 
-c
-[1] 0.3435
 
-summary
-$[1] "c = 0.3435 and a = 0.7565. So Bias(H) = 0.3435/(N^0.7565)  for samples from the normal distribution."$
-
+$"c = 0.1156 and a = 0.6443. So Bias(H) = 0.1156/(N^0.6443)  for samples from the normal distribution."$
 
 
 \subsubsection{k=5} \label{N_k=5}
