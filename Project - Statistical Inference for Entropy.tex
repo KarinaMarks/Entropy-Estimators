@@ -221,7 +221,7 @@ Considering table \ref{normal_k=1_table}, we can see for a larger value of N, th
 
 This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{normal_k=1_graph}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ with a fitted regression line. In this graph, I have considered the values of $N$ up to $50,000$ at intervals of size $100$, where each point is calculate $500$ times and the average estimator is plotted. I have also found the corresponding coefficients a and c for the relationship shown in (\ref{bias}); $a = 0.4594$ and $c = 0.0249$;
 \begin{equation}
-|Bias(\hat{H}_{N, 1})| = \frac{0.0249}{N^{0.4594}} \nonumber
+|Bias(\hat{H}_{N, 1})| \approx \frac{0.0249}{N^{0.4594}} \nonumber
 \end{equation}
 On their own these coefficients show that there is a negative relationship between $log(|Bias(\hat{H}_{N, 1})|)$ and $log(N)$. This implies that the relationship between the Bias and N is such that as N increases the Bias decreases to 0. Hence, creating a consistent estimator for entropy, when considering the 1-dimensional normal distribution with k=1 in the Kozachenko-Leonenko estimator. However, to understand better the meaning of this relationship we must compare this to coefficients found of the regression relationships for different values of $k$, and for different distributions.
 
@@ -274,18 +274,11 @@ We can see that, as expected, the Bias of the estimator decreases from $\approx 
   \label{normal_k=2_graph}
 \end{figure}
 
-
-
-CONSIDER THE GRAPH...
-
-a
-[1] 0.5998
-
-c
-[1] 0.0746
-
-$summary
-[1] "c = 0.0746 and a = 0.5998. So Bias(H) = 0.0746/(N^0.5998)  for samples from the normal distribution."$
+We have found the coefficients for the formula \ref{bias}, for $k=2$ are given by $c = 0.0746$ and $a = 0.5998$, thus;
+\begin{equation}
+|Bias(\hat{H}_{N, 2})| \approx \frac{0.0746}{N^{0.5998}} \nonumber
+\end{equation}
+COMPARISON
 
 
 \subsubsection{k=3} \label{N_k=3}
@@ -318,8 +311,6 @@ $N$ & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ 
 
 This shows again, that the Kozachenko-Leonenko estimator for entropy tends to 0, $\hat{H}_{N, 3} \to 0$, as $N \to \infty$. However, comparing these results to those for $k=1, 2$, which had similar bias as $N \to \infty$, we can see that for $k=3$, $|Bias(\hat{H}_{N, 3})| \approx 0.0202 \to 0.00009$. So for larger $N$, the estimator with $k=1$ or $k=2$ would be less appropriate to use, since the bias is slightly larger than for the estimator using $k=3$.
 
-CONSIDER THE GRAPH...
-
 \begin{figure}
   \begin{center}
     \includegraphics[width=\textwidth]{./Graphs/Normal_k=3_plot.png}
@@ -328,9 +319,11 @@ CONSIDER THE GRAPH...
   \label{normal_k=3_graph}
 \end{figure}
 
-
-
-$"c = 0.1156 and a = 0.6443. So Bias(H) = 0.1156/(N^0.6443)  for samples from the normal distribution."$
+We have found the coefficients for the formula \ref{bias}, for $k=3$ are given by $c = 0.1156$ and $a = 0.6443$, thus;
+\begin{equation}
+|Bias(\hat{H}_{N, 3})| \approx \frac{0.1156}{N^{0.5998}} \nonumber
+\end{equation}
+COMPARISON...
 
 
 \subsubsection{k=5} \label{N_k=5}
@@ -370,11 +363,6 @@ To determine the reason for this jump of Bias in the wrong direction, I will exa
 \end{equation}
 This gives us a much smaller bias than $|Bias(\hat{H}_{50000, 5})|$ shown in table \ref{normal_k=5_table}, however, this is still not smaller than the value of $|Bias(\hat{H}_{25000, 5})|$ shown in the same table. This could mean that for $k=5$, the estimator doesn't satisfy the consistency condition as strongly as the previous estimators for $k=1, 2, 3$.
 
-CONSIDER GRAPH...
-
-$"c = 0.3557 and a = 0.7568. So Bias(H) = 0.3557/(N^0.7568)  for samples from the normal distribution."$
-
-
 \begin{figure}
   \begin{center}
     \includegraphics[width=\textwidth]{./Graphs/Normal_k=5_plot.png}
@@ -383,6 +371,11 @@ $"c = 0.3557 and a = 0.7568. So Bias(H) = 0.3557/(N^0.7568)  for samples from th
   \label{normal_k=5_graph}
 \end{figure}
 
+We have found the coefficients for the formula \ref{bias}, for $k=5$ are given by $c = 0.3557$ and $a = 0.7568$, thus;
+\begin{equation}
+|Bias(\hat{H}_{N, 5})| \approx \frac{0.3557}{N^{0.7568}} \nonumber
+\end{equation}
+COMPARISON...
 
 
 
@@ -465,6 +458,25 @@ $k$ &  $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
 From the results in table \ref{normal_kcompare2_table}, we can see that  $|Bias(\hat{H}_{N, k})|$ is the smallest, for sample size $N=50,000$, when $k=3$, which is consistent with the results found in table \ref{normal_kcompare_table}. So from these simulations, we can conclude that for large $N$, the consistency condition is best satisfied when $k=3$. Interestingly, the $Var(Bias(\hat{H}_{50000, k})) \to 0$ for $k \to 10$, but this is to be expected, as by the definition of the estimator using the nearest neighbour method. Taking a larger $k$ in the nearest neighbour method will produce less varied results, this is because more smoothing takes place for a larger $k$, eventually - if $k$ is made large enough - the output will be constant and the variance negligible regardless of the inputted values. Thus, considering the variance of the bias of the estimator is not necessarily informative.
 
 CONSIDER GRAPHS...
+
+\begin{table}
+\caption{Comparison of coefficients of regression $a$ and $c$ from equation \ref{}, for 1-dimensional normal distribution} \label{normal_a_c_compare_table}
+\begin{center}
+\begin{tabular}{| l | l l |} 
+\toprule
+$k$ &  $a$ & $c$ \\
+\midrule[1pt]
+1      & 0.4594     & 0.0249  \\
+2      & 0.5998     & 0.0746  \\
+3      & 0.6443     & 0.1156   \\
+5      & 0.7568     & 0.3557   \\
+10    &      &    \\
+\hline
+\end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
+
 
 \subsection{1-dimensional Uniform distribution}
 
