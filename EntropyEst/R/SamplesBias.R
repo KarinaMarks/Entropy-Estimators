@@ -32,9 +32,9 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform"), k = 1,
   
   dfest <- data.frame(Estimator = est, Bias = bias)
   return(list(
-    Est = list(mean = mean(dfest$Estimator)), 
-    Bias = list(mean = abs(mean(dfest$Bias)), 
-                var = var(dfest$Bias))))
+    Est = list(mean = mean(dfest$Estimator, na.rm = TRUE)), 
+    Bias = list(mean = abs(mean(dfest$Bias, na.rm = TRUE)), 
+                var = var(dfest$Bias, na.rm = TRUE))))
 }
 
 

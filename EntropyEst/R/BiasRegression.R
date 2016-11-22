@@ -19,7 +19,7 @@
 BiasRegression <- function(dist = c("normal", "uniform"), k = 1, N = 25000, 
                            sd = 1, min = 0, max = 1, M=500){
   # creating a dataframe with values of n, grouped by n
-  grouped_n <- data.frame(n = seq(50, N, 50)) %>% 
+  grouped_n <- data.frame(n = seq(50, N, 100)) %>% 
     dplyr::group_by(n) 
   
   dist <- match.arg(dist)
