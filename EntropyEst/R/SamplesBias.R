@@ -8,7 +8,7 @@
 #' use if dist = "normal"
 #' @param min, minimum for uniform distribution
 #' @param max, maximum for uniform distribution
-#'
+#' @import Rcpp
 #'
 
 SamplesBias <- function(N = 5000, dist = c("normal", "uniform"), k = 1, 
@@ -17,17 +17,33 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform"), k = 1,
   bias <- numeric(0)
   dist <- match.arg(dist)
   
-  for (i in 1:M){ #need to be able to increase this without crashing pc!
-    x <- numeric(0)
-    
-    if(dist == "normal"){
-      x <- rnorm(N, sd=sd, mean = 0)
-    } else if(dist == "uniform"){
-      x <- runif(N, min = min, max = max)
+  cppFunction('
+            NumericVector normalsmth(int M, int N){
+                NumericVector est(M);
+                NumericVector x(N);
+                for (int i = 0; i < M; i++) {
+                    int sd=1; int k=2;
+                    Function KLEE("KLEE");
+                    Function rnorm("rnorm");
+                    x=rnorm(N, sd=sd);
+                    est[i]=as<double>(KLEE(x ,k=k));
+                }
+                return Rcpp::wrap(est);
+  }
+  ')
+  
+  
+  if(dist == "normal"){
+    est <- normalsmth(M, N)
+    bias <- est - NormalEnt(sd=sd)
+  } else if(dist == "uniform"){
+    for(i in 1:M){
+      x <- numeric(0)
+      x <- runif(N, min=min, max=max)
+      
+      est[i] <- KLEE(x, k=k)
+      bias[i] <- EntBias(x, k=k, dist="uniform", max=max)
     }
-    
-    est[i] <- KLEE(x, k=k)
-    bias[i] <- EntBias(x, k=k, dist=dist, sd=sd, min=min, max=max)
   }
   
   dfest <- data.frame(Estimator = est, Bias = bias)
