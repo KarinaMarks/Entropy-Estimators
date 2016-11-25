@@ -12,7 +12,7 @@
 #'
 
 SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"), 
-                        k = 1, M = 500, sd = 1, min = 0, max = 1){
+                        k = 1, M = 500, sd = 1, min = 0, max = 1, rate = 1){
 
   dist <- match.arg(dist)
   
@@ -55,7 +55,7 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"),
     bias <- est - UniformEnt(min=min, max=max)
   } else if(dist=="exponential"){
     
-    paste("not ready for this jelly")
+    paste("not ready for this jelly", rate)
   }
   
   dfest <- data.frame(Estimator = est, Bias = bias)

@@ -13,7 +13,8 @@
 #' @export
 
 
-EntBias <- function(X, k, dist = c("normal", "uniform"), sd = 1, min = 0, max = 1){
+EntBias <- function(X, k, dist = c("normal", "uniform", "exponential"), 
+                    sd = 1, min = 0, max = 1, rate = 1){
   # Working out the estimator of entropy for the sample
   Est <- KLEE(X, k)
   dist <- match.arg(dist)
@@ -25,7 +26,9 @@ EntBias <- function(X, k, dist = c("normal", "uniform"), sd = 1, min = 0, max = 
   } else if (dist == "uniform"){
     # working out the actual value of entropy for this distribution
     Act <- UniformEnt(min=min, max=max)
-  } 
+  } else if (dist == "exponential"){
+    paste("not ready for this jelly", rate)
+  }
   
   # The bias
   return(Est - Act)
