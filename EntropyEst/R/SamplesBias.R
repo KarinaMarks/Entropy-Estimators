@@ -11,39 +11,51 @@
 #' @import Rcpp
 #'
 
-SamplesBias <- function(N = 5000, dist = c("normal", "uniform"), k = 1, 
-                        M = 500, sd = 1, min = 0, max = 1){
-  est <- numeric(0)
-  bias <- numeric(0)
+SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"), 
+                        k = 1, M = 500, sd = 1, min = 0, max = 1){
+
   dist <- match.arg(dist)
   
-  cppFunction('
-            NumericVector normalsmth(int M, int N){
+  if(dist == "normal"){
+    
+    cppFunction('
+            NumericVector normalsmth(int M, int N, int k){
                 NumericVector est(M);
                 NumericVector x(N);
                 for (int i = 0; i < M; i++) {
-                    int sd=1; int k=2;
-                    Function KLEE("KLEE");
-                    Function rnorm("rnorm");
-                    x=rnorm(N, sd=sd);
-                    est[i]=as<double>(KLEE(x ,k=k));
+                  int sd=1;
+                  Function KLEE("KLEE");
+                  Function rnorm("rnorm");
+                  x=rnorm(N, sd=sd);
+                  est[i]=as<double>(KLEE(x ,k=k));
                 }
                 return Rcpp::wrap(est);
-  }
-  ')
-  
-  
-  if(dist == "normal"){
-    est <- normalsmth(M, N)
+            }
+      ')
+    
+    est <- normalsmth(M, N, k)
     bias <- est - NormalEnt(sd=sd)
+    
   } else if(dist == "uniform"){
-    for(i in 1:M){
-      x <- numeric(0)
-      x <- runif(N, min=min, max=max)
-      
-      est[i] <- KLEE(x, k=k)
-      bias[i] <- EntBias(x, k=k, dist="uniform", max=max)
-    }
+    cppFunction('
+          NumericVector uniformsmth(int M, int N, int k, int min, int max){
+                NumericVector est(M);
+                NumericVector x(N);
+                for (int i = 0; i < M; i++) {
+                  Function KLEE("KLEE");
+                  Function runif("runif");
+                  x=runif(N, max=max, min=min);
+                  est[i]=as<double>(KLEE(x ,k=k));
+                }
+                return Rcpp::wrap(est);
+          }
+    ')
+    
+    est <- uniformsmth(M, N, k, min, max)
+    bias <- est - UniformEnt(min=min, max=max)
+  } else if(dist=="exponential"){
+    
+    paste("not ready for this jelly")
   }
   
   dfest <- data.frame(Estimator = est, Bias = bias)
@@ -52,7 +64,4 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform"), k = 1,
     Bias = list(mean = abs(mean(dfest$Bias, na.rm = TRUE)), 
                 var = var(dfest$Bias, na.rm = TRUE))))
 }
-
-
-#readr::write_csv(dfest, path=paste0("./normal_1d_k=1_N=", N, ".csv")) 
 
