@@ -4,8 +4,8 @@
 \alias{BiasRegression}
 \title{A function to plot simulations for the Kozachenko-Leonenko entropy estimator}
 \usage{
-BiasRegression(dist = c("normal", "uniform"), k = 1, N = 25000, sd = 1,
-  min = 0, max = 1, M = 500)
+BiasRegression(dist = c("normal", "uniform", "exponential"), k = 1,
+  N = 25000, sd = 1, min = 0, max = 1, rate = 1, M = 500)
 }
 \arguments{
 \item{dist, }{the distribution for the simulation to come from, either 

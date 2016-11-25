@@ -4,7 +4,8 @@
 \alias{EntBias}
 \title{Bias of entropy estimator}
 \usage{
-EntBias(X, k, dist = c("normal", "uniform"), sd = 1, min = 0, max = 1)
+EntBias(X, k, dist = c("normal", "uniform", "exponential"), sd = 1,
+  min = 0, max = 1, rate = 1)
 }
 \arguments{
 \item{X}{the sample}

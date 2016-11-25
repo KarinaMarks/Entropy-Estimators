@@ -2,6 +2,7 @@
 
 export(BiasRegression)
 export(EntBias)
+export(ExpoEnt)
 export(GammaFun)
 export(KLEE)
 export(NormalEnt)

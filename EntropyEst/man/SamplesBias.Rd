@@ -4,8 +4,8 @@
 \alias{SamplesBias}
 \title{A function to return the average value of N KLEE estimators}
 \usage{
-SamplesBias(N = 5000, dist = c("normal", "uniform"), k = 1, M = 500,
-  sd = 1, min = 0, max = 1)
+SamplesBias(N = 5000, dist = c("normal", "uniform", "exponential"), k = 1,
+  M = 500, sd = 1, min = 0, max = 1, rate = 1)
 }
 \arguments{
 \item{N}{sample size}
