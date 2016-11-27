@@ -44,7 +44,7 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"),
                 for (int i = 0; i < M; i++) {
                   Function KLEE("KLEE");
                   Function runif("runif");
-                  x=runif(N, max=max, min=min);
+                  x=runif(N, min=min, max=max);
                   est[i]=as<double>(KLEE(x ,k=k));
                 }
                 return Rcpp::wrap(est);
