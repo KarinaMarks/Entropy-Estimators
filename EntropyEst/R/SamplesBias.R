@@ -12,7 +12,7 @@
 #'
 
 SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"), 
-                        k = 1, M = 500, sd = 1, min = 0, max = 1, rate = 1){
+                        k = 1, M = 500, sd = 1, min = 0, max = 1, rate = 0.5){
 
   dist <- match.arg(dist)
   
@@ -53,9 +53,24 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"),
     
     est <- uniformsmth(M, N, k, min, max)
     bias <- est - UniformEnt(min=min, max=max)
-  } else if(dist=="exponential"){
     
-    paste("not ready for this jelly", rate)
+  } else if(dist=="exponential"){
+    cppFunction('
+          NumericVector exposmth(int M, int N, int k, int rate){
+                NumericVector est(M);
+                NumericVector x(N);
+                for (int i = 0; i < M; i++) {
+                Function KLEE("KLEE");
+                Function rexp("rexp");
+                x=runif(N, rate=rate);
+                est[i]=as<double>(KLEE(x ,k=k));
+                }
+                return Rcpp::wrap(est);
+  }
+                ')
+    
+    est <- exposmth(M, N, k, rate)
+    bias <- est - ExpoEnt(rate=rate)
   }
   
   dfest <- data.frame(Estimator = est, Bias = bias)

@@ -7,7 +7,7 @@
 
 
 SamplesMean <- function(N = 5000, dist = c("normal", "uniform", "exponential"), 
-                        k = 1, M = 100, sd = 1, min = 0, max = 1, rate = 1){
+                        k = 1, M = 100, sd = 1, min = 0, max = 1, rate = 0.5){
   dist <- match.arg(dist)
   x <- SamplesBias(N = N, dist = dist, k = k, M = M, sd = sd, min = min, 
                    max = max, rate = rate)

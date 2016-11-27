@@ -18,7 +18,7 @@
 
 BiasRegression <- function(dist = c("normal", "uniform", "exponential"), 
                            k = 1, N = 25000, sd = 1, min = 0, max = 1, 
-                           rate = 1, M=500){
+                           rate = 0.5, M=500){
   # creating a dataframe with values of n, grouped by n
   grouped_n <- data.frame(n = seq(50, N, 100)) %>% 
     dplyr::group_by(n) 
@@ -36,12 +36,16 @@ BiasRegression <- function(dist = c("normal", "uniform", "exponential"),
                               Bias = SamplesMean(N=n, dist="uniform", k=k, 
                                                  M=M, min=min, max=max))
   } else if (dist == "exponential"){
-    paste("not ready for this jelly!", rate)
+    #creating a new dataframe with the Bias for each n
+    newdf <- dplyr::summarise(grouped_n, 
+                              Bias = SamplesMean(N=n, dist="exponential", k=k, 
+                                                 M=M, rate=rate))
   }
   
   # creating a new dataframe with the log of n and bias
   df <- data.frame(n = newdf$n, Bias = newdf$Bias) %>% 
-    dplyr::transmute(log_N = log(n), log_Bias = log(Bias))
+    dplyr::transmute(log_N = log(n), log_Bias = log(Bias)) %>%
+    na.omit()
   
   # creating the plot of the log(N) against log(Bias(H))
   glogreg <- ggplot2::ggplot(aes(x=log_N, y=log_Bias), data=df) +
@@ -54,7 +58,7 @@ BiasRegression <- function(dist = c("normal", "uniform", "exponential"),
     ggplot2::ylab("log(Bias(H))")
   
   # finding the regression model for this sample
-  reg <- lm(df$log_Bias ~ df$log_N)
+  reg <- lm(df$log_Bias ~ df$log_N, na.action=na.exclude)
   
   c <- round(exp(reg$coefficients[["(Intercept)"]]), 4)
   a <- round(-reg$coefficients[["df$log_N"]], 4)

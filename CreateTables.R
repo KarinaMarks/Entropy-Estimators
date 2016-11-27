@@ -4,7 +4,7 @@ options(scipen=999)
 # set the value of k
 k <- 1
 # set the distribution
-dist <- "uniform"
+dist <- "exponential"
 
 # initiate the dataframe (with syntax appropriate for table in LaTeX)
 df <- data.frame(row.names = c(100, 200, 500, 1000, 5000, 10000, 25000, 50000),
@@ -17,7 +17,7 @@ for (i in 1:8){
   n <- c(100, 200, 500, 1000, 5000, 10000, 25000, 50000)
   
   # generate the SamplesBias for each different value of N
-  P <- SamplesBias(N=n[i], k=k, dist=dist, min=0, max=100, sd=1)
+  P <- SamplesBias(N=n[i], k=k, dist=dist, min=0, max=100, sd=1, rate=0.5)
   
   # add these values into the data frame
   df[i,2] <- P$Est$mean

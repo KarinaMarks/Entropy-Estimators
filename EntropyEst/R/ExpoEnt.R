@@ -6,6 +6,6 @@
 #' 
 
 
-ExpoEnt <- function(){
+ExpoEnt <- function(rate = 1.5){
   1 - log(rate)
 }
