@@ -25,3 +25,35 @@ gg <- ggplot(data=dat, aes(x=k, y=value, color=aORc)) +
   guides(guide_legend(title="Variable"))
 
 
+f1 <- function(x){
+  0.0249/(x^0.4594)
+}
+
+f2 <- function(x){
+  0.0746/(x^0.5998)
+}
+
+f3 <- function(x){
+  0.1156/(x^0.6443)
+}
+
+f5 <- function(x){
+  0.3557/(x^0.7568)
+}
+
+f10 <- function(x){
+  5.5942/(x^1.0055)
+}
+
+ggg <- ggplot() +
+  stat_function(aes(x=1:100), fun=f1, color = "orange")+
+  stat_function(aes(x=1:100), fun=f2, color = "red")+
+  stat_function(aes(x=1:100), fun=f3, color = "purple")+
+  stat_function(aes(x=1:100), fun=f5, color = "blue")+
+  stat_function(aes(x=1:100), fun=f10, color = "green") +
+  ylim(0, 0.75) +
+  ylab("|Bias(H)|") +
+  xlab("N")
+  
+  # add legend?
+
