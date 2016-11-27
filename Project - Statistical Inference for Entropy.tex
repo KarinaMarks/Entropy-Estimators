@@ -3,7 +3,7 @@
 \title{Statistical Inference for Entropy}
 \author{Karina Marks}
 
-\usepackage{amsmath, amsfonts, graphicx, listings, Booktabs, amstext}
+\usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext}
 \usepackage[format=plain,
             textfont=it]{caption}
 
@@ -643,11 +643,11 @@ To understand better what is occurring in table \ref{uniform_k=2_table}, I have 
   \label{uniform_k=2_graph}
 \end{figure}
 
-This graph has the regression line plotted of the form \ref{logbias}, wtih $a_{2} \approx 0.5857$ and $c_{2} \approx 0.00503$. From this analysis, I would expect the bias of the Koazchenko-Leonenko estimator for entropy to have the following relationship with $N$;
+This graph has the regression line plotted of the form \ref{logbias}, with $a_{2} \approx 0.5857$ and $c_{2} \approx 0.00503$. From this analysis, I would expect the bias of the Koazchenko-Leonenko estimator for entropy to have the following relationship with $N$;
 \begin{equation}
 |Bias(\hat{H}_{N, 2})| \approx \frac{0.0503}{N^{0.5857}}\nonumber
 \end{equation}
-As we can see from the graph, the relationship is obviously a negative correlation, and the values around the line are sparsely located. So I believe the reason for table \ref{uniform_k=2_table} not looking as expected, is just due to bad luck in the values of $N$ that I have chosen to be numerically represented in it. The graph plotted and the regression coefficients, align well with the normal distribution. Thus removing any uncertainty that we have about the estimator of entropy for a sample from the uniform distribution acting differently to that from the normal distribution.
+As we can see from the graph, the relationship is obviously a negative correlation, and the values around the line are sparsely located. So I believe the reason for table \ref{uniform_k=2_table} not looking as expected, is just due to bad luck in the values of $N$ that I have chosen to be numerically represented in it. The graph plotted and the regression coefficients, align well with the normal distribution. Thus removing any uncertainty that we have about the estimator of entropy for a sample from the uniform distribution acting differently to that from the normal distribution. A comparison of the values of $a_{2}$ and $c_{2}$, with other values of $k$, will be further explored in section \ref{U_compare_k}.
 
 
 
@@ -679,7 +679,11 @@ N & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ \\
 \end{center}
 \end{table}
 
-I believe that the best way to show this consistency condition is to just consider the graphical representation, and to not worry about the tabulated values, as they're inconsistent due to the reasons stated in section \ref{U_k=2}. From this plot, Figure \ref{uniform_k=3_graph}, I have found that $a_{3} \approx 0.6291$ and $c_{2} \approx 0.0737$
+I believe that the best way to show this consistency condition is to just consider the graphical representation, and to not worry about the tabulated values, as they're inconsistent due to the reasons stated in section \ref{U_k=2}. From this plot, Figure \ref{uniform_k=3_graph}, I have found that $a_{3} \approx 0.6291$ and $c_{3} \approx 0.0737$. This implies the relationship;
+\begin{equation}
+|Bias(\hat{H}_{N, 3})| \approx \frac{0.0737}{N^{0.6291}}\nonumber
+\end{equation}
+In comparison to this, for $k=2$, we had that $a_{2} \approx 0.5857$, so $a_{2} < a_{3}$, which implies that the relationship for $k=3$ is stronger than that for $k=2$. A more detailed comparison will be further explored in section \ref{U_compare_k}.
 
 \begin{figure}
   \begin{center}
@@ -691,6 +695,12 @@ I believe that the best way to show this consistency condition is to just consid
 
 
 \subsubsection{k=5} \label{U_k=5}
+Now we consider the estimator, shown in equation \ref{KLest}, for k=5. This takes the form;
+\begin{equation}
+\hat{H}_{N, 5} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(5),i}(N-1)}{e^{\Psi(5)}} \right] \nonumber
+\end{equation}
+
+Comparing this estimator to the exact value of entropy, shown in equation (\ref{uniform_exact}), for 500 samples of size $N$, as before, we get an inconclusive result from table \ref{uniform_k=5_table}. This is again due to the fact that taking a larger number of samples around a relatively small interval, will give similar results; hence, the relationship is again not as obvious from this. 
 
 \begin{table}
 \caption{1-dimensional uniform distribution, $k=5$} \label{uniform_k=5_table}
@@ -712,13 +722,29 @@ N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & $Var(Bias(\hat{H}_{N, 5}))$ \\
 \end{center}
 \end{table}
 
-a
-[1] 0.7501
+Furthermore, I have considered a plot to represent equation (\ref{logbias}), shown in Figure \ref{uniform_k=5_graph}, where I have also found the coefficients of regression to be; $a_{5} \approx 0.7501$ and $c_{5} \approx 0.1889$. Thus, here we get the relationship;
+\begin{equation}
+|Bias(\hat{H}_{N, 5})| \approx \frac{0.1889}{N^{0.7501}}\nonumber
+\end{equation}
+In comparison to the previous two plots, we find that $a_{2} < a_{3} < a_{5}$, indicating that as $k$ increases the strength of the relationship between the $|Bias(\hat{H}_{N, k})|$ and $N$ also increases. This implies that $|Bias(\hat{H}_{N, k})| \to 0$ as $N \to \infty$ faster for $k=5$, over a smaller $k$. We can also see that $c_{k}$, so far, has also been increasing for larger $k \leq 5$. A comparison will be further explored in section \ref{U_compare_k}.
 
-c
-[1] 0.1889
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Uniform_k=5_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 5})|$ against $\log(N)$}
+  \label{uniform_k=5_graph}
+\end{figure}
+
+
+
 
 \subsubsection{k=10} \label{U_k=10}
+The last estimator for the entropy of a sample from the 1-dimensional uniform distribution that I wish to explore is that for $k=10$. Here, the estimator takes the form;
+\begin{equation}
+\hat{H}_{N, 10} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(10),i}(N-1)}{e^{\Psi(10)}} \right] \nonumber
+\end{equation}
+The results for the comparison between this estimator and \ref{uniform_exact} are displayed in table \ref{uniform_k=10_table}.
 
 \begin{table}
 \caption{1-dimensional uniform distribution, $k=10$} \label{uniform_k=10_table}
@@ -740,12 +766,20 @@ N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$
 \end{center}
 \end{table}
 
+In comparison to what we have seen before in tables \ref{uniform_k=2_table}, \ref{uniform_k=3_table} and \ref{uniform_k=5_table}, we here have more of a obvious comparison, shown numerically, between the size of the sample, $N$, and the size of the bias. This fits in with the consistency condition from Theorem \ref{consistency_theorem}, that $|Bias(\hat{H}_{N, 10})| \to 0$ as $N \to \infty$. 
+
+TODO ..  graphical comparison.
 
 
-\subsubsection{k comparison}
+\subsubsection{Comparison of k} \label{U_compare_k}
+In sections \ref{U_k=1} to \ref{U_k=10}, I have explored the Koazchenko-Leonenko estimator for samples from the 1-dimensional uniform distribution. In the most part, the tables of information from this estimator were inconsistent and inconclusive, due to the nature of the uniform distribution; that the samples are very close to one and other. Because of this, I will not be going into more detail of that comparison; thus, will be focusing solely on the relationship shown in equation (\ref{bias});
+\begin{equation}
+|Bias(\hat{H}_{N, k})| = \frac{c_{k}}{N^{a_{k}}} \nonumber
+\end{equation}
+The results from the investigation above have been condensed into table \ref{uniform_k_comparison_table}, showing the change in values of $a_{k}$ and $c_{k}$ for different {k}.
 
 \begin{table}
-\caption{1-dimensional uniform distribution, $k=10$} \label{uniform_k=10_table}
+\caption{1-dimensional uniform distribution, a comparison of $k$} \label{uniform_k_comparison_table}
 \begin{center}
 \begin{tabular}{| l | c c|} 
 \toprule
@@ -761,6 +795,39 @@ k & $a_{k}$ & $c{k}$ \\
 \end{center}
 \end{table}
 
+From table \ref{uniform_k_comparison_table}, we can see that as $k$ in creases from $1$ to $10$, that both $a_{k}$ and $c_{k}$ also increase. The value of $a_{k}$ increasing implies an increase in strength of the consistency condition, Theorem \ref{consistency_theorem};  $N (H - \mathbb{E}{\hat{H}_{N, k}})^2 \to 0 \quad  (N \to \infty)$, which is equivalent to saying that $|Bias(\hat{H}_{N, k})| \to 0 \quad (N \to \infty)$. Thus, considering a large sample size, say $N=100,000$, we can find the bias of the Kozachenko-Leonenko estimator according to the regressional relationship for each $k$;
+\begin{gather*}
+|Bias(\hat{H}_{100000, 1})| \approx  \frac{}{100000^{}}   \approx  \\
+|Bias(\hat{H}_{100000, 2})| \approx  \frac{0.0503}{100000^{0.5857}}   \approx 0.000059301 \\
+|Bias(\hat{H}_{100000, 3})| \approx  \frac{0.0737}{100000^{0.6291}}   \approx 0.000052719 \\
+|Bias(\hat{H}_{100000, 5})| \approx  \frac{0.1889}{100000^{0.7501}}   \approx 0.000033553\\
+|Bias(\hat{H}_{100000, 10})| \approx  \frac{}{100000^{}}   \approx  
+\end{gather*}
+These values confirm our original thoughts that the larger value of $k \leq 10$ gives a more consistent estimator. Moreover, we can compare these values to those found for the standard normal distribution, along with comparing the values of $a_{k}$ and $c_{k}$, to see if the estimator has a similar accuracy for both distributions, this comparison is shown in table \ref{uniform_normal_comparison_table}.
+In this comparison we can see that, the values of $a_{k}$ and $|Bias(\hat{H}_{100000, k})|$ are similar for both distributions, with $a_{k}$ varying by less that $\approx 0.015$ and $|Bias(\hat{H}_{100000, k})|$ varying by less than $\approx 0.000015$. Both of these confirm that the approximation to the relationship between the estimator and the actual value of entropy, is a good approximation to make; one which is consistent through both distributions considered so far.
+
+\begin{table}
+\caption{Comparison between 1-dimensional Uniform and Normal distribution} \label{uniform_normal_comparison_table}
+\begin{center}
+\begin{tabular}{| l | c c c | c c c |}
+\toprule
+{ |} &  \multicolumn{3}{c |}{Normal} & \multicolumn{3}{c |}{Uniform}\\
+\hline
+$k$   &  $a_{k}$  &  $c_{k}$  &  $|Bias(\hat{H}_{100000, k})|$  &  $a_{k}$  &  $c_{k}$  &  $|Bias(\hat{H}_{100000, k})|$  \\
+\midrule[1pt]
+1      & 0.4594     & 0.0249 &  0.00012566  &  &  & \\
+2      & 0.5998     & 0.0746 &  0.00007477  &  0.5857  &  0.0503  &  0.000059301 \\
+3      & 0.6443     & 0.1156 &  0.00006942  &  0.6291  &  0.0737  &  0.000052719 \\
+5      & 0.7568     & 0.3557 &  0.00005949  &  0.7501  &  0.1889  &  0.000033553 \\
+10    & 1.0055     & 5.5942 &  0.00005251  &  &  &  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Another comparison that we can make, is by considering the plot of the regression lines for the logarithm of  $|Bias(\hat{H}_{N, k})|$ against the logarithm of $N$, this relationship is shown in Figure \ref{?}. TODO .. plot this graph and talk about it
+
+TODO.. plot a graph with regression lines for both the normal and uniform on top of one and other, discuss
 
 
 
@@ -778,10 +845,23 @@ H &= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \\
 \end{align*}
 
 Thus we have the the exact value of entropy for the exponential distribution, given the rate parameter $\lambda > 0$, is;
-\begin{equation}
+\begin{equation} \label{ExpEnt}
 H = 1 - log(\lambda)
 \end{equation}
 
+I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 1.5$, this is because, if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$, which will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy, $H$. Therefore, I have chosen a random number for the rate parameter such that $\lambda \in (0, e)$, so for this value of $\lambda$, the exact entropy is given by;
+\begin{equation} \label{exponential_exact}
+H = 1 - log(1.5) \approx 0.594535
+\end{equation}
+Moreover, I am again considering a 1-dimensional distribution; thus $V_{d} = V_{1} = 2$, and;
+\begin{equation}
+\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
+\end{equation}
+is the form of the Kozachenko-Leonenko estimator that I will be considering here.
+
+
+
+\subsubsection{k=1} \label{E_k=1}
 
 
 
