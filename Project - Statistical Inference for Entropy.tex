@@ -849,9 +849,9 @@ Thus we have the the exact value of entropy for the exponential distribution, gi
 H = 1 - log(\lambda)
 \end{equation}
 
-I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 1.5$, this is because, if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$, which will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy, $H$. Therefore, I have chosen a random number for the rate parameter such that $\lambda \in (0, e)$, so for this value of $\lambda$, the exact entropy is given by;
+I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 0.5$, this is because, if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$, which will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy, $H$. Also, for $\lambda \geq 1$, we have a small value of entropy, which would cause problems when calculating large samples and their entropy. Therefore, I have chosen a random number for the rate parameter such that $\lambda \in (0, 1)$, so for this value of $\lambda=0.5$, the exact entropy is given by;
 \begin{equation} \label{exponential_exact}
-H = 1 - log(1.5) \approx 0.594535
+H = 1 - log(0.5) \approx 1.693147
 \end{equation}
 Moreover, I am again considering a 1-dimensional distribution; thus $V_{d} = V_{1} = 2$, and;
 \begin{equation}
