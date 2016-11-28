@@ -768,7 +768,20 @@ N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$
 
 In comparison to what we have seen before in tables \ref{uniform_k=2_table}, \ref{uniform_k=3_table} and \ref{uniform_k=5_table}, we here have more of a obvious comparison, shown numerically, between the size of the sample, $N$, and the size of the bias. This fits in with the consistency condition from Theorem \ref{consistency_theorem}, that $|Bias(\hat{H}_{N, 10})| \to 0$ as $N \to \infty$. 
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Uniform_k=10_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 10})|$ against $\log(N)$}
+  \label{uniform_k=10_graph}
+\end{figure}
+
 TODO ..  graphical comparison.
+a
+[1] 1.0357
+c
+[1] 3.8217
+
 
 
 \subsubsection{Comparison of k} \label{U_compare_k}
@@ -789,7 +802,7 @@ k & $a_{k}$ & $c{k}$ \\
 2 & 0.5857 & 0.0503 \\
 3 & 0.6291 & 0.0737 \\
 5 & 0.7501 & 0.1889 \\
-10 & & \\
+10 & 1.0357 &  3.8217 \\
 \hline
 \end{tabular}
 \end{center}
@@ -801,7 +814,7 @@ From table \ref{uniform_k_comparison_table}, we can see that as $k$ in creases f
 |Bias(\hat{H}_{100000, 2})| \approx  \frac{0.0503}{100000^{0.5857}}   \approx 0.000059301 \\
 |Bias(\hat{H}_{100000, 3})| \approx  \frac{0.0737}{100000^{0.6291}}   \approx 0.000052719 \\
 |Bias(\hat{H}_{100000, 5})| \approx  \frac{0.1889}{100000^{0.7501}}   \approx 0.000033553\\
-|Bias(\hat{H}_{100000, 10})| \approx  \frac{}{100000^{}}   \approx  
+|Bias(\hat{H}_{100000, 10})| \approx  \frac{3.8217}{100000^{1.0357}}  \approx 0.000025337
 \end{gather*}
 These values confirm our original thoughts that the larger value of $k \leq 10$ gives a more consistent estimator. Moreover, we can compare these values to those found for the standard normal distribution, along with comparing the values of $a_{k}$ and $c_{k}$, to see if the estimator has a similar accuracy for both distributions, this comparison is shown in table \ref{uniform_normal_comparison_table}.
 In this comparison we can see that, the values of $a_{k}$ and $|Bias(\hat{H}_{100000, k})|$ are similar for both distributions, with $a_{k}$ varying by less that $\approx 0.015$ and $|Bias(\hat{H}_{100000, k})|$ varying by less than $\approx 0.000015$. Both of these confirm that the approximation to the relationship between the estimator and the actual value of entropy, is a good approximation to make; one which is consistent through both distributions considered so far.
@@ -819,7 +832,7 @@ $k$   &  $a_{k}$  &  $c_{k}$  &  $|Bias(\hat{H}_{100000, k})|$  &  $a_{k}$  &  $
 2      & 0.5998     & 0.0746 &  0.00007477  &  0.5857  &  0.0503  &  0.000059301 \\
 3      & 0.6443     & 0.1156 &  0.00006942  &  0.6291  &  0.0737  &  0.000052719 \\
 5      & 0.7568     & 0.3557 &  0.00005949  &  0.7501  &  0.1889  &  0.000033553 \\
-10    & 1.0055     & 5.5942 &  0.00005251  &  &  &  \\
+10    & 1.0055     & 5.5942 &  0.00005251  &  1.0357  &  3.8217  &  0.000025337 \\
 \hline
 \end{tabular}
 \end{center}
