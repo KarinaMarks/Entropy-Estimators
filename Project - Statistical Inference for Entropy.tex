@@ -8,6 +8,7 @@
             textfont=it]{caption}
 
 \newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Condition}
 
 \begin{document}
 \maketitle
@@ -86,37 +87,99 @@ where $\gamma = 0.577216$ is the Euler-Mascheroni constant (where the digamma fu
 \end{itemize} Then the Kozachenko-Leonenko estimator for entropy, H, is given by;
 \begin{equation} \label{KLest}
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (N-1)}{e^{\Psi(k)}} \right]
-\end{equation} where, $\rho_{(k),i}^{d}$ is defined in (\ref{Rho}), $V_{d}$ is defined in (\ref{Volume}) and $\Psi(k)$ is defined in (\ref{Psi}).This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, satisfies the following theorems.
+\end{equation} where, $\rho_{(k),i}^{d}$ is defined in (\ref{Rho}), $V_{d}$ is defined in (\ref{Volume}) and $\Psi(k)$ is defined in (\ref{Psi}).This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, satisfies some  theorems. Firstly from PAPER 1 (TODO refrence), we have the following;
 
-\begin{theorem} \label{consistency_theorem}
-For exact entropy $H$, and Kozachenko-Leonenko estimator $\hat{H}_{N,k}$ we have that;
-\begin{equation} \label{consistency_equation}
-N (H - \mathbb{E}{\hat{H}_{N, k}})^2 \to 0 \quad  (N \to \infty)
+\begin{theorem} \label{paper1_T1}
+For exact entropy $H$, Kozachenko-Leonenko estimator $\hat{H}_{N,k}$, and density function $f(x)$, for some $\epsilon > 0$ if both
+\begin{equation} \label{paper1_T1_eq1}
+\int_{\mathbb{R}^{d}} | log(f(x))|^{1 + \epsilon} f(x) dx < \infty 
 \end{equation}
-Thus $\hat{H}_{N, k}$ is a consistent estimator of $H$, for large $N$.
+and
+\begin{equation} \label{paper1_T1_eq1}
+\int_{\mathbb{R}^{d}} \int_{\mathbb{R}^{d}} | log(\|x-y\|)|^{2+ \epsilon} f(x) f(y) dx dy < \infty
+\end{equation}
+Then we have that 
+\begin{equation} 
+\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H \nonumber
+\end{equation}
+Thus $\hat{H}_{N, k}$ is an asymptotically unbiased estimator of $H$.
 \end{theorem}
 
-\begin{theorem} \label{asymptotic_theorem}
-For the situation in Theorem \ref{consistency_theorem}, we say that $\hat{H}_{N, k}$ is efficient in the sense that the asymptotic variance is the best attainable;
-\begin{equation} \label{asymptotic_equation}
+\begin{theorem} \label{paper1_T2}
+For exact entropy $H$, Kozachenko-Leonenko estimator $\hat{H}_{N,k}$, and density function $f(x)$, for some $\epsilon > 0$ if both
+\begin{equation}
+\int_{\mathbb{R}^{d}} | log(f(x))|^{2 + \epsilon} f(x) dx < \infty \nonumber
+\end{equation}
+and
+\begin{equation}
+\int_{\mathbb{R}^{d}} \int_{\mathbb{R}^{d}} | log(\|x-y\|)|^{2+ \epsilon} f(x) f(y) dx dy < \infty \nonumber
+\end{equation}
+Then $\hat{H}_{N, k}$ for $N \to \infty$ is a consistent estimator of H.
+
+(An estimator is consistent if the probability that it is in error by more than a given amount tends to zero as the sample become large $\Leftrightarrow $ for error $\delta > 0$, we have $\lim_{N \to \infty} \mathbb{P}(|\hat{H}_{N,k} - H| < \delta) = 1$) 
+\end{theorem}
+
+Additionally, from paper 4 (TODO reference), we have the following, stronger conditions which will be used in the Theorem \ref{paper4_T1};
+\begin{remark} ($\beta$) \label{A1}
+For density $f$ bounded, denoting $m := \lfloor \beta \rfloor$ and $\eta := \beta -m$, we have that $f$ is $m$ times continuously differentiable and there exists $r_{*} > 0$ and a Borel measurable function $g_{*}$ such that for each $t = 1, 2, ... , m$ and $\|y-x\| \leq r_{*}$, we have;
+\begin{equation}
+\| f^{(t)} (x) \| \leq g_{*}(x)f(x) \nonumber
+\end{equation},
+\begin{equation}
+\| f^{(m)} (y) - f^{(m)} (x) \| \leq g_{*}(x)f(x) \|y-x\|^{\eta} \nonumber
+\end{equation}
+and $sup_{x:f(x)\geq \delta} g_{*}(x) = o(\delta^{-\epsilon})$ as $\delta \downarrow 0$, for each $\epsilon > 0$.
+\end{remark}
+
+\begin{remark} ($\alpha$) \label{A2}
+For density $f(x)$ and dimension $d$, we have;
+\begin{equation}
+\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty \nonumber
+\end{equation}
+\end{remark}
+
+\begin{remark} \label{A3}
+Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$. Let $k_{0}^{*} = k_{0, N}^{*}$ and $k_{1}^{*} = k_{1, N}^{*}$ denote two deterministic sequences of positive integers with $k_{0}^{*} \leq k_{1}^{*}$, with $\frac{k_{0}^{*}}{\log^{5}{N}} \to 0$ and with $k_{1}^{*} = O(N^{\tau})$, where
+\begin{equation}
+\tau < \min \left\{ \frac{2 \alpha}{5 \alpha + 3d} , \frac{\alpha - d}{2 \alpha} , \frac{4}{4 + 3d} \right\} \nonumber
+\end{equation}
+\end{remark}
+
+\begin{theorem}\label{paper4_T$}
+Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$, then by condition \ref{A3}, for the estimator $\hat{H}_{N, k}$ we have;
+\begin{equation}
+Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} + o(\frac{1}{N}) \nonumber
+\end{equation}
+as $N \to \infty$, uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$.
+\end{theorem}
+
+\begin{theorem} \label{paper4_T5}
+Assume that $d \leq 3$ and the conditions of Theorem \ref{paper4_T4} are satisfied (where if $d=3$, we additionally assume $k_{1}^{*} = o(n^{\frac{1}{4}})$. Then, for the estimator $\hat{H}_{N, k}$ we have;
+\begin{equation} \label{est_dist}
 \sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)
 \end{equation}
-where $\sigma^2 = Var(log(f(x))$, for density function $f(x)$, used to attain the actual value of entropy, $H$. We now say that $\hat{H}_{N, k}$ is an asymptotically unbiased estimator of exact entropy $H$.
+and 
+\begin{equation} \label{est_consist}
+N \mathbb{E}{(\hat{H}_{N, k} - H)^2} \xrightarrow{} \sigma^2
+\end{equation}
+as $N \to \infty$ uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$, where $\sigma^2 = Var(log(f(x))$, for density function $f(x)$.
+
+(This combines Theorem \ref{paper1_T1} with stronger conditions; hence we can now say that $\hat{H}_{N, k}$ is an consistent and asymptotically unbiased estimator of exact entropy $H$.)
 \end{theorem}
 
-These theorems hold according to the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$;
+The reason that theorem \ref{paper4_T5} holds, is according to the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$;
 \begin{equation}
 \frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, \sigma^2) \nonumber
 \end{equation}
-Assuming that (TODO why?) $Var(\hat{H}_{N, k}) = \frac{1}{N}$, the LHS of the central limit theorem above can be written as;
+By Theorem \ref{paper4_T4}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} \approx \frac{1}{N}$, as for large $N$, the variance of the density function stays constant. Thus, we can rewrite the LHS of the central limit theorem above can be written as;
 \begin{align*}
 \frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} &= \sqrt{N}(\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}) \\
 &= \sqrt{N}[(\hat{H}_{N, k} - H) + (H + \mathbb{E}{\hat{H}_{N, k}})] \\
 &= \sqrt{N}(\hat{H}_{N, k} - H) + \sqrt{N}(H + \mathbb{E}{\hat{H}_{N, k}})
 \end{align*}
-and as $N \to \infty$ this tends to the normal distribution, $N(0, \sigma^2)$. So we can say that $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ while $\sqrt{N} (H - \mathbb{E}{\hat{H}_{N, k}}) \to 0$, which is equivalent to the properties stated in Theorems \ref{consistency_theorem} and \ref{asymptotic_theorem}.
+and as $N \to \infty$ this tends to the normal distribution, $N(0, \sigma^2)$. So we can say that $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ while $\sqrt{N} (H - \mathbb{E}{\hat{H}_{N, k}}) \to \sigma^2$, which is equivalent to the properties stated in Theorem \ref{paper4_T1}.
 
-Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equation(\ref{consistency_equation}) no longer holds but the estimator $\hat{H}_{N, k}$, defined by (\ref{KLest}), is still root-N consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of k. There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of k, explored in ...SOMEONE... . Moreover, this will not be examined here as this paper focuses only on the 1-dimensional samples, with estimator of the form;
+Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equations (\ref{est_dist}) and (\ref{est_consist}) no longer hold but the estimator $\hat{H}_{N, k}$, defined by (\ref{KLest}), is still root-N consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of k. There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of k, explored in ...SOMEONE... . Moreover, this will not be examined here as this paper focuses only on the 1-dimensional samples, with estimator of the form;
 \begin{equation} \nonumber
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i} V_{1} (N-1)}{e^{\Psi(k)}} \right]
 \end{equation}
@@ -164,7 +227,17 @@ Thus the exact entropy for the normal distribution is given by
 H =  log(\sqrt{(2\pi e)}\sigma) 
 \end{equation}
 
-The normal distribution has the properties which automatically satisfy the conditions above.... condition 1 since ... condition 2 since...
+The normal distribution satisfies Theorem \ref{paper1_T1} because the density function is given by $f(x) = C \exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and where $C:= \frac{1}{\sqrt{(2\pi)} \sigma} > 0$. Then by equation (\ref{paper1_T1_eq1}), considering that here $d=1$ we have;
+\begin{align}
+\int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= \int_{\mathbb{R}} \left| log\left( C\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \right) \right|^{1 + \epsilon}C\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
+&= C \int_{\mathbb{R}} \left| log \left( C \right) -  \left( \frac{x^2}{2\sigma^2} \right) \right|^{1 + \epsilon} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
+&\approx \int_{-\infty}^{\infty} \frac{x^{\epsilon}}{ \exp{x^2}} dx \\ \nonumber
+&< \infty
+\end{align}
+
+
+
+
 
 I will first explore the 1-dimensional standard normal distribution with mean $\mu = 0$ and variance $\sigma^2 = 1$, $N(0, 1)$. The exact entropy of this distribution is given by;
 \begin{equation} \label{normal_exact}
