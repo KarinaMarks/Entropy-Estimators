@@ -44,8 +44,7 @@ BiasRegression <- function(dist = c("normal", "uniform", "exponential"),
   
   # creating a new dataframe with the log of n and bias
   df <- data.frame(n = newdf$n, Bias = newdf$Bias) %>% 
-    dplyr::transmute(log_N = log(n), log_Bias = log(Bias)) %>%
-    na.omit()
+    dplyr::transmute(log_N = log(n), log_Bias = log(Bias)) 
   
   # creating the plot of the log(N) against log(Bias(H))
   glogreg <- ggplot2::ggplot(aes(x=log_N, y=log_Bias), data=df) +
@@ -69,4 +68,4 @@ BiasRegression <- function(dist = c("normal", "uniform", "exponential"),
   
   # returning the graph and information summary
   return(list(graph = glogreg, a = a, c = c, summary = Info))
-}
+  }

@@ -4,7 +4,7 @@
 \alias{ExpoEnt}
 \title{The actual value of entropy for the exponential distribution}
 \usage{
-ExpoEnt()
+ExpoEnt(rate = 1.5)
 }
 \arguments{
 \item{rate}{the rate parameter of the exponential distribution}

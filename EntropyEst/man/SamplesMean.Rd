@@ -5,7 +5,7 @@
 \title{A function to just select the mean bias from SamplesBias function}
 \usage{
 SamplesMean(N = 5000, dist = c("normal", "uniform", "exponential"), k = 1,
-  M = 100, sd = 1, min = 0, max = 1, rate = 1)
+  M = 100, sd = 1, min = 0, max = 1, rate = 0.5)
 }
 \description{
 A function to just select the mean bias from SamplesBias function

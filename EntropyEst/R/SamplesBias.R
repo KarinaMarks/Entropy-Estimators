@@ -9,6 +9,7 @@
 #' @param min, minimum for uniform distribution
 #' @param max, maximum for uniform distribution
 #' @import Rcpp
+#' @import dplyr
 #'
 
 SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"), 
@@ -73,7 +74,10 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"),
     bias <- est - ExpoEnt(rate=rate)
   }
   
-  dfest <- data.frame(Estimator = est, Bias = bias)
+  
+  dfest <- data.frame(Estimator = est, Bias = bias) %>%
+    dplyr::filter(est != -Inf)
+  
   return(list(
     Est = list(mean = mean(dfest$Estimator, na.rm = TRUE)), 
     Bias = list(mean = abs(mean(dfest$Bias, na.rm = TRUE)), 
