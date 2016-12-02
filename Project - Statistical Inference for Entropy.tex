@@ -119,7 +119,7 @@ Then $\hat{H}_{N, k}$ for $N \to \infty$ is a consistent estimator of H.
 (An estimator is consistent if the probability that it is in error by more than a given amount tends to zero as the sample become large $\Leftrightarrow $ for error $\delta > 0$, we have $\lim_{N \to \infty} \mathbb{P}(|\hat{H}_{N,k} - H| < \delta) = 1$) 
 \end{theorem}
 
-Additionally, from paper 4 (TODO reference), we have the following, stronger conditions which will be used in the Theorem \ref{paper4_T1};
+Additionally, from paper 4 (TODO reference), we have the following, stronger conditions which will be used in Theorems \ref{paper4_T4} and \ref{paper4_T5};
 \begin{remark} ($\beta$) \label{A1}
 For density $f$ bounded, denoting $m := \lfloor \beta \rfloor$ and $\eta := \beta -m$, we have that $f$ is $m$ times continuously differentiable and there exists $r_{*} > 0$ and a Borel measurable function $g_{*}$ such that for each $t = 1, 2, ... , m$ and $\|y-x\| \leq r_{*}$, we have;
 \begin{equation}
@@ -145,7 +145,7 @@ Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} hold
 \end{equation}
 \end{remark}
 
-\begin{theorem}\label{paper4_T$}
+\begin{theorem}\label{paper4_T4}
 Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$, then by condition \ref{A3}, for the estimator $\hat{H}_{N, k}$ we have;
 \begin{equation}
 Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} + o(\frac{1}{N}) \nonumber
@@ -167,25 +167,27 @@ as $N \to \infty$ uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$, where 
 (This combines Theorem \ref{paper1_T1} with stronger conditions; hence we can now say that $\hat{H}_{N, k}$ is an consistent and asymptotically unbiased estimator of exact entropy $H$.)
 \end{theorem}
 
-The reason that theorem \ref{paper4_T5} holds, is according to the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$;
+Theorem \ref{paper4_T5} holds, according to the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$;
 \begin{equation}
 \frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, \sigma^2) \nonumber
 \end{equation}
-By Theorem \ref{paper4_T4}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} \approx \frac{1}{N}$, as for large $N$, the variance of the density function stays constant. Thus, we can rewrite the LHS of the central limit theorem above can be written as;
+By Theorem \ref{paper4_T4}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} \approx \frac{1}{N}$, as for large $N$, the variance of the logarithm of the density function stays constant. Thus, the left side of the central limit theorem above can be written as;
 \begin{align*}
 \frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} &= \sqrt{N}(\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}) \\
-&= \sqrt{N}[(\hat{H}_{N, k} - H) + (H + \mathbb{E}{\hat{H}_{N, k}})] \\
-&= \sqrt{N}(\hat{H}_{N, k} - H) + \sqrt{N}(H + \mathbb{E}{\hat{H}_{N, k}})
+&= \sqrt{N}[(\hat{H}_{N, k} - H) + (H - \mathbb{E}{\hat{H}_{N, k}})] \\
+&= \sqrt{N}(\hat{H}_{N, k} - H) + \sqrt{N}(H - \mathbb{E}{\hat{H}_{N, k}})
 \end{align*}
-and as $N \to \infty$ this tends to the normal distribution, $N(0, \sigma^2)$. So we can say that $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ while $\sqrt{N} (H - \mathbb{E}{\hat{H}_{N, k}}) \to \sigma^2$, which is equivalent to the properties stated in Theorem \ref{paper4_T1}.
+and as $N \to \infty$ this tends to the normal distribution, $N(0, \sigma^2)$. So we can say that $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ while $\sqrt{N} (H - \mathbb{E}{\hat{H}_{N, k}}) \to \sigma^2$, which is equivalent to the properties stated in Theorem \ref{paper4_T5}.
 
-Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equations (\ref{est_dist}) and (\ref{est_consist}) no longer hold but the estimator $\hat{H}_{N, k}$, defined by (\ref{KLest}), is still root-N consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of k. There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of k, explored in ...SOMEONE... . Moreover, this will not be examined here as this paper focuses only on the 1-dimensional samples, with estimator of the form;
-\begin{equation} \nonumber
-\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i} V_{1} (N-1)}{e^{\Psi(k)}} \right]
+Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equations (\ref{est_dist}) and (\ref{est_consist}) no longer hold but the estimator $\hat{H}_{N, k}$, defined by (\ref{KLest}), is still root-N consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of $k$. There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of $k$, where $k$ depends on the choice of $N$, explored in PAPER 4 (TODO reference). 
+
+Moreover, this paper focuses only on distributions for $d \leq 3$, more specifically, I will first be considering samples from 1-dimensional distributions, $d=1$. Therefore, the volume of the 1-dimensional Euclidean ball is given by $V_{1} = \frac{\pi^{\frac{1}{2}}}{\Gamma (\frac{3}{2})} = \frac{\sqrt{\pi}}{\frac{\sqrt{\pi}}{2}} = 2$. Hence the Kozachenko-Leonenko estimator is of the form;
+\begin{equation} \label{KLest_d=1}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]
 \end{equation}
-and the 2-dimensional samples, with estimator of the form;
-\begin{equation} \nonumber
-\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{2} V_{2} (N-1)}{e^{\Psi(k)}} \right]
+ Later, I will be considering samples from 2-dimensional distributions; thus, $d=2$ and the volume of the 2-dimensional Euclidean ball is given by $V_{2} = \frac{\pi^{\frac{2}{2}}}{\Gamma (2)} = \frac{\pi}{1} = \pi$. Hence, the estimator takes the form;
+\begin{equation} \label{KLest_d=2}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\pi \rho_{(k),i}^{2} (N-1)}{e^{\Psi(k)}} \right]
 \end{equation}
 
 
@@ -202,7 +204,7 @@ and the 2-dimensional samples, with estimator of the form;
 
 In this section I will explore simulations of the bias of estimator (\ref{KLest}) in comparison to the size of the sample estimated from, with respect to different values of k; firstly exploring 1-dimensional distributions and then progressing onto 2-dimensional.
 
-The motivation for these simulations is to explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. Throughout this analysis we will be considering the absolute value of this bias, since when considering its logarithm, we need a positive value. Using Theorem \ref{consistency_theorem}, we can write that the bias of the estimator approaches 0 as $N \to \infty$. This is because we can write $Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H$, which in equation (\ref{consistency_equation}) implies $Bias(\hat{H}_{N, k}) \to 0$ as $N \to \infty$. Thus, there must be a type of inverse relationship between the modulus of the bias of the estimator, $|Bias(\hat{H}_{N, k})|$, and $N$. We believe this relationship is of the form;
+The motivation for these simulations is to explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. Throughout this analysis we will be considering the absolute value of this bias, since when considering its logarithm, we need a positive value. Using Theorem \ref{paper4_T5}, we can write that the bias of the estimator approaches 0 as $N \to \infty$. This is because we can write $Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H$, which in equation (\ref{est_consist}) implies $Bias(\hat{H}_{N, k}) \to 0$ as $N \to \infty$. Thus, there must be a type of inverse relationship between the modulus of the bias of the estimator, $|Bias(\hat{H}_{N, k})|$, and $N$. We believe this relationship is of the form;
 \begin{equation} \label{bias}
 |Bias(\hat{H}_{N, k})| = \frac{c}{N^a}
 \end{equation}
@@ -244,7 +246,7 @@ I will first explore the 1-dimensional standard normal distribution with mean $\
 H = log(\sqrt{(2\pi e)}) \approx 1.418939
 \end{equation}
 
-Since, I am first considering the 1-dimensional normal distribution, the Kozachenko-Leonenko estimator, (\ref{KLest}), has $d=1$. Thus, the volume of the 1-dimensional Euclidean ball is $V_{1} = \frac{\pi^{\frac{1}{2}}}{\Gamma(\frac{3}{2})} = \frac{\sqrt{\pi}}{\frac{\sqrt{\pi}}{2}} = 2$. Hence, the estimator takes the form;
+Since, I am first considering the 1-dimensional normal distribution, the Kozachenko-Leonenko estimator takes the form in equation (\ref{KLest_d=1});
 \begin{equation}
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
 \end{equation}
@@ -628,7 +630,7 @@ In our samples we will be consider the uniform distribution $U[0,100]$; this is 
 H = log(100) \approx 4.605170
 \end{equation}
 
-Similarly to the 1-dimensional normal distribution, we have for the 1-dimensional uniform distribution that $d=1$ so $V_{1} = 2$, thus our estimator takes the form;
+Similarly to the 1-dimensional normal distribution, we have for the 1-dimensional uniform distribution that $d=1$ so $V_{1} = 2$, thus our estimator takes the form of equation (\ref{KLest_d=1});
 \begin{equation}
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
 \end{equation}
