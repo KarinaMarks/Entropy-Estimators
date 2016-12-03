@@ -20,11 +20,10 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"),
   if(dist == "normal"){
     
     cppFunction('
-            NumericVector normalsmth(int M, int N, int k){
+            NumericVector normalsmth(int M, int N, int k, float sd){
                 NumericVector est(M);
                 NumericVector x(N);
                 for (int i = 0; i < M; i++) {
-                  int sd=1;
                   Function KLEE("KLEE");
                   Function rnorm("rnorm");
                   x=rnorm(N, sd=sd);
@@ -57,13 +56,13 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"),
     
   } else if(dist=="exponential"){
     cppFunction('
-          NumericVector exposmth(int M, int N, int k, int rate){
+          NumericVector exposmth(int M, int N, int k, float rate){
                 NumericVector est(M);
                 NumericVector x(N);
                 for (int i = 0; i < M; i++) {
                 Function KLEE("KLEE");
                 Function rexp("rexp");
-                x=runif(N, rate=rate);
+                x=rexp(N, rate=rate);
                 est[i]=as<double>(KLEE(x ,k=k));
                 }
                 return Rcpp::wrap(est);
