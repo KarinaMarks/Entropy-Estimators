@@ -586,15 +586,15 @@ Table \ref{normal_a_c_compare_table}, shows that as $k$ runs from $1 \to 10$, we
 
 This shows that the bias decreases slightly faster for a higher values of $k$. I have also compared these relationships through a graph of the regression lines found from plotting the simulations above, shown in Figure \ref{normal_comparison_graph}. Moreover, I have plotted the actual lines for the relationship between $|Bias(\hat{H}_{N, k})|$ and $N$, using the relationship shown in equation (\ref{bias}), this shows that ... TODO.
 
-I have also considered a plot of the values of $a_{k}$ and $c_{k}$ against $k$, to see if there is a clear relationship between the value of $k$ and the coefficients, $a$ and $c$. This shows that ... TODO
-
 \begin{figure}
   \begin{center}
     \includegraphics[width=\textwidth]{./Graphs/Normal_comparison.png}
   \end{center}
-\caption{Plot of regression lines for $\log|Bias(\hat{H}_{N, k})|$ against $\log(N)$, for $k=1, 2, 3, 5, 10$}
+\caption{Plot of regression lines for $\log|Bias(\hat{H}_{N, k})|$ against $\log(N)$, for $k=1, 2, 3, 5, 10$, for samples from the normal distribution}
   \label{normal_comparison_graph}
 \end{figure}
+
+I have also considered a plot of the values of $a_{k}$ and $c_{k}$ against $k$, to see if there is a clear relationship between the value of $k$ and the coefficients, $a$ and $c$. This shows that ... TODO
 
 TODO .. add in plots 
 
@@ -652,22 +652,50 @@ Considering the bias for this estimator against the actual value (\ref{uniform_e
 \toprule
 N & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & $Var(Bias(\hat{H}_{N, 1}))$ \\
 \midrule[1pt]
-100     & 4.596921     & 0.00824926770     & 0.0222674976  \\
-200     & 4.616316     & 0.01114602105     & 0.0100263188  \\
-500     & 4.601683     & 0.00348766754     & 0.0040618438  \\
-1000    & 4.610342     & 0.00517161041     & 0.0017659932  \\
-5000    & 4.605226     & 0.00005536281     & 0.0003974555  \\
-10000   &     -Inf     &           Inf     &          NaN  \\
-25000   &     -Inf     &           Inf     &          NaN  \\
-50000   &     -Inf     &           Inf     &          NaN  \\
+100     & 4.600031     & 0.0051387799     & 0.02082714731  \\
+200     & 4.610892     & 0.0057214665     & 0.01051097236  \\
+500     & 4.606304     & 0.0011339740     & 0.00464501181  \\
+1000    & 4.604414     & 0.0007562145     & 0.00197979118  \\
+5000    & 4.606068     & 0.0008976195     & 0.00041910068  \\
+10000   & 4.604871     & 0.0002993139     & 0.00021349464  \\
+25000   & 4.605529     & 0.0003587332     & 0.00008599342  \\
+50000   & 4.605547     & 0.0003764863     & 0.00004437685  \\
 \hline
 \end{tabular}
 \end{center}
 \end{table}
 
-We can see from this table that for $N \geq 10,000$ the estimator cannot be computed. This is due to the same reason, that we decided to use the distribution $U[0,100]$ instead of the standard normal $U[0,1]$. However, even considering $U[0,100000]$ only gives non infinite values for $N \leq 10,000$. Hence, for $k=1$, we will only consider samples of size $N \leq 5,000$ and we will use the distribution $U[0,100]$. From the above table, we can see obviously, that for the largest non-infinite value of $N$, we have $|Bias(\hat{H}_{5000, 1})| \approx 0.00006$, which is significantly smaller than $|Bias(\hat{H}_{100, 1})| \approx 0.00825$, confirming the consistency condition.
+From table \ref{uniform_k=1_table} there is an obvious decrease in value of the Bias, for larger $N$, with $|Bias(\hat{H}_{N, 1})|$ decreasing from $\approx 0.005$ to $\approx 0.0004$. This decrease is similar to that considered in the normal distribution for $k=1$, where $|Bias(\hat{H}_{N, 1})|$ went from $\approx 0.01$ to $\approx 0.0003$; however, the difference is that for this distribution, the estimator seems to be more accurate for smaller $N$. Another thing to notice from this table is that, even through there is a general decrease, considering each rows in the table in comparison to the next does not necessarily show a decrease. The smallest value of bias occurs for $N=10,000$, which does not correspond with the findings for the normal distribution. This could indicate a number of features;
 
-TODO.. graph for k=1 and regression coefs + comparison to the normal distribution
+\begin{itemize}
+\item The values in table \ref{uniform_k=1_table} contains outliers - this could be the case, since the numbers seem to jump around more ion this occasion than any others seen before. However, for $k=1$ the bias decreases from $0.0057 \to 0.00029$ in the uniform distribution and decreases from $0.013 \to 0.00034$ in the normal distribution (not necessarily as $N$ gets larger); these values of bias are not too dissimilar from one and other. Also, the tables are made from considering $500$ samples of each $N$, finding the estimator in all cases, then taking the average of these as the actual estimator; this makes an outlier much less likely, as they would have been smoothed out from the averaging process.
+
+\item The actual value of entropy is significantly smaller itself, so the bias of the estimator is accordingly small - this is again unlikely, since the actual value of entropy for the uniform distribution is given by $\approx 4.605170$ (\ref{uniform_exact}), and the for the normal distribution is $\approx 1.418939$ (\ref{normal_exact}). These values are not significantly different to one and other, also under this reasoning, one would expect the normal distribution to have an accordingly smaller bias than the uniform - but we are experiencing values the other way around.
+
+\item The estimator works better for samples from uniform than the normal distributions - this should not be true since the uniform distribution satisfies the conditions under which this estimator can be used in exactly the same manner as the normal distribution, so one would not expect samples from a specific distribution to yield a more accurate estimator for entropy. However, this is the most likely reason for the difference occurring between the two distributions. This is due to, as mentioned before, the nature of the uniform distribution, that by using $U[0, 100]$, for $N=50,000$ each sample would be $\approx 0.002$ distance apart. So using the nearest neighbour method; all of the data in the samples will have close neighbours, which could be the reason for the unreliable values shown in table \ref{uniform_k=1_table}.
+\end{itemize}
+
+To understand what is occurring in table \ref{uniform_k=1_table}, I have plotted the results of the approximate correlation between the bias of the estimator against $N$, as shown in equation \ref{logbias}. This is shown in Figure \ref{uniform_k=1_graph}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Uniform_k=1_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 1})|$ against $\log(N)$}
+  \label{uniform_k=1_graph}
+\end{figure}
+
+ From this analysis, the bias of the Koazchenko-Leonenko estimator for entropy has the following relationship with $N$;
+\begin{equation}
+|Bias(\hat{H}_{N, 2})| \approx \frac{0.0103}{N^{0.3698}}\nonumber
+\end{equation}
+TODO.. write about this and plot graph for k=1 and regression coefs + comparison to the normal distribution
+a
+[1] 0.3698
+
+c
+[1] 0.0103
+
 
 
 
@@ -698,15 +726,7 @@ N & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ \\
 \end{center}
 \end{table}
 
-Using the same parameters as before; taking $500$ samples of size $N=100 \to 50,000$ from the uniform, $U[0, 100]$, distribution, we get the results in Table \ref{uniform_k=2_table}. These show that there is a general decrease in bias for a larger $N$ from $|Bias(\hat{H}_{500, 2})| \approx  0.006430$ to $|Bias(\hat{H}_{50000, 2})| \approx 0.00031$; however, if we look closely, the bias is not always decreasing as N gets larger; since it increases for the first 3 data points; $N=100, 200 ,500$, then decreases for a bit, then increases again for $N = 10000, 25000$. The smallest value of Bias actually occurs at $N=5000$, which does not correspond with the results one would expect from this analysis. Moreover, the size of the bias does begin smaller for this case than it has done previously for values from the normal distribution, section \ref{Normal_d=1}. Here, we began with values of $|Bias(\hat{H}_{100, k})| \approx 0.01$ / $0.05$, instead of the $|Bias(\hat{H}_{100, k})| \approx 0.002$, experienced in this distribution. This could indicate a number of features;
-
-\begin{itemize}
-\item The values in table \ref{uniform_k=2_table} contains outliers - this could be the case, since the numbers seem to jump around more ion this occasion than any others seen before. However, for $k=2$ the bias decreases from $0.0064 \to 0.00019$ (not necessarily as $N$ gets larger) in the uniform distribution and decreases from $0.010 \to 0.00025$ (as $N$ increases) in the normal distribution; these values of bias are not too dissimilar from one and other. Also, the tables are made from considering $500$ samples of each $N$, finding the estimator in all cases, then taking the average of these as the actual estimator; this makes an outlier much less likely, as they would have been smoothed out from the averaging process.
-
-\item The actual value of entropy is significantly smaller itself, so the bias of the estimator is accordingly small - this is again unlikely, since the actual value of entropy for the uniform distribution is given by $\approx 4.605170$ (\ref{uniform_exact}), and the for the normal distribution is $\approx 1.418939$ (\ref{normal_exact}). These values are not significantly different to one and other, also under this reasoning, one would expect the normal distribution to have an accordingly smaller bias than the uniform - but we are experiencing values the other way around.
-
-\item The estimator works better for samples from uniform than the normal distributions - this should not be true since the uniform distribution satisfies the conditions under which this estimator can be used in exactly the same manner as the normal distribution, so one would not expect samples from a specific distribution to yield a more accurate estimator for entropy. However, this is the most likely reason for the difference occurring between the two distributions. This is due to, as mentioned before, the nature of the uniform distribution, that by using $U[0, 100]$, each sample would be $\approx 0.01$ distance apart. So using the nearest neighbour method; all of the data in the samples will have close neighbours, which could be the reason for the unreliable values shown in table \ref{uniform_k=2_table}.
-\end{itemize}
+Using the same parameters as before; taking $500$ samples of size $N=100 \to 50,000$ from the uniform, $U[0, 100]$, distribution, we get the results in Table \ref{uniform_k=2_table}. These show that there is a general decrease in bias for a larger $N$ from $|Bias(\hat{H}_{500, 2})| \approx  0.006430$ to $|Bias(\hat{H}_{50000, 2})| \approx 0.00031$; however, if we look closely, in a similar fashion to for $k=1$, the bias is not always decreasing as $N$ gets larger. This is shown in it increasing for the first 3 data points; $N=100, 200 ,500$, then decreasing for a bit, then increasing again for $N = 10000, 25000$. The smallest value of Bias actually occurs at $N=5000$, which does not correspond with the results one would expect from this analysis. Moreover, the size of the bias does begin smaller for this case than it has done previously for values from the normal distribution, section \ref{Normal_d=1}. 
 
 To understand better what is occurring in table \ref{uniform_k=2_table}, I have plotted the results of the approximate correlation between the bias of the estimator against $N$, as shown in equation \ref{bias}. This is shown in Figure \ref{uniform_k=2_graph}.
 
@@ -873,7 +893,7 @@ The results from the investigation above have been condensed into table \ref{uni
 \toprule
 k & $a_{k}$ & $c{k}$ \\
 \midrule[1pt]
-1 & & \\
+1 & 0.3698 & 0.0103 \\
 2 & 0.5857 & 0.0503 \\
 3 & 0.6291 & 0.0737 \\
 5 & 0.7501 & 0.1889 \\
@@ -915,6 +935,15 @@ $k$   &  $a_{k}$  &  $c_{k}$  &  $|Bias(\hat{H}_{100000, k})|$  &  $a_{k}$  &  $
 
 Another comparison that we can make, is by considering the plot of the regression lines for the logarithm of  $|Bias(\hat{H}_{N, k})|$ against the logarithm of $N$, this relationship is shown in Figure \ref{?}. TODO .. plot this graph and talk about it
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Uniform_comparison.png}
+  \end{center}
+\caption{Plot of regression lines for $\log|Bias(\hat{H}_{N, k})|$ against $\log(N)$, for $k=1, 2, 3, 5, 10$, for samples from the uniform distribution}
+  \label{uniform_comparison_graph}
+\end{figure}
+
+
 TODO.. plot a graph with regression lines for both the normal and uniform on top of one and other, discuss
 
 
@@ -952,7 +981,11 @@ is the form of the Kozachenko-Leonenko estimator that I will be considering here
 \subsubsection{k=1} \label{E_k=1}
 
 
+a
+[1] 0.0001
 
+c
+[1] 1.6947
 
 
 
