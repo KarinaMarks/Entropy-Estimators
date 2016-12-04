@@ -64,7 +64,7 @@ where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the 
 
 \subsection{Kozachenko-Leonenko Estimator}
 
-We now wish to introduce the Kozachenko-Leonenko estimator of the entropy H. Let $X_{1}, X_{2}, ... ,X_{N}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
+I now wish to introduce the Kozachenko-Leonenko estimator of the entropy H. Let $X_{1}, X_{2}, ... ,X_{N}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
  
 \begin{itemize}
 
@@ -229,11 +229,11 @@ Thus the exact entropy for the normal distribution is given by
 H =  log(\sqrt{(2\pi e)}\sigma) 
 \end{equation}
 
-The normal distribution satisfies Theorem \ref{paper1_T1}, using that the density function is given by $f(x) = C \exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and where $C:= \frac{1}{\sqrt{(2\pi)} \sigma} > 0$. Then by equation (\ref{paper1_T1_eq1}), considering that here $d=1$ we have, the first condition of the Theorem is satisfied;
+The normal distribution satisfies Theorem \ref{paper1_T1}, using that the density function is given by $f(x) = C \exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and where $C:= \frac{1}{\sqrt{(2\pi)} \sigma} > 0$. Then by equation (\ref{paper1_T1_eq1}), considering that here $d=1$, taking some $\epsilon >0$, the first condition of the Theorem is satisfied;
 \begin{align} \nonumber
 \int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= C \int_{\mathbb{R}} \left| log \left( C \right) -  \left( \frac{x^2}{2\sigma^2} \right) \right|^{1 + \epsilon} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
-&< \int_{\mathbb{R}} \frac{x^{1 + \epsilon}}{ \exp{x^2}} dx \\ \nonumber
-&< \int_{-\infty}^{\infty} \frac{x}{ \exp{x^2}} dx < \infty \nonumber
+&< \int_{\mathbb{R}} \frac{|x|^{1 + \epsilon}}{ \exp{x^2}} dx \\ \nonumber
+&< \int_{-\infty}^{\infty} \frac{|x|}{ \exp{x^2}} dx < \infty \nonumber
 \end{align}
 Also, the second condition, equation (\ref{paper1_T1_eq2}), of Theorem \ref{paper1_T1} is satisfied;
 \begin{align} \nonumber
@@ -244,8 +244,8 @@ Also, the second condition, equation (\ref{paper1_T1_eq2}), of Theorem \ref{pape
 Thus we can say that for the normal distribution, $\hat{H}_{N,k}$ is an asymptotically unbiased estimator for entropy. Moreover, the normal distribution also satisfies Theorem \ref{paper1_T2}, as it fulfills the first condition shown in equation (\ref{paper1_T2_eq1});
 \begin{align} \nonumber
 \int_{\mathbb{R}} | log(f(x))|^{2 + \epsilon} f(x) dx  &= C \int_{\mathbb{R}} \left| log \left( C \right) -  \left( \frac{x^2}{2\sigma^2} \right) \right|^{2 + \epsilon} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
-&< \int_{\mathbb{R}} \frac{x^{2 + \epsilon}}{ \exp{x^2}} dx \\ \nonumber
-&< \int_{-\infty}^{\infty} \frac{x^2}{ \exp{x^2}} dx < \infty \nonumber
+&< \int_{\mathbb{R}} \frac{|x|^{2 + \epsilon}}{ \exp{x^2}} dx \\ \nonumber
+&< \int_{-\infty}^{\infty} \frac{|x|^2}{ \exp{x^2}} dx < \infty \nonumber
 \end{align}
 and the second condition, equation (\ref{paper1_T2_eq2});
 \begin{align} \nonumber
@@ -253,7 +253,7 @@ and the second condition, equation (\ref{paper1_T2_eq2});
 &< \int_{\mathbb{R}} \int_{\mathbb{R}} \frac{| log(\|x\| + \|y\|)|^{2+ \epsilon}}{\exp{(x^2 + y^2)}} dx dy \\ \nonumber
 &< \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{| log(\|x\| + \|y\|)|^2}{\exp{(x^2 + y^2)}} dx dy < \infty  \nonumber
 \end{align}
-Henceforth, the estimator $\hat{H}_{N,k}$ is a consistent estimator by Theorem \ref{paper1_T2}. Due to the above showing the both Theorem \ref{paper1_T1} and \ref{paper1_T2} are satisfied, we can say that the Kozachenko-Leonenko estimator is an asymptotically unbiased and consistent estimator for entropy. Since, I am first considering the 1-dimensional normal distribution, the estimator takes the form in equation (\ref{KLest_d=1});
+Henceforth, the estimator $\hat{H}_{N,k}$, for a sample from the normal distribution is a consistent estimator by Theorem \ref{paper1_T2}. Due to the above showing the both Theorem \ref{paper1_T1} and \ref{paper1_T2} are satisfied, we can say that the Kozachenko-Leonenko estimator, of a sample from the normal distribution is an asymptotically unbiased and consistent estimator for entropy. Since, I am first considering the 1-dimensional normal distribution, the estimator takes the form in equation (\ref{KLest_d=1});
 \begin{equation}
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
 \end{equation}
@@ -296,24 +296,24 @@ $N$ & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & $Var(Bias(\hat{H}_{N, 1}))$ 
 
 Considering table \ref{normal_k=1_table}, we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.0130$ to $\approx 0.0003$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to be asymptotically unbiased, shown in Theorem \ref{paper1_T1}. We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy, also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
 
-This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{normal_k=1_graph}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ with a fitted regression line. In this graph, I have considered the values of $N$ up to $50,000$ at intervals of size $100$, where each point is calculate $500$ times and the average estimator is plotted. I have also found the corresponding coefficients $a_{1}$ and $c_{1}$ for the relationship shown in (\ref{bias}). These coefficients tend towards $a_{1} = 0.4594$ and $c_{1} = 0.0249$ for a large $N$; 
+This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{normal_k=1_graph}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ with a fitted regression line. In this graph, I have considered the values of $N$ up to $50,000$ at intervals of size $100$, where each point is calculate $500$ times and the average estimator is plotted. I have also found the corresponding coefficients $a_{1}$ and $c_{1}$ for the relationship shown in (\ref{bias}). These coefficients tend towards $a_{1} = 0.4594$ and $c_{1} = 0.0249$ for a large $N$, as shown in table \ref{normal_k=1_reg_coeff_table}. 
+ 
 \begin{table}
+\caption{1-dimensional normal distribution, $k=1$, coefficients of regression for large $N$} \label{normal_k=1_reg_coeff_table}
 \begin{center}
 \begin{tabular}{| l | c c|}
 \toprule
 $N$ & $a_{1}$ & $c_{1}$ \\
 \midrule[1pt]
-5000   &  0.6545   &   0.1845   \\
-75000 &  0.5011   &   0.0462   \\
-10000 &  0.7699   &   0.3512   \\
-25000 &  0.5442   &   0.0620   \\
-50000 &  0.4594   &   0.0249   \\
+35000 &  0.5047   &   0.0389   \\
+40000 &  0.4732   &   0.0315  \\
+45000 &     &      \\
+50000 &  0.4954  &   0.0249   \\
 \end{tabular}
 \end{center}
 \end{table}
 
-Doesn't show what expected.. TODO..
-
+Thus we have the relationship between the bias and $N$, for $k=1$, to be of the form;
 \begin{equation}
 |Bias(\hat{H}_{N, 1})| \approx \frac{0.0249}{N^{0.4594}} \nonumber
 \end{equation}
@@ -639,7 +639,7 @@ Thus, the actual value of entropy for the uniform distribution is given by;
 H = log [ b-a ]
 \end{equation}
 
-The uniform distribution satisfies Theorem \ref{paper1_T1}, firstly by considering equation (\ref{paper1_T1_eq1}) with $d=1$ and the distribution $f(x)=C$ for $a \leq x \leq b$, where $C = \frac{1}{b-a} >0$, we have;
+The uniform distribution satisfies Theorem \ref{paper1_T1}, firstly by considering equation (\ref{paper1_T1_eq1}) with $d=1$ and the distribution $f(x)=C$ for $a \leq x \leq b$, where $C = \frac{1}{b-a} >0$, we have for some $\epsilon >0$;
 \begin{align} \nonumber
 \int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= C \int_{a}^{b} | log (C) |^{1 + \epsilon} dx \\ \nonumber 
 &<  \int_{a}^{b} | \hat{C} |^{1 + \epsilon}  dx  < \infty \nonumber
@@ -985,15 +985,13 @@ Another comparison that we can make, is by considering the plot of the regressio
   \label{uniform_comparison_graph}
 \end{figure}
 
-TODO.. plot a graph with regression lines for both the normal and uniform on top of one and other, discuss
-
 
 
 
 
 \subsection{1-dimensional Exponential Distribution}
 
-I will now be looking at the entropy of samples from the exponential distribution $exp(\lambda)$, where $\lambda > 0$ is the rate or inverse scale parameter. In a similar fashion to the previous distributions, the exponential also has an exact formula for the entropy, given the rate parameter $\lambda$. Using equation (\ref{ShaEnt}) and the density function for the exponential distribution $f(x) = \lambda e^{-\lambda x}$ for $x \in [0, \infty)$, we can write the exact entropy;
+I will now be looking at the entropy of samples from the exponential distribution $exp(\lambda)$, where $\lambda > 0$ is the rate or inverse scale parameter. In a similar fashion to the previous distributions, the exponential also has an exact formula for the entropy, given the rate parameter $\lambda$. Using equation (\ref{ShaEnt}) and the density function for the exponential distribution $f(x) = \lambda e^{-\lambda x}$ for $x \in [0, \infty)$ and for $\lambda >0$, we can write the exact entropy;
 \begin{align*}
 H &= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \\ 
 &= - \int_{0}^{\infty} \lambda e^{-\lambda x} log [ \lambda e^{-\lambda x} ] dx  \\
@@ -1009,20 +1007,82 @@ Thus we have the the exact value of entropy for the exponential distribution, gi
 H = 1 - log(\lambda)
 \end{equation}
 
-I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 0.5$, this is because, if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$, which will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy, $H$. Also, for $\lambda \geq 1$, we have a small value of entropy, which would cause problems when calculating large samples and their entropy. Therefore, I have chosen a random number for the rate parameter such that $\lambda \in (0, 1)$, so for this value of $\lambda=0.5$, the exact entropy is given by;
-\begin{equation} \label{exponential_exact}
-H = 1 - log(0.5) \approx 1.693147
-\end{equation}
-Moreover, I am again considering a 1-dimensional distribution; thus $V_{d} = V_{1} = 2$, and;
+Samples from the exponential distribution must satisfy the conditions of Theorem \ref{paper1_T1} and \ref{paper1_T2}, to  be an asymptotically unbiased and consistent estimator. For Theorem \ref{paper1_T1} to be satisfied, it must first satisfy equation (\ref{paper1_T1_eq1}), thus using that the density here is $f(x) = \lambda e^{-\lambda x}$ for $x \in [0, \infty)$, where $\lambda >0$, and considering some $\epsilon >0$;
+\begin{align} \nonumber
+\int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= \lambda \int_{0}^{\infty} | log (\lambda) - \lambda x |^{1 + \epsilon} e^{- \lambda x} dx \\ \nonumber
+&<  \int_{0}^{\infty} \frac{| - \lambda x |^{1 + \epsilon}}{ e^{\lambda x}} dx \\ \nonumber
+&<  \int_{0}^{\infty} \frac{|x|}{ e^{\lambda x}} dx < \infty \nonumber
+\end{align}
+Also, the second condition, equation (\ref{paper1_T1_eq2}), of Theorem \ref{paper1_T1} is satisfied;
+\begin{align} \nonumber
+\int_{(\mathbb{R})^2} | log(\|x-y\|)|^{1+ \epsilon} f(x) f(y) dx dy  &= \lambda^2 \int_{0}^{\infty} \int_{0}^{\infty} | log(\|x-y\|)|^{1+ \epsilon} e^{- \lambda (x + y)} dx dy \\ \nonumber
+&<  \int_{0}^{\infty} \int_{0}^{\infty}  \frac{| log(\|x\| + \|y\|)|^{1+ \epsilon}}{e^{\lambda (x + y)}} dx dy \\ \nonumber
+&<  \int_{0}^{\infty} \int_{0}^{\infty}  \frac{| log(\|x\| + \|y\|)|}{e^{(x + y)}} dx dy < \infty  \nonumber
+\end{align}
+Thus we can say that for the exponential distribution, $\hat{H}_{N,k}$ is an asymptotically unbiased estimator for entropy. Moreover, the exponential distribution also satisfies Theorem \ref{paper1_T2}, as it fulfills the first condition shown in equation (\ref{paper1_T2_eq1});
+\begin{align} \nonumber
+\int_{\mathbb{R}} | log(f(x))|^{2 + \epsilon} f(x) dx  &= \lambda \int_{0}^{\infty} | log (\lambda) - \lambda x |^{2 + \epsilon} e^{- \lambda x} dx \\ \nonumber
+&<  \int_{0}^{\infty} \frac{| - \lambda x |^{2 + \epsilon}}{ e^{\lambda x}} dx \\ \nonumber
+&<  \int_{0}^{\infty} \frac{|x|^2}{ e^{\lambda x}} dx < \infty \nonumber
+\end{align}
+and the second condition, equation (\ref{paper1_T2_eq2});
+\begin{align} \nonumber
+\int_{(\mathbb{R})^2} | log(\|x-y\|)|^{2+ \epsilon} f(x) f(y) dx dy  &= \lambda^2 \int_{0}^{\infty} \int_{0}^{\infty} | log(\|x-y\|)|^{2+ \epsilon} e^{- \lambda (x + y)} dx dy \\ \nonumber
+&<  \int_{0}^{\infty} \int_{0}^{\infty}  \frac{| log(\|x\| + \|y\|)|^{2+ \epsilon}}{e^{\lambda (x + y)}} dx dy \\ \nonumber
+&<  \int_{0}^{\infty} \int_{0}^{\infty}  \frac{| log(\|x\| + \|y\|)|^2}{e^{(x + y)}} dx dy < \infty  \nonumber
+\end{align}
+Thus, the estimator $\hat{H}_{N,k}$, for a sample from the exponential distribution is a consistent estimator by Theorem \ref{paper1_T2}. Due to the above showing the both Theorem \ref{paper1_T1} and \ref{paper1_T2} are satisfied, we can say that the Kozachenko-Leonenko estimator, of a sample from the exponential distribution is an asymptotically unbiased and consistent estimator for entropy.Moreover, I am again considering a 1-dimensional distribution; thus $V_{d} = V_{1} = 2$, and;
 \begin{equation}
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
 \end{equation}
-is the form of the Kozachenko-Leonenko estimator that I will be considering here.
+is the form of the Kozachenko-Leonenko estimator that I will be considering here, equation (\ref{KLest_d=1}).
+
+I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 0.5$, this is because, we know that for the exponential distribution we must have the rate parameter $\lambda >0$ and if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$. This will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy, $H$. Also, for $\lambda \geq 1$, we have a very small value of entropy, $H \leq 1$, which would cause problems when calculating large samples and their entropy. Therefore, I have chosen a random number for the rate parameter such that $\lambda \in (0, 1)$, so for this value of $\lambda=0.5$, the exact entropy is given by;
+\begin{equation} \label{exponential_exact}
+H = 1 - log(0.5) \approx 1.693147
+\end{equation}
+
 
 
 
 \subsubsection{k=1} \label{E_k=1}
+In a similar fashion to how the previous distributions were explored in sections \ref{N_k=1} to \ref{N_k=10} and \ref{U_k=1} and \ref{U_k=10}, I will be considering $500$ samples of size $N$ from the exponential distribution, find the estimator in each case and take the average of these estimators to find our entropy estimator, using the equation;
+\begin{equation}
+\hat{H}_{N, 1} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(1),i} (N-1)}{e^{-\gamma}} \right] \nonumber
+\end{equation}
+Considering the bias for this estimator against the actual value of entropy for the exponential distribution, with $\lambda =0.5$, shown in equation (\ref{expo_exact}), for different samples sizes $N$ gives Table \ref{expo_k=1_table}.
 
+\begin{table}
+\caption{1-dimensional exponential distribution, $k=1$} \label{expo_k=1_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
+$N$ & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & $Var(Bias(\hat{H}_{N, 1}))$ \\
+\midrule[1pt]
+100     & 1.682163     & 0.01098459356     & 0.03000921515  \\
+200     & 1.692696     & 0.00045124177     & 0.01814679310  \\
+500     & 1.690508     & 0.00263961497     & 0.00634492739  \\
+1000    & 1.687560     & 0.00558717255     & 0.00319726793  \\
+5000    & 1.695081     & 0.00193336147     & 0.00058924735  \\
+10000   & 1.693198     & 0.00005051942     & 0.00032789400  \\
+25000   & 1.694373     & 0.00122575211     & 0.00012790693  \\
+50000   & 1.693321     & 0.00017399576     & 0.00005779114  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+These results show an overall decreasing trend in the bias, and a strong decreasing variance of the bias. However, this is not a decreasing sequence of numbers, as in many places (i.e. from $N=10,000$ to $N=25,000$) the bias is increasing, which disagrees with Theorem \ref{paper1_T1}, that the estimator is asymptotically unbiased; since the smallest value of bias occurs at $N=10,000$. There could be a number of reasons for the behaviour shown;
+\begin{itemize}
+\item outliers
+\item the relationship isn't smooth but does overall tend that way
+\item estimator for the expo dist is not asymptotically unbiased - not true since we've shown it satisfies theorems
+\end{itemize}
+
+To further examine the relationship between bias and $N$, which was inconclusive in table \ref{expo_k=1_table}, I have depicted Figure \ref{expo_k=1_graph}, shows the relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ with a fitted regression line. In this graph, I have considered the values of $N$ up to $50,000$ at intervals of size $100$, where each point is calculate $500$ times and the average estimator is plotted. I have also found the corresponding coefficients $a_{1} = 0.4174$ and $c_{1} = 0.0198$ for the relationship shown in (\ref{bias});
+\begin{equation}
+|Bias(\hat{H}_{N, 1})| \approx \frac{0.0198}{N^{0.4174}}\nonumber
+\end{equation}
 
 \begin{figure}
   \begin{center}
@@ -1032,20 +1092,142 @@ is the form of the Kozachenko-Leonenko estimator that I will be considering here
   \label{expo_k=1_graph}
 \end{figure}
 
-a
-[1] 0.4174
+To say that this estimator is asymptotically unbiased, we would like to have the value of $a_{k} > 0.5$, which is not the case here. This is similar to the relationship shown in sections \ref{N_k=1} and \ref{U_k=1}, where we also had $a_{1} = 0.4594, 0.3698 < 0.5$. Although this is not what we would like in our estimator, it is consistent throughout the different distribution considered so far. Also, it still implies a negative relationship between the bias and $N$, as $N$ increases the bias will decrease, just not a relationship as strong one would like. These three regression lines can be plotted together to further show their similarities, depicted in figure \ref{E_U_N_k=1_graph}.
 
-c
-[1] 0.0198
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/EUN_k=1_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 1})|$ against $\log(N)$, for the 1-dimensional distributions; exponential, uniform and normal}
+  \label{E_U_N_k=1_graph}
+\end{figure}
+
+TODO... this graph shows... A more detailed comparison will be further explored in section \ref{E_compare_k}.
 
 
 
 
 
- k=2
-a
-[1] 0.648
+\subsubsection{k=2} \label{E_k=2}
+We now wish to consider the estimator for $k=2$, which takes the form;
+\begin{equation} 
+\hat{H}_{N, 1} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(1),i} (N-1)}{e^{-\gamma + 1}} \right] \nonumber
+\end{equation}
 
-c
-[1] 0.1482
+\begin{table}
+\caption{1-dimensional exponential distribution, $k=2$} \label{expo_k=2_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
+N & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ \\
+\midrule[1pt]
+100     & 1.692627     & 0.00051996867     & 0.01705110058  \\
+200     & 1.686513     & 0.00663429438     & 0.00942333921  \\
+500     & 1.691328     & 0.00181927748     & 0.00371778428  \\
+1000    & 1.692399     & 0.00074835082     & 0.00203062072  \\
+5000    & 1.692660     & 0.00048693059     & 0.00039750041  \\
+10000   & 1.693193     & 0.00004543429     & 0.00019553001  \\
+25000   & 1.693504     & 0.00035725960     & 0.00007458969  \\
+50000   & 1.693084     & 0.00006338711     & 0.00004293387  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Using the same parameters as before; taking $500$ samples of size $N=100 \to 50,000$ from the exponential distribution, with rate parameter $\lambda =0.5$, and consider the estimator of these samples against the actual value of entropy, equation \ref{exponential_exact}, we get the results in table \ref{expo_k=2_table}. These results are inconclusive in showing the relationship desired between the $|Bias(\hat{H}_{N, 2})|$ and $N$, from Theorem \ref{paper1_T1}. 
+
+Additionally, I have also plotted the regression graph again, this time for $k=2$, the results are shown in Figure \ref{expo_k=1_graph} and the regression coefficients are given by $a_{2} = 0.6480$ and $c_{2} = 0.1482$.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Expo_k=2_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 2})|$ against $\log(N)$}
+  \label{expo_k=2_graph}
+\end{figure}
+
+Using equation (\ref{bias}), we have the relationship between the bias and $N$ given by;
+\begin{equation}
+|Bias(\hat{H}_{N, 1})| \approx \frac{0.1482}{N^{0.6480}}\nonumber
+\end{equation}
+where here we have the $a_{2} > a_{1}$, which is the same relationship that we have found in the previous two distributions. We can also compare th value of $a_{2}$ in these other distributions and we have; $a_{2} = 0.5857$ for the normal distribution and $a_{3}= 0.5998$ for the uniform distribution (from sections \ref{N_k=2} and \ref{U_k=2} respectively). All of these values vary by only $\approx 0.06$, showing that the information found from the analysis done is consistent throughout the distributions considered so far. I have also plotted these regression lines alongside each other, in Figure \ref{E_U_N_k=2_graph}, to depict the differences/similarities, between the regression line for each distribution.
+
+
+
+
+\subsubsection{k=3} \label{E_k=3}
+
+
+
+\begin{table}
+\caption{1-dimensional exponential distribution, $k=3$} \label{expo_k=3_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
+$N$ & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ \\
+\midrule[1pt]
+
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\subsubsection{k=5} \label{E_k=5}
+
+\subsubsection{k=10} \label{E_k=10}
+
+\subsubsection{Comparison of k} \label{E_compare_k}
+
+
+
+In sections \ref{E_k=1} to \ref{E_k=10}, I have explored the Koazchenko-Leonenko estimator for samples from the 1-dimensional exponential distribution. I will be now focusing on the results of the coefficients of equation (\ref{bias}), found from the simulations above;
+\begin{equation}
+|Bias(\hat{H}_{N, k})| = \frac{c_{k}}{N^{a_{k}}} \nonumber
+\end{equation}
+The results from the investigation above have been condensed into table \ref{expo_k_comparison_table}, showing the change in values of $a_{k}$ and $c_{k}$ for different $k$.
+
+\begin{table}
+\caption{1-dimensional exponential distribution, a comparison of $k$} \label{expo_k_comparison_table}
+\begin{center}
+\begin{tabular}{| l | c c|} 
+\toprule
+k & $a_{k}$ & $c{k}$ \\
+\midrule[1pt]
+1 &  0.4147  &  0.0198  \\
+2 &  0.6480  &  0.1482 \\
+3 &  & \\
+5 &  &  \\
+10 &  &   \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+TODO.. what this table shows
+
+I can also compare the values found for $a_{k}$ and $c_{k}$ for the exponential distribution, to those found from the other 1-dimensional distributions previously considered, I have condensed this formation into table \ref{expo_uniform_normal_comparison_table}.
+
+
+
+\begin{table}
+\caption{Comparison between 1-dimensional Exponential, Uniform and Normal distribution} \label{expo_uniform_normal_comparison_table}
+\begin{center}
+\begin{tabular}{| l | c c | c c | c c |}
+\toprule
+{ |} &  \multicolumn{2}{c |}{Normal} & \multicolumn{2}{c |}{Uniform} & \multicolumn{2}{c |}{Exponential}\\
+\hline
+$k$   &  $a_{k}$  &  $c_{k}$  &  $a_{k}$  &  $c_{k}$  &  $a_{k}$  &  $c_{k}$   \\
+\midrule[1pt]
+1      & 0.4594     & 0.0249 &  0.3698  &  0.0103  &  0.4147  &  0.0198  \\
+2      & 0.5998     & 0.0746 &  0.5857  &  0.0503  &  0.0648  &  0.1482  \\
+3      & 0.6443     & 0.1156 &  0.6291  &  0.0737  &  & \\
+5      & 0.7568     & 0.3557 &  0.7501  &  0.1889  &  & \\
+10    & 1.0055     & 5.5942 &  1.0357  &  3.8217  &  & \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
 \end{document}
