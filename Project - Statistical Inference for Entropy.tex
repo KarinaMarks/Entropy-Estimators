@@ -724,17 +724,7 @@ To understand what is occurring in table \ref{uniform_k=1_table}, I have plotted
 \begin{equation}
 |Bias(\hat{H}_{N, 2})| \approx \frac{0.0103}{N^{0.3698}}\nonumber
 \end{equation}
-This is not what we would like to see, as for the estimator to be asymptotically unbiased, we would like to have $a_{k} > 0.5$, which here is not true. This could possibly be due to outliers in the samples, or could be due to the fact that for $k=1$, the estimator for the entropy of a sample from the uniform distribution, is not as strong as expected. If we compare this to the values from the normal distribution; $a_{1} = 0.4594$ and $c_{1} = 0.0249$,we can see that for the normal distribution, the value for $a_{k}$ is closer to that desired, but they have only an $\approx 0.09$ difference between them. This difference is depicted in Figure \ref{U_N_k=1_compare_graph}, where we can see that these lines are similar, but the regression for the normal distribution is more ideal for the situation being described.
-
-\begin{figure}
-  \begin{center}
-    \includegraphics[width=\textwidth]{./Graphs/Uniform_Normal_k=1_plot.png}
-  \end{center}
-\caption{Plot of regression lines for $\log|Bias(\hat{H}_{N, 1})|$ against $\log(N)$, for both normal and uniform distributions}
-  \label{uniform_k=1_graph}
-\end{figure}
-
-To further understand the meaning of these coefficients we must compare them with those for higher values of $k$, which will be done in more detail in section \ref{U_compare_k}.
+This is not what we would like to see, as for the estimator to be asymptotically unbiased, we would like to have $a_{k} > 0.5$, which here is not true. This could possibly be due to outliers in the samples, or could be due to the fact that for $k=1$, the estimator for the entropy of a sample from the uniform distribution, is not as strong as expected. If we compare this to the values from the normal distribution; $a_{1} = 0.4594$ and $c_{1} = 0.0249$,we can see that for the normal distribution, the value for $a_{k}$ is closer to that desired, but they have only an $\approx 0.09$ difference between them. To further understand the meaning of these coefficients we must compare them with those for higher values of $k$, which will be done in more detail in section \ref{U_compare_k}.
 
 
 
@@ -782,7 +772,7 @@ This graph has the regression line plotted of the form \ref{logbias}, with $a_{2
 \begin{equation}
 |Bias(\hat{H}_{N, 2})| \approx \frac{0.0503}{N^{0.5857}}\nonumber
 \end{equation}
-As we can see from the graph, the relationship is obviously a negative correlation, and the values around the line are sparsely located. So I believe the reason for table \ref{uniform_k=2_table} not looking as expected, is just due to bad luck in the values of $N$ that I have chosen to be numerically represented in it. The graph plotted and the regression coefficients, align well with the normal distribution. Thus removing any uncertainty that we have about the estimator of entropy for a sample from the uniform distribution acting differently to that from the normal distribution. A comparison of the values of $a_{2}$ and $c_{2}$, with other values of $k$, will be further explored in section \ref{U_compare_k}.
+As we can see from the graph, the relationship is obviously a negative correlation, and the values around the line are sparsely located. So I believe the reason for table \ref{uniform_k=2_table} not looking as expected, is just due to bad luck in the values of $N$ that I have chosen to be numerically represented in it. The graph plotted and the regression coefficients, align well with the normal distribution; whose coefficients $a_{2} \approx 0.5998$ and $c_{2} \approx 0.0746$ were found in section \ref{N_k=2}. Thus removing any uncertainty that we have about the estimator of entropy for a sample from the uniform distribution acting differently to that from the normal distribution. A comparison of the values of $a_{2}$ and $c_{2}$, with other values of $k$, will be further explored in section \ref{U_compare_k}.
 
 
 
@@ -818,7 +808,6 @@ I believe that the best way to show this consistency condition is to just consid
 \begin{equation}
 |Bias(\hat{H}_{N, 3})| \approx \frac{0.0737}{N^{0.6291}}\nonumber
 \end{equation}
-In comparison to this, for $k=2$, we had that $a_{2} \approx 0.5857$, so $a_{2} < a_{3}$, which implies that the relationship for $k=3$ is stronger than that for $k=2$. A more detailed comparison will be further explored in section \ref{U_compare_k}.
 
 \begin{figure}
   \begin{center}
@@ -827,6 +816,11 @@ In comparison to this, for $k=2$, we had that $a_{2} \approx 0.5857$, so $a_{2} 
 \caption{Regression plot of $\log|Bias(\hat{H}_{N, 3})|$ against $\log(N)$}
   \label{uniform_k=3_graph}
 \end{figure}
+
+In comparison to this, for $k=2$, we had that $a_{2} \approx 0.5857$ and $a_{1} \approx 0.3698$, so $a{1} < a_{2} < a_{3}$, which implies that the relationship for $k=3$ is stronger than that for $k=1, 2$. We can also compare the values found in section \ref{N_k=3}, where samples from the normal distribution were considered and an estimator for $k=3$ was found. The coefficients here were given by $a_{3} \approx 0.6443$ and $c_{3} \approx 0.1156$, which is a $\approx 0.015$ difference in $a_{3}$, and a $\approx 0.04$ difference in $c_{3}$, in comparison to the uniform distribution. This implies a very similar relationship is shown for each distribution; moreover, a more detailed comparison will be further explored in section \ref{U_compare_k}.
+
+
+
 
 
 \subsubsection{k=5} \label{U_k=5}
@@ -857,11 +851,7 @@ N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & $Var(Bias(\hat{H}_{N, 5}))$ \\
 \end{center}
 \end{table}
 
-Furthermore, I have considered a plot to represent equation (\ref{logbias}), shown in Figure \ref{uniform_k=5_graph}, where I have also found the coefficients of regression to be; $a_{5} \approx 0.7501$ and $c_{5} \approx 0.1889$. Thus, here we get the relationship;
-\begin{equation}
-|Bias(\hat{H}_{N, 5})| \approx \frac{0.1889}{N^{0.7501}}\nonumber
-\end{equation}
-In comparison to the previous two plots, we find that $a_{2} < a_{3} < a_{5}$, indicating that as $k$ increases the strength of the relationship between the $|Bias(\hat{H}_{N, k})|$ and $N$ also increases. This implies that $|Bias(\hat{H}_{N, k})| \to 0$ as $N \to \infty$ faster for $k=5$, over a smaller $k$. We can also see that $c_{k}$, so far, has also been increasing for larger $k \leq 5$. A comparison will be further explored in section \ref{U_compare_k}.
+Furthermore, I have considered a plot to represent equation (\ref{logbias}), shown in Figure \ref{uniform_k=5_graph}, where I have also found the coefficients of regression to be; $a_{5} \approx 0.7501$ and $c_{5} \approx 0.1889$. 
 
 \begin{figure}
   \begin{center}
@@ -870,6 +860,15 @@ In comparison to the previous two plots, we find that $a_{2} < a_{3} < a_{5}$, i
 \caption{Regression plot of $\log|Bias(\hat{H}_{N, 5})|$ against $\log(N)$}
   \label{uniform_k=5_graph}
 \end{figure}
+
+Thus, here we get the relationship;
+\begin{equation}
+|Bias(\hat{H}_{N, 5})| \approx \frac{0.1889}{N^{0.7501}}\nonumber
+\end{equation}
+In comparison to the coefficients from the previous value of $k$, we find that $a_{1} < a_{2} < a_{3} < a_{5}$, indicating that as $k$ increases the strength of the relationship between the $|Bias(\hat{H}_{N, k})|$ and $N$ also increases. This implies that $|Bias(\hat{H}_{N, k})| \to 0$ as $N \to \infty$ faster for $k=5$, over a smaller $k$. We can also see that $c_{k}$, so far, has also been increasing for larger $k \leq 5$.
+We can also compare this to the information found form the analysis of the normal distribution, with $k=5$, explored in section \ref{N_k=5}. Here we found that $a_{5}=0.7568$ and $c_{5}=0.3557$, which shows an $\approx 0.06$ difference in the value of $a_{5}$ and a $\approx 0.17$ difference in the values of $c_{5}$. These show small differences between the two distributions, which will be further explored in section \ref{U_compare_k}.
+
+
 
 
 
@@ -901,7 +900,7 @@ N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$
 \end{center}
 \end{table}
 
-In comparison to what we have seen before in tables \ref{uniform_k=2_table}, \ref{uniform_k=3_table} and \ref{uniform_k=5_table}, we here have more of a obvious comparison, shown numerically, between the size of the sample, $N$, and the size of the bias. This fits in with the consistency condition from Theorem \ref{consistency_theorem}, that $|Bias(\hat{H}_{N, 10})| \to 0$ as $N \to \infty$. 
+In comparison to what we have seen before in tables \ref{uniform_k=2_table}, \ref{uniform_k=3_table} and \ref{uniform_k=5_table}, we here have more of a obvious comparison, shown numerically, between the size of the sample, $N$, and the size of the bias. This fits in with the condition of asymptotic unbiasedness from Theorem \ref{paper1_T1}, that $|Bias(\hat{H}_{N, 10})| \to 0$ as $N \to \infty$. 
 
 \begin{figure}
   \begin{center}
@@ -911,11 +910,13 @@ In comparison to what we have seen before in tables \ref{uniform_k=2_table}, \re
   \label{uniform_k=10_graph}
 \end{figure}
 
-TODO ..  graphical comparison.
-a
-[1] 1.0357
-c
-[1] 3.8217
+From plotting the logarithm of the bias of the estimator against the logarithm of $N$ I have found the coefficients of regression to be $a_{10} = 1.0357$ and $c_{10}=3.8217$. Again these values are both larger than recorded previously for smaller values of $k$, for samples from the uniform distribution. Most importantly; $a_{10} > a_{5} > a_{3} > a_{2} > a_{1}$. These coefficients imply a relationship between the bias of the estimator and $N$ of the form;
+\begin{equation}
+|Bias(\hat{H}_{N, 10})| \approx \frac{3.8217}{N^{1.0357}}\nonumber
+\end{equation}
+This implies that the value of $|Bias(\hat{H}_{N, 10})| \to 0$ for large $N$, in a faster manner than that for smaller $k$, which again is fitting with Theorem \ref{paper1_T1} on the asymptotic unbiasedness of the estimator. I can also make the comparison between the regressional relationship between the uniform and the normal distribution for $k=10$, where for the normal distribution I found the coefficients to be $a_{10}=1.0055$ and $c_{10}=5.5942$, in section \ref{N_k=10}. We can see that these regression lines would be close to one and other, which is to be expected. For both distributions the value of $a_{10}$ is only $\approx 0.03$ in difference, but the value of $c_{10}$ has a larger difference of $\approx 1.8$, which is a much larger distance and gives the impression of the two lines being parallel to one and other; the uniform regression line is just shifted down slightly from the normal. A more detailed comparison of this will be shown in section \ref{U_compare_k}.
+
+
 
 
 
