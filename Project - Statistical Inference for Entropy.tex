@@ -989,7 +989,7 @@ Another comparison that we can make, is by considering the plot of the regressio
 
 
 
-\subsection{1-dimensional Exponential Distribution}
+\subsection{1-dimensional Exponential Distribution} \label{Expo_d=1}
 
 I will now be looking at the entropy of samples from the exponential distribution $exp(\lambda)$, where $\lambda > 0$ is the rate or inverse scale parameter. In a similar fashion to the previous distributions, the exponential also has an exact formula for the entropy, given the rate parameter $\lambda$. Using equation (\ref{ShaEnt}) and the density function for the exponential distribution $f(x) = \lambda e^{-\lambda x}$ for $x \in [0, \infty)$ and for $\lambda >0$, we can write the exact entropy;
 \begin{align*}
@@ -1074,9 +1074,9 @@ $N$ & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & $Var(Bias(\hat{H}_{N, 1}))$ 
 
 These results show an overall decreasing trend in the bias, and a strong decreasing variance of the bias. However, this is not a decreasing sequence of numbers, as in many places (i.e. from $N=10,000$ to $N=25,000$) the bias is increasing, which disagrees with Theorem \ref{paper1_T1}, that the estimator is asymptotically unbiased; since the smallest value of bias occurs at $N=10,000$. There could be a number of reasons for the behaviour shown;
 \begin{itemize}
-\item outliers
-\item the relationship isn't smooth but does overall tend that way
-\item estimator for the expo dist is not asymptotically unbiased - not true since we've shown it satisfies theorems
+\item The estimator for the exponential distribution is not asymptotically unbiased - we know that this is not true since in section \ref{Expo_d=1}, I have shown how samples from this distribution satisfies the conditions to imply that the Theorems \ref{paper1_T1} and \ref{paper1_T2} hold. Thus the estimator for samples from the exponential distribution must be asymptotically unbiased and consistent, hence we should see the trend that $|Bias(\hat{H}_{N, 1})| \to 0$ as $N \to \infty$.
+\item The relationship isn't smooth but does overall show asymptotic unbias -  this could be true, since we are not looking at every data point from $N = 1 \to 50,000$, we have only considered 8 values of $N$. Between each $N$ we would expect variability and not an exact smoothness; this is because we are considering simulations so are not expecting to have every point of bias against $N$ in exactly the correct place. Thus considering each point could confirm Theorem \ref{paper1_T1}; this will be done in the graph of the $log |Bias(\hat{H}_{N, 1})|$ against $log(N)$.
+\item The table could just contain outliers - the amount that the values of bias jumps around would indicate that the majority of them being outliers is not feasible. Additionally, the estimator for each value $N$ is computed $500$ times, and then the average is recorded in table \ref{expo_k=1_table}, so this should smooth out any outliers that could occur from the computation.
 \end{itemize}
 
 To further examine the relationship between bias and $N$, which was inconclusive in table \ref{expo_k=1_table}, I have depicted Figure \ref{expo_k=1_graph}, shows the relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ with a fitted regression line. In this graph, I have considered the values of $N$ up to $50,000$ at intervals of size $100$, where each point is calculate $500$ times and the average estimator is plotted. I have also found the corresponding coefficients $a_{1} = 0.4174$ and $c_{1} = 0.0198$ for the relationship shown in (\ref{bias});
@@ -1102,7 +1102,7 @@ To say that this estimator is asymptotically unbiased, we would like to have the
   \label{E_U_N_k=1_graph}
 \end{figure}
 
-TODO... this graph shows... A more detailed comparison will be further explored in section \ref{E_compare_k}.
+This graph shows that for each distribution, with $k=1$, has a similar trend between the logarithm of the bias and the logarithm of $N$. It appears that the normal has the strongest negative correlation, but only by a small amount; considering the graph for larger values of $log(N)$ show the regression lines being particularly close to one and other for large $N$. A more detailed comparison will be further explored in section \ref{E_compare_k}.
 
 
 
@@ -1134,9 +1134,7 @@ N & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ \\
 \end{center}
 \end{table}
 
-Using the same parameters as before; taking $500$ samples of size $N=100 \to 50,000$ from the exponential distribution, with rate parameter $\lambda =0.5$, and consider the estimator of these samples against the actual value of entropy, equation \ref{exponential_exact}, we get the results in table \ref{expo_k=2_table}. These results are inconclusive in showing the relationship desired between the $|Bias(\hat{H}_{N, 2})|$ and $N$, from Theorem \ref{paper1_T1}. 
-
-Additionally, I have also plotted the regression graph again, this time for $k=2$, the results are shown in Figure \ref{expo_k=1_graph} and the regression coefficients are given by $a_{2} = 0.6480$ and $c_{2} = 0.1482$.
+Using the same parameters as before; taking $500$ samples of size $N=100 \to 50,000$ from the exponential distribution, with rate parameter $\lambda =0.5$, and consider the estimator of these samples against the actual value of entropy, equation \ref{exponential_exact}, we get the results in table \ref{expo_k=2_table}. These results are inconclusive in showing the relationship desired between the $|Bias(\hat{H}_{N, 2})|$ and $N$, from Theorem \ref{paper1_T1}, this is similar to what was found for $k=1$ in section \ref{E_k=1}, and a more convincing conclusion was made by examining the relationship in equation (\ref{logbias}). Thus, I have also plotted the regression graph again, this time for $k=2$, the results are shown in Figure \ref{expo_k=1_graph} and the regression coefficients are given by $a_{2} = 0.6480$ and $c_{2} = 0.1482$.
 
 \begin{figure}
   \begin{center}
@@ -1152,12 +1150,24 @@ Using equation (\ref{bias}), we have the relationship between the bias and $N$ g
 \end{equation}
 where here we have the $a_{2} > a_{1}$, which is the same relationship that we have found in the previous two distributions. We can also compare th value of $a_{2}$ in these other distributions and we have; $a_{2} = 0.5857$ for the normal distribution and $a_{3}= 0.5998$ for the uniform distribution (from sections \ref{N_k=2} and \ref{U_k=2} respectively). All of these values vary by only $\approx 0.06$, showing that the information found from the analysis done is consistent throughout the distributions considered so far. I have also plotted these regression lines alongside each other, in Figure \ref{E_U_N_k=2_graph}, to depict the differences/similarities, between the regression line for each distribution.
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/EUN_k=2_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 2})|$ against $\log(N)$, for the 1-dimensional distributions; exponential, uniform and normal}
+  \label{E_U_N_k=2_graph}
+\end{figure}
+
+This graph confirms the closeness of the regression lines for each distribution, for k=2, we can see that the uniform distribution has the lowest regression line; indicating that at the largest $N$ considered, we would have the smallest bias for this distribution. However, the exponential distribution has the steepest slope to its line; demonstrating that for a large $N$ (larger than what has been considered so far), we would have that the bias of samples from this distribution tends to 0 the fastest. Moreover, the regression lines are very similar between these distributions for k=2, suggesting that the results here are as to be expected.
+
 
 
 
 \subsubsection{k=3} \label{E_k=3}
-
-
+Again, for $k=3$, I will examine $500$ samples of size $N$ from the exponential distribution considered before, with estimator of the form;
+\begin{equation}
+\hat{H}_{N, 3} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(3),i} (N-1)}{e^{\Psi(3)}} \right] = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(3),i} (N-1)}{e^{-\gamma + 1 + \frac{1}{2}}} \right] \nonumber
+\end{equation}
 
 \begin{table}
 \caption{1-dimensional exponential distribution, $k=3$} \label{expo_k=3_table}
@@ -1178,6 +1188,12 @@ $N$ & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ 
 \end{tabular}
 \end{center}
 \end{table}
+
+The results of the comparison between the actual value and the estimated value of entropy, for different values of $N$, are displayed in table \ref{expo_k=3_table}. This table is beginning to indicate a strong trend between the bias of the estimator and the sample size, $N$. The previous tables from section \ref{E_k=1} and \ref{E_k=2}, had inconclusive values in their tables; however this table does seem to suggest that the estimator agrees with Theorem \ref{paper1_T1}, that the estimator is asymptotically unbiased. To further examine the relationship between the values of bias and $N$, I have created the graph depicted in Figure \ref{}.
+
+
+
+
 
 \subsubsection{k=5} \label{E_k=5}
 
