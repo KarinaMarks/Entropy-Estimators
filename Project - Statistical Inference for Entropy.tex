@@ -282,7 +282,7 @@ $N$ & $\hat{H}_{N, 1}$ & $|Bias(\hat{H}_{N, 1})|$ & $Var(Bias(\hat{H}_{N, 1}))$ 
 \end{center}
 \end{table}
 
-Considering table \ref{normal_k=1_table}, we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.0130$ to $\approx 0.0003$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to satisfy the consistency condition, shown in Theorem \ref{consistency_theorem}. We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy, also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
+Considering table \ref{normal_k=1_table}, we can see for a larger value of N, the Bias of the estimator becomes much smaller; the bias decreases from $\approx 0.0130$ to $\approx 0.0003$ as $N$ increases from $100 \to 50,000$. This result is to be expected for an estimator to be asymptotically unbiased, shown in Theorem \ref{paper1_T1}. We can also see that the variance of the bias is decreasing as N increases implying that, not only is the average of the estimator getting closer to the actual value of entropy, also the variability between the estimator of different samples is decreasing, making it a consistent and asymptotically unbiased estimator in practice, as well as in theory.
 
 This relationship between the bias $|Bias(\hat{H}_{N, 1})|$ of the estimator and the size of the sample $N$, can be computed for these sample sizes. Figure \ref{normal_k=1_graph}, shows this relationship of $log|Bias(\hat{H}_{N, 1})|$ against $log(N)$ with a fitted regression line. In this graph, I have considered the values of $N$ up to $50,000$ at intervals of size $100$, where each point is calculate $500$ times and the average estimator is plotted. I have also found the corresponding coefficients $a_{1}$ and $c_{1}$ for the relationship shown in (\ref{bias}). These coefficients tend towards $a_{1} = 0.4594$ and $c_{1} = 0.0249$ for a large $N$; 
 \begin{table}
@@ -346,7 +346,7 @@ $N$ & $\hat{H}_{N, 2}$ & $|Bias(\hat{H}_{N, 2})|$ & $Var(Bias(\hat{H}_{N, 2}))$ 
 \end{center}
 \end{table}
 
-We can see that, as expected, the Bias of the estimator decreases from $\approx 0.0100$ when $N=100$ to $\approx 0.0002$ when $N=50,000$. This is showing that the consistency condition is being met since as $N \to \infty$ we have $|Bias(\hat{H}_{N, 2})| \to 0$, which is equivalent to saying $\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H$, Theorem (\ref{consistency_theorem}). We also have that the variance of the bias of these estimators decrease as $N \to \infty$, as expected. In relation to $k=1$, we can see that the bias of this estimator for $k=2$ decreases at a similar pace as $N \to \infty$; $|Bias(\hat{H}_{N, 1})| \approx 0.0130 \to 0.0003$ and $|Bias(\hat{H}_{N, 2})| \approx 0.0101 \to 0.0002$, implying that from this analysis we cannot decide which value of $k$ generates a better estimator.
+We can see that, as expected, the Bias of the estimator decreases from $\approx 0.0100$ when $N=100$ to $\approx 0.0002$ when $N=50,000$. This is showing that the consistency condition is being met since as $N \to \infty$ we have $|Bias(\hat{H}_{N, 2})| \to 0$, which is equivalent to saying $\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H$, Theorem \ref{paper1_T1}. We also have that the variance of the bias of these estimators decrease as $N \to \infty$, as expected. In relation to $k=1$, we can see that the bias of this estimator for $k=2$ decreases at a similar pace as $N \to \infty$; $|Bias(\hat{H}_{N, 1})| \approx 0.0130 \to 0.0003$ and $|Bias(\hat{H}_{N, 2})| \approx 0.0101 \to 0.0002$, implying that from this analysis we cannot decide which value of $k$ generates a better estimator.
 
 \begin{figure}
   \begin{center}
@@ -447,7 +447,7 @@ To determine the reason for this jump of Bias in the wrong direction, I will exa
 \end{equation}
 This gives us a much smaller bias than $|Bias(\hat{H}_{50000, 5})|$ shown in table \ref{normal_k=5_table}, however, this is still not smaller than the value of $|Bias(\hat{H}_{25000, 5})|$ shown in the same table. This could mean that for $k=5$, the estimator doesn't satisfy the consistency condition as strongly as the previous estimators for $k=1, 2, 3$.
 
-However, if we consider the graph in figure \ref{normal_k=5_graph}, we can see an obvious negative relationship between the logarithm of $|Bias(\hat{H}_{N, 5})|$ and the logarithm of $N$. Henceforth, I would expect that the numbers above are within the standard error range, so that for $k=5$, we do have an estimator which satisfies the consistency condition, shown in Theorem \ref{consistency_theorem}.
+However, if we consider the graph in figure \ref{normal_k=5_graph}, we can see an obvious negative relationship between the logarithm of $|Bias(\hat{H}_{N, 5})|$ and the logarithm of $N$. Henceforth, I would expect that the numbers above are within the standard error range, so that for $k=5$, we do have an estimator which is asymptotically unbiased, as required for Theorem \ref{paper1_T1}.
 
 \begin{figure}
   \begin{center}
@@ -493,7 +493,7 @@ N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$
 \end{center}
 \end{table}
 
-Here, we can again see that this estimator is satisfying the consistency condition, from Theorem \ref{consistency_theorem}, as $\hat{H}_{N, 10} \approx  0.0432 \to 0.0001$ as $N \approx 100 \to 50,000$. Comparing this to previous values of $k$, we can see that the bias changes decreases in a similar manner to that for $k=1, 2, 3$.
+Here, we can again see that this estimator is asymptotically unbiased, satisfying Theorem \ref{paper1_T1}, as $\hat{H}_{N, 10} \approx  0.0432 \to 0.0001$ as $N \approx 100 \to 50,000$. Comparing this to previous values of $k$, we can see that the bias changes decreases in a similar manner to that for $k=1, 2, 3$.
 
 \begin{figure}
   \begin{center}
@@ -513,7 +513,7 @@ So we have the coefficients of the regression formula (\ref{bias}) as $a_{10} = 
 
 
 \subsubsection{Comparison of k} \label{N_compare_k}
-The above analysis, sections \ref{N_k=1} to \ref{N_k=10} is done to examine the difference in the bias of the estimator for different values of k. Considering the above samples, for $N=25,000$ and $N=50,000$, we can create a table to compare the values of the bias of the estimator for the different values of $k$ considered;
+The above analysis, sections \ref{N_k=1} to \ref{N_k=10} is done to examine the difference in the bias of the estimator for different values of k. Considering the above samples, for $N=25,000$ and $N=50,000$, we can create a table to compare the values of the bias of the estimator for the different values of $k$ considered.
 
 \begin{table}
 \caption{1-dimensional normal distribution, comparison of $k$} \label{normal_kcompare_table}
@@ -534,7 +534,7 @@ $k$ & $|Bias(\hat{H}_{25000, k})|$ & $Var(Bias(\hat{H}_{25000, k}))$ & $|Bias(\h
 \end{center}
 \end{table}
 
-The results shown in table \ref{normal_kcompare_table} are inconclusive in determining if larger/smaller values of k generate better estimators, with smaller bias. However, these results are consistent in showing that for the larger value of N, the smaller the variance in the estimator. The results for the Bias are not conclusive; because, for $N=25,000$ we can see that with $k=1, 5$ and possibly $k=3$ have a slight smaller bias than the others. However, when $N=50,000$ we find that for $k=3, 10$ we have the smallest values of bias. These are inconsistent with one and other. To further examine this, I will now generate a table for values $k=1, 2, 3, 5, 10$ with $N=50,000$ in all cases. Moreover, this time I will consider $3,000$ samples of this size, not the $500$ considered before, and will find the mean and variance of the bias of this estimator.
+The results shown in table \ref{normal_kcompare_table} are inconclusive in determining which value of k generates the best estimator, with the smallest bias. However, these results are consistent in showing that for the larger value of N, the smaller the variance in the estimator. The results for the bias are not conclusive; because, for $N=25,000$ we can see that with $k=1, 5$ and possibly $k=3$ have a slight smaller bias than the others. However, when $N=50,000$ we find that for $k=3, 10$ we have the smallest values of bias. These are inconsistent with one and other. To further examine this, I will now generate a table for values $k=1, 2, 3, 5, 10$ with $N=50,000$ in all cases. Moreover, this time I will consider $3,000$ samples of this size, not the $500$ considered before, and will find the mean and variance of the bias of this estimator.
 
 \begin{table}
 \caption{1-dimensional normal distribution, comparison of $k$} \label{normal_kcompare2_table}
@@ -555,7 +555,9 @@ $k$ &  $|Bias(\hat{H}_{50000, k})|$ & $Var(Bias(\hat{H}_{50000, k}))$ \\
 \end{center}
 \end{table}
 
-The results in table \ref{normal_kcompare2_table}, consider the scenario set out above, and we can see that $|Bias(\hat{H}_{N, k})|$ is the smallest, for sample size $N=50,000$, when $k=3$, which is consistent with the results found in table \ref{normal_kcompare_table}. So from these simulations, we can conclude that for large $N$, the consistency condition is best satisfied when $k=3$. Interestingly, the $Var(Bias(\hat{H}_{50000, k})) \to 0$ for $k \to 10$, but this is to be expected, as by the definition of the estimator using the nearest neighbour method. Taking a larger $k$ in the nearest neighbour method will produce less varied results, this is because more smoothing takes place for a larger $k$, eventually - if $k$ is made large enough - the output will be constant and the variance negligible regardless of the inputted values. Thus, considering the variance of the bias of the estimator is not necessarily informative.
+The results in table \ref{normal_kcompare2_table}, consider the scenario set out above, and we can see that $|Bias(\hat{H}_{N, k})|$ is the smallest, for sample size $N=50,000$, when $k=3$, which is consistent with the results found in table \ref{normal_kcompare_table}. So from these simulations, we can conclude that for large $N$, the consistency condition is best satisfied when $k=3$. 
+Interestingly, the $Var|Bias(\hat{H}_{50000, k})| \to 0$ for $k \to 10$, but this is to be expected, as by the definition of the estimator using the nearest neighbour method. Taking a larger $k$ in the nearest neighbour method will produce less varied results, this is because more smoothing takes place for a larger $k$, eventually - if $k$ is made large enough - the output will be constant and the variance negligible regardless of the inputted values. Thus, considering the variance of the bias of the estimator in comparison to $k$ is not necessarily informative. 
+However, considering the variance of the bias of the estimator in comparison to $N$ is informative. Theorem \ref{paper4_T4} states that the variance of the estimator becomes $\approx \frac{Var(log(f(x))}{N}$ as $N \to \infty$, and previously I have stated that, if $Var(log(f(x))$ is constant, this becomes 0 for large $N$. This is consistent with the results found considering the variance of the bias, $Var|\hat{H}_{N, k} - H|$, instead of just variance of the estimator, $Var(\hat{H}_{N, k})$. But, since variance is not linear; $Var(X+a)=Var(X)$ for some $a \in \mathbb{R}$, we can say that $Var(\hat{H}_{N, k} - H) = Var(\hat{H}_{N, k})$, thus  $Var|\hat{H}_{N, k} - H| \leq Var(\hat{H}_{N, k} - H) = Var(\hat{H}_{N, k})$. So if $Var(\hat{H}_{N, k}) \to 0$ as $N \to \infty$, then we also must have $Var|\hat{H}_{N, k} - H| \to 0$ as $N \to \infty$, which we have confirmed to be true numerically throughout this analysis.
 
 \begin{table}
 \caption{Comparison of coefficients of regression $a_{k}$ and $c_{k}$ from equation \ref{bias}, for 1-dimensional normal distribution} \label{normal_a_c_compare_table}
@@ -905,7 +907,7 @@ k & $a_{k}$ & $c{k}$ \\
 
 From table \ref{uniform_k_comparison_table}, we can see that as $k$ in creases from $1$ to $10$, that both $a_{k}$ and $c_{k}$ also increase. The value of $a_{k}$ increasing implies an increase in strength of the consistency condition, Theorem \ref{consistency_theorem};  $N (H - \mathbb{E}{\hat{H}_{N, k}})^2 \to 0 \quad  (N \to \infty)$, which is equivalent to saying that $|Bias(\hat{H}_{N, k})| \to 0 \quad (N \to \infty)$. Thus, considering a large sample size, say $N=100,000$, we can find the bias of the Kozachenko-Leonenko estimator according to the regressional relationship for each $k$;
 \begin{gather*}
-|Bias(\hat{H}_{100000, 1})| \approx  \frac{}{100000^{}}   \approx  \\
+|Bias(\hat{H}_{100000, 1})| \approx  \frac{0.0103}{100000^{0.3698}}   \approx 0.000145826 \\
 |Bias(\hat{H}_{100000, 2})| \approx  \frac{0.0503}{100000^{0.5857}}   \approx 0.000059301 \\
 |Bias(\hat{H}_{100000, 3})| \approx  \frac{0.0737}{100000^{0.6291}}   \approx 0.000052719 \\
 |Bias(\hat{H}_{100000, 5})| \approx  \frac{0.1889}{100000^{0.7501}}   \approx 0.000033553\\
@@ -981,12 +983,28 @@ is the form of the Kozachenko-Leonenko estimator that I will be considering here
 \subsubsection{k=1} \label{E_k=1}
 
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Expo_k=1_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 1})|$ against $\log(N)$}
+  \label{expo_k=1_graph}
+\end{figure}
+
 a
-[1] 0.0001
+[1] 0.4174
 
 c
-[1] 1.6947
+[1] 0.0198
 
 
 
+
+
+ k=2
+a
+[1] 0.648
+
+c
+[1] 0.1482
 \end{document}
