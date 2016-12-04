@@ -24,7 +24,7 @@
 
 BiasRegression <- function(dist = c("normal", "uniform", "exponential"), 
                            k = 1, N = 25000, sd = 1, min = 0, max = 1, 
-                           rate = 0.5, M=500, graph=TRUE){
+                           rate = 0.5, M = 500, graph = TRUE){
   # creating a dataframe with values of n, grouped by n
   grouped_n <- data.frame(n = seq(50, N, 100)) %>% 
     dplyr::group_by(n) 
