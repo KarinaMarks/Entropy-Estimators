@@ -95,8 +95,8 @@ For exact entropy $H$, Kozachenko-Leonenko estimator $\hat{H}_{N,k}$, and densit
 \int_{\mathbb{R}^{d}} | log(f(x))|^{1 + \epsilon} f(x) dx < \infty 
 \end{equation}
 and
-\begin{equation} \label{paper1_T1_eq1}
-\int_{\mathbb{R}^{d}} \int_{\mathbb{R}^{d}} | log(\|x-y\|)|^{2+ \epsilon} f(x) f(y) dx dy < \infty
+\begin{equation} \label{paper1_T1_eq2}
+\int_{\mathbb{R}^{d}} \int_{\mathbb{R}^{d}} | log(\|x-y\|)|^{1+ \epsilon} f(x) f(y) dx dy < \infty
 \end{equation}
 Then we have that 
 \begin{equation} 
@@ -107,11 +107,11 @@ Thus $\hat{H}_{N, k}$ is an asymptotically unbiased estimator of $H$.
 
 \begin{theorem} \label{paper1_T2}
 For exact entropy $H$, Kozachenko-Leonenko estimator $\hat{H}_{N,k}$, and density function $f(x)$, for some $\epsilon > 0$ if both
-\begin{equation}
+\begin{equation} \label{paper1_T2_eq1}
 \int_{\mathbb{R}^{d}} | log(f(x))|^{2 + \epsilon} f(x) dx < \infty \nonumber
 \end{equation}
 and
-\begin{equation}
+\begin{equation} \label{paper1_T2_eq2}
 \int_{\mathbb{R}^{d}} \int_{\mathbb{R}^{d}} | log(\|x-y\|)|^{2+ \epsilon} f(x) f(y) dx dy < \infty \nonumber
 \end{equation}
 Then $\hat{H}_{N, k}$ for $N \to \infty$ is a consistent estimator of H.
@@ -229,26 +229,38 @@ Thus the exact entropy for the normal distribution is given by
 H =  log(\sqrt{(2\pi e)}\sigma) 
 \end{equation}
 
-The normal distribution satisfies Theorem \ref{paper1_T1} because the density function is given by $f(x) = C \exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and where $C:= \frac{1}{\sqrt{(2\pi)} \sigma} > 0$. Then by equation (\ref{paper1_T1_eq1}), considering that here $d=1$ we have;
-\begin{align}
-\int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= \int_{\mathbb{R}} \left| log\left( C\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \right) \right|^{1 + \epsilon}C\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
-&= C \int_{\mathbb{R}} \left| log \left( C \right) -  \left( \frac{x^2}{2\sigma^2} \right) \right|^{1 + \epsilon} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
-&\approx \int_{-\infty}^{\infty} \frac{x^{\epsilon}}{ \exp{x^2}} dx \\ \nonumber
-&< \infty
+The normal distribution satisfies Theorem \ref{paper1_T1}, using that the density function is given by $f(x) = C \exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and where $C:= \frac{1}{\sqrt{(2\pi)} \sigma} > 0$. Then by equation (\ref{paper1_T1_eq1}), considering that here $d=1$ we have, the first condition of the Theorem is satisfied;
+\begin{align} \nonumber
+\int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= C \int_{\mathbb{R}} \left| log \left( C \right) -  \left( \frac{x^2}{2\sigma^2} \right) \right|^{1 + \epsilon} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
+&< \int_{\mathbb{R}} \frac{x^{1 + \epsilon}}{ \exp{x^2}} dx \\ \nonumber
+&< \int_{-\infty}^{\infty} \frac{x}{ \exp{x^2}} dx < \infty \nonumber
 \end{align}
-
-
-
-
-
-I will first explore the 1-dimensional standard normal distribution with mean $\mu = 0$ and variance $\sigma^2 = 1$, $N(0, 1)$. The exact entropy of this distribution is given by;
-\begin{equation} \label{normal_exact}
-H = log(\sqrt{(2\pi e)}) \approx 1.418939
-\end{equation}
-
-Since, I am first considering the 1-dimensional normal distribution, the Kozachenko-Leonenko estimator takes the form in equation (\ref{KLest_d=1});
+Also, the second condition, equation (\ref{paper1_T1_eq2}), of Theorem \ref{paper1_T1} is satisfied;
+\begin{align} \nonumber
+\int_{(\mathbb{R})^2} | log(\|x-y\|)|^{1+ \epsilon} f(x) f(y) dx dy  &= C^2 \int_{(\mathbb{R})^2} | log(\|x-y\|)|^{1+ \epsilon} \exp{\left(\frac{-(x^2 + y^2)}{2 \sigma}\right)} dx dy \\ \nonumber
+&< \int_{\mathbb{R}} \int_{\mathbb{R}} \frac{| log(\|x\| + \|y\|)|^{1+ \epsilon}}{\exp{(x^2 + y^2)}} dx dy \\ \nonumber
+&< \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{| log(\|x\| + \|y\|)|}{\exp{(x^2 + y^2)}} dx dy < \infty  \nonumber
+\end{align}
+Thus we can say that for the normal distribution, $\hat{H}_{N,k}$ is an asymptotically unbiased estimator for entropy. Moreover, the normal distribution also satisfies Theorem \ref{paper1_T2}, as it fulfills the first condition shown in equation (\ref{paper1_T2_eq1});
+\begin{align} \nonumber
+\int_{\mathbb{R}} | log(f(x))|^{2 + \epsilon} f(x) dx  &= C \int_{\mathbb{R}} \left| log \left( C \right) -  \left( \frac{x^2}{2\sigma^2} \right) \right|^{2 + \epsilon} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
+&< \int_{\mathbb{R}} \frac{x^{2 + \epsilon}}{ \exp{x^2}} dx \\ \nonumber
+&< \int_{-\infty}^{\infty} \frac{x^2}{ \exp{x^2}} dx < \infty \nonumber
+\end{align}
+and the second condition, equation (\ref{paper1_T2_eq2});
+\begin{align} \nonumber
+\int_{(\mathbb{R})^2} | log(\|x-y\|)|^{2+ \epsilon} f(x) f(y) dx dy  &= C^2 \int_{(\mathbb{R})^2} | log(\|x-y\|)|^{2+ \epsilon} \exp{\left(\frac{-(x^2 + y^2)}{2 \sigma}\right)} dx dy \\ \nonumber
+&< \int_{\mathbb{R}} \int_{\mathbb{R}} \frac{| log(\|x\| + \|y\|)|^{2+ \epsilon}}{\exp{(x^2 + y^2)}} dx dy \\ \nonumber
+&< \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{| log(\|x\| + \|y\|)|^2}{\exp{(x^2 + y^2)}} dx dy < \infty  \nonumber
+\end{align}
+Henceforth, the estimator $\hat{H}_{N,k}$ is a consistent estimator by Theorem \ref{paper1_T2}. Due to the above showing the both Theorem \ref{paper1_T1} and \ref{paper1_T2} are satisfied, we can say that the Kozachenko-Leonenko estimator is an asymptotically unbiased and consistent estimator for entropy. Since, I am first considering the 1-dimensional normal distribution, the estimator takes the form in equation (\ref{KLest_d=1});
 \begin{equation}
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
+\end{equation}
+
+I will first explore samples from 1-dimensional standard normal distribution with mean $\mu = 0$ and variance $\sigma^2 = 1$, $N(0, 1)$, to consider the behavior of the estimator stated above. The exact entropy of this distribution is given by equation (\ref{NormalEnt}), with $\sigma^2=1$;
+\begin{equation} \label{normal_exact}
+H = log(\sqrt{(2\pi e)}) \approx 1.418939
 \end{equation}
 
 
@@ -586,7 +598,7 @@ Table \ref{normal_a_c_compare_table}, shows that as $k$ runs from $1 \to 10$, we
 |Bias(\hat{H}_{100000, 10})| \approx  \frac{5.5942}{100000^{1.10055}}   \approx 0.00005251 
 \end{gather*}
 
-This shows that the bias decreases slightly faster for a higher values of $k$. I have also compared these relationships through a graph of the regression lines found from plotting the simulations above, shown in Figure \ref{normal_comparison_graph}. Moreover, I have plotted the actual lines for the relationship between $|Bias(\hat{H}_{N, k})|$ and $N$, using the relationship shown in equation (\ref{bias}), this shows that ... TODO.
+This shows that the bias decreases slightly faster for a higher values of $k$. I have also compared these relationships through a graph of the regression lines found from plotting the simulations above, shown in Figure \ref{normal_comparison_graph}. From this we can see obviously that for $k=10$, the regression line is steepest, indicating the strongest relationship between the logarithm of the bias and the logarithm of $N$. This implies that for a larger value of $k$, the estimator is stronger, to explore this I will plot the regression lines for some larger values of $k$ to see if this is true.
 
 \begin{figure}
   \begin{center}
@@ -596,9 +608,11 @@ This shows that the bias decreases slightly faster for a higher values of $k$. I
   \label{normal_comparison_graph}
 \end{figure}
 
-I have also considered a plot of the values of $a_{k}$ and $c_{k}$ against $k$, to see if there is a clear relationship between the value of $k$ and the coefficients, $a$ and $c$. This shows that ... TODO
+I have also considered a plot of the values of $a_{k}$ and $c_{k}$ against $k$, to see if there is a clear relationship between the value of $k$ and the coefficients,  $a_{k}$ and $c_{k}$. This relationship is depicted in figure \ref{}.
 
-TODO .. add in plots 
+what does this show? ... TODO
+
+
 
 
 
@@ -625,16 +639,35 @@ Thus, the actual value of entropy for the uniform distribution is given by;
 H = log [ b-a ]
 \end{equation}
 
-The uniform distribution automatically satisfies the conditions .... because ... 
+The uniform distribution satisfies Theorem \ref{paper1_T1}, firstly by considering equation (\ref{paper1_T1_eq1}) with $d=1$ and the distribution $f(x)=C$ for $a \leq x \leq b$, where $C = \frac{1}{b-a} >0$, we have;
+\begin{align} \nonumber
+\int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= C \int_{a}^{b} | log (C) |^{1 + \epsilon} dx \\ \nonumber 
+&<  \int_{a}^{b} | \hat{C} |^{1 + \epsilon}  dx  < \infty \nonumber
+\end{align}
+Also, the second condition, equation (\ref{paper1_T1_eq2}), of Theorem \ref{paper1_T1} is satisfied;
+\begin{align} \nonumber
+\int_{(\mathbb{R})^2} | log(\|x-y\|)|^{1+ \epsilon} f(x) f(y) dx dy  &= C^2 \int_{a}^{b} \int_{a}^{b} | log(\|x-y\|)|^{1+ \epsilon} dx dy \\ \nonumber
+&< \int_{a}^{b} \int_{a}^{b} | log(\|x\| + \|y\|)| dx dy < \infty  \nonumber
+\end{align}
+Thus we can say that for the normal distribution, $\hat{H}_{N,k}$ is an asymptotically unbiased estimator for entropy. Moreover, the uniform distribution also satisfies Theorem \ref{paper1_T2}, as it fulfills the first condition shown in equation (\ref{paper1_T2_eq1});
+\begin{align} \nonumber
+\int_{\mathbb{R}} | log(f(x))|^{2 + \epsilon} f(x) dx  &= C \int_{a}^{b} | log  (C)|^{2 + \epsilon} dx \\ \nonumber
+&< \int_{a}^{b} \hat{C}^{2 + \epsilon} dx < \infty \nonumber
+\end{align}
+and the second condition, equation (\ref{paper1_T2_eq2});
+\begin{align} \nonumber
+\int_{(\mathbb{R})^2} | log(\|x-y\|)|^{2+ \epsilon} f(x) f(y) dx dy  &= C^2 \int_{a}^{b} \int_{a}^{b}| log(\|x-y\|)|^{2+ \epsilon} dx dy \\ \nonumber
+&< \int_{a}^{b} \int_{a}^{b} | log(\|x\| + \|y\|)|^2 dx dy < \infty \nonumber
+\end{align}
 
-In our samples we will be consider the uniform distribution $U[0,100]$; this is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems as the pdf would be $f(x) = 1 , \quad 0 \leq x \leq 1$, which would incur working on a very small scale; i.e taking a points with distance between them as $\approx 0.00002$ along the x-direction. Thus, I will be using the pdf $f(x) = 0.01 , \quad 0 \leq x \leq 100$, which gives the exact entropy to be;
-\begin{equation} \label{uniform_exact}
-H = log(100) \approx 4.605170
-\end{equation}
-
-Similarly to the 1-dimensional normal distribution, we have for the 1-dimensional uniform distribution that $d=1$ so $V_{1} = 2$, thus our estimator takes the form of equation (\ref{KLest_d=1});
+Henceforth, the estimator $\hat{H}_{N,k}$, generated by samples from the uniform distribution is a consistent estimator by Theorem \ref{paper1_T2}. Due to the above showing the both Theorem \ref{paper1_T1} and \ref{paper1_T2} are satisfied, we can say that the Kozachenko-Leonenko estimator is an asymptotically unbiased and consistent estimator for entropy for samples from the uniform distribution. Similarly to the 1-dimensional normal distribution, we have for the 1-dimensional uniform distribution that $d=1$ so $V_{1} = 2$, thus our estimator takes the form of equation (\ref{KLest_d=1});
 \begin{equation}
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
+\end{equation}
+
+Moreover, the samples considered will not be from the standard uniform, but from the the uniform distribution $U[0,100]$. This is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems as the pdf would be $f(x) = 1 , \quad 0 \leq x \leq 1$, which would incur working on a very small scale; i.e taking a points with distance between them as $\approx 0.00002$ along the x-direction. Thus, I will be using the pdf $f(x) = 0.01 , \quad 0 \leq x \leq 100$, which is from the $U[0,100]$ distribution and gives the exact entropy to be;
+\begin{equation} \label{uniform_exact}
+H = log(100) \approx 4.605170
 \end{equation}
 
 
@@ -687,16 +720,21 @@ To understand what is occurring in table \ref{uniform_k=1_table}, I have plotted
   \label{uniform_k=1_graph}
 \end{figure}
 
- From this analysis, the bias of the Koazchenko-Leonenko estimator for entropy has the following relationship with $N$;
+ From this analysis, I have found the coefficients of the regression to be $a_{1} = 0.3698$ and $c_{1}=0.0103$. On their own these coefficients show that the bias of the Koazchenko-Leonenko estimator for entropy has the following relationship with $N$;
 \begin{equation}
 |Bias(\hat{H}_{N, 2})| \approx \frac{0.0103}{N^{0.3698}}\nonumber
 \end{equation}
-TODO.. write about this and plot graph for k=1 and regression coefs + comparison to the normal distribution
-a
-[1] 0.3698
+This is not what we would like to see, as for the estimator to be asymptotically unbiased, we would like to have $a_{k} > 0.5$, which here is not true. This could possibly be due to outliers in the samples, or could be due to the fact that for $k=1$, the estimator for the entropy of a sample from the uniform distribution, is not as strong as expected. If we compare this to the values from the normal distribution; $a_{1} = 0.4594$ and $c_{1} = 0.0249$,we can see that for the normal distribution, the value for $a_{k}$ is closer to that desired, but they have only an $\approx 0.09$ difference between them. This difference is depicted in Figure \ref{U_N_k=1_compare_graph}, where we can see that these lines are similar, but the regression for the normal distribution is more ideal for the situation being described.
 
-c
-[1] 0.0103
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Uniform_Normal_k=1_plot.png}
+  \end{center}
+\caption{Plot of regression lines for $\log|Bias(\hat{H}_{N, 1})|$ against $\log(N)$, for both normal and uniform distributions}
+  \label{uniform_k=1_graph}
+\end{figure}
+
+To further understand the meaning of these coefficients we must compare them with those for higher values of $k$, which will be done in more detail in section \ref{U_compare_k}.
 
 
 
@@ -905,7 +943,7 @@ k & $a_{k}$ & $c{k}$ \\
 \end{center}
 \end{table}
 
-From table \ref{uniform_k_comparison_table}, we can see that as $k$ in creases from $1$ to $10$, that both $a_{k}$ and $c_{k}$ also increase. The value of $a_{k}$ increasing implies an increase in strength of the consistency condition, Theorem \ref{consistency_theorem};  $N (H - \mathbb{E}{\hat{H}_{N, k}})^2 \to 0 \quad  (N \to \infty)$, which is equivalent to saying that $|Bias(\hat{H}_{N, k})| \to 0 \quad (N \to \infty)$. Thus, considering a large sample size, say $N=100,000$, we can find the bias of the Kozachenko-Leonenko estimator according to the regressional relationship for each $k$;
+From table \ref{uniform_k_comparison_table}, we can see that as $k$ in creases from $1$ to $10$, that both $a_{k}$ and $c_{k}$ also increase. The value of $a_{k}$ increasing implies an increase in strength of the asymptotic unbiasedness of the estimator, Theorem \ref{paper1_T1};  $N (H - \mathbb{E}{\hat{H}_{N, k}})^2 \to 0 \quad  (N \to \infty)$, which is equivalent to saying that $|Bias(\hat{H}_{N, k})| \to 0 \quad (N \to \infty)$. Thus, considering a large sample size, say $N=100,000$, we can find the bias of the Kozachenko-Leonenko estimator according to the regressional relationships found in sections \ref{U_k=1} to \ref{U_k=10} for each $k$;
 \begin{gather*}
 |Bias(\hat{H}_{100000, 1})| \approx  \frac{0.0103}{100000^{0.3698}}   \approx 0.000145826 \\
 |Bias(\hat{H}_{100000, 2})| \approx  \frac{0.0503}{100000^{0.5857}}   \approx 0.000059301 \\
@@ -914,7 +952,6 @@ From table \ref{uniform_k_comparison_table}, we can see that as $k$ in creases f
 |Bias(\hat{H}_{100000, 10})| \approx  \frac{3.8217}{100000^{1.0357}}  \approx 0.000025337
 \end{gather*}
 These values confirm our original thoughts that the larger value of $k \leq 10$ gives a more consistent estimator. Moreover, we can compare these values to those found for the standard normal distribution, along with comparing the values of $a_{k}$ and $c_{k}$, to see if the estimator has a similar accuracy for both distributions, this comparison is shown in table \ref{uniform_normal_comparison_table}.
-In this comparison we can see that, the values of $a_{k}$ and $|Bias(\hat{H}_{100000, k})|$ are similar for both distributions, with $a_{k}$ varying by less that $\approx 0.015$ and $|Bias(\hat{H}_{100000, k})|$ varying by less than $\approx 0.000015$. Both of these confirm that the approximation to the relationship between the estimator and the actual value of entropy, is a good approximation to make; one which is consistent through both distributions considered so far.
 
 \begin{table}
 \caption{Comparison between 1-dimensional Uniform and Normal distribution} \label{uniform_normal_comparison_table}
@@ -925,7 +962,7 @@ In this comparison we can see that, the values of $a_{k}$ and $|Bias(\hat{H}_{10
 \hline
 $k$   &  $a_{k}$  &  $c_{k}$  &  $|Bias(\hat{H}_{100000, k})|$  &  $a_{k}$  &  $c_{k}$  &  $|Bias(\hat{H}_{100000, k})|$  \\
 \midrule[1pt]
-1      & 0.4594     & 0.0249 &  0.00012566  &  &  & \\
+1      & 0.4594     & 0.0249 &  0.00012566  &  0.3698  &  0.0103  &  0.000145826 \\
 2      & 0.5998     & 0.0746 &  0.00007477  &  0.5857  &  0.0503  &  0.000059301 \\
 3      & 0.6443     & 0.1156 &  0.00006942  &  0.6291  &  0.0737  &  0.000052719 \\
 5      & 0.7568     & 0.3557 &  0.00005949  &  0.7501  &  0.1889  &  0.000033553 \\
@@ -935,7 +972,9 @@ $k$   &  $a_{k}$  &  $c_{k}$  &  $|Bias(\hat{H}_{100000, k})|$  &  $a_{k}$  &  $
 \end{center}
 \end{table}
 
-Another comparison that we can make, is by considering the plot of the regression lines for the logarithm of  $|Bias(\hat{H}_{N, k})|$ against the logarithm of $N$, this relationship is shown in Figure \ref{?}. TODO .. plot this graph and talk about it
+In this comparison we can see that, the values of $a_{k}$ and $|Bias(\hat{H}_{100000, k})|$ are similar for both distributions, with $a_{k}$ varying by less that $\approx 0.015$ for $k=2,3,5,10$ and $|Bias(\hat{H}_{100000, k})|$ varying by less than $\approx 0.00002$ for all $k$. Both of these confirm that the approximation to the relationship between the estimator and the actual value of entropy, is a good approximation to make; one which is consistent through both distributions considered so far.
+
+Another comparison that we can make, is by considering the plot of the regression lines for the logarithm of  $|Bias(\hat{H}_{N, k})|$ against the logarithm of $N$, for all values of $k$. This relationship is shown in Figure \ref{uniform_comparison_graph}. This graph shows obviously that the larger the $k$ that we have considered the stronger the relationship between the bias and $N$, since the regression line for $k=10$ is the steepest out of them all.
 
 \begin{figure}
   \begin{center}
@@ -945,8 +984,9 @@ Another comparison that we can make, is by considering the plot of the regressio
   \label{uniform_comparison_graph}
 \end{figure}
 
-
 TODO.. plot a graph with regression lines for both the normal and uniform on top of one and other, discuss
+
+
 
 
 
