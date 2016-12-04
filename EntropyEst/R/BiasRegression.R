@@ -6,19 +6,25 @@
 #' information about the linear regression equation; Bias(H) = c/(N^a)
 #'
 #' @param dist, the distribution for the simulation to come from, either 
-#' normal or uniform
-#' @param k the number for nearest neighbour, default 1
-#' @param N the size of the largest sample to be considered, default 250000
-#' @param sd the standard deviation for the normal distribution that the 
-#' sample is from, given the distribution is "normal", default 1
+#' normal, uniform or exponential
+#' @param k, the number for nearest neighbour, default k=1
+#' @param N, the size of the largest sample to be considered, default N=250000
+#' @param M, the number of times each estimator is made, to have it's 
+#' average considered for the plot, default M=500
+#' @param sd, the standard deviation for the normal distribution that the 
+#' sample is from, given the distribution is "normal", default sd=1
 #' @param max/min, the parameters for the unifrom distribution, provided
-#' that the distribution is "uniform", default is min=0, max=1
+#' that the distribution is "uniform", default min=0, max=1
+#' @param rate, the parameter for the exponential distribution, provided 
+#' that the distribution is "exponential", default rate=0.5
+#' @param graph, Boolean whether to plot a graph or to just return the regression
+#' coefficients, default TRUE; i.e. graph is shown
 #' @export
 #' @import ggplot2 dplyr
 
 BiasRegression <- function(dist = c("normal", "uniform", "exponential"), 
                            k = 1, N = 25000, sd = 1, min = 0, max = 1, 
-                           rate = 0.5, M=500){
+                           rate = 0.5, M=500, graph=TRUE){
   # creating a dataframe with values of n, grouped by n
   grouped_n <- data.frame(n = seq(50, N, 100)) %>% 
     dplyr::group_by(n) 
@@ -46,15 +52,18 @@ BiasRegression <- function(dist = c("normal", "uniform", "exponential"),
   df <- data.frame(n = newdf$n, Bias = newdf$Bias) %>% 
     dplyr::transmute(log_N = log(n), log_Bias = log(Bias)) 
   
-  # creating the plot of the log(N) against log(Bias(H))
-  glogreg <- ggplot2::ggplot(aes(x=log_N, y=log_Bias), data=df) +
-    ggplot2::geom_point(shape="o") +
-    ggplot2::geom_smooth(method='lm', se = FALSE) +
-    ggplot2::ggtitle(paste0("Simulation from ", dist, " distribution, 
-  for bias of the K-L entropy estimator at varying sample sizes, 
-  up to N = ", as.numeric(N), ", for the kth nearest neighbour (k =", k, ").")) +
-    ggplot2::xlab("log(N)") +
-    ggplot2::ylab("log(Bias(H))")
+  if (graph == TRUE){
+    # creating the plot of the log(N) against log(Bias(H))
+    glogreg <- ggplot2::ggplot(aes(x=log_N, y=log_Bias), data=df) +
+      ggplot2::geom_point(shape="o") +
+      ggplot2::geom_smooth(method='lm', se = FALSE) +
+      ggplot2::ggtitle(paste0("Simulation from ", dist, " distribution, 
+                              for bias of the K-L entropy estimator at varying sample sizes, 
+                              up to N = ", as.numeric(N), ", for the kth nearest neighbour (k =", k, ").")) +
+      ggplot2::xlab("log(N)") +
+      ggplot2::ylab("log(Bias(H))")
+  }else{glogreg <- paste("no graph shown")}
+
   
   # finding the regression model for this sample
   reg <- lm(df$log_Bias ~ df$log_N, na.action=na.exclude)

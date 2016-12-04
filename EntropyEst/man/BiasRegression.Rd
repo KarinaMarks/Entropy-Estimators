@@ -5,21 +5,31 @@
 \title{A function to plot simulations for the Kozachenko-Leonenko entropy estimator}
 \usage{
 BiasRegression(dist = c("normal", "uniform", "exponential"), k = 1,
-  N = 25000, sd = 1, min = 0, max = 1, rate = 0.5, M = 500)
+  N = 25000, sd = 1, min = 0, max = 1, rate = 0.5, M = 500,
+  graph = TRUE)
 }
 \arguments{
 \item{dist, }{the distribution for the simulation to come from, either 
-normal or uniform}
+normal, uniform or exponential}
 
-\item{k}{the number for nearest neighbour, default 1}
+\item{k, }{the number for nearest neighbour, default k=1}
 
-\item{N}{the size of the largest sample to be considered, default 250000}
+\item{N, }{the size of the largest sample to be considered, default N=250000}
 
-\item{sd}{the standard deviation for the normal distribution that the 
-sample is from, given the distribution is "normal", default 1}
+\item{sd, }{the standard deviation for the normal distribution that the 
+sample is from, given the distribution is "normal", default sd=1}
+
+\item{rate, }{the parameter for the exponential distribution, provided 
+that the distribution is "exponential", default rate=0.5}
+
+\item{M, }{the number of times each estimator is made, to have it's 
+average considered for the plot, default M=500}
+
+\item{graph, }{Boolean whether to plot a graph or to just return the regression
+coefficients, default TRUE; i.e. graph is shown}
 
 \item{max/min, }{the parameters for the unifrom distribution, provided
-that the distribution is "uniform", default is min=0, max=1}
+that the distribution is "uniform", default min=0, max=1}
 }
 \description{
 This function considers the logarithm of the Bias of entropy estimator for a 

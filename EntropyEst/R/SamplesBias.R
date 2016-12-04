@@ -20,10 +20,11 @@ SamplesBias <- function(N = 5000, dist = c("normal", "uniform", "exponential"),
   if(dist == "normal"){
     
     cppFunction('
-            NumericVector normalsmth(int M, int N, int k, float sd){
+            NumericVector normalsmth(int M, int N, int k){
                 NumericVector est(M);
                 NumericVector x(N);
                 for (int i = 0; i < M; i++) {
+                  int sd=1;
                   Function KLEE("KLEE");
                   Function rnorm("rnorm");
                   x=rnorm(N, sd=sd);
