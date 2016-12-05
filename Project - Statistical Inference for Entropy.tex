@@ -215,7 +215,10 @@ log|Bias(\hat{H}_{N, k})| = log(c) - a [log(N)]
 I will investigate the consistency of this estimator for a sample from the normal distribution, dependent on the value of $k$, this mean finding the optimum value of $k$ for which $|Bias(\hat{H}_{N, k})| \to 0$ for $N \to \infty$. For the relationship in equation (\ref{bias}), this will happen for large values of $a$ and relatively small $c$, as $N \to \infty$. Moreover, I wish to also examine the dependence of $c$ on the value of $k$. As I wish to consider the difference in accuracy of the estimator when using different values of k, let us denote the approximate values for $a$ and $c$ dependent on $k$ as $a_{k}$ and $c_{k}$.
 
 
+
+
 \subsection{1-dimensional Normal Distribution} \label{Normal_d=1}
+
 I will begin by exploring entropy of samples from the normal distribution $N(0, \sigma^2)$, where without loss of generality we can use the mean $\mu = 0$ and change the variance $\sigma^2$ as needed. The normal distribution has an exact formula to work out the entropy, given the variance $\sigma^2$. Using equation (\ref{ShaEnt}) and the density function for the normal distribution $f(x) = \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$. We can write the exact entropy for the normal distribution, using equation (\ref{ShaEnt});
 \begin{align}
 H &= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \nonumber \\
@@ -618,7 +621,7 @@ what does this show? ... TODO
 
 
 
-\subsection{1-dimensional Uniform distribution}
+\subsection{1-dimensional Uniform distribution} \label{Uniform_d=1}
 
 I will now explore the entropy of samples from the 1-dimensional uniform distribution, $U[a b]$. This distribution also has an exact formula to work out the entropy for. We can find this formula by considering the density function, $f$, from the uniform distribution, which is given by;
 \[
@@ -1189,9 +1192,39 @@ $N$ & $\hat{H}_{N, 3}$ & $|Bias(\hat{H}_{N, 3})|$ & $Var(Bias(\hat{H}_{N, 3}))$ 
 \end{center}
 \end{table}
 
-The results of the comparison between the actual value and the estimated value of entropy, for different values of $N$, are displayed in table \ref{expo_k=3_table}. This table is beginning to indicate a strong trend between the bias of the estimator and the sample size, $N$. The previous tables from section \ref{E_k=1} and \ref{E_k=2}, had inconclusive values in their tables; however this table does seem to suggest that the estimator agrees with Theorem \ref{paper1_T1}, that the estimator is asymptotically unbiased. To further examine the relationship between the values of bias and $N$, I have created the graph depicted in Figure \ref{}.
+The results of the comparison between the actual value and the estimated value of entropy, for different values of $N$, are displayed in table \ref{expo_k=3_table}. This table is beginning to indicate a strong trend between the bias of the estimator and the sample size, $N$. The previous tables from section \ref{E_k=1} and \ref{E_k=2}, had inconclusive values in their tables; however this table does seem to suggest that the estimator agrees with Theorem \ref{paper1_T1}, that the estimator is asymptotically unbiased. To further examine the relationship between the values of bias and $N$, I have created the graph depicted in Figure \ref{expo_k=3_graph}.
 
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Expo_k=3_plot2.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 3})|$ against $\log(N)$}
+  \label{expo_k=3_graph}
+\end{figure}
 
+From this analysis, I have found that for this distribution we have the coefficients of regression to be $a_{3} = 0.5711$ and $c_{3}=0.0585$, which implies a relationship of the form;
+\begin{equation}
+|Bias(\hat{H}_{N, 1})| \approx \frac{0.0585}{N^{0.5711}}\nonumber
+\end{equation}
+In comparison to the regression coefficients found for smaller values of $k$, for samples also from the exponential distribution, I have found that this relationship is unlike expected. This is because, for this distribution, we have; $a_{1} < a_{3} < a_{2}$, whereas for the 1-dimensional normal and uniform distribution I have consistently found that  $a_{1} < a_{2} < a_{3}$. There is also similar behaviour for the values of $c_{k}$, where here we have  $c_{1} < c_{3} < c_{2}$ in contrast to  $c_{1} < c_{2} < c_{3}$. This could mean a number of things;
+\begin{itemize}
+\item When $k=2$, we have a stronger asymptotic unbias than when $k=1, 3$ - this could be true, since we do not know what value of $k$ will produce the best estimator, also in the previous distributions, we only had a difference of $\approx 0.045$ for normal and $\approx 0.043$ for uniform, between the values of $a_{2}$ and $a_{3}$. However, since the previous analysis done in sections \ref{Uniform_d=1} and \ref{Normal_d=1} implies otherwise, I would not encourage this solution. To confirm this either way, it would be beneficial to take into account the regression relationship for higher values of $k$ for samples fro the exponential distribution.
+
+\item There are outliers in the solution - this is a possibility, since the regression relationship for $k=2$ and $k=3$, have similar values of the gradient $a_{2} = 0.6480$ and $a_{3}=0.5711$, they differ by $\approx 0.077$. Thus, if the value of $a_{2}$ is slightly higher than it should be and if $a_{3}$ is slightly lower than it should be, both due to outliers; then we could actually have the relationship already assumed, that $a_{2} < a_{3}$. On the other hand, one would not expect this to happen, since any outliers should have been smoothed out in the process of considering a large number of samples (300) for a lot of different sample sizes (100, 200, 300, ... , 50000).
+
+\end{itemize}
+
+We can also compare the found values for $a_{3}$ and $c_{3}$ between distributions; normal - $a_{3}=0.6443$ and $c_{3}=0.1156$, uniform - $a_{3}=0.6291$ and $c_{3}=0.0737$ and exponential - $a_{3}=0.5711$ and $c_{3}=0.0585$. Thus the values of the slope and intercept differ by only $\approx 0.073$ and $\approx 0.057$ respectively, which are not especially large values of difference. I have plotted the regression lines for each distribution together in figure \ref{E_U_N_k=3_graph} to hopefully more easily view the differences.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/EUN_k=3_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 3})|$ against $\log(N)$, for the 1-dimensional distributions; exponential, uniform and normal}
+  \label{E_U_N_k=3_graph}
+\end{figure}
+
+From this plot, we can see that the regression lines for each distribution are actually very similar to one and other, where at the largest value of $N$ considered here we have that the regression lines implies that the uniform distribution has the smallest bias at this point. However, the normal distribution has the steepest slope, thus for a larger $N$ than what is considered in the graph, one would have that the estimator for samples from the normal distribution has the strongest asymptotic unbias. A more detailed comparison of all values of $k$ and all distributions will be explored in section \ref{E_compare_k}.
 
 
 
@@ -1217,8 +1250,8 @@ The results from the investigation above have been condensed into table \ref{exp
 k & $a_{k}$ & $c{k}$ \\
 \midrule[1pt]
 1 &  0.4147  &  0.0198  \\
-2 &  0.6480  &  0.1482 \\
-3 &  & \\
+2 &  0.6480  &  0.1482  \\
+3 &  0.5711  &  0.0585  \\
 5 &  &  \\
 10 &  &   \\
 \hline
