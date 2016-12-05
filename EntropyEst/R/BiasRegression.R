@@ -58,8 +58,8 @@ BiasRegression <- function(dist = c("normal", "uniform", "exponential"),
       ggplot2::geom_point(shape="o") +
       ggplot2::geom_smooth(method='lm', se = FALSE) +
       ggplot2::ggtitle(paste0("Simulation from ", dist, " distribution, 
-                              for bias of the K-L entropy estimator at varying sample sizes, 
-                              up to N = ", as.numeric(N), ", for the kth nearest neighbour (k =", k, ").")) +
+      for bias of the K-L entropy estimator at varying sample sizes, 
+      up to N = ", as.numeric(N), ", for the kth nearest neighbour (k =", k, ").")) +
       ggplot2::xlab("log(N)") +
       ggplot2::ylab("log(Bias(H))")
   }else{glogreg <- paste("no graph shown")}
