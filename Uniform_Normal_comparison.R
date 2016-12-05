@@ -31,7 +31,11 @@ g <- ggplot()+
 
 g
 
+<<<<<<< HEAD
 somek <- 3
+=======
+somek <- 1
+>>>>>>> 6b7c27b65405f7874e0d0d9efea7b2dcce6a2cd1
 
 dfk1 <- df %>%
   filter(k==somek)
