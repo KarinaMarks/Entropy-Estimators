@@ -1229,14 +1229,97 @@ From this plot, we can see that the regression lines for each distribution are a
 
 
 \subsubsection{k=5} \label{E_k=5}
+Now we consider the estimator, shown in equation \ref{KLest}, for k=5. This takes the form;
+\begin{equation}
+\hat{H}_{N, 5} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(5),i}(N-1)}{e^{\Psi(5)}} \right] \nonumber
+\end{equation}
+
+Comparing this estimator to the exact value of entropy, shown in equation (\ref{exponential_exact}), for 500 samples of size $N$, we get the results in table \ref{expo_k=5_table}. 
+
+\begin{table}
+\caption{1-dimensional exponential distribution, $k=5$} \label{expo_k=5_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
+N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & $Var(Bias(\hat{H}_{N, 5}))$ \\
+\midrule[1pt]
+100     & 1.671551     & 0.02159648310     & 0.01379216507  \\
+200     & 1.679168     & 0.01397964263     & 0.00670466906  \\
+500     & 1.692568     & 0.00057877793     & 0.00231523099  \\
+1000    & 1.694130     & 0.00098238978     & 0.00134446983  \\
+5000    & 1.692592     & 0.00055538663     & 0.00029049727  \\
+10000   & 1.693190     & 0.00004331284     & 0.00014609571  \\
+25000   & 1.692837     & 0.00031015885     & 0.00005897936  \\
+50000   & 1.692901     & 0.00024589568     & 0.00002504615  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+From this table we can see an overall decrease in bias, from $\approx 0.02 \to 0.0002$ as $N$ goes from $100 \to 50,000$. This is fitting with Theorem \ref{paper1_T1}, that the estimator is asymptotically unbiased for this distribution. However, on closer inspection we can see, as in the previous values of $k$ for this distribution, that the size of the bias does not decrease consistently as the sample size, $N$, increases in the table. For example from $N=10,000$ to $N=25,000$, the size of the bias actually increases by $\approx 0.00027$, which one would not expect. However, we should allow for some variability in the results since they are found from simulations. 
+Furthermore, I have considered a plot to represent equation (\ref{logbias}), shown in Figure \ref{expo_k=5_graph}, where I have also found the coefficients of regression to be; $a_{5} =$ and $c_{5} =$. 
+
+\begin{figure}
+  \begin{center}
+    %\includegraphics[width=\textwidth]{./Graphs/Expo_k=5_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 5})|$ against $\log(N)$}
+  \label{expo_k=5_graph}
+\end{figure}
+
+This implies the relationship;
+\begin{equation}
+|Bias(\hat{H}_{N, 5})| \approx \frac{}{N^{}}\nonumber
+\end{equation}
+In comparison to the coefficients from the previous value of $k$, we find that... 
+
 
 \subsubsection{k=10} \label{E_k=10}
 
+The last estimator for the entropy of a sample from the standard normal distribution that I wish to explore is that for $k=10$. Here, the estimator takes the form;
+\begin{equation}
+\hat{H}_{N, 10} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(10),i}(N-1)}{e^{\Psi(10)}} \right] \nonumber
+\end{equation}
+The results for the comparison between this estimator and \ref{exponential_exact} are displayed in table \ref{expo_k=10_table}.
+
+\begin{table}
+\caption{1-dimensional exponential distribution, $k=10$} \label{expo_k=10_table}
+\begin{center}
+\begin{tabular}{| l | c c c|} 
+\toprule
+N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$ \\
+\midrule[1pt]
+100     & 1.681136     & 0.01201069876     & 0.01103729658  \\
+200     & 1.679907     & 0.01323996238     & 0.00586663681  \\
+500     & 1.687144     & 0.00600360695     & 0.00209594189  \\
+1000    & 1.692988     & 0.00015893618     & 0.00118121417  \\
+5000    & 1.693597     & 0.00044935080     & 0.00025313033  \\
+10000   & 1.692565     & 0.00058186611     & 0.00012048276  \\
+25000   & 1.693052     & 0.00009528961     & 0.00004392069  \\
+50000   & 1.693243     & 0.00009553753     & 0.00002392945  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+
+
 \subsubsection{Comparison of k} \label{E_compare_k}
 
+In sections \ref{E_k=1} to \ref{E_k=10}, I have explored the Koazchenko-Leonenko estimator for samples from the 1-dimensional exponential distribution. 
+
+smth about tables and bias with N
+
+Additionally, it is important to note that in all the tables for the exponential distribution, we consistently have $Var(Bias(\hat{H}_{N, k}))$ decreases as $N \to \infty$. By Theorem \ref{paper_T4}, we know that $Var(\hat{H}_{N, k}) \approx \frac{Var(\log f(x))}{N}$, and for $N=50,000$ we have for this distribution that the variance of $Bias(\hat{H}_{N, k})$, for $k=1,2,3,5,10$ are given by $\approx 0.000058, 0.000043, 0.000031, 0.000025, 0.000024$ respectively. By the non-linearity of the variance we have that  $Var(Bias(\hat{H}_{N, k})) = Var(\hat{H}_{N,k} - H) = Var(\hat{H}_{N,k})$. For this distribution we have;
+\begin{align}
+Var(\log f(x)) = TODO... 
+\end{align}
 
 
-In sections \ref{E_k=1} to \ref{E_k=10}, I have explored the Koazchenko-Leonenko estimator for samples from the 1-dimensional exponential distribution. I will be now focusing on the results of the coefficients of equation (\ref{bias}), found from the simulations above;
+
+I will be now focusing on the results of the coefficients of equation (\ref{bias}), found from the simulations above;
 \begin{equation}
 |Bias(\hat{H}_{N, k})| = \frac{c_{k}}{N^{a_{k}}} \nonumber
 \end{equation}
@@ -1261,7 +1344,7 @@ k & $a_{k}$ & $c{k}$ \\
 
 TODO.. what this table shows
 
-I can also compare the values found for $a_{k}$ and $c_{k}$ for the exponential distribution, to those found from the other 1-dimensional distributions previously considered, I have condensed this formation into table \ref{expo_uniform_normal_comparison_table}.
+I can also compare the values found for $a_{k}$ and $c_{k}$ for the exponential distribution, to those found from the other 1-dimensional distributions previously considered, I have condensed this information into table \ref{expo_uniform_normal_comparison_table}.
 
 
 
@@ -1276,7 +1359,7 @@ $k$   &  $a_{k}$  &  $c_{k}$  &  $a_{k}$  &  $c_{k}$  &  $a_{k}$  &  $c_{k}$   \
 \midrule[1pt]
 1      & 0.4594     & 0.0249 &  0.3698  &  0.0103  &  0.4147  &  0.0198  \\
 2      & 0.5998     & 0.0746 &  0.5857  &  0.0503  &  0.0648  &  0.1482  \\
-3      & 0.6443     & 0.1156 &  0.6291  &  0.0737  &  & \\
+3      & 0.6443     & 0.1156 &  0.6291  &  0.0737  &  0.5711  &  0.0585 \\
 5      & 0.7568     & 0.3557 &  0.7501  &  0.1889  &  & \\
 10    & 1.0055     & 5.5942 &  1.0357  &  3.8217  &  & \\
 \hline
