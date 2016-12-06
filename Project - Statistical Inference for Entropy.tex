@@ -310,11 +310,12 @@ $N$ & $a_{1}$ & $c_{1}$ \\
 \midrule[1pt]
 35000 &  0.5047   &   0.0389   \\
 40000 &  0.4732   &   0.0315  \\
-45000 &     &      \\
-50000 &  0.4954  &   0.0249   \\
+45000 &  0.4514   &   0.0240  \\
+50000 &  0.4954   &   0.0249   \\
 \end{tabular}
 \end{center}
 \end{table}
+
 
 Thus we have the relationship between the bias and $N$, for $k=1$, to be of the form;
 \begin{equation}
@@ -935,7 +936,7 @@ The results from the investigation above have been condensed into table \ref{uni
 \begin{center}
 \begin{tabular}{| l | c c|} 
 \toprule
-k & $a_{k}$ & $c{k}$ \\
+k & $a_{k}$ & $c_{k}$ \\
 \midrule[1pt]
 1 & 0.3698 & 0.0103 \\
 2 & 0.5857 & 0.0503 \\
@@ -1257,11 +1258,11 @@ N & $\hat{H}_{N, 5}$ & $|Bias(\hat{H}_{N, 5})|$ & $Var(Bias(\hat{H}_{N, 5}))$ \\
 \end{table}
 
 From this table we can see an overall decrease in bias, from $\approx 0.02 \to 0.0002$ as $N$ goes from $100 \to 50,000$. This is fitting with Theorem \ref{paper1_T1}, that the estimator is asymptotically unbiased for this distribution. However, on closer inspection we can see, as in the previous values of $k$ for this distribution, that the size of the bias does not decrease consistently as the sample size, $N$, increases in the table. For example from $N=10,000$ to $N=25,000$, the size of the bias actually increases by $\approx 0.00027$, which one would not expect. However, we should allow for some variability in the results since they are found from simulations. 
-Furthermore, I have considered a plot to represent equation (\ref{logbias}), shown in Figure \ref{expo_k=5_graph}, where I have also found the coefficients of regression to be; $a_{5} =$ and $c_{5} =$. 
+Furthermore, I have considered a plot to represent equation (\ref{logbias}), shown in Figure \ref{expo_k=5_graph}, where I have also found the coefficients of regression to be; $a_{5} = 0.4793$ and $c_{5} = 0.0241$. 
 
 \begin{figure}
   \begin{center}
-    %\includegraphics[width=\textwidth]{./Graphs/Expo_k=5_plot.png}
+    \includegraphics[width=\textwidth]{./Graphs/Expo_k=5_plot.png}
   \end{center}
 \caption{Regression plot of $\log|Bias(\hat{H}_{N, 5})|$ against $\log(N)$}
   \label{expo_k=5_graph}
@@ -1269,9 +1270,22 @@ Furthermore, I have considered a plot to represent equation (\ref{logbias}), sho
 
 This implies the relationship;
 \begin{equation}
-|Bias(\hat{H}_{N, 5})| \approx \frac{}{N^{}}\nonumber
+|Bias(\hat{H}_{N, 5})| \approx \frac{0.0241}{N^{0.4793}}\nonumber
 \end{equation}
-In comparison to the coefficients from the previous value of $k$, we find that... 
+In comparison to the coefficients from the previous value of $k$, we find that these coefficients also do not fit with the trend that as $k \to 10$ that the values of $a_{k}$ and $c_{k}$ also increase. For the exponential distribution we have found, so far, that $a_{1} < a_{5} < a_{3} < a_{2}$; this is atypical to the normal and uniform distributions where the results are consistently $a_{1} < a_{2} < a_{3} < a_{5} < a_{10}$. To compare the values of $a_{5}$ for these distributions, I have plotted their regression lines together, depicted in Figure \ref{E_U_N_k=5_graph}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/EUN_k=5_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N,5})|$ against $\log(N)$, for the 1-dimensional distributions; exponential, uniform and normal}
+  \label{E_U_N_k=5_graph}
+\end{figure}
+
+This graph shows that, the normal and uniform have almost parallel to one and other, with uniform lowest at the largest $N$ considered. On the other hand, we have the regression line for the bias of samples from the exponential distribution, which is a more gradual decline that those for the other two distributions. Indicating that the asymptotic unbais of this distribution is not as strong as that for the other two. The reasoning behind this is currently unclear, but a detailed analysis into this will take place in section \ref{E_compare_k}.
+
+
+
 
 
 \subsubsection{k=10} \label{E_k=10}
@@ -1280,7 +1294,7 @@ The last estimator for the entropy of a sample from the standard normal distribu
 \begin{equation}
 \hat{H}_{N, 10} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(10),i}(N-1)}{e^{\Psi(10)}} \right] \nonumber
 \end{equation}
-The results for the comparison between this estimator and \ref{exponential_exact} are displayed in table \ref{expo_k=10_table}.
+The results for the comparison between this estimator and the exact value of entropy, equation (\ref{exponential_exact}), are displayed in table \ref{expo_k=10_table}.
 
 \begin{table}
 \caption{1-dimensional exponential distribution, $k=10$} \label{expo_k=10_table}
@@ -1301,6 +1315,33 @@ N & $\hat{H}_{N, 10}$ & $|Bias(\hat{H}_{N, 10})|$ & $Var(Bias(\hat{H}_{N, 10}))$
 \end{tabular}
 \end{center}
 \end{table}
+
+This values in this table, now begin to show more what we are used to; that as $N$ increases the bias of the estimator decreases, which is fitting with Theorem \ref{paper1_T1}. Additionally, the variance of the bias is decreasing for a larger $N$, again something to be expected by Theorem \ref{paper4_T4}. To view this relationship in a more desirable way, we can consider the equation (\ref{logbias}), as previously done, and generate 500 samples, for each size $N = 100, 200, ... ,50000$, and find out the estimator $\hat{H}_{N,k}$ each time, to then work out the average and plot the logarithm of the modulus of the Bias for each $N$, $log|Bias(\hat{H}_{N,k})|$, against the logarithm of $N$, $log(N)$. This is shown in figure \ref{expo_k=5_graph}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Expo_k=5_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 5})|$ against $\log(N)$}
+  \label{expo_k=5_graph}
+\end{figure}
+
+From plotting these points and fitting a regression line, we get the relationship, shown in equation (\ref{bias}), here with the coefficients $a_{10}=0.7170$ and $c_{10}=0.2292$, thus;
+\begin{equation}
+|Bias(\hat{H}_{N, 5})| \approx \frac{0.2292}{N^{0.7170}}\nonumber
+\end{equation}
+
+We wish to have $a_{k}>0.5$, which is true for this particular realisation. In comparison to the other coefficients for different $k$ in the exponential distribution,we have that; $a_{1} < a_{5} < a_{3} < a_{2} < a_{10}$. This does show that now there is a general trend, since $a_{1} < a_{5} < a_{10}$, but this is still not the same as what was shown for the other distributions. Considering $k=5$ and the values of $a_{5}$ and $c_{5}$, for the different distributions, I have plot the regression lines together in figure \ref{E_U_N_k=1_graph}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/EUN_k=10_plot.png}
+  \end{center}
+\caption{Regression plot of $\log|Bias(\hat{H}_{N, 10})|$ against $\log(N)$, for the 1-dimensional distributions; exponential, uniform and normal}
+  \label{E_U_N_k=10_graph}
+\end{figure}
+
+This graph shows ... TODO 
 
 
 
@@ -1330,13 +1371,38 @@ The results from the investigation above have been condensed into table \ref{exp
 \begin{center}
 \begin{tabular}{| l | c c|} 
 \toprule
-k & $a_{k}$ & $c{k}$ \\
+k & $a_{k}$ & $c_{k}$ \\
 \midrule[1pt]
 1 &  0.4147  &  0.0198  \\
 2 &  0.6480  &  0.1482  \\
 3 &  0.5711  &  0.0585  \\
-5 &  &  \\
-10 &  &   \\
+5 &  0.4793  &  0.0241  \\
+10 & 0.7170 &  0.2292 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+This table doesn't show the same as the other distributions; previously, in sections \ref{U_compare_k} and \ref{N_compare_k}, we have found that $a_{1} < a_{2} < a_{3} < a_{5} < a_{10}$, similarly with the intercept coefficient we have found that $c_{1} < c_{2} < c_{3} < c_{5} < c_{10}$. However, here the coefficients at $k=3$ and $k=5$ are not as expected, they are smaller than those for $k=2$. To examine this more, I will find the coefficients of regression for estimators found when $k=4,6,7,8,9,11$, these are displayed in table \ref{expo_more_coeffs}.
+
+\begin{table}
+\caption{1-dimensional exponential distribution, a comparison of more $k$} \label{expo_more_coeffs}
+\begin{center}
+\begin{tabular}{| l | c c|} 
+\toprule
+k & $a_{k}$ & $c_{k}$ \\
+\midrule[1pt]
+1 &  0.4147  &  0.0198  \\
+2 &  0.6480  &  0.1482  \\
+3 &  0.5711  &  0.0585  \\
+4 & & \\
+5 &  0.4793  &  0.0241  \\
+6 & & \\
+7 & & \\
+8 & & \\
+9 & & \\
+10 & 0.7170 &  0.2292 \\
+11 & & \\
 \hline
 \end{tabular}
 \end{center}
@@ -1358,10 +1424,10 @@ I can also compare the values found for $a_{k}$ and $c_{k}$ for the exponential 
 $k$   &  $a_{k}$  &  $c_{k}$  &  $a_{k}$  &  $c_{k}$  &  $a_{k}$  &  $c_{k}$   \\
 \midrule[1pt]
 1      & 0.4594     & 0.0249 &  0.3698  &  0.0103  &  0.4147  &  0.0198  \\
-2      & 0.5998     & 0.0746 &  0.5857  &  0.0503  &  0.0648  &  0.1482  \\
+2      & 0.5998     & 0.0746 &  0.5857  &  0.0503  &  0.6480  &  0.1482  \\
 3      & 0.6443     & 0.1156 &  0.6291  &  0.0737  &  0.5711  &  0.0585 \\
-5      & 0.7568     & 0.3557 &  0.7501  &  0.1889  &  & \\
-10    & 1.0055     & 5.5942 &  1.0357  &  3.8217  &  & \\
+5      & 0.7568     & 0.3557 &  0.7501  &  0.1889  &  0.4793  &  0.0241 \\
+10    & 1.0055     & 5.5942 &  1.0357  &  3.8217  &  0.7170  &  0.2292 \\
 \hline
 \end{tabular}
 \end{center}
