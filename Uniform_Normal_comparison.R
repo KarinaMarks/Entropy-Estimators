@@ -7,8 +7,8 @@ df2 <- data.frame(k = c(1, 2, 3, 5, 10),
                  c = c(log(0.0103), log(0.0503), log(0.0737), log(0.1889), log(3.8217)))
 
 df3 <- data.frame(k = c(1, 2, 3, 5, 10),
-                  a = -c(0.4147, 0.6480, 0.5711, 0, 0),
-                  c = c(log(0.0198), log(0.1482), log(0.0585), log(1), log(1)))
+                  a = -c(0.4147, 0.6480, 0.5711, 0.4793, 0.7170),
+                  c = c(log(0.0198), log(0.1482), log(0.0585), log(0.0241), log(0.2292)))
 
 df1$dist <- "normal"
 df2$dist <- "uniform"
@@ -31,11 +31,8 @@ g <- ggplot()+
 
 g
 
-<<<<<<< HEAD
-somek <- 3
-=======
-somek <- 1
->>>>>>> 6b7c27b65405f7874e0d0d9efea7b2dcce6a2cd1
+somek <- 10
+
 
 dfk1 <- df %>%
   filter(k==somek)
@@ -49,3 +46,4 @@ g <- ggplot()+
   ggtitle(paste0("Comparison of the regression lines for the
           Normal, Uniform and Exponential distributions (k=", somek, ")"))+ 
   labs(colour = "Distribution")
+g
