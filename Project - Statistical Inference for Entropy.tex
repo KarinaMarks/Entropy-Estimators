@@ -139,7 +139,7 @@ For density $f(x)$ and dimension $d$, we have;
 \end{remark}
 
 \begin{remark} \label{A3}
-Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$. Let $k_{0}^{*} = k_{0, N}^{*}$ and $k_{1}^{*} = k_{1, N}^{*}$ denote two deterministic sequences of positive integers with $k_{0}^{*} \leq k_{1}^{*}$, with $\frac{k_{0}^{*}}{\log^{5}{N}} \to 0$ and with $k_{1}^{*} = O(N^{\tau})$, where
+Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$. Let $k_{0}^{*} = k_{0, N}^{*}$ and $k_{1}^{*} = k_{1, N}^{*}$ denote two deterministic sequences of positive integers with $k_{0}^{*} \leq k_{1}^{*}$, with $\frac{k_{0}^{*}}{\log^{5}{N}} \to \infty$ and with $k_{1}^{*} = O(N^{\tau})$, where
 \begin{equation}
 \tau < \min \left\{ \frac{2 \alpha}{5 \alpha + 3d} , \frac{\alpha - d}{2 \alpha} , \frac{4}{4 + 3d} \right\} \nonumber
 \end{equation}
@@ -202,7 +202,7 @@ Moreover, this paper focuses only on distributions for $d \leq 3$, more specific
 
 \section{Monte-Carlo Simulations}
 
-In this section I will explore simulations of the bias of estimator (\ref{KLest}) in comparison to the size of the sample estimated from, with respect to different values of k; firstly exploring 1-dimensional distributions and then progressing onto 2-dimensional.
+In this section I will explore simulations of the bias of estimator (\ref{KLest}) in comparison to the size of the sample estimated from, with respect to different values of k; by exploring 1-dimensional distributions and then progressing onto 2-dimensional. Firstly, the distributions considered will be analysed to determine if they satisfy the conditions stated for Theorems \ref{paper1_T1}, \ref{paper1_T2}, \ref{paper4_T4} and \ref{paper4_T5} to hold. Then, I will explore the estimator of entropy for simulations of samples  from certain distributions, for different values of $k$.
 
 The motivation for these simulations is to explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. Throughout this analysis we will be considering the absolute value of this bias, since when considering its logarithm, we need a positive value. Using Theorem \ref{paper4_T5}, we can write that the bias of the estimator approaches 0 as $N \to \infty$. This is because we can write $Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H$, which in equation (\ref{est_consist}) implies $Bias(\hat{H}_{N, k}) \to 0$ as $N \to \infty$. Thus, there must be a type of inverse relationship between the modulus of the bias of the estimator, $|Bias(\hat{H}_{N, k})|$, and $N$. We believe this relationship is of the form;
 \begin{equation} \label{bias}
@@ -231,7 +231,20 @@ Thus the exact entropy for the normal distribution is given by
 \begin{equation}\label{NormalEnt}
 H =  log(\sqrt{(2\pi e)}\sigma) 
 \end{equation}
+I will first explore samples from 1-dimensional standard normal distribution with mean $\mu = 0$ and variance $\sigma^2 = 1$, $N(0, 1)$, to consider the behavior of the Kozachenko-Leonenko estimator. The exact entropy of this distribution is given by equation (\ref{NormalEnt}), with $\sigma^2=1$;
+\begin{equation} \label{normal_exact}
+H = log(\sqrt{(2\pi e)}) \approx 1.418939
+\end{equation}
 
+Since, I am first considering the 1-dimensional normal distribution, the estimator takes the form in equation (\ref{KLest_d=1}), which is given by;
+\begin{equation}
+\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
+\end{equation}
+
+
+
+
+\subsubsection{Estimator Conditions} \label{N_Conditions}
 The normal distribution satisfies Theorem \ref{paper1_T1}, using that the density function is given by $f(x) = C \exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and where $C:= \frac{1}{\sqrt{(2\pi)} \sigma} > 0$. Then by equation (\ref{paper1_T1_eq1}), considering that here $d=1$, taking some $\epsilon >0$, the first condition of the Theorem is satisfied;
 \begin{align} \nonumber
 \int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= C \int_{\mathbb{R}} \left| log \left( C \right) -  \left( \frac{x^2}{2\sigma^2} \right) \right|^{1 + \epsilon} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
@@ -244,7 +257,9 @@ Also, the second condition, equation (\ref{paper1_T1_eq2}), of Theorem \ref{pape
 &< \int_{\mathbb{R}} \int_{\mathbb{R}} \frac{| log(\|x\| + \|y\|)|^{1+ \epsilon}}{\exp{(x^2 + y^2)}} dx dy \\ \nonumber
 &< \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{| log(\|x\| + \|y\|)|}{\exp{(x^2 + y^2)}} dx dy < \infty  \nonumber
 \end{align}
-Thus we can say that for the normal distribution, $\hat{H}_{N,k}$ is an asymptotically unbiased estimator for entropy. Moreover, the normal distribution also satisfies Theorem \ref{paper1_T2}, as it fulfills the first condition shown in equation (\ref{paper1_T2_eq1});
+Thus we can say that for the normal distribution, $\hat{H}_{N,k}$ is an asymptotically unbiased estimator for entropy. 
+
+Moreover, the normal distribution satisfies Theorem \ref{paper1_T2}, as it fulfills the first condition shown in equation (\ref{paper1_T2_eq1});
 \begin{align} \nonumber
 \int_{\mathbb{R}} | log(f(x))|^{2 + \epsilon} f(x) dx  &= C \int_{\mathbb{R}} \left| log \left( C \right) -  \left( \frac{x^2}{2\sigma^2} \right) \right|^{2 + \epsilon} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx \\ \nonumber
 &< \int_{\mathbb{R}} \frac{|x|^{2 + \epsilon}}{ \exp{x^2}} dx \\ \nonumber
@@ -256,15 +271,35 @@ and the second condition, equation (\ref{paper1_T2_eq2});
 &< \int_{\mathbb{R}} \int_{\mathbb{R}} \frac{| log(\|x\| + \|y\|)|^{2+ \epsilon}}{\exp{(x^2 + y^2)}} dx dy \\ \nonumber
 &< \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} \frac{| log(\|x\| + \|y\|)|^2}{\exp{(x^2 + y^2)}} dx dy < \infty  \nonumber
 \end{align}
-Henceforth, the estimator $\hat{H}_{N,k}$, for a sample from the normal distribution is a consistent estimator by Theorem \ref{paper1_T2}. Due to the above showing the both Theorem \ref{paper1_T1} and \ref{paper1_T2} are satisfied, we can say that the Kozachenko-Leonenko estimator, of a sample from the normal distribution is an asymptotically unbiased and consistent estimator for entropy. Since, I am first considering the 1-dimensional normal distribution, the estimator takes the form in equation (\ref{KLest_d=1});
-\begin{equation}
-\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
-\end{equation}
+Henceforth, the estimator $\hat{H}_{N,k}$, for a sample from the normal distribution is a consistent estimator by Theorem \ref{paper1_T2}. 
 
-I will first explore samples from 1-dimensional standard normal distribution with mean $\mu = 0$ and variance $\sigma^2 = 1$, $N(0, 1)$, to consider the behavior of the estimator stated above. The exact entropy of this distribution is given by equation (\ref{NormalEnt}), with $\sigma^2=1$;
-\begin{equation} \label{normal_exact}
-H = log(\sqrt{(2\pi e)}) \approx 1.418939
-\end{equation}
+For Theorems \ref{paper4_T4} and \ref{paper4_T5} to be satisfied by the estimators generated by samples from the normal distribution, this distribution must meet the Conditions \ref{A1}, \ref{A2} and \ref{A3}. 
+Firstly, to satisfy Condition \ref{A1}, for density function $f(x) = \frac{1}{\sqrt{(2\pi)}} \exp{ \left( \frac{-x^2}{2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and $\sigma^2 = 1$, it must be such that;
+\begin{itemize}
+\item f is bounded
+
+\item f is m-times differentiable
+
+\item $\exists r_{*} > 0$ and a Borel measurable function $g_{*}$, with $\|y-x\| \leq r_{*}$ so that $\|f^{(t)}(x)\| \leq g_{*}(x) f(x)$ and $\|f^{(m)}(x) - f^{(m)}(x)\| \leq g_{*}(x) f(x)\|y - x\|^{\eta}$, for some $g_{*}$ such that $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$
+
+\end{itemize}
+
+Next, to satisfy Condition \ref{A2}, for the density function $f$ of the normal distribution, must fulfill that;
+\begin{itemize}
+\item The $\alpha$-moment of $f$ must be finite, so $\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty$
+
+\end{itemize}
+
+Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{paper4_T4} and \ref{paper4_T5}. To do this we must have, for some $\alpha > d = 1$, let $k_{0}^{*}$ and $k_{1}^{*}$ denote two deterministic sequences of positive integers with $k_{0}^{*} \leq k_{1}^{*}$. Taking $\alpha = 2$, we must have;
+
+\begin{itemize}
+\item $\frac{k_{0}^{*}}{\log^{5}{N}} \to \infty$ 
+
+\item $k_{1}^{*} = O(N^{\tau})$, where $\tau < \min \left\{ \frac{2 \alpha}{5 \alpha + 3d} , \frac{\alpha - d}{2 \alpha} , \frac{4}{4 + 3d} \right\} = \min \left\{ \frac{4}{13}, \frac{1}{4}, \frac{4}{7} \right\} = \frac{1}{4}$
+\end{itemize}
+
+
+Due to the above conditions for Theorems \ref{paper1_T1}, \ref{paper1_T2}, \ref{paper4_T4} and \ref{paper4_T5} being met, we can say that the Kozachenko-Leonenko estimator, of a sample from the normal distribution is an asymptotically unbiased and consistent estimator for entropy. 
 
 
 
@@ -643,6 +678,21 @@ Thus, the actual value of entropy for the uniform distribution is given by;
 H = log [ b-a ]
 \end{equation}
 
+ Similarly to the 1-dimensional normal distribution, we have for the 1-dimensional uniform distribution that $d=1$ so $V_{1} = 2$, thus our estimator takes the form of equation (\ref{KLest_d=1});
+\begin{equation}
+\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
+\end{equation}
+
+Moreover, the samples considered will not be from the standard uniform, but from the the uniform distribution $U[0,100]$. This is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems as the pdf would be $f(x) = 1 , \quad 0 \leq x \leq 1$, which would incur working on a very small scale; i.e taking a points with distance between them as $\approx 0.00002$ along the x-direction. Thus, I will be using the pdf $f(x) = 0.01 , \quad 0 \leq x \leq 100$, which is from the $U[0,100]$ distribution and gives the exact entropy to be;
+\begin{equation} \label{uniform_exact}
+H = log(100) \approx 4.605170
+\end{equation}
+
+
+
+
+\subsubsection{Estimator Conditions} \label{U_Conditions}
+
 The uniform distribution satisfies Theorem \ref{paper1_T1}, firstly by considering equation (\ref{paper1_T1_eq1}) with $d=1$ and the distribution $f(x)=C$ for $a \leq x \leq b$, where $C = \frac{1}{b-a} >0$, we have for some $\epsilon >0$;
 \begin{align} \nonumber
 \int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= C \int_{a}^{b} | log (C) |^{1 + \epsilon} dx \\ \nonumber 
@@ -653,7 +703,9 @@ Also, the second condition, equation (\ref{paper1_T1_eq2}), of Theorem \ref{pape
 \int_{(\mathbb{R})^2} | log(\|x-y\|)|^{1+ \epsilon} f(x) f(y) dx dy  &= C^2 \int_{a}^{b} \int_{a}^{b} | log(\|x-y\|)|^{1+ \epsilon} dx dy \\ \nonumber
 &< \int_{a}^{b} \int_{a}^{b} | log(\|x\| + \|y\|)| dx dy < \infty  \nonumber
 \end{align}
-Thus we can say that for the normal distribution, $\hat{H}_{N,k}$ is an asymptotically unbiased estimator for entropy. Moreover, the uniform distribution also satisfies Theorem \ref{paper1_T2}, as it fulfills the first condition shown in equation (\ref{paper1_T2_eq1});
+Thus we can say that for the normal distribution, $\hat{H}_{N,k}$ is an asymptotically unbiased estimator for entropy. 
+
+Moreover, the uniform distribution also satisfies Theorem \ref{paper1_T2}, as it fulfills the first condition shown in equation (\ref{paper1_T2_eq1});
 \begin{align} \nonumber
 \int_{\mathbb{R}} | log(f(x))|^{2 + \epsilon} f(x) dx  &= C \int_{a}^{b} | log  (C)|^{2 + \epsilon} dx \\ \nonumber
 &< \int_{a}^{b} \hat{C}^{2 + \epsilon} dx < \infty \nonumber
@@ -664,15 +716,26 @@ and the second condition, equation (\ref{paper1_T2_eq2});
 &< \int_{a}^{b} \int_{a}^{b} | log(\|x\| + \|y\|)|^2 dx dy < \infty \nonumber
 \end{align}
 
-Henceforth, the estimator $\hat{H}_{N,k}$, generated by samples from the uniform distribution is a consistent estimator by Theorem \ref{paper1_T2}. Due to the above showing the both Theorem \ref{paper1_T1} and \ref{paper1_T2} are satisfied, we can say that the Kozachenko-Leonenko estimator is an asymptotically unbiased and consistent estimator for entropy for samples from the uniform distribution. Similarly to the 1-dimensional normal distribution, we have for the 1-dimensional uniform distribution that $d=1$ so $V_{1} = 2$, thus our estimator takes the form of equation (\ref{KLest_d=1});
-\begin{equation}
-\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
-\end{equation}
+For Theorems \ref{paper4_T4} and \ref{paper4_T5} to be satisfied by the estimators generated by samples from the uniform distribution, this distribution must meet the Conditions \ref{A1}, \ref{A2} and \ref{A3}. 
+Firstly, to satisfy Condition \ref{A1}, for the density function $f(x) = 0.01$ for $0 \leq x \leq 100$, it must be such that;
+\begin{itemize}
+\item f is bounded
 
-Moreover, the samples considered will not be from the standard uniform, but from the the uniform distribution $U[0,100]$. This is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems as the pdf would be $f(x) = 1 , \quad 0 \leq x \leq 1$, which would incur working on a very small scale; i.e taking a points with distance between them as $\approx 0.00002$ along the x-direction. Thus, I will be using the pdf $f(x) = 0.01 , \quad 0 \leq x \leq 100$, which is from the $U[0,100]$ distribution and gives the exact entropy to be;
-\begin{equation} \label{uniform_exact}
-H = log(100) \approx 4.605170
-\end{equation}
+\item f is m-times differentiable
+
+\item $\exists r_{*} > 0$ and a Borel measurable function $g_{*}$, with $\|y-x\| \leq r_{*}$ so that $\|f^{(t)}(x)\| \leq g_{*}(x) f(x)$ and $\|f^{(m)}(x) - f^{(m)}(x)\| \leq g_{*}(x) f(x)\|y - x\|^{\eta}$, for some $g_{*}$ such that $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$
+
+\end{itemize}
+
+Next, to satisfy Condition \ref{A2}, for the density function $f$ of the uniform distribution, must fulfill that;
+\begin{itemize}
+\item The $\alpha$-moment of $f$ must be finite, so $\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty$
+
+\end{itemize}
+
+Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{paper4_T4} and \ref{paper4_T5}. These values are independent of the distribution that the sample is from, and only depends on the size of the sample, the dimension of the distribution that sample is taken from and the vlaue chosen for $\alpha$, where we have chosen $\alpha = 2$. Thus, the values of $k$ found in section \ref{N_Conditions} are... TODO.
+
+Due to the above conditions for Theorems \ref{paper1_T1}, \ref{paper1_T2}, \ref{paper4_T4} and \ref{paper4_T5} being met, we can say that the Kozachenko-Leonenko estimator, of a sample from the uniform distribution is an asymptotically unbiased and consistent estimator for entropy. 
 
 
 
@@ -1011,6 +1074,21 @@ Thus we have the the exact value of entropy for the exponential distribution, gi
 H = 1 - log(\lambda)
 \end{equation}
 
+Moreover, I am again considering a 1-dimensional distribution; thus $V_{d} = V_{1} = 2$, and;
+\begin{equation}
+\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
+\end{equation}
+is the form of the Kozachenko-Leonenko estimator that I will be considering here, equation (\ref{KLest_d=1}).
+
+I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 0.5$, this is because, we know that for the exponential distribution we must have the rate parameter $\lambda >0$ and if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$. This will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy, $H$. Also, for $\lambda \geq 1$, we have a very small value of entropy, $H \leq 1$, which would cause problems when calculating large samples and their entropy. Therefore, I have chosen a random number for the rate parameter such that $\lambda \in (0, 1)$, so for this value of $\lambda=0.5$, the exact entropy is given by;
+\begin{equation} \label{exponential_exact}
+H = 1 - log(0.5) \approx 1.693147
+\end{equation}
+
+
+
+\subsubsection{Estimator Conditions} \label{E_Conditions}
+
 Samples from the exponential distribution must satisfy the conditions of Theorem \ref{paper1_T1} and \ref{paper1_T2}, to  be an asymptotically unbiased and consistent estimator. For Theorem \ref{paper1_T1} to be satisfied, it must first satisfy equation (\ref{paper1_T1_eq1}), thus using that the density here is $f(x) = \lambda e^{-\lambda x}$ for $x \in [0, \infty)$, where $\lambda >0$, and considering some $\epsilon >0$;
 \begin{align} \nonumber
 \int_{\mathbb{R}} | log(f(x))|^{1 + \epsilon} f(x) dx  &= \lambda \int_{0}^{\infty} | log (\lambda) - \lambda x |^{1 + \epsilon} e^{- \lambda x} dx \\ \nonumber
@@ -1035,16 +1113,28 @@ and the second condition, equation (\ref{paper1_T2_eq2});
 &<  \int_{0}^{\infty} \int_{0}^{\infty}  \frac{| log(\|x\| + \|y\|)|^{2+ \epsilon}}{e^{\lambda (x + y)}} dx dy \\ \nonumber
 &<  \int_{0}^{\infty} \int_{0}^{\infty}  \frac{| log(\|x\| + \|y\|)|^2}{e^{(x + y)}} dx dy < \infty  \nonumber
 \end{align}
-Thus, the estimator $\hat{H}_{N,k}$, for a sample from the exponential distribution is a consistent estimator by Theorem \ref{paper1_T2}. Due to the above showing the both Theorem \ref{paper1_T1} and \ref{paper1_T2} are satisfied, we can say that the Kozachenko-Leonenko estimator, of a sample from the exponential distribution is an asymptotically unbiased and consistent estimator for entropy.Moreover, I am again considering a 1-dimensional distribution; thus $V_{d} = V_{1} = 2$, and;
-\begin{equation}
-\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
-\end{equation}
-is the form of the Kozachenko-Leonenko estimator that I will be considering here, equation (\ref{KLest_d=1}).
+Thus, the estimator $\hat{H}_{N,k}$, for a sample from the exponential distribution is a consistent estimator by Theorem \ref{paper1_T2}. 
 
-I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 0.5$, this is because, we know that for the exponential distribution we must have the rate parameter $\lambda >0$ and if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$. This will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy, $H$. Also, for $\lambda \geq 1$, we have a very small value of entropy, $H \leq 1$, which would cause problems when calculating large samples and their entropy. Therefore, I have chosen a random number for the rate parameter such that $\lambda \in (0, 1)$, so for this value of $\lambda=0.5$, the exact entropy is given by;
-\begin{equation} \label{exponential_exact}
-H = 1 - log(0.5) \approx 1.693147
-\end{equation}
+For Theorems \ref{paper4_T4} and \ref{paper4_T5} to be satisfied by the estimators generated by samples from the exponential distribution, this distribution must meet the Conditions \ref{A1}, \ref{A2} and \ref{A3}. 
+Firstly, to satisfy Condition \ref{A1}, the density function $f(x) =  \frac{e^{\frac{-x}{2}}}{2}$ for $x \in [0, \infty)$, where we have chosen $\lambda = 0.5$, must be such that;
+\begin{itemize}
+\item f is bounded
+
+\item f is m-times differentiable
+
+\item $\exists r_{*} > 0$ and a Borel measurable function $g_{*}$, with $\|y-x\| \leq r_{*}$ so that $\|f^{(t)}(x)\| \leq g_{*}(x) f(x)$ and $\|f^{(m)}(x) - f^{(m)}(x)\| \leq g_{*}(x) f(x)\|y - x\|^{\eta}$, for some $g_{*}$ such that $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$
+
+\end{itemize}
+
+Next, to satisfy Condition \ref{A2}, for the density function $f$ of the exponential distribution, must fulfill that;
+\begin{itemize}
+\item The $\alpha$-moment of $f$ must be finite, so $\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty$
+
+\end{itemize}
+
+Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{paper4_T4} and \ref{paper4_T5}. As previously, these values are independent of the distribution that the sample is from, and only depends on the size of the sample, the dimension of the distribution that sample is taken from and the value chosen for $\alpha$, where we have chosen $\alpha = 2$. Thus, the values of $k$ found in section \ref{N_Conditions} are... TODO.
+
+Due to the above conditions for Theorems \ref{paper1_T1}, \ref{paper1_T2}, \ref{paper4_T4} and \ref{paper4_T5} being met, we can say that the Kozachenko-Leonenko estimator, of a sample from the exponential distribution is an asymptotically unbiased and consistent estimator for entropy. 
 
 
 
