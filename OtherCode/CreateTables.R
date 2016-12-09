@@ -2,7 +2,7 @@
 options(scipen=999)
 
 # set the value of k
-k <- 2
+k <- 10
 # set the distribution
 dist <- "exponential"
 
