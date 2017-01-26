@@ -7,17 +7,16 @@ library(readr) # to write/read files
 # change this for each k
 k <- 1
 
-# the function for the normal distribution, takes M, N and k and returns the 
-# entropy for the standard normal distribution
+# the function for the uniform distribution, takes M, N, k, min/max parameters
+# and returns the estimator of entropy
 cppFunction('
-            NumericVector normalsmth(int M, int N, int k){
+          NumericVector uniformsmth(int M, int N, int k, int min, int max){
             NumericVector est(M);
             NumericVector x(N);
             for (int i = 0; i < M; i++) {
-            int sd=1;
             Function KLEE("KLEE");
-            Function rnorm("rnorm");
-            x=rnorm(N, sd=sd);
+            Function runif("runif");
+            x=runif(N, min=min, max=max);
             est[i]=as<double>(KLEE(x ,k=k));
             }
             return Rcpp::wrap(est);
@@ -27,7 +26,7 @@ cppFunction('
 # creating the data frame with n and entropy
 newdf <- data.frame(n = seq(100, 50000, 500)) %>% 
   dplyr::group_by(n) %>%
-  summarise(Ent = mean(normalsmth(M=500, N=n, k=k), na.rm=TRUE))
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=k, min=0, max=100), na.rm=TRUE))
 
-write_csv(newdf, "./Data/data_normal_1.csv")
+write_csv(newdf, "./Data/data_uniform_1.csv")
 
