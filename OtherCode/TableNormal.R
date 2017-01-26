@@ -29,3 +29,4 @@ newdf <- data.frame(n = seq(100, 50000, 500)) %>%
   summarise(Ent = mean(normalsmth(M=500, N=n, k=k), na.rm=TRUE))
 
 write_csv(newdf, "./Data/data_normal_1.csv")
+
