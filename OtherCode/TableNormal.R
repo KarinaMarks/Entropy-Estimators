@@ -5,7 +5,7 @@ library(Rcpp) # to create a faster for loop
 library(readr) # to write/read files
 
 # change this for each k
-k <- 1
+k <- 2
 
 # the function for the normal distribution, takes M, N and k and returns the 
 # entropy for the standard normal distribution
@@ -25,9 +25,11 @@ cppFunction('
             ')
 
 # creating the data frame with n and entropy
-newdf <- data.frame(n = seq(100, 50000, 500)) %>% 
+newdf7 <- data.frame(n = seq(100, 50000, 100)) %>% 
   dplyr::group_by(n) %>%
-  summarise(Ent = mean(normalsmth(M=500, N=n, k=k), na.rm=TRUE))
+  summarise(Ent = mean(normalsmth(M=500, N=n, k=7), na.rm=TRUE))
 
-write_csv(newdf, "./Data/data_normal_1.csv")
+write_csv(df, "./Data/data_normal.csv")
+
+df <- left_join(df, newdf11, by="n")
 
