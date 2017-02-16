@@ -15,6 +15,46 @@
 \section{Introduction}
 
 
+\section{Literature Review}
+
+\subsection{Problems of Information Transmission - On Statistical Estimation of Entropy of Random Vector (N.Leonenko)}
+
+Firstly, I considered this paper, looking at estimating the Shannon entropy of an absolutely continuous random sample of independent observations, with unknown probability density $f(x), x \in \mathbb{R}^{d}$. As $f(x)$ is unknown this is not easily estimated accurately for a random sample, and by just estimating the density $\hat{f}(x)$ to replace the actual density $f(x)$ in the formula for the entropy we get highly restrictive consistency conditions. 
+
+Therefore, the following estimator was proposed for the Shannon entropy of a random sample $X_{1}, X_{2}, ..., X_{N}$ of d-dimensional observations;
+\begin{equation}
+H_{N} = d \log(\bar{\rho } ) + \log (c(d)) + \log (\gamma) + \log (N-1)
+\end{equation}
+where $c(d) = \frac{\pi^{\frac{d}{2}}}{\Gamma ( \frac{d}{2} + 1 )}$ is the volume of the d-dimensional unit ball, the Euler constant is $\gamma = \exp \left[ - \int_{0}^{\infty} e^{-t} \log(t) dt \right]$ and $\bar{\rho} = \left[ \prod_{i=1}^{N} \rho_{i} \right]^{\frac{1}{N}}$, with $\rho_{i}$ the nearest neighbour distance from $X_{i}$ to another member of the sample $X_{j}$, $i \neq j$. 
+
+Under some strong conditions on the density function, this estimator is asymptotically unbiased and a consistent estimator for the Shannon entropy. 
+
+The estimator here is in a simple form, which is later developed into something more sophisticated, using the nearest neighbour method, but considering larger values of $k$ (here $k=1$). This estimator is developed so that the consistency and asymptotic unbias of the estimator holds under less constrained conditions.
+
+
+
+\subsection{Causality Detection Based on Information-Theoretic Approaches in Time Series Analysis (K.H-Schindler, M.Palus, M.Vejmelka, J.Bhattacharya)}
+
+
+
+\subsection{a Class of Renyi Information Estimators for Mulitdimensional densities (N.Leonenko, L.Pronzato, V.Savani)}
+
+This paper looks at estimating both the R\'enyi ($H_{q}^{*}$) and Tsallis ($H_{q}$) entropies for a random vector $X \in \mathbb{R}^d$ with density function $f(x)$, when $q \neq 1$, by using the kth nearest neighbour method, with a fixed values of k. This is achieved by considering the integral  $I_{q} = \int_{\mathbb{R}^d} f^q (x) dx$, and generating its estimator, which is defined as $\hat{I}_{N, k, q} = \frac{1}{N} \sum_{i=1}^{N} (\zeta_{N, k, q})^{1-q}$. Where, $\zeta_{N, k ,q} = (N-1)C_{k}V_{d}(\rho_{k, N-1}^{(i)})^d$,  $V_{d} = \frac{\pi^{\frac{d}{2}}}{\Gamma(\frac{d}{2} + 1 )}$ is the volume of d-dimensional unit ball, $C_{k} = \left[ \frac{\Gamma(k)}{\Gamma(k+1-q)} \right]^{\frac{1}{1-q}}$ and $\rho_{k, N-1}^{(i)}$ is the kth nearest neighbour distance from the observation $X_{i}$ to some other $X_{j}$.
+
+The estimator $\hat{I}_{N, k, q}$, provided $q>1$ and $I_{q}$ exists - and for any $q \in (1, k+1)$ if f is bounded - is thus found to be an asymptotically unbiased estimator for $I_{q}$. Also, provided  $q>1$ and $I_{2q-1}$ exists -  and for any $q \in (1, \frac{k+1}{2})$, when $k \geq 2$ if f is bounded - $\hat{I}_{N, k, q}$ is thus a consistent estimator for $I_{q}$. Moreover, by simple formulas both the R\'enyi and Tsallis entropies can be written in terms of this estimated value; 
+\begin{align}
+\hat{H}_{q}^{*} &= \frac{1}{1-q} log(\hat{I}_{N, k, q}) \\
+\hat{H}_{q} &= \frac{1}{q-1} (1 - \hat{I}_{N, k, q})
+\end{align}
+thus, under the latter conditions, provide consistent estimates of these entropies as $N \to \infty$.
+
+Furthermore, this paper goes on to discuss an estimator for the Shannon entropy, $H_{1}$ by taking the limit of the estimator for the Tsallis entropy, $\hat{H}_{N, k, q}$ as $q \to 1$, again with a fixed value of $k$. This estimator is given by $\hat{H}_{N, k, 1} =  \frac{1}{N} \sum_{i=1}^{N} \log (\xi_{N, i, k})$, where $\xi_{N, i, k} = (N-1)\exp[-\Psi(k)]V_{d}(\rho_{k, N-1}^{(i)})^{d}$, with $V_{d}$ and $\rho_{k, N-1}^{(i)}$ defined as in the estimation of $I_{q}$ and the Digamma function $\Psi(z) = \frac{\Gamma'(z)}{\Gamma(z)}$. Under the following conditions; f is bounded, $I_{q_{1}}$ exists for some $q_{1} > 1$; the $H_{1}$ exists and the estimator $\hat{H}_{N, k, 1}$ is a consistent estimator for the Shannon entropy.
+
+
+
+\subsection{..}
+
+
 
 \section{Entropies and Properties}
 
@@ -87,39 +127,9 @@ where $\gamma = 0.577216$ is the Euler-Mascheroni constant (where the digamma fu
 \end{itemize} Then the Kozachenko-Leonenko estimator for entropy, H, is given by;
 \begin{equation} \label{KLest}
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (N-1)}{e^{\Psi(k)}} \right]
-\end{equation} where, $\rho_{(k),i}^{d}$ is defined in (\ref{Rho}), $V_{d}$ is defined in (\ref{Volume}) and $\Psi(k)$ is defined in (\ref{Psi}).This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, satisfies some  theorems. Firstly from PAPER 1 (TODO refrence), we have the following;
+\end{equation} where, $\rho_{(k),i}^{d}$ is defined in (\ref{Rho}), $V_{d}$ is defined in (\ref{Volume}) and $\Psi(k)$ is defined in (\ref{Psi}).This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, satisfies some  theorems.
 
-\begin{theorem} \label{paper1_T1}
-For exact entropy $H$, Kozachenko-Leonenko estimator $\hat{H}_{N,k}$, and density function $f(x)$, for some $\epsilon > 0$ if both
-\begin{equation} \label{paper1_T1_eq1}
-\int_{\mathbb{R}^{d}} | log(f(x))|^{1 + \epsilon} f(x) dx < \infty 
-\end{equation}
-and
-\begin{equation} \label{paper1_T1_eq2}
-\int_{\mathbb{R}^{d}} \int_{\mathbb{R}^{d}} | log(\|x-y\|)|^{1+ \epsilon} f(x) f(y) dx dy < \infty
-\end{equation}
-Then we have that 
-\begin{equation} 
-\lim_{N \to \infty} \mathbb{E} (\hat{H}_{N, k}) = H \nonumber
-\end{equation}
-Thus $\hat{H}_{N, k}$ is an asymptotically unbiased estimator of $H$.
-\end{theorem}
-
-\begin{theorem} \label{paper1_T2}
-For exact entropy $H$, Kozachenko-Leonenko estimator $\hat{H}_{N,k}$, and density function $f(x)$, for some $\epsilon > 0$ if both
-\begin{equation} \label{paper1_T2_eq1}
-\int_{\mathbb{R}^{d}} | log(f(x))|^{2 + \epsilon} f(x) dx < \infty \nonumber
-\end{equation}
-and
-\begin{equation} \label{paper1_T2_eq2}
-\int_{\mathbb{R}^{d}} \int_{\mathbb{R}^{d}} | log(\|x-y\|)|^{2+ \epsilon} f(x) f(y) dx dy < \infty \nonumber
-\end{equation}
-Then $\hat{H}_{N, k}$ for $N \to \infty$ is a consistent estimator of H.
-
-(An estimator is consistent if the probability that it is in error by more than a given amount tends to zero as the sample become large $\Leftrightarrow $ for error $\delta > 0$, we have $\lim_{N \to \infty} \mathbb{P}(|\hat{H}_{N,k} - H| < \delta) = 1$) 
-\end{theorem}
-
-Additionally, from paper 4 (TODO reference), we have the following, stronger conditions which will be used in Theorems \ref{paper4_T4} and \ref{paper4_T5};
+From paper 4 (TODO reference), we have the following, conditions which will be used in Theorems \ref{paper4_T4} and \ref{paper4_T5};
 \begin{remark} ($\beta$) \label{A1}
 For density $f$ bounded, denoting $m := \lfloor \beta \rfloor$ and $\eta := \beta -m$, we have that $f$ is $m$ times continuously differentiable and there exists $r_{*} > 0$ and a Borel measurable function $g_{*}$ such that for each $t = 1, 2, ... , m$ and $\|y-x\| \leq r_{*}$, we have;
 \begin{equation}
