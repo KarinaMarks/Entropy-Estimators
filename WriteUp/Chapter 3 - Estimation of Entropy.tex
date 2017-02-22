@@ -11,7 +11,69 @@
 \newtheorem{remark}{Condition}
 
 \begin{document}
-\section{Estimation of Entropy}
+\section{Kozachenko-Leonenko Estimator}
+
+\subsection{History}
+
+This estimator was first introduced by L.Kozachenko and N.Leonenko, in 1987, where they first published the article \textit{Sample Estimate of the Entropy of a Random Vector}, in the paper \textit{Problems of Information Transmission}. Using the nearest neighbour method, they created a simple estimator for the Shannon entropy of an absolutely continuous random vector from a independent sample of observations, to then establish conditions under which we have asymptotic unbiasedness and consistency.
+
+Since then, there has been major developments in the estimator; firstly in 2007, N.Leonenko, L.Pronzato, V.Savani, proposed a similar alternative to this estimator in their paper \textit{a Class of Renyi Information Estimators for Mulitdimensional densities}, this time using the k-nearest neighbour method, to consider estimators for the R\'enyi and Tsallis entropies. Then as the order of these entropies $q \to 1$, they defined the k-nearest neighbour estimator for the Shannon entropy, where k is fixed, and these estimators (under less rigorous conditions) are both consistent and asymptotically unbiased.
+
+Also, the use of a fixed k has been backed up by a more recent paper in 2016, by S.Delattre and N.Fournier, \textit{On the Kozachenko-Leonenko Entropy Estimator}, which is a detailed study of the bias and variance of this estimator, using a fixed k. Subsequently finding that, in higher dimensions, the bias can be expressed in terms of $N^{-\frac{2}{d}}$; thus, leading to the development of explicit asymptotic confidence intervals.
+
+Moreover, in 2016, a new idea was proposed by T.Berrett, R.Samsworth and M.Yuan, written in \textit{Efficient Mulitvariate Entropy Estimation via k-Nearest Neighbour Distances}; that the value chosen for $k$, depends upon the sample size $N$. Also, this idea is then extended to a new estimator; ''formed as a weighted average if Kozachenko-Leonenko estimators for different values of k''. I will not be exploring this new estimator in depth; however, the understanding of the value of $k$ depending on $N$ will be examined in detail.
+
+\subsubsection{Estimator with k=1}
+
+Firstly, I considered an article \textit{On Statistical Estimation of Entropy of Random Vector} (N.Leonenko and L.Kozachenko, 1987), which considers estimating the Shannon entropy of an absolutely continuous random sample of independent observations, with unknown probability density $f(x), x \in \mathbb{R}^{d}$. As $f(x)$ is unknown this is not easily estimated accurately for a random sample, and by just estimating the density $\hat{f}(x)$ to replace the actual density $f(x)$ in the formula for the entropy we get highly restrictive consistency conditions. 
+
+Therefore, the following estimator was proposed for the Shannon entropy of a random sample $X_{1}, X_{2}, ..., X_{N}$ of d-dimensional observations;
+\begin{equation}
+H_{N} = d \log(\bar{\rho } ) + \log (c(d)) + \log (\gamma) + \log (N-1)
+\end{equation}
+where $c(d) = \frac{\pi^{\frac{d}{2}}}{\Gamma ( \frac{d}{2} + 1 )}$ is the volume of the d-dimensional unit ball, the Euler constant is $\log (\gamma) = \exp \left[ - \int_{0}^{\infty} e^{-t} \log(t) dt \right] = -\Psi(1)$ and $\bar{\rho} = \left[ \prod_{i=1}^{N} \rho_{i} \right]^{\frac{1}{N}}$, with $\rho_{i}$ the nearest neighbour distance from $X_{i}$ to another member of the sample $X_{j}$, $i \neq j$. 
+
+It is important to note that one can write the Euler constant $-\Psi(1) = \log (\exp(-\Psi(1))) = \log (\frac{1}{\exp(\Psi(1))})$, this notation is what is used in the latter papers, so it is useful to introduce it here. $\Psi(x)$ is the Digamma function, and when $x=1$, this is just the Euler constant. Thus this estimator can be written if the form;
+\begin{align}
+H_{N} &= \log(\bar{\rho}^{d} ) + \log (c(d)) - \Psi(1)  + \log (N-1) \nonumber \\
+&= \log \left( \left[ \prod_{i=1}^{N} \rho_{i} \right]^{\frac{d}{N}} \right) \log( c(d) (N-1)) + \log \left(\frac{1}{\exp(\Psi(1))}\right) \nonumber \\
+&= \frac{1}{N} \sum_{i=1}^{N} \log( \rho_{i}^{d} ) + \log \left( \frac{c(d) (N-1)}{ \exp(\Psi(1))} \right) \nonumber \\
+&= \frac{1}{N} \sum_{i=1}^{N}\log(\rho_{i}^{d}) + \frac{1}{N} \sum_{i=1}^{N} \log \left( \frac{c(d) (N-1)}{\exp(\Psi(1))}\right) \nonumber \\
+&= \frac{1}{N} \sum_{i=1}^{N} \log \left( \frac{\rho_{i}^{d} c(d) (N-1)}{\exp(\Psi(1))}\right) \label{Est_k=1}
+\end{align}
+
+Under some strong conditions on the density function, this estimator is asymptotically unbiased and a consistent estimator for the Shannon entropy. 
+
+The estimator here is in a simple form, which is later developed into something more sophisticated, using the nearest neighbour method, but considering larger values of $k$ (here $k=1$). This estimator is developed so that the consistency and asymptotic unbias of the estimator holds under less constrained conditions.
+
+
+\subsubsection{Estimator with k fixed}
+
+The next paper I am exploring on estimation is \textit{a Class of Renyi Information Estimators for Mulitdimensional densities} (N.Leonenko, L.Pronzato, V.Savani, 2007), which looks at estimating the R\'enyi ($H_{q}^{*}$) and Tsallis ($H_{q}$) entropies, when $q \neq 1$, and the Shannon ($\hat{H}_{N, k, 1}$) entropy. Where these are taken for a random vector $X \in \mathbb{R}^d$ with density function $f(x)$, by using the kth nearest neighbour method, with a fixed values of k. 
+
+For the R\'enyi and Tsallis entropies, this is achieved by considering the integral  $I_{q} = \int_{\mathbb{R}^d} f^q (x) dx$, and generating its estimator, which is defined as $\hat{I}_{N, k, q} = \frac{1}{N} \sum_{i=1}^{N} (\zeta_{N, k, q})^{1-q}$. Where, $\zeta_{N, k ,q} = (N-1)C_{k}V_{d}(\rho_{k, N-1}^{(i)})^d$,  $V_{d} = \frac{\pi^{\frac{d}{2}}}{\Gamma(\frac{d}{2} + 1 )}$ is the volume of d-dimensional unit ball, $C_{k} = \left[ \frac{\Gamma(k)}{\Gamma(k+1-q)} \right]^{\frac{1}{1-q}}$ and $\rho_{k, N-1}^{(i)}$ is the kth nearest neighbour distance from the observation $X_{i}$ to some other $X_{j}$.
+
+The estimator $\hat{I}_{N, k, q}$, provided $q>1$ and $I_{q}$ exists - and for any $q \in (1, k+1)$ if f is bounded - is thus found to be an asymptotically unbiased estimator for $I_{q}$. Also, provided  $q>1$ and $I_{2q-1}$ exists -  and for any $q \in (1, \frac{k+1}{2})$, when $k \geq 2$ if f is bounded - $\hat{I}_{N, k, q}$ is thus a consistent estimator for $I_{q}$. Moreover, by simple formulas both the R\'enyi and Tsallis entropies can be written in terms of this estimated value; 
+\begin{align}
+\hat{H}_{q}^{*} &= \frac{1}{1-q} log(\hat{I}_{N, k, q}) \\
+\hat{H}_{q} &= \frac{1}{q-1} (1 - \hat{I}_{N, k, q})
+\end{align}
+thus, under the latter conditions, provide consistent estimates of these entropies as $N \to \infty$.
+
+Furthermore, this paper goes on to discuss an estimator for the Shannon entropy, $H_{1}$ by taking the limit of the estimator for the Tsallis entropy, $\hat{H}_{N, k, q}$ as $q \to 1$, again with a fixed value of $k$. This estimator is similar to that discussed before by Leonenko in his 2004 paper, equation \ref{Est_k=1}; however, it is now extended from the nearest neighbour to the kth nearest neighbour;
+\begin{equation}
+\hat{H}_{N, k, 1} =  \frac{1}{N} \sum_{i=1}^{N} \log (\xi_{N, i, k})
+\end{equation} 
+where $\xi_{N, i, k} = (N-1)\exp[-\Psi(k)]V_{d}(\rho_{k, N-1}^{(i)})^{d}$, with $V_{d}$ and $\rho_{k, N-1}^{(i)}$ defined as in the estimation of $I_{q}$ and the digamma function $\Psi(z) = \frac{\Gamma'(z)}{\Gamma(z)}$. The digamma function at $k=1$ is given by $\Psi(1) = \log(\gamma)$, the Euler constant, which was used for the $k=1$ version of this estimator. Under the following less restrictive conditions; f is bounded, $I_{q_{1}}$ exists for some $q_{1} > 1$; then $H_{1}$ exists and the estimator $\hat{H}_{N, k, 1}$ is a consistent estimator for the Shannon entropy.
+
+Extend this to also include paper 3
+
+
+\subsubsection{Estimator with k=k(n)}
+
+Paper 4
+
+\subsection{Focus of this Paper}
 
 I now wish to more explicitly introduce the Kozachenko-Leonenko estimator of the entropy H. Let $X_{1}, X_{2}, ... ,X_{N}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
  
