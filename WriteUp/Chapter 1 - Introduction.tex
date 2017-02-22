@@ -1,0 +1,63 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\title{Statistical Inference for Entropy}
+\author{Karina Marks}
+
+\usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext}
+\usepackage[format=plain,
+            textfont=it]{caption}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Condition}
+
+\begin{document}
+\section{Introduction}
+
+\subsection{Abstract}
+
+
+\subsection{Entropies and Properties}
+
+Entropy can be thought of as a representation of the average information content of an observation; sometimes referred to as a measure of unpredictability or disorder. 
+
+\subsection{Shannon Entropy}
+The Shannon entropy of a random vector X with density function f is given by;
+\begin{align} 
+H &= - \mathbb{E} \{log(f(x))\} \nonumber \\
+&= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \nonumber \\
+&= - \sum_{x \in \mathbb{R}^{d}} f(x) log(f(x)) \label{ShaEnt}
+\end{align} 
+
+\subsection{ R\'enyi and Tsallis Entropy}
+These entropies are for the order $q \neq 1$ and the construction of them relies upon the generalisation of the Shannon entropy \ref{ShaEnt}. For a random vector $X \in \mathbb{R}^d$ with density function f, we define;
+
+R\'enyi entropy
+\begin{align} 
+H_{q}^{*} &= \frac{1}{1-q} log \left( \int_{\mathbb{R}^d} f^q (x) dx \right) \quad  \quad (q \neq 1) \label{RenEnt} \\
+&=  \frac{1}{1-q} log \left( \sum_{x \in \mathbb{R}^{d}} f^q (x) \right) \nonumber 
+\end{align}
+
+Tsallis entropy
+\begin{align} 
+H_{q} &= \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  \quad (q \neq 1) \label{TsaEnt} \\
+&=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{R}^d} f^q (x) \right) \nonumber 
+\end{align}
+
+When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. There are also other special cases, sometimes the R\'enyi entropy is considered for the special case, $q=2$, and known as the quadratic R\'enyi entropy;
+\begin{align} 
+H_{2}^{*} &= - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right) \label{QuadRenEnt} \\
+&= - log \left( \sum_{x \in \mathbb{R}^d} f^2 (x) \right) \nonumber 
+\end{align}
+As $q \to \infty$, the limit of the R\'enyi entropy exists, and is defined as the minimum entropy, since it's the smallest possible value of $H_{q}^{*}$;
+\begin{equation}
+H_{\infty}^{*} = - \log \sup_{x \in \mathbb{R}^d} f (x) \nonumber
+\end{equation}
+Thus, it follows that; $H_{\infty}^{*} \leq H_{2}^{*} \leq 2H_{\infty}^{*}$.
+
+There is also an approximate relationship between the Shannon entropy and the quadratic R\'enyi entropy;
+\begin{equation}
+H_{2}^{*} \leq H \leq \log(d) + \frac{1}{d} - e^{-H_{2}^{*}} \nonumber
+\end{equation}
+where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the Shannon entropy (\ref{ShaEnt}) and d is the dimension of the distribution.
+
+\end{document}

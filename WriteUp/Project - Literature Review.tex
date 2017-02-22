@@ -233,11 +233,73 @@ Studies the bias (which is found to be $O(N^{\frac{-2}{d}})$, for dimension $d$)
 
 
 
-\subsection{Jul 2016 - Efficient Multivariate Entropy Estimation via k-Nearest Neighbour Distances (T.B.Berrett, R.J.Samworth, M.Yuan) 4}
+\subsection{Jul 2016 - Efficient Multivariate Entropy Estimation via k-Nearest Neighbour Distances (T.B.Berrett, R.J.Samworth, M.Yuan) 4} THIS ONE
 
 Under certain conditions (considering k dependent of n) the k-nearest neighbour estimator only works for dimension $d \leq 3$, for a higher dimension gives problems. They introduced a new estimator which is formed as a weighted average of k-nearest neighbour estimators for different values of k.
 
 They also show that the bias of the kl estimator is dependent on $\alpha$ and $\beta$ from certain conditions which imply for $d \leq 3$,  that the bias is $O\left(max \left\{ \frac{k^{\frac{\alpha }{\alpha + d} + \epsilon}}{n^{\frac{\alpha}{\alpha + d} + \epsilon}}, \frac{k^{\frac{\beta}{d}}}{n^{\frac{\beta}{d}}} \right\} \right)$.
+
+
+
+From paper 4 (TODO reference), we have the following, conditions which will be used in Theorems \ref{paper4_T4} and \ref{paper4_T5};
+\begin{remark} ($\beta$) \label{A1}
+For density $f$ bounded, denoting $m := \lfloor \beta \rfloor$ and $\eta := \beta -m$, we have that $f$ is $m$ times continuously differentiable and there exists $r_{*} > 0$ and a Borel measurable function $g_{*}$ such that for each $t = 1, 2, ... , m$ and $\|y-x\| \leq r_{*}$, we have;
+\begin{equation}
+\| f^{(t)} (x) \| \leq g_{*}(x)f(x) \nonumber
+\end{equation},
+\begin{equation}
+\| f^{(m)} (y) - f^{(m)} (x) \| \leq g_{*}(x)f(x) \|y-x\|^{\eta} \nonumber
+\end{equation}
+and $sup_{x:f(x)\geq \delta} g_{*}(x) = o(\delta^{-\epsilon})$ as $\delta \downarrow 0$, for each $\epsilon > 0$.
+\end{remark}
+
+\begin{remark} ($\alpha$) \label{A2}
+For density $f(x)$ and dimension $d$, we have;
+\begin{equation}
+\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty \nonumber
+\end{equation}
+\end{remark}
+
+\begin{remark} \label{A3}
+Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$. Let $k_{0}^{*} = k_{0, N}^{*}$ and $k_{1}^{*} = k_{1, N}^{*}$ denote two deterministic sequences of positive integers with $k_{0}^{*} \leq k_{1}^{*}$, with $\frac{k_{0}^{*}}{\log^{5}{N}} \to \infty$ and with $k_{1}^{*} = O(N^{\tau})$, where
+\begin{equation}
+\tau < \min \left\{ \frac{2 \alpha}{5 \alpha + 3d} , \frac{\alpha - d}{2 \alpha} , \frac{4}{4 + 3d} \right\} \nonumber
+\end{equation}
+\end{remark}
+
+\begin{theorem} \label{paper4_T1}
+Assume that conditions \ref{A1} and \ref{A2} hold for some $\beta, \alpha > 0$. Let  $k^{*} = k_{N}^{*}$ denote a deterministic sequence of positive integers with $k^{*} = O(N^{1-\epsilon})$ as $N \to \infty$  for some $\epsilon > 0$. Then, for $d \leq 2$ (or $d \geq 3$) with either $\beta \leq 2$ or $\alpha \in (0, \frac{2d}{d-2})$, then for every $\epsilon >0$ we have;
+\begin{equation}
+\mathbb{E} ( \hat{H}_{N} ) - H = O \left( max \left\{ \frac{k^{\frac{\alpha}{\alpha + d} - \epsilon}}{N^{\frac{\alpha}{\alpha + d} - \epsilon}}, \frac{k^{\frac{\beta}{d}}}{N^{\frac{\beta}{d}}} \right\} \right)
+\end{equation}
+uniformly for $k \in \{ a, ..., k^{*}\}$, as $N \to \infty$.
+\end{theorem}
+
+
+\begin{theorem}\label{paper4_T4}
+Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$, then by condition \ref{A3}, for the estimator $\hat{H}_{N, k}$ we have;
+\begin{equation}
+Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} + o(\frac{1}{N}) \nonumber
+\end{equation}
+as $N \to \infty$, uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$.
+\end{theorem}
+
+\begin{theorem} \label{paper4_T5}
+Assume that $d \leq 3$ and the conditions of Theorem \ref{paper4_T4} are satisfied (where if $d=3$, we additionally assume $k_{1}^{*} = o(n^{\frac{1}{4}})$. Then, for the estimator $\hat{H}_{N, k}$ we have;
+\begin{equation} \label{est_dist}
+\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)
+\end{equation}
+and 
+\begin{equation} \label{est_consist}
+N \mathbb{E}{(\hat{H}_{N, k} - H)^2} \xrightarrow{} \sigma^2
+\end{equation}
+as $N \to \infty$ uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$, where $\sigma^2 = Var(log(f(x))$, for density function $f(x)$.
+
+(This combines Theorem \ref{paper1_T1} with stronger conditions; hence we can now say that $\hat{H}_{N, k}$ is an consistent and asymptotically unbiased estimator of exact entropy $H$.)
+\end{theorem}
+
+
+
 
 \subsection{Aug 2016 - Demystifying Fixed k-Nearest Neighbour Information Estimators (W.Gao, S.Oh, P.Viswanath) 9}
 

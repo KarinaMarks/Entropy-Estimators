@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\title{Statistical Inference for Entropy}
+\author{Karina Marks}
+
+\usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext}
+\usepackage[format=plain,
+            textfont=it]{caption}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Condition}
+
+\begin{document}
+\section{Estimation of Entropy}
+
+I now wish to more explicitly introduce the Kozachenko-Leonenko estimator of the entropy H. Let $X_{1}, X_{2}, ... ,X_{N}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
+ 
+\begin{itemize}
+
+\item For $i = 1, 2, ..., N$, let $X_{(1), i}, X_{(2), i}, .., X_{(N-1), i}$ denote an order of the $X_{k}$ for $k = \{1, 2, ..., N\} \setminus \{i\}$, such that $\| X_{(1), i} - X_{i}\| \leq \cdots \leq \|  X_{(N-1), i} - X_{i}\| $. Let the metric $\rho$, defined as;
+\begin{equation} \label{Rho}
+\rho_{(k), i} = \| X_{(k), i} - X_{i}\|
+\end{equation} denote the kth nearest neighbour or $X_{i}$.
+
+\item  For dimension d, the volume of the unit d-dimensional Euclidean ball is defined as;
+\begin{equation} \label{Volume}
+V_{d} = \frac{\pi^\frac{d}{2}}{\Gamma(1 + \frac{d}{2})}
+\end{equation}
+
+\item For the kth nearest neighbour, the digamma function is defined as;
+\begin{equation} \label{Psi}
+\Psi(k) = -\gamma + \sum_{j=1}^{k-1} \frac{1}{j}
+\end{equation}
+where $\gamma = 0.577216$ is the Euler-Mascheroni constant (where the digamma function is chosen so that $\frac{e^{\Psi(k)}}{k}\to1$ as $k \to \infty$).
+
+\end{itemize} Then the Kozachenko-Leonenko estimator for entropy, H, is given by;
+\begin{equation} \label{KLest}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (N-1)}{e^{\Psi(k)}} \right]
+\end{equation} where, $\rho_{(k),i}^{d}$ is defined in (\ref{Rho}), $V_{d}$ is defined in (\ref{Volume}) and $\Psi(k)$ is defined in (\ref{Psi}).This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, satisfies some  theorems.
+
+
+
+Theorem \ref{paper4_T5} holds, according to the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$;
+\begin{equation}
+\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, \sigma^2) \nonumber
+\end{equation}
+By Theorem \ref{paper4_T4}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} \approx \frac{1}{N}$, as for large $N$, the variance of the logarithm of the density function stays constant. Thus, the left side of the central limit theorem above can be written as;
+\begin{align*}
+\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} &= \sqrt{N}(\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}) \\
+&= \sqrt{N}[(\hat{H}_{N, k} - H) + (H - \mathbb{E}{\hat{H}_{N, k}})] \\
+&= \sqrt{N}(\hat{H}_{N, k} - H) + \sqrt{N}(H - \mathbb{E}{\hat{H}_{N, k}})
+\end{align*}
+and as $N \to \infty$ this tends to the normal distribution, $N(0, \sigma^2)$. So we can say that $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ while $\sqrt{N} (H - \mathbb{E}{\hat{H}_{N, k}}) \to \sigma^2$, which is equivalent to the properties stated in Theorem \ref{paper4_T5}.
+
+Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equations (\ref{est_dist}) and (\ref{est_consist}) no longer hold but the estimator $\hat{H}_{N, k}$, defined by (\ref{KLest}), is still root-N consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of $k$. There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of $k$, where $k$ depends on the choice of $N$, explored in PAPER 4 (TODO reference). 
+
+Moreover, this paper focuses only on distributions for $d \leq 3$, more specifically, I will first be considering samples from 1-dimensional distributions, $d=1$. Therefore, the volume of the 1-dimensional Euclidean ball is given by $V_{1} = \frac{\pi^{\frac{1}{2}}}{\Gamma (\frac{3}{2})} = \frac{\sqrt{\pi}}{\frac{\sqrt{\pi}}{2}} = 2$. Hence the Kozachenko-Leonenko estimator is of the form;
+\begin{equation} \label{KLest_d=1}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]
+\end{equation}
+ Later, I will be considering samples from 2-dimensional distributions; thus, $d=2$ and the volume of the 2-dimensional Euclidean ball is given by $V_{2} = \frac{\pi^{\frac{2}{2}}}{\Gamma (2)} = \frac{\pi}{1} = \pi$. Hence, the estimator takes the form;
+\begin{equation} \label{KLest_d=2}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\pi \rho_{(k),i}^{2} (N-1)}{e^{\Psi(k)}} \right]
+\end{equation}
+
+
+\end{document}
