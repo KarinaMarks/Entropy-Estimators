@@ -19,9 +19,10 @@ This estimator was first introduced by L.Kozachenko and N.Leonenko, in 1987, whe
 
 Since then, there has been major developments in the estimator; firstly in 2007, N.Leonenko, L.Pronzato, V.Savani, proposed a similar alternative to this estimator in their paper \textit{a Class of Renyi Information Estimators for Mulitdimensional densities}, this time using the k-nearest neighbour method, to consider estimators for the R\'enyi and Tsallis entropies. Then as the order of these entropies $q \to 1$, they defined the k-nearest neighbour estimator for the Shannon entropy, where k is fixed, and these estimators (under less rigorous conditions) are both consistent and asymptotically unbiased.
 
-Also, the use of a fixed k has been backed up by a more recent paper in 2016, by S.Delattre and N.Fournier, \textit{On the Kozachenko-Leonenko Entropy Estimator}, which is a detailed study of the bias and variance of this estimator, using a fixed k. Subsequently finding that, in higher dimensions, the bias can be expressed in terms of $N^{-\frac{2}{d}}$; thus, leading to the development of explicit asymptotic confidence intervals.
+Moreover, in 2016, a new idea was proposed by T.Berrett, R.Samsworth and M.Yuan, written in \textit{Efficient Mulitvariate Entropy Estimation via k-Nearest Neighbour Distances}; that the value chosen for $k$, depends upon the sample size $N$. Also, this idea is then extended to a new estimator; ''formed as a weighted average of Kozachenko-Leonenko estimators for different values of k''. I will not be exploring this new estimator in depth; however, the understanding of the value of $k$ depending on $N$ will be examined in detail. Additionally, for $d=1, 2,3$, under some conditions on $k$, we are shown that the bias of the estimator acts in terms of $N^{-\frac{2}{d}}$; something which will also later be explored.
 
-Moreover, in 2016, a new idea was proposed by T.Berrett, R.Samsworth and M.Yuan, written in \textit{Efficient Mulitvariate Entropy Estimation via k-Nearest Neighbour Distances}; that the value chosen for $k$, depends upon the sample size $N$. Also, this idea is then extended to a new estimator; ''formed as a weighted average if Kozachenko-Leonenko estimators for different values of k''. I will not be exploring this new estimator in depth; however, the understanding of the value of $k$ depending on $N$ will be examined in detail.
+Lastly, also in 2016, S.Delattre and N.Fournier wrote the paper; \textit{On the Kozachenko-Leonenko Entropy Estimator}, where they studied in detail the bias and variance of this estimator considering all 3 proposed values of $k$ - $k = 1$, $k$ fixed or $k$ depends on $N$. The also provided a development for the bias of this estimator when $k=1$, in dimensions $d=1,2,3$, in terms of $O(N^{-\frac{1}{2}})$, and in higher dimensions, in terms of powers of $N^{\frac{-2}{d}}$. This is an idea that will be considered in the focus of this paper; for $d=1,2$ to show how the bias acts for large $N$ when $k=1$.
+
 
 \subsubsection{Estimator with k=1}
 
@@ -33,7 +34,7 @@ H_{N} = d \log(\bar{\rho } ) + \log (c(d)) + \log (\gamma) + \log (N-1)
 \end{equation}
 where $c(d) = \frac{\pi^{\frac{d}{2}}}{\Gamma ( \frac{d}{2} + 1 )}$ is the volume of the d-dimensional unit ball, the Euler constant is $\log (\gamma) = \exp \left[ - \int_{0}^{\infty} e^{-t} \log(t) dt \right] = -\Psi(1)$ and $\bar{\rho} = \left[ \prod_{i=1}^{N} \rho_{i} \right]^{\frac{1}{N}}$, with $\rho_{i}$ the nearest neighbour distance from $X_{i}$ to another member of the sample $X_{j}$, $i \neq j$. 
 
-It is important to note that one can write the Euler constant $-\Psi(1) = \log (\exp(-\Psi(1))) = \log (\frac{1}{\exp(\Psi(1))})$, this notation is what is used in the latter papers, so it is useful to introduce it here. $\Psi(x)$ is the Digamma function, and when $x=1$, this is just the Euler constant. Thus this estimator can be written if the form;
+It is important to note that one can write the Euler constant $-\Psi(1) = \log (\exp(-\Psi(1))) = \log (\frac{1}{\exp(\Psi(1))})$, this notation is what is used in the latter papers, so it is useful to introduce it here. $\Psi(x)$ is the Digamma function, and when $x=1$, this is just the negative Euler constant. Thus this estimator can be written if the form;
 \begin{align}
 H_{N} &= \log(\bar{\rho}^{d} ) + \log (c(d)) - \Psi(1)  + \log (N-1) \nonumber \\
 &= \log \left( \left[ \prod_{i=1}^{N} \rho_{i} \right]^{\frac{d}{N}} \right) \log( c(d) (N-1)) + \log \left(\frac{1}{\exp(\Psi(1))}\right) \nonumber \\
@@ -42,40 +43,74 @@ H_{N} &= \log(\bar{\rho}^{d} ) + \log (c(d)) - \Psi(1)  + \log (N-1) \nonumber \
 &= \frac{1}{N} \sum_{i=1}^{N} \log \left( \frac{\rho_{i}^{d} c(d) (N-1)}{\exp(\Psi(1))}\right) \label{Est_k=1}
 \end{align}
 
-Under some strong conditions on the density function, this estimator is asymptotically unbiased and a consistent estimator for the Shannon entropy. 
+Under some conditions on the density function, this estimator is asymptotically unbiased and under stronger conditions it is also a consistent estimator for the Shannon entropy. 
 
 The estimator here is in a simple form, which is later developed into something more sophisticated, using the nearest neighbour method, but considering larger values of $k$ (here $k=1$). This estimator is developed so that the consistency and asymptotic unbias of the estimator holds under less constrained conditions.
 
 
-\subsubsection{Estimator with k fixed}
 
-The next paper I am exploring on estimation is \textit{a Class of Renyi Information Estimators for Mulitdimensional densities} (N.Leonenko, L.Pronzato, V.Savani, 2007), which looks at estimating the R\'enyi ($H_{q}^{*}$) and Tsallis ($H_{q}$) entropies, when $q \neq 1$, and the Shannon ($\hat{H}_{N, k, 1}$) entropy. Where these are taken for a random vector $X \in \mathbb{R}^d$ with density function $f(x)$, by using the kth nearest neighbour method, with a fixed values of k. 
+\subsubsection{Estimator with k fixed} \label{fixed_k}
+
+The next paper I am exploring on estimation is \textit{a Class of Renyi Information Estimators for Multidimensional densities} (N.Leonenko, L.Pronzato, V.Savani, 2007), which looks at estimating the R\'enyi ($H_{q}^{*}$) and Tsallis ($H_{q}$) entropies, when $q \neq 1$, and the Shannon ($\hat{H}_{N, k, 1}$) entropy. Where these are taken for a random vector $X \in \mathbb{R}^d$ with density function $f(x)$, by using the kth nearest neighbour method, with a fixed values of k. 
 
 For the R\'enyi and Tsallis entropies, this is achieved by considering the integral  $I_{q} = \int_{\mathbb{R}^d} f^q (x) dx$, and generating its estimator, which is defined as $\hat{I}_{N, k, q} = \frac{1}{N} \sum_{i=1}^{N} (\zeta_{N, k, q})^{1-q}$. Where, $\zeta_{N, k ,q} = (N-1)C_{k}V_{d}(\rho_{k, N-1}^{(i)})^d$,  $V_{d} = \frac{\pi^{\frac{d}{2}}}{\Gamma(\frac{d}{2} + 1 )}$ is the volume of d-dimensional unit ball, $C_{k} = \left[ \frac{\Gamma(k)}{\Gamma(k+1-q)} \right]^{\frac{1}{1-q}}$ and $\rho_{k, N-1}^{(i)}$ is the kth nearest neighbour distance from the observation $X_{i}$ to some other $X_{j}$.
 
-The estimator $\hat{I}_{N, k, q}$, provided $q>1$ and $I_{q}$ exists - and for any $q \in (1, k+1)$ if f is bounded - is thus found to be an asymptotically unbiased estimator for $I_{q}$. Also, provided  $q>1$ and $I_{2q-1}$ exists -  and for any $q \in (1, \frac{k+1}{2})$, when $k \geq 2$ if f is bounded - $\hat{I}_{N, k, q}$ is thus a consistent estimator for $I_{q}$. Moreover, by simple formulas both the R\'enyi and Tsallis entropies can be written in terms of this estimated value; 
+The estimator $\hat{I}_{N, k, q}$, provided $q>1$ and $I_{q}$ exists - and for any $q \in (1, k+1)$ if f is bounded - is thus found to be an asymptotically unbiased estimator for $I_{q}$. Also, provided  $q>1$ and $I_{2q-1}$ exists -  and for any $q \in (1, \frac{k+1}{2})$, when $k \geq 2$ if f is bounded - $\hat{I}_{N, k, q}$ is thus a consistent estimator for $I_{q}$.
+
+Moreover, by simple formulas both the R\'enyi and Tsallis entropies can be written in terms of this estimated value; 
 \begin{align}
 \hat{H}_{q}^{*} &= \frac{1}{1-q} log(\hat{I}_{N, k, q}) \\
 \hat{H}_{q} &= \frac{1}{q-1} (1 - \hat{I}_{N, k, q})
 \end{align}
-thus, under the latter conditions, provide consistent estimates of these entropies as $N \to \infty$.
+thus, under the latter conditions, provide consistent estimates of these entropies as $N \to \infty$ for $q > 1$.
 
-Furthermore, this paper goes on to discuss an estimator for the Shannon entropy, $H_{1}$ by taking the limit of the estimator for the Tsallis entropy, $\hat{H}_{N, k, q}$ as $q \to 1$, again with a fixed value of $k$. This estimator is similar to that discussed before by Leonenko in his 2004 paper, equation \ref{Est_k=1}; however, it is now extended from the nearest neighbour to the kth nearest neighbour;
+Furthermore, this paper goes on to discuss an estimator for the Shannon entropy, $H_{1}$ by taking the limit of the estimator for the Tsallis entropy, $\hat{H}_{N, k, q}$ as $q \to 1$, again with a fixed value of $k$. This estimator is similar to that proposed in 1987, equation \ref{Est_k=1}; however, it is now extended from the nearest neighbour to the kth nearest neighbour;
 \begin{equation}
 \hat{H}_{N, k, 1} =  \frac{1}{N} \sum_{i=1}^{N} \log (\xi_{N, i, k})
 \end{equation} 
-where $\xi_{N, i, k} = (N-1)\exp[-\Psi(k)]V_{d}(\rho_{k, N-1}^{(i)})^{d}$, with $V_{d}$ and $\rho_{k, N-1}^{(i)}$ defined as in the estimation of $I_{q}$ and the digamma function $\Psi(z) = \frac{\Gamma'(z)}{\Gamma(z)}$. The digamma function at $k=1$ is given by $\Psi(1) = \log(\gamma)$, the Euler constant, which was used for the $k=1$ version of this estimator. Under the following less restrictive conditions; f is bounded, $I_{q_{1}}$ exists for some $q_{1} > 1$; then $H_{1}$ exists and the estimator $\hat{H}_{N, k, 1}$ is a consistent estimator for the Shannon entropy.
-
-Extend this to also include paper 3
+where $\xi_{N, i, k} = (N-1)\exp[-\Psi(k)]V_{d}(\rho_{k, N-1}^{(i)})^{d}$, with $V_{d}$ and $\rho_{k, N-1}^{(i)}$ defined as in the estimation of $I_{q}$ and the digamma function $\Psi(z) = \frac{\Gamma'(z)}{\Gamma(z)}$. The digamma function at $k=1$ is given by $\Psi(1) = -\log(\gamma)$, the Euler constant, which was used for the $k=1$ version of this estimator. Under the following less restrictive conditions; f is bounded and $I_{q_{1}}$ exists for some $q_{1} > 1$; then $H_{1}$ exists and the estimator $\hat{H}_{N, k, 1}$ is a consistent estimator for the Shannon entropy. This means that for large $N$, we have $\hat{H}_{N, k, 1} \overset{L_{2}}{\to} H$; which implies that as $N \to \infty$, both $N^{\frac{1}{2}}(\hat{H}_{N, k, 1} - H) \overset{d}{\to} N(0, \sigma^2)$ - it's asymptotically efficient - and $\mathbb{E}(\hat{H}_{N, k, 1}) \to H$ - it's asymptotically unbiased.
 
 
-\subsubsection{Estimator with k=k(n)}
 
-Paper 4
+\subsubsection{Estimator with k dependent on N} \label{dependent_k}
+
+The last main paper, whose results I will be exploring is \textit{Efficient Multivariate Entropy Estimation via k-Nearest Neighbour Distances} (T.Berrett, R.Samworth, M.Yuan, 2016), which initially studies the K-L estimator, and the conditions under which it is efficient and asymptotically unbiased (for a value of $k$ depending on the sample size $N$). 
+
+Considering dimensions $d \leq 3$, and a sample size $N$ from distribution with density $f(x)$, they defined the k-nearest neighbour estimator of entropy - just as in section \ref{fixed_k} - to be;
+\begin{equation}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (N-1)}{e^{\Psi(k)}} \right]
+\end{equation}
+where $\rho_{(k),i}$, $V_{d}$ and $\Psi(k)$ are all defined as in the 2007 paper. However, the difference here is in the conditions under which the estimator is consistent and asymptotically unbiased.
+
+Here, some conditions on the finiteness of the $\alpha$ moment of $f$ and the continuity and differentaibility of $f$ are proposed, with $k \in \{1, ..., O(N^{1-\epsilon})\}$, for some $\epsilon > 0$, we have asymptotic unbias of the estimator; where the bias can be expressed as;
+\begin{equation}
+\mathbb{E} ( \hat{H}_{N} ) - H = O \left( max \left\{ \frac{k^{\frac{\alpha}{\alpha + d} - \epsilon}}{N^{\frac{\alpha}{\alpha + d} - \epsilon}}, \frac{k^{\frac{\beta}{d}}}{N^{\frac{\beta}{d}}} \right\} \right) \quad \quad N \to \infty
+\end{equation}
+
+Also, they considered the asymptotic normality of the estimator, given the $\alpha$ moment of $f$ is finite (for $\alpha > d$), and some conditions on the continuity and differentaibility of $f$ hold and with $k \in \{k_{0}, ..., k_{1}\}$. Then the variance of the estimator is given by;
+\begin{equation}
+Var(\hat{H}_{N, k}) = \frac{\sigma^2}{N} + o(\frac{1}{N})
+\end{equation}
+as $N \to \infty$, where $\sigma^2 = Var(log(f(x))$, and we define $k_{0}, k_{1}$ such that $\frac{k_{0}}{log^5(N)} \to \infty$ and $k_{1} = O(N^{\tau})$, where $\tau < \min \left\{ \frac{2 \alpha}{5 \alpha + 3d} , \frac{\alpha - d}{2 \alpha} , \frac{4}{4 + 3d} \right\}$. 
+
+Moreover, T.Berrett, R.Samsworth and M.Yuan also go on to show that a consequence of the variance, given the dimension of the sample $d \leq 3$, with the same conditions, we have the asymptotic normality;
+\begin{equation}
+\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)
+\end{equation}
+and 
+\begin{equation} 
+N \mathbb{E}{(\hat{H}_{N, k} - H)^2} \xrightarrow{} \sigma^2
+\end{equation}
+where the estimator is asymptotically efficient and the asymptotic variance here is the best possible.
+
+It is important to note that for higher dimensions ($d > 3$), these results do not necessarily hold; since I am just considering the specific dimensions $d=1$ and $d=2$, there is no need to detail this. However, they do then go on to discuss a more appropriate estimator for higher dimensions, given sufficient smoothness, which is efficient in arbitrary dimensions, which was previously mentioned in section TODO.
+
+
+
 
 \subsection{Focus of this Paper}
 
-I now wish to more explicitly introduce the Kozachenko-Leonenko estimator of the entropy H. Let $X_{1}, X_{2}, ... ,X_{N}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
+I now wish to more explicitly introduce the Kozachenko-Leonenko estimator of the entropy H, in the form that I will be considering. Let $X_{1}, X_{2}, ... ,X_{N}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
  
 \begin{itemize}
 
@@ -98,32 +133,88 @@ where $\gamma = 0.577216$ is the Euler-Mascheroni constant (where the digamma fu
 \end{itemize} Then the Kozachenko-Leonenko estimator for entropy, H, is given by;
 \begin{equation} \label{KLest}
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (N-1)}{e^{\Psi(k)}} \right]
-\end{equation} where, $\rho_{(k),i}^{d}$ is defined in (\ref{Rho}), $V_{d}$ is defined in (\ref{Volume}) and $\Psi(k)$ is defined in (\ref{Psi}).This estimator for entropy, when $d \leq 3$, under a wide range of k and some regularity conditions, satisfies some  theorems.
+\end{equation} where, $\rho_{(k),i}^{d}$ is defined in (\ref{Rho}), $V_{d}$ is defined in (\ref{Volume}) and $\Psi(k)$ is defined in (\ref{Psi}). 
 
-
-
-Theorem \ref{paper4_T5} holds, according to the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$;
-\begin{equation}
-\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, \sigma^2) \nonumber
-\end{equation}
-By Theorem \ref{paper4_T4}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} \approx \frac{1}{N}$, as for large $N$, the variance of the logarithm of the density function stays constant. Thus, the left side of the central limit theorem above can be written as;
-\begin{align*}
-\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} &= \sqrt{N}(\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}) \\
-&= \sqrt{N}[(\hat{H}_{N, k} - H) + (H - \mathbb{E}{\hat{H}_{N, k}})] \\
-&= \sqrt{N}(\hat{H}_{N, k} - H) + \sqrt{N}(H - \mathbb{E}{\hat{H}_{N, k}})
-\end{align*}
-and as $N \to \infty$ this tends to the normal distribution, $N(0, \sigma^2)$. So we can say that $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ while $\sqrt{N} (H - \mathbb{E}{\hat{H}_{N, k}}) \to \sigma^2$, which is equivalent to the properties stated in Theorem \ref{paper4_T5}.
-
-Later, I will further discuss this estimator for the specific dimensions $d=1$ and $d=2$; however, it is important to note that for larger dimensions this estimator is not accurate. When $d=4$, equations (\ref{est_dist}) and (\ref{est_consist}) no longer hold but the estimator $\hat{H}_{N, k}$, defined by (\ref{KLest}), is still root-N consistent, provided k is bounded. Also, when $d \geq 5$ there is a non trivial bias, regardless of the choice of $k$. There is a new proposed estimator, formed as a weighted average of $\hat{H}_{N, k}$ for different values of $k$, where $k$ depends on the choice of $N$, explored in PAPER 4 (TODO reference). 
-
-Moreover, this paper focuses only on distributions for $d \leq 3$, more specifically, I will first be considering samples from 1-dimensional distributions, $d=1$. Therefore, the volume of the 1-dimensional Euclidean ball is given by $V_{1} = \frac{\pi^{\frac{1}{2}}}{\Gamma (\frac{3}{2})} = \frac{\sqrt{\pi}}{\frac{\sqrt{\pi}}{2}} = 2$. Hence the Kozachenko-Leonenko estimator is of the form;
+This paper focuses only on distributions for $d \leq 3$, more specifically, I will first be considering samples from 1-dimensional distributions, $d=1$. Therefore, the volume of the 1-dimensional Euclidean ball is given by $V_{1} = \frac{\pi^{\frac{1}{2}}}{\Gamma (\frac{3}{2})} = \frac{\sqrt{\pi}}{\frac{\sqrt{\pi}}{2}} = 2$. Hence the Kozachenko-Leonenko estimator is of the form;
 \begin{equation} \label{KLest_d=1}
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]
 \end{equation}
  Later, I will be considering samples from 2-dimensional distributions; thus, $d=2$ and the volume of the 2-dimensional Euclidean ball is given by $V_{2} = \frac{\pi^{\frac{2}{2}}}{\Gamma (2)} = \frac{\pi}{1} = \pi$. Hence, the estimator takes the form;
 \begin{equation} \label{KLest_d=2}
 \hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\pi \rho_{(k),i}^{2} (N-1)}{e^{\Psi(k)}} \right]
+\end{equation} 
+
+I will be looking at the asymptotic bias and variance of the estimator for different values of $k$, the main theorems I will be working by are those from section \ref{dependent_k}, where we have the conditions \ref{A1}, \ref{A2} and \ref{A3}, which imply the results stated by Theorems \ref{unbias} and \ref{efficient}. 
+
+\textit{(NB: these conditions and theorems have been tweaked slightly to only explicitly consider distributions of dimension $d=1, 2$, since the only distributions being considered in this paper are of dimension 1 or 2)}
+
+\begin{remark} ($\beta$) \label{A1}
+For density $f$ bounded, denoting $m := \lfloor \beta \rfloor$ and $\eta := \beta -m$, we have that $f$ is $m$ times continuously differentiable and there exists $r_{*} > 0$ and a Borel measurable function $g_{*}$ such that for each $t = 1, 2, ... , m$ and $\|y-x\| \leq r_{*}$, we have;
+\begin{equation}
+\| f^{(t)} (x) \| \leq g_{*}(x)f(x) \nonumber
+\end{equation},
+\begin{equation}
+\| f^{(m)} (y) - f^{(m)} (x) \| \leq g_{*}(x)f(x) \|y-x\|^{\eta} \nonumber
 \end{equation}
+and $sup_{x:f(x)\geq \delta} g_{*}(x) = o(\delta^{-\epsilon})$ as $\delta \downarrow 0$, for each $\epsilon > 0$.
+\end{remark}
+
+\begin{remark} ($\alpha$) \label{A2}
+For density $f(x)$ and dimension $d$, we have;
+\begin{equation}
+\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty \nonumber
+\end{equation}
+\end{remark}
+
+\begin{remark} \label{A3}
+Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$. Let $k_{0}^{*} = k_{0, N}^{*}$ and $k_{1}^{*} = k_{1, N}^{*}$ denote two deterministic sequences of positive integers with $k_{0}^{*} \leq k_{1}^{*}$, with $\frac{k_{0}^{*}}{\log^{5}{N}} \to \infty$ and with $k_{1}^{*} = O(N^{\tau})$, where
+\begin{equation}
+\tau < \min \left\{ \frac{2 \alpha}{5 \alpha + 3d} , \frac{\alpha - d}{2 \alpha} , \frac{4}{4 + 3d} \right\} \nonumber
+\end{equation}
+\end{remark}
+
+
+\begin{theorem}[Asymptotic Unbiasedness] \label{unbias}
+Assume that conditions \ref{A1} and \ref{A2} hold for some $\beta, \alpha > 0$. Let  $k^{*} = k_{N}^{*}$ denote a deterministic sequence of positive integers with $k^{*} = O(N^{1-\epsilon})$ as $N \to \infty$  for some $\epsilon > 0$. Then, for $d \leq 2$ (or $d \geq 3$) with $\beta \leq 2$ (or $\alpha \in (0, \frac{2d}{d-2})$), then for every $\epsilon >0$ we have;
+\begin{equation}
+\mathbb{E} ( \hat{H}_{N} ) - H = O \left( max \left\{ \frac{k^{\frac{\alpha}{\alpha + d} - \epsilon}}{N^{\frac{\alpha}{\alpha + d} - \epsilon}}, \frac{k^{\frac{\beta}{d}}}{N^{\frac{\beta}{d}}} \right\} \right)
+\end{equation}
+uniformly for $k \in \{1, ..., k^{*}\}$, as $N \to \infty$.
+\end{theorem}
+
+
+\begin{theorem}[Efficiency and Consistency] \label{efficient}
+Assume that $d \leq 3$ and that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} holds for some $\alpha > d$, then by condition \ref{A3} (where extra assumptions are made for $d=3$), for the estimator $\hat{H}_{N, k}$ we have;
+\begin{equation} \label{efficiency_equation}
+\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)
+\end{equation}
+and 
+\begin{equation} \label{consistency_equation}
+N \mathbb{E}{(\hat{H}_{N, k} - H)^2} \xrightarrow{} \sigma^2
+\end{equation}
+as $N \to \infty$ uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$, where $\sigma^2 = Var(log(f(x))$, for density function $f(x)$. Thus, the estimator is asymptotically efficient and its asymptotic variance is the best attainable.
+\end{theorem}
+
+
+By the above, we can now say that $\hat{H}_{N, k}$ is an consistent and asymptotically unbiased estimator of exact entropy $H$; thus is a consistent estimator. This is due to using the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$, which states that;
+\begin{equation}
+\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, 1) \nonumber
+\end{equation}
+By section \ref{dependent_k}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} + O(\frac{1}{N}) \approx \frac{\sigma^2}{N}$. Accordingly, the left side of the central limit theorem above can be written as;
+\begin{align*}
+\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} &= \frac{\sqrt{N}(\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}})}{\sigma} \\
+&= \frac{\sqrt{N}}{\sigma}[(\hat{H}_{N, k} - H) - (\mathbb{E}{\hat{H}_{N, k}} - H)] \\
+&= \frac{\sqrt{N}(\hat{H}_{N, k} - H)}{\sigma} - \frac{N(\mathbb{E}{\hat{H}_{N, k}} - H)}{\sigma \sqrt{N}}
+\end{align*}
+So we can see that from Theorem \ref{efficient}; $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ as $N \to \infty$. Whilst from Theorem \ref{unbias} we have $\mathbb{E}{\hat{H}_{N, k}} - H  \to 0$ as $N \to \infty$. Thus as $N \to \infty$ this tends to the standard normal distribution, $N(0, 1)$, and the central limit theorem holds.
+
+I will be exploring the bias is more detail later to see which one of the two ideas show to be more true for the behaviors of the bias for a large value of $N$, in dimension $d=1$ or $d=2$. 
+\begin{itemize}
+\item From paper 3 (TODO - ref) with a fixed k, for $\beta \in (0, 2] \cap (0, d]$, we choose $\theta \in (0, \frac{\beta}{d} ]$, then the bias is $O \left( \frac{1}{N^{\theta}} \right)$.
+
+\item From paper 4 (TODO - ref) with k depending on N, for $\beta \in (0, 2]$, we again choose $\theta \in (0, \frac{\beta}{d} ]$, then the bias is $O\left( \left( \frac{k}{N} \right)^{\theta} \right)$.
+
+\end{itemize}
 
 
 \end{document}
