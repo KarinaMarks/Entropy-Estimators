@@ -237,7 +237,7 @@ Studies the bias (which is found to be $O(N^{\frac{-2}{d}})$, for dimension $d$)
 
 Under certain conditions (considering k dependent of n) the k-nearest neighbour estimator only works for dimension $d \leq 3$, for a higher dimension gives problems. They introduced a new estimator which is formed as a weighted average of k-nearest neighbour estimators for different values of k.
 
-They also show that the bias of the kl estimator is dependent on $\alpha$ and $\beta$ from certain conditions which imply for $d \leq 3$,  that the bias is $O\left(max \left\{ \frac{k^{\frac{\alpha }{\alpha + d} + \epsilon}}{n^{\frac{\alpha}{\alpha + d} + \epsilon}}, \frac{k^{\frac{\beta}{d}}}{n^{\frac{\beta}{d}}} \right\} \right)$.
+They also show that the bias of the K-L estimator is dependent on $\alpha$ and $\beta$ from certain conditions which imply for $d \leq 3$,  that the bias is $O\left(max \left\{ \frac{k^{\frac{\alpha }{\alpha + d} + \epsilon}}{n^{\frac{\alpha}{\alpha + d} + \epsilon}}, \frac{k^{\frac{\beta}{d}}}{n^{\frac{\beta}{d}}} \right\} \right)$.
 
 
 
@@ -298,7 +298,38 @@ as $N \to \infty$ uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$, where 
 (This combines Theorem \ref{paper1_T1} with stronger conditions; hence we can now say that $\hat{H}_{N, k}$ is an consistent and asymptotically unbiased estimator of exact entropy $H$.)
 \end{theorem}
 
+\subsubsection{Summary - paper 4}
 
+The last main paper, whose results I will be exploring is \textit{Efficient Multivariate Entropy Estimation via k-Nearest Neighbour Distances} (T.Berrett, R.Samworth, M.Yuan, 2016), which initially studies the K-L estimator, and the conditions under which it is efficient and asymptotically unbiased (for a value of $k$ depending on the sample size $N$). 
+
+Considering dimensions $d \leq 3$, and a sample size $N$ from distribution with density $f(x)$, they defined the k-nearest neighbour estimator of entropy - just as in section \ref{fixed_k} - to be;
+\begin{equation}
+\hat{H}_{N, k} = \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{\rho_{(k),i}^{d} V_{d} (N-1)}{e^{\Psi(k)}} \right]
+\end{equation}
+where $\rho_{(k),i}$, $V_{d}$ and $\Psi(k)$ are all defined as in the 2007 paper. However, the difference here is in the conditions under which the estimator is consistent and asymptotically unbiased.
+
+Here, some conditions on the finiteness of the $\alpha$ moment of $f$ and the continuity and differentaibility of $f$ are proposed, with $k \in \{1, ..., O(N^{1-\epsilon})\}$, for some $\epsilon > 0$, we have asymptotic unbias of the estimator; where the bias can be expressed as;
+\begin{equation}
+\mathbb{E} ( \hat{H}_{N} ) - H = O \left( max \left\{ \frac{k^{\frac{\alpha}{\alpha + d} - \epsilon}}{N^{\frac{\alpha}{\alpha + d} - \epsilon}}, \frac{k^{\frac{\beta}{d}}}{N^{\frac{\beta}{d}}} \right\} \right) \quad \quad N \to \infty
+\end{equation}
+
+Also, they considered the asymptotic normality of the estimator, given the $\alpha$ moment of $f$ is finite (for $\alpha > d$), and some conditions on the continuity and differentaibility of $f$ hold and with $k \in \{k_{0}, ..., k_{1}\}$. Then the variance of the estimator is given by;
+\begin{equation}
+Var(\hat{H}_{N, k}) = \frac{\sigma^2}{N} + o(\frac{1}{N})
+\end{equation}
+as $N \to \infty$, where $\sigma^2 = Var(log(f(x))$, and we define $k_{0}, k_{1}$ such that $\frac{k_{0}}{log^5(N)} \to \infty$ and $k_{1} = O(N^{\tau})$, where $\tau < \min \left\{ \frac{2 \alpha}{5 \alpha + 3d} , \frac{\alpha - d}{2 \alpha} , \frac{4}{4 + 3d} \right\}$. 
+
+Moreover, T.Berrett, R.Samsworth and M.Yuan also go on to show that a consequence of the variance, given the dimension of the sample $d \leq 3$, with the same conditions, we have the asymptotic normality;
+\begin{equation}
+\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)
+\end{equation}
+and 
+\begin{equation} 
+N \mathbb{E}{(\hat{H}_{N, k} - H)^2} \xrightarrow{} \sigma^2
+\end{equation}
+where the estimator is asymptotically efficient and the asymptotic variance here is the best possible.
+
+It is important to note that for higher dimensions ($d > 3$), these results do not necessarily hold; since I am just considering the specific dimensions $d=1$ and $d=2$, there is no need to detail this. However, they do then go on to discuss a more appropriate estimator for higher dimensions, given sufficient smoothness, which is efficient in arbitrary dimensions, which was previously mentioned in section TODO.
 
 
 \subsection{Aug 2016 - Demystifying Fixed k-Nearest Neighbour Information Estimators (W.Gao, S.Oh, P.Viswanath) 9}
