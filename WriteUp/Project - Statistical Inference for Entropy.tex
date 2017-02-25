@@ -1,7 +1,11 @@
 \documentclass{report}
 \usepackage[utf8]{inputenc}
+%\usepackage{titling}
+
+%\pretitle{MMath Project}
 \title{Statistical Inference for Estimation of Entropy}
 \author{Karina Marks}
+%\postauthor{C1324197}
 
 \usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext}
 \usepackage[format=plain,
@@ -14,17 +18,18 @@
 
 \begin{titlepage}
 \maketitle
+\end{titlepage}
+
 \begin{abstract}
  What am I doing?
 \end{abstract}
-\end{titlepage}
-
 
 \tableofcontents
 
 
 \chapter{Introduction}
 
+\cite{paper1} \cite{paper2} \cite{paper3} \cite{paper4} \cite{paper5} \cite{paper6} \cite{paper7} \cite{paper8} \cite{paper9} \cite{paper10}
 
 \section{Entropy}
 
@@ -91,18 +96,18 @@ where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the 
 
 \section{History}
 
-This estimator was first introduced by L.Kozachenko and N.Leonenko, in 1987, where they first published the article \textit{Sample Estimate of the Entropy of a Random Vector}, in the paper \textit{Problems of Information Transmission}. Using the nearest neighbour method, they created a simple estimator for the Shannon entropy of an absolutely continuous random vector from a independent sample of observations, to then establish conditions under which we have asymptotic unbiasedness and consistency.
+This estimator was first introduced by L.Kozachenko and N.Leonenko, in 1987, where they first published the article \textit{Sample Estimate of the Entropy of a Random Vector} \cite{paper1}. Using the nearest neighbour method, they created a simple estimator for the Shannon entropy of an absolutely continuous random vector from a independent sample of observations, to then establish conditions under which we have asymptotic unbiasedness and consistency.
 
-Since then, there has been major developments in the estimator; firstly in 2007, N.Leonenko, L.Pronzato, V.Savani, proposed a similar alternative to this estimator in their paper \textit{a Class of Renyi Information Estimators for Mulitdimensional densities}, this time using the k-nearest neighbour method, to consider estimators for the R\'enyi and Tsallis entropies. Then as the order of these entropies $q \to 1$, they defined the k-nearest neighbour estimator for the Shannon entropy, where k is fixed, and these estimators (under less rigorous conditions) are both consistent and asymptotically unbiased.
+Since then, there has been major developments in the estimator; firstly in 2007, N.Leonenko, L.Pronzato, V.Savani, proposed a similar alternative to this estimator in their paper \textit{a Class of Renyi Information Estimators for Mulitdimensional densities} \cite{paper2}, this time using the k-nearest neighbour method, to consider estimators for the R\'enyi and Tsallis entropies. Then as the order of these entropies $q \to 1$, they defined the k-nearest neighbour estimator for the Shannon entropy, where k is fixed, and these estimators (under less rigorous conditions) are both consistent and asymptotically unbiased.
 
-Moreover, in 2016, a new idea was proposed by T.Berrett, R.Samsworth and M.Yuan, written in \textit{Efficient Mulitvariate Entropy Estimation via k-Nearest Neighbour Distances}; that the value chosen for $k$, depends upon the sample size $N$. Also, this idea is then extended to a new estimator; ''formed as a weighted average of Kozachenko-Leonenko estimators for different values of k''. I will not be exploring this new estimator in depth; however, the understanding of the value of $k$ depending on $N$ will be examined in detail. Additionally, for $d=1, 2,3$, under some conditions on $k$, we are shown that the bias of the estimator acts in terms of $N^{-\frac{2}{d}}$; something which will also later be explored.
+Moreover, in 2016, a new idea was proposed by T.Berrett, R.Samsworth and M.Yuan, written in \textit{Efficient Mulitvariate Entropy Estimation via k-Nearest Neighbour Distances} \cite{paper4}; that the value chosen for $k$, depends upon the sample size $N$. Also, this idea is then extended to a new estimator; ''formed as a weighted average of Kozachenko-Leonenko estimators for different values of k''. I will not be exploring this new estimator in depth; however, the understanding of the value of $k$ depending on $N$ will be examined in detail. Additionally, for $d=1, 2,3$, under some conditions on $k$, we are shown that the bias of the estimator acts in terms of $N^{-\frac{2}{d}}$; something which will also later be explored.
 
-Lastly, also in 2016, S.Delattre and N.Fournier wrote the paper; \textit{On the Kozachenko-Leonenko Entropy Estimator}, where they studied in detail the bias and variance of this estimator considering all 3 proposed values of $k$ - $k = 1$, $k$ fixed or $k$ depends on $N$. The also provided a development for the bias of this estimator when $k=1$, in dimensions $d=1,2,3$, in terms of $O(N^{-\frac{1}{2}})$, and in higher dimensions, in terms of powers of $N^{\frac{-2}{d}}$. This is an idea that will be considered in the focus of this paper; for $d=1,2$ to show how the bias acts for large $N$ when $k=1$.
+Lastly, also in 2016, S.Delattre and N.Fournier wrote the paper; \textit{On the Kozachenko-Leonenko Entropy Estimator} \cite{paper3}, where they studied in detail the bias and variance of this estimator considering all 3 proposed values of $k$ - $k = 1$, $k$ fixed or $k$ depends on $N$. The also provided a development for the bias of this estimator when $k=1$, in dimensions $d=1,2,3$, in terms of $O(N^{-\frac{1}{2}})$, and in higher dimensions, in terms of powers of $N^{\frac{-2}{d}}$. This is an idea that will be considered in the focus of this paper; for $d=1,2$ to show how the bias acts for large $N$ when $k=1$.
 
 
 \subsection{Estimator with k=1}
 
-Firstly, I considered an article \textit{On Statistical Estimation of Entropy of Random Vector} (N.Leonenko and L.Kozachenko, 1987), which considers estimating the Shannon entropy of an absolutely continuous random sample of independent observations, with unknown probability density $f(x), x \in \mathbb{R}^{d}$. As $f(x)$ is unknown this is not easily estimated accurately for a random sample, and by just estimating the density $\hat{f}(x)$ to replace the actual density $f(x)$ in the formula for the entropy we get highly restrictive consistency conditions. 
+Firstly, I considered an article \textit{On Statistical Estimation of Entropy of Random Vector} (N.Leonenko and L.Kozachenko, 1987) \cite{paper1}, which considers estimating the Shannon entropy of an absolutely continuous random sample of independent observations, with unknown probability density $f(x), x \in \mathbb{R}^{d}$. As $f(x)$ is unknown this is not easily estimated accurately for a random sample, and by just estimating the density $\hat{f}(x)$ to replace the actual density $f(x)$ in the formula for the entropy we get highly restrictive consistency conditions. 
 
 Therefore, the following estimator was proposed for the Shannon entropy of a random sample $X_{1}, X_{2}, ..., X_{N}$ of d-dimensional observations;
 \begin{equation}
@@ -127,7 +132,7 @@ The estimator here is in a simple form, which is later developed into something 
 
 \subsection{Estimator with k fixed} \label{fixed_k}
 
-The next paper I am exploring on estimation is \textit{a Class of Renyi Information Estimators for Multidimensional densities} (N.Leonenko, L.Pronzato, V.Savani, 2007), which looks at estimating the R\'enyi ($H_{q}^{*}$) and Tsallis ($H_{q}$) entropies, when $q \neq 1$, and the Shannon ($\hat{H}_{N, k, 1}$) entropy. Where these are taken for a random vector $X \in \mathbb{R}^d$ with density function $f(x)$, by using the kth nearest neighbour method, with a fixed values of k. 
+The next paper I am exploring on estimation is \textit{a Class of Renyi Information Estimators for Multidimensional densities} (N.Leonenko, L.Pronzato, V.Savani, 2007) \cite{paper3}, which looks at estimating the R\'enyi ($H_{q}^{*}$) and Tsallis ($H_{q}$) entropies, when $q \neq 1$, and the Shannon ($\hat{H}_{N, k, 1}$) entropy. Where these are taken for a random vector $X \in \mathbb{R}^d$ with density function $f(x)$, by using the kth nearest neighbour method, with a fixed values of k. 
 
 For the R\'enyi and Tsallis entropies, this is achieved by considering the integral  $I_{q} = \int_{\mathbb{R}^d} f^q (x) dx$, and generating its estimator, which is defined as $\hat{I}_{N, k, q} = \frac{1}{N} \sum_{i=1}^{N} (\zeta_{N, k, q})^{1-q}$. Where, $\zeta_{N, k ,q} = (N-1)C_{k}V_{d}(\rho_{k, N-1}^{(i)})^d$,  $V_{d} = \frac{\pi^{\frac{d}{2}}}{\Gamma(\frac{d}{2} + 1 )}$ is the volume of d-dimensional unit ball, $C_{k} = \left[ \frac{\Gamma(k)}{\Gamma(k+1-q)} \right]^{\frac{1}{1-q}}$ and $\rho_{k, N-1}^{(i)}$ is the kth nearest neighbour distance from the observation $X_{i}$ to some other $X_{j}$.
 
@@ -150,7 +155,7 @@ where $\xi_{N, i, k} = (N-1)\exp[-\Psi(k)]V_{d}(\rho_{k, N-1}^{(i)})^{d}$, with 
 
 \subsection{Estimator with k dependent on N} \label{dependent_k}
 
-The last main paper, whose results I will be exploring is \textit{Efficient Multivariate Entropy Estimation via k-Nearest Neighbour Distances} (T.Berrett, R.Samworth, M.Yuan, 2016), which initially studies the K-L estimator, and the conditions under which it is efficient and asymptotically unbiased (for a value of $k$ depending on the sample size $N$). 
+The last main paper, whose results I will be exploring is \textit{Efficient Multivariate Entropy Estimation via k-Nearest Neighbour Distances} (T.Berrett, R.Samworth, M.Yuan, 2016) \cite{paper4}, which initially studies the K-L estimator, and the conditions under which it is efficient and asymptotically unbiased (for a value of $k$ depending on the sample size $N$). 
 
 Considering dimensions $d \leq 3$, and a sample size $N$ from distribution with density $f(x)$, they defined the k-nearest neighbour estimator of entropy - just as in section \ref{fixed_k} - to be;
 \begin{equation}
@@ -1784,7 +1789,10 @@ $k$   &  $a_{k}$  &  $c_{k}$  &  $a_{k}$  &  $c_{k}$  &  $a_{k}$  &  $c_{k}$   \
 \end{table}
 
 
-
 \chapter{Conclusion}
+
+
+\bibliographystyle{plain}
+\bibliography{Bibliography}
 
 \end{document}
