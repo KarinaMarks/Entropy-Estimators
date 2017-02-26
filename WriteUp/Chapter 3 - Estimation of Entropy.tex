@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\title{Statistical Inference for Entropy}
+\title{Chapter 3 - Estimation of Entropy}
 \author{Karina Marks}
 
 \usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext}
@@ -11,6 +11,8 @@
 \newtheorem{remark}{Condition}
 
 \begin{document}
+\maketitle
+
 \section{Kozachenko-Leonenko Estimator}
 
 \subsection{History}
@@ -210,10 +212,15 @@ So we can see that from Theorem \ref{efficient}; $\sqrt{N}(\hat{H}_{N, k} - H) \
 
 I will be exploring the bias is more detail later to see which one of the two ideas show to be more true for the behaviors of the bias for a large value of $N$, in dimension $d=1$ or $d=2$. 
 \begin{itemize}
-\item From paper 3 (TODO - ref) with a fixed k, for $\beta \in (0, 2] \cap (0, d]$, we choose $\theta \in (0, \frac{\beta}{d} ]$, then the bias is $O \left( \frac{1}{N^{\theta}} \right)$.
+\item With a fixed k, by \cite{paper3}, for $\beta \in (0, 2] \cap (0, d]$, we choose $a \in (0, \frac{\beta}{d} ]$, then;
+\begin{equation} \label{fixedkbias}
+|Bias(\hat{H}_{N, k})| = O \left( \frac{1}{N^{a}} \right)
+\end{equation}
 
-\item From paper 4 (TODO - ref) with k depending on N, for $\beta \in (0, 2]$, we again choose $\theta \in (0, \frac{\beta}{d} ]$, then the bias is $O\left( \left( \frac{k}{N} \right)^{\theta} \right)$.
-
+\item With k depending on N, by \cite{paper4}, for $\beta \in (0, 2]$, we again choose $a \in (0, \frac{\beta}{d} ]$, then;
+ \begin{equation} \label{dependentkbias}
+|Bias(\hat{H}_{N, k})| = O\left( \left( \frac{k}{N} \right)^{a} \right)
+\end{equation}
 \end{itemize}
 
 
