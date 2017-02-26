@@ -338,11 +338,11 @@ By the above, we can now say that $\hat{H}_{N, k}$ is an consistent and asymptot
 \begin{equation}
 \frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, \sigma^2) \nonumber
 \end{equation}
-where $\simga^2 = Var(\log f(x))$. By section \ref{dependent_k}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} + O(\frac{1}{N}) \approx \frac{1}{N}$, as for large $N$, the variance of the logarithm of the density function stays constant. Accordingly, the left side of the central limit theorem above can be written as;
+where $\sigma^2 = Var(\log f(x))$. By section \ref{dependent_k}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} + O(\frac{1}{N}) \approx \frac{1}{N}$, as for large $N$, the variance of the logarithm of the density function stays constant. Accordingly, the left side of the central limit theorem above can be written as;
 \begin{align*}
 \frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} &= \sqrt{N}(\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}) \\
 &= \sqrt{N}[(\hat{H}_{N, k} - H) - (\mathbb{E}{\hat{H}_{N, k}} - H)] \\
-&= \sqrt{N}(\hat{H}_{N, k} - H)} - \sqrt{N} Bias(\hat{H}_{N, k}})
+&= \sqrt{N}(\hat{H}_{N, k} - H) - \sqrt{N} Bias(\hat{H}_{N, k})
 \end{align*}
 So we can see that from Theorem \ref{efficient}; $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ as $N \to \infty$. Whilst from Theorem \ref{unbias} we have $Bias{\hat{H}_{N, k}} \to 0$ as $N \to \infty$. Thus as $N \to \infty$ this tends to the normal distribution, $N(0, \sigma^2)$, and the central limit theorem holds.
 
