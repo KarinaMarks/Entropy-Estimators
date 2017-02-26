@@ -30,9 +30,75 @@ Vasicek's sample entropy estimator
 conditions, theorems and proofs of this
 
 
+\section{Other Estimators}
+
+\subsection{2001 - Nonparametric Entropy Estimation: An Overview (J.Beirlant, E.Dudewicz, L.Gyorfi, E.van der Muelen) 10}
+
+There are several estimation methods for the nonparametric estimation of the Shannon entropy of a continuous random sample. The paper \textit{Nonparametric Entropy Estimation: An Overview} (J.Beirlant, E.Dudewicz, L.Gyorfi, E.van der Muelen, 2001) \cite{paper10}, gives an overview of the properties of these various methods. I will outline a summary below to the types of estimators, which will lead us to understand why we choose the Kozachenko-Leonenko estimator for entropy. 
+
+First, I must set out the types of consistency, so we can see more obviously how it compares to the K-L estimator, for $X_{1}, ..., X_{N}$ a i.i.d sample from the distribution $f(X)$, where $H_{N}$ is the estimator of $H(f)$. Then we have (as $N \to \infty$);
+\begin{itemize}
+\item Weak Consistency 
+\begin{equation}
+H_{N} \xrightarrow{p} H(f)
+\end{equation}
+
+\item Mean Square Consistency
+\begin{equation}
+\mathbb{E}\{(H_{N} - H(f))^2\} \to 0
+\end{equation}
+
+\item Strong Consistency
+\begin{align}
+\sqrt{N}(\hat{H}_{N, k} - H) &\xrightarrow{d} N(0, \sigma^2) \\
+N \mathbb{E}{(\hat{H}_{N, k} - H)^2} &\xrightarrow{} \sigma^2 \\ \nonumber
+\end{align}
+This is the type of consistency shown with the K-L estimator in Theorem \ref{efficient}.
+
+\end{itemize}
+
+The types of nonparametric estimators can be split into 3 categories; plug-in estimates, estimates based on sample-spacings and estimates based on nearest neighbour distances. The latter is the Kozachenko-Leonenko estimator, which is the main focus of this paper and will be explored in more detail in section TODO.
+
+The plug-in estimates are based upon a consistent density estimate $f_{N}$, of density $f$, which depends on the sample $X_{1}, ..., X_{N}$, I will consider two of these; the most obvious estimator of this type if the integral estimate of entropy. Given by;
+\begin{equation}
+H_{N} = - \int_{A_{N}} f_{N}(x) log ( f_{N}(x) )dx
+\end{equation}
+where the set $A_{N}$ excludes the tail values of $f_{N}$. When the sample is from a 1-dimensional distribution, Dmitriev and Tarasenko, \cite{intest1} for $A_{N} = [-b_{N}, b_{N}]$ and $f_{N}$ the kernel density estimator; proved a strong consistency for this estimator. However, if $f_{N}$ is not estimated in this form, due to the numeric integration, for dimensions $d \geq 2$, Joe \cite{intest2} points out that this estimator is not practical and thus proposed the next plug-in estimator for entropy - the resubstitution estimator.
+
+The resubstitution estimate is of the form;
+\begin{equation}
+H_{N} = - \frac{1}{N}\sum_{i=1}^{N}  log ( f_{N}(X_{i}) )dx
+\end{equation}
+which was first proposed in 1976, by Ahmad and Lin \cite{resest1} who showed the mean-square consistency of this estimator, where  $f_{N}$ is a kernel density estimate. Joe \cite{intest2} then went on to obtain the asymptotic bias and variance, and whilst satisfying certain conditions reduced the mean square error. Moreover, Hall and Morton \cite{resest2} went on to say that under more restrictive conditions we have strong consistency for 1-dimensional distributions; however, when $d=2$ the root-n consistent estimator will have significant bias.
+
+There are also two more plug-in estimates discussed in this paper; the splitting data and cross-validation estimates. Where in the first estimator, strong consistency is shown for a general dimension $d$, under some conditions on $f$. And in the latter estimator, strong consistency holds for a kernel estimate of $f$ and for other estimates of $f$ under some conditions we have root-n consistency when $1 \leq d \leq 3$.
+
+Thus, so far the estimates for entropy looked at are only consistent whilst under strong conditions on $f$ and $f_{N}$ and mostly for a 1-dimensional distribution. So it is important to look at the next category of estimates - estimates of entropy based on sample-spacings; namely the m-spacing estimate. Sometimes it in not practical to estimate $f_{N}$, so this estimate is found based on spacings between the sample observations. 
+
+This estimator is only defined for samples of 1-dimension, where we assume $X_{1}, ..., X_{N}$ are an i.i.d sample, and let $X_{N, 1} \leq X_{N, 2} \leq ... \leq X_{N, N}$ be the corresponding ordered sample, then $X_{N, i+m} - X_{N, m}$ is the m-spacing.
+
+Firstly we look at this estimator of the form, with fixed $m$;
+\begin{equation}
+H_{m, N} = \frac{1}{N} \sum_{i=1}^{N-m} log \left(\frac{N}{m} (X_{N, i+m} - X_{n, i}) \right) - \Psi(m) + log(m)
+\end{equation}
+where $\Psi(x)$ is the digamma function - more detailed explanation in section \ref{TODO}. For a sample from a uniform distribution this estimator has been shown to be consistent; proved by Tarasenko \cite{spacest1}. Under some conditions on $f$, on its boundedness, the weak consistency and asymptotic normality was shown by Hall \cite{spacest2}.
+
+To decrease the asymptotic variance of the estimator, we consider the estimator when $m_{N} \to \infty$, which is defined slightly differently;
+\begin{equation}
+H_{m, N} = \frac{1}{N} \sum_{i=1}^{N-m_{N}} log \left(\frac{N}{m_{N}} (X_{N, i+m_{N}} - X_{n, i}) \right)
+\end{equation}
+for this estimator the weak and strong consistencies are proved under the assumption that as $N \to \infty$, $m_{N} \to \infty$ and $\frac{m_{N}}{N} \to 0$, for densities with bounded support.
+
+
+
+
+
+
+
+
 \section{N.N Entropy Estimator}
 
-\subsection{2004 - Problems of Information Transmission - On statistical estimation of entropy of random vector (N.Leonenko) 1}
+\subsection{1987 - Problems of Information Transmission - On statistical estimation of entropy of random vector (N.Leonenko) 1}
 
 This paper is a primary view at the estimator and at how conditions for asymptotic unbiasedness and consistency of the estimator can be established. Here we are looking at estimating the entropy of an absolutely continuous random sample of independent observations, with unknown probability density $f(x), x \in \mathbb{R}^{d}$, given by;
 \begin{equation}
@@ -335,5 +401,7 @@ It is important to note that for higher dimensions ($d > 3$), these results do n
 \subsection{Aug 2016 - Demystifying Fixed k-Nearest Neighbour Information Estimators (W.Gao, S.Oh, P.Viswanath) 9}
 
 Now considering k is independent of n, the kl estimator has bias  $O(N^{\frac{-1}{d}})$
+
+
 
 \end{document}

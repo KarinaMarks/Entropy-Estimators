@@ -84,15 +84,72 @@ where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the 
 \section{Properties of Entropy}
 
 
-\section{Other Estimators of Entropy}
+\section{Other Estimates of Entropy} \label{otherEst}
+
+There are several estimation methods for the nonparametric estimation of the Shannon entropy of a continuous random sample. The paper \textit{Nonparametric Entropy Estimation: An Overview} (J.Beirlant, E.Dudewicz, L.Gyorfi, E.van der Muelen, 2001) \cite{paper10}, gives an overview of the properties of these various methods. I will outline a summary below to the types of estimators, which will lead us to understand why we choose the Kozachenko-Leonenko estimator for entropy. 
+
+First, I must set out the types of consistency, so we can see more obviously how it compares to the K-L estimator, for $X_{1}, ..., X_{N}$ a i.i.d sample from the distribution $f(X)$, where $H_{N}$ is the estimator of $H(f)$. Then we have (as $N \to \infty$);
 \begin{itemize}
-\item The estimator for $H_{2}^{*}$ from paper 5
-\item The estimator for higher dimensions $d$, from paper 4
+\item Weak Consistency 
+\begin{equation}
+H_{N} \xrightarrow{p} H(f)
+\end{equation}
+
+\item Mean Square Consistency
+\begin{equation}
+\mathbb{E}\{(H_{N} - H(f))^2\} \to 0
+\end{equation}
+
+\item Strong Consistency
+\begin{align}
+\sqrt{N}(\hat{H}_{N, k} - H) &\xrightarrow{d} N(0, \sigma^2) \\
+N \mathbb{E}{(\hat{H}_{N, k} - H)^2} &\xrightarrow{} \sigma^2 \\ \nonumber
+\end{align}
+This is the type of consistency shown with the K-L estimator in Theorem \ref{efficient}.
+
 \end{itemize}
 
+The types of nonparametric estimators can be split into 3 categories; plug-in estimates, estimates based on sample-spacings and estimates based on nearest neighbour distances. The latter is the Kozachenko-Leonenko estimator, which is the main focus of this paper and will be explored in more detail in section \ref{KLEstChp}.
+
+The plug-in estimates are based upon a consistent density estimate $f_{N}$, of density $f$, which depends on the sample $X_{1}, ..., X_{N}$, I will consider two of these; the most obvious estimator of this type if the integral estimate of entropy. Given by;
+\begin{equation}
+H_{N} = - \int_{A_{N}} f_{N}(x) log ( f_{N}(x) )dx
+\end{equation}
+where the set $A_{N}$ excludes the tail values of $f_{N}$. When the sample is from a 1-dimensional distribution, Dmitriev and Tarasenko, \cite{intest1} for $A_{N} = [-b_{N}, b_{N}]$ and $f_{N}$ the kernel density estimator; proved a strong consistency for this estimator. However, if $f_{N}$ is not estimated in this form, due to the numeric integration, for dimensions $d \geq 2$, Joe \cite{intest2} points out that this estimator is not practical and thus proposed the next plug-in estimator for entropy - the resubstitution estimator.
+
+The resubstitution estimate is of the form;
+\begin{equation}
+H_{N} = - \frac{1}{N}\sum_{i=1}^{N}  log ( f_{N}(X_{i}) )dx
+\end{equation}
+which was first proposed in 1976, by Ahmad and Lin \cite{resest1} who showed the mean-square consistency of this estimator, where  $f_{N}$ is a kernel density estimate. Joe \cite{intest2} then went on to obtain the asymptotic bias and variance, and whilst satisfying certain conditions reduced the mean square error. Moreover, Hall and Morton \cite{resest2} went on to say that under more restrictive conditions we have strong consistency for 1-dimensional distributions; however, when $d=2$ the root-n consistent estimator will have significant bias.
+
+There are also two more plug-in estimates discussed in this paper; the splitting data and cross-validation estimates. Where in the first estimator, strong consistency is shown for a general dimension $d$, under some conditions on $f$. And in the latter estimator, strong consistency holds for a kernel estimate of $f$ and for other estimates of $f$ under some conditions we have root-n consistency when $1 \leq d \leq 3$.
+
+Thus, so far the estimates for entropy looked at are only consistent whilst under strong conditions on $f$ and $f_{N}$ and mostly for a 1-dimensional distribution. So it is important to look at the next category of estimates - estimates of entropy based on sample-spacings; namely the m-spacing estimate. Sometimes it in not practical to estimate $f_{N}$, so this estimate is found based on spacings between the sample observations. 
+
+This estimator is only defined for samples of 1-dimension, where we assume $X_{1}, ..., X_{N}$ are an i.i.d sample, and let $X_{N, 1} \leq X_{N, 2} \leq ... \leq X_{N, N}$ be the corresponding ordered sample, then $X_{N, i+m} - X_{N, m}$ is the m-spacing.
+
+Firstly we look at this estimator of the form, with fixed $m$;
+\begin{equation}
+H_{m, N} = \frac{1}{N} \sum_{i=1}^{N-m} log \left(\frac{N}{m} (X_{N, i+m} - X_{n, i}) \right) - \Psi(m) + log(m)
+\end{equation}
+where $\Psi(x)$ is the digamma function - more detailed explanation in section \ref{motivation}. For a sample from a uniform distribution this estimator has been shown to be consistent; proved by Tarasenko \cite{spacest1}. Under some conditions on $f$, on its boundedness, the weak consistency and asymptotic normality was shown by Hall \cite{spacest2}.
+
+To decrease the asymptotic variance of the estimator, we consider the estimator when $m_{N} \to \infty$, which is defined slightly differently;
+\begin{equation}
+H_{m, N} = \frac{1}{N} \sum_{i=1}^{N-m_{N}} log \left(\frac{N}{m_{N}} (X_{N, i+m_{N}} - X_{n, i}) \right)
+\end{equation}
+for this estimator the weak and strong consistencies are proved under the assumption that as $N \to \infty$, $m_{N} \to \infty$ and $\frac{m_{N}}{N} \to 0$, for densities with bounded support.
+
+The last category of estimators discussed by Beirlant, Dudewicz, Gyorfi and Muelen are those based on nearest neighbour distances. The main focus of my paper is on the Kozachenko-Leonenko estimator for entropy; which is the estimator covered in this section of their paper. I will not go into detail for this estimator now; however, I will mention that strong consistency holds for dimension $d \leq 3$, but higher dimensions can cause problems. Thus, it is important to note that recently a new estimator has been proposed by Berrerrt, Samworth and Yuan \cite{paper4}, formed as a weighted average of k-nearest neighbour estimators for different values of k. This estimator has shown promising results in higher dimensions, where under the same assumptions as for the K-L estimator, the strong consistency condition holds.
 
 
-\chapter{Kozachenko-Leonenko Estimator}
+
+
+
+
+
+\chapter{Kozachenko-Leonenko Estimator} \label{KLEstChp}
 
 \section{History}
 
@@ -184,12 +241,12 @@ N \mathbb{E}{(\hat{H}_{N, k} - H)^2} \xrightarrow{} \sigma^2
 \end{equation}
 where the estimator is asymptotically efficient and the asymptotic variance here is the best possible.
 
-It is important to note that for higher dimensions ($d > 3$), these results do not necessarily hold; since I am just considering the specific dimensions $d=1$ and $d=2$, there is no need to detail this. However, they do then go on to discuss a more appropriate estimator for higher dimensions, given sufficient smoothness, which is efficient in arbitrary dimensions, which was previously mentioned in section TODO.
+It is important to note that for higher dimensions ($d > 3$), these results do not necessarily hold; since I am just considering the specific dimensions $d=1$ and $d=2$, there is no need to detail this. However, they do then go on to discuss a more appropriate estimator for higher dimensions, given sufficient smoothness, which is efficient in arbitrary dimensions, which was previously mentioned in section \ref{otherEst}.
 
 
 
 
-\section{Focus of this Paper}
+\section{Focus of this Paper} \label{motivation}
 
 I now wish to more explicitly introduce the Kozachenko-Leonenko estimator of the entropy H, in the form that I will be considering. Let $X_{1}, X_{2}, ... ,X_{N}$, $N \geq 1$ be independent and identically distributed random vectors in $\mathbb{R}^{d}$, and denote $\|.\|$ the Euclidean norm on $\mathbb{R}^{d}$.
  
@@ -257,7 +314,7 @@ Assume that condition \ref{A1} holds for $\beta = 2$ and condition \ref{A2} hold
 
 \begin{theorem}[Asymptotic Unbiasedness] \label{unbias}
 Assume that conditions \ref{A1} and \ref{A2} hold for some $\beta, \alpha > 0$. Let  $k^{*} = k_{N}^{*}$ denote a deterministic sequence of positive integers with $k^{*} = O(N^{1-\epsilon})$ as $N \to \infty$  for some $\epsilon > 0$. Then, for $d \leq 2$ (or $d \geq 3$) with $\beta \leq 2$ (or $\alpha \in (0, \frac{2d}{d-2})$), then for every $\epsilon >0$ we have;
-\begin{equation}
+\begin{equation} \label{unbias_equation}
 \mathbb{E} ( \hat{H}_{N} ) - H = O \left( max \left\{ \frac{k^{\frac{\alpha}{\alpha + d} - \epsilon}}{N^{\frac{\alpha}{\alpha + d} - \epsilon}}, \frac{k^{\frac{\beta}{d}}}{N^{\frac{\beta}{d}}} \right\} \right)
 \end{equation}
 uniformly for $k \in \{1, ..., k^{*}\}$, as $N \to \infty$.
@@ -279,21 +336,28 @@ as $N \to \infty$ uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$, where 
 
 By the above, we can now say that $\hat{H}_{N, k}$ is an consistent and asymptotically unbiased estimator of exact entropy $H$; thus is a consistent estimator. This is due to using the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$, which states that;
 \begin{equation}
-\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, 1) \nonumber
+\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, \sigma^2) \nonumber
 \end{equation}
-By section \ref{dependent_k}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} + O(\frac{1}{N}) \approx \frac{\sigma^2}{N}$. Accordingly, the left side of the central limit theorem above can be written as;
+where $\simga^2 = Var(\log f(x))$. By section \ref{dependent_k}, we can assume that $Var(\hat{H}_{N, k}) = \frac{Var(\log f(x))}{N} + O(\frac{1}{N}) \approx \frac{1}{N}$, as for large $N$, the variance of the logarithm of the density function stays constant. Accordingly, the left side of the central limit theorem above can be written as;
 \begin{align*}
-\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} &= \frac{\sqrt{N}(\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}})}{\sigma} \\
-&= \frac{\sqrt{N}}{\sigma}[(\hat{H}_{N, k} - H) - (\mathbb{E}{\hat{H}_{N, k}} - H)] \\
-&= \frac{\sqrt{N}(\hat{H}_{N, k} - H)}{\sigma} - \frac{N(\mathbb{E}{\hat{H}_{N, k}} - H)}{\sigma \sqrt{N}}
+\frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} &= \sqrt{N}(\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}) \\
+&= \sqrt{N}[(\hat{H}_{N, k} - H) - (\mathbb{E}{\hat{H}_{N, k}} - H)] \\
+&= \sqrt{N}(\hat{H}_{N, k} - H)} - \sqrt{N} Bias(\hat{H}_{N, k}})
 \end{align*}
-So we can see that from Theorem \ref{efficient}; $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ as $N \to \infty$. Whilst from Theorem \ref{unbias} we have $\mathbb{E}{\hat{H}_{N, k}} - H  \to 0$ as $N \to \infty$. Thus as $N \to \infty$ this tends to the standard normal distribution, $N(0, 1)$, and the central limit theorem holds.
+So we can see that from Theorem \ref{efficient}; $\sqrt{N}(\hat{H}_{N, k} - H) \xrightarrow{d} N(0, \sigma^2)$ as $N \to \infty$. Whilst from Theorem \ref{unbias} we have $Bias{\hat{H}_{N, k}} \to 0$ as $N \to \infty$. Thus as $N \to \infty$ this tends to the normal distribution, $N(0, \sigma^2)$, and the central limit theorem holds.
 
 I will be exploring the bias is more detail later to see which one of the two ideas show to be more true for the behaviors of the bias for a large value of $N$, in dimension $d=1$ or $d=2$. 
 \begin{itemize}
-\item From paper 3 (TODO - ref) with a fixed k, for $\beta \in (0, 2] \cap (0, d]$, we choose $\theta \in (0, \frac{\beta}{d} ]$, then the bias is $O \left( \frac{1}{N^{\theta}} \right)$.
+\item With a fixed k, by \cite{paper3}, for $\beta \in (0, 2] \cap (0, d]$, we choose $a \in (0, \frac{\beta}{d} ]$, then;
+\begin{equation} \label{fixedkbias}
+|Bias(\hat{H}_{N, k})| = O \left( \frac{1}{N^{a}} \right)
+\end{equation}
 
-\item From paper 4 (TODO - ref) with k depending on N, for $\beta \in (0, 2]$, we again choose $\theta \in (0, \frac{\beta}{d} ]$, then the bias is $O\left( \left( \frac{k}{N} \right)^{\theta} \right)$.
+\item With k depending on N, by \cite{paper4}, for $\beta \in (0, 2]$, we again choose $a \in (0, \frac{\beta}{d} ]$, then;
+ \begin{equation} \label{dependentkbias}
+|Bias(\hat{H}_{N, k})| = O\left( \left( \frac{k}{N} \right)^{a} \right)
+\end{equation}
+
 
 \end{itemize}
 
@@ -301,17 +365,18 @@ I will be exploring the bias is more detail later to see which one of the two id
 
 \chapter{Monte-Carlo Simulations}
 
-In this chapter I will explore simulations of the bias of estimator (\ref{KLest}) in comparison to the size of the sample estimated from, with respect to different values of k; by exploring 1-dimensional distributions and then progressing onto 2-dimensional. Firstly, the distributions considered will be analysed to determine if they satisfy the conditions stated for Theorems \ref{paper1_T1}, \ref{paper1_T2}, \ref{paper4_T4} and \ref{paper4_T5} to hold. Then, I will explore the estimator of entropy for simulations of samples  from certain distributions, for different values of $k$.
+In this chapter I will explore simulations of the bias of estimator (\ref{KLest}) in comparison to the size of the sample estimated from, with respect to different values of k; by exploring 1-dimensional distributions and then progressing onto 2-dimensional. Firstly, the distributions considered will be analysed to determine if they satisfy the conditions \ref{A1}, \ref{A2} and \ref{A3} stated for Theorems \ref{unbias} and \ref{efficient} to hold. Then, I will explore the estimator of entropy for simulations of samples from certain distributions, for different values of $k$.
 
-The motivation for these simulations is to explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. Throughout this analysis we will be considering the absolute value of this bias, since when considering its logarithm, we need a positive value. Using Theorem \ref{paper4_T5}, we can write that the bias of the estimator approaches 0 as $N \to \infty$. This is because we can write $Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H$, which in equation (\ref{est_consist}) implies $Bias(\hat{H}_{N, k}) \to 0$ as $N \to \infty$. Thus, there must be a type of inverse relationship between the modulus of the bias of the estimator, $|Bias(\hat{H}_{N, k})|$, and $N$. We believe this relationship is of the form;
+The motivation for these simulations is to explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. Throughout this analysis we will be considering the absolute value of this bias, since when considering its logarithm, we need a positive value. Using Theorem \ref{unbias}, we can write that the bias of the estimator approaches 0 as $N \to \infty$. This is because we can write $Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H$, which in equation (\ref{unbias_equation}) implies $Bias(\hat{H}_{N, k}) \to 0$ as $N \to \infty$. Thus, there must be a type of inverse relationship between the modulus of the bias of the estimator, $|Bias(\hat{H}_{N, k})|$, and $N$. We believe this relationship is of the form;
 \begin{equation} \label{bias}
 |Bias(\hat{H}_{N, k})| = \frac{c}{N^a}
 \end{equation}
 for $a, c > 0$. By taking the logarithm of this, we can generate a linear relationship, which is easier to analyse, and is given by;
 \begin{equation} \label{logbias}
-log|Bias(\hat{H}_{N, k})| = log(c) - a [log(N)]
+log|Bias(\hat{H}_{N, k})| \approx log(c) - a [log(N)] + \epsilon
 \end{equation}
-I will investigate the consistency of this estimator for a sample from the normal distribution, dependent on the value of $k$, this mean finding the optimum value of $k$ for which $|Bias(\hat{H}_{N, k})| \to 0$ for $N \to \infty$. For the relationship in equation (\ref{bias}), this will happen for large values of $a$ and relatively small $c$, as $N \to \infty$. Moreover, I wish to also examine the dependence of $c$ on the value of $k$. As I wish to consider the difference in accuracy of the estimator when using different values of k, let us denote the approximate values for $a$ and $c$ dependent on $k$ as $a_{k}$ and $c_{k}$.
+where $\epsilon > 0$ is some small error term. I will investigate the consistency of this estimator for a sample from the normal distribution, dependent on the value of $k$, this mean finding the optimum value of $k$ for which $|Bias(\hat{H}_{N, k})| \to 0$ for $N \to \infty$. For the relationship in equation (\ref{bias}), this will happen for larger values of $a$ and relatively small $c$, as $N \to \infty$. As previously mentioned, there is evidence supporting that the bias becomes either of order $(\frac{1}{N})^a$ (equation (\ref{fixedkbias})) or $(\frac{k}{N})^a$ (equation (\ref{dependentkbias})). This leads to also examining the dependence of $c$ on the value of $k$. 
+As I wish to consider the difference in accuracy of the estimator when using different values of k, let us denote the approximate values for $a$ and $c$ dependent on $k$ as $a_{k}$ and $c_{k}$.
 
 
 
