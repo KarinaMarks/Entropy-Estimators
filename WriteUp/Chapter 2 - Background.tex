@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\title{Statistical Inference for Entropy}
+\title{Chapter 2 - Background}
 \author{Karina Marks}
 
 \usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext}
@@ -11,19 +11,59 @@
 \newtheorem{remark}{Condition}
 
 \begin{document}
-\section{Background}
+\maketitle
 
-\subsection{Entropy}
 
-quick intro to entropy
 
-\subsection{Applications of Entropy}
+\section{Properties of Entropy}
 
-how we use entropy and why we need to look at the estimation of it
+Kapur and Kesavan's book on \textit{Entropy Optimization Principles with Applications} \cite{paper8}, gives an account of some of the properties of the Shannon entropy $H$, which I will mention. First recall the definition of Shannon entropy (equation (\ref{ShaEnt});
+\begin{equation}
+H = - \int_{x : f(x) > 0} f(x) log(f(x)) dx \nonumber
+\end{equation}
+where $f$ is the density of the distribution of $x$. Some properties are as follows; 
+\begin{itemize}
+\item $H$ is permutationally symmetric
+\item For $f(x)$ continuous on some interval; H is also continuous everywhere in the same interval
+\item Entropy doesn't change by the inclusion of an impossible event
+\item $H > 0$ for all circumstances unless if $f$ is any of the $N$ degenerate distributions; where $f(x_{i}) = 1$ if $i = k, k \in [1, N]$ otherwise $f(x_{i}) = 0$, then $H=0$
+\item H is a concave function, \textit{for R\'enyi and Tsallis entropies, when $q > 0$ they're concave; however, if $q<0$ then they're convex}
+\item The maximum value of $H$ is attained when $f$ is the uniform distribution
+\item For two independent distributions ($f_{X}(x)$ and $f_{Y}(y)$), the entropy of their joint distribution ($f_{X,Y}(x,y)$) is just the sum of the entropies of the two distributions; $H(f_{X,Y}) = H(f_{X}) + H(f_{Y})$
+\end{itemize}
 
-\subsection{Estimation of Entropy}
 
-There are several estimation methods for the nonparametric estimation of the Shannon entropy of a continuous random sample. The paper \textit{Nonparametric Entropy Estimation: An Overview} (J.Beirlant, E.Dudewicz, L.Gyorfi, E.van der Muelen, 2001) \cite{paper10}, gives an overview of the properties of these various methods. I will outline a summary below to the types of estimators, which will lead us to understand why we choose the Kozachenko-Leonenko estimator for entropy. 
+\section{Applications of Entropy}
+
+Entropy began as a concept in thermodynamics, about the idea of that within any irreversible system, a small amount of heat energy is aways lost. Entropy has more recently found application in the field of information theory, where it describes a similar loss, this time of missing information or data in systems of information transmission. Thus, entropy has many applications across both these areas.
+
+I will be concentrating on Shannon entropy - also mentioning R\'enyi and Tsallis entropies - which concern information theory; therefore the application thus considered are appropriate to this. I will give a short overview of some of its applications; however, this is not an exhaustive list, since the application of entropy are extensive.
+
+Wikipedia gives an appropriate overview of the applications, that the estimation of Shannon entropy is useful in ''various science/engineering applications, such as independent component analysis, image analysis, genetic analysis, speech recognition, manifold learning, and time delay estimation''.
+
+\subsection{independent component analysis}
+
+signal processing ref from paper 2
+
+%22 - http://www.jasoncantarella.com/downloads/kg_mutual.pdf
+%23 - http://www.jmlr.org/papers/volume4/learned-miller03a/learned-miller03a.pdf
+
+\subsection{Image analysis}
+ ref from paper 2
+ 
+ %16 -  https://www.math.ucdavis.edu/~saito/data/acha.read.w12/hero-ma-michel-gorman-entropic-graphs.pdf
+ %17 - https://pdfs.semanticscholar.org/a9f0/1eb347c477bd5c5cd74e75cb791d574e2ca5.pdf
+ %29 - https://pdfs.semanticscholar.org/3819/c13df6619b593bd0d510c02b1b978f6c6171.pdf
+ 
+ 
+
+
+
+
+
+\section{Estimation of Entropy}
+
+There are several estimation methods for the nonparametric estimation of the Shannon entropy of a continuous random sample. The paper \textit{Nonparametric Entropy Estimation: An Overview} (J.Beirlant, E.Dudewicz, L.Gyorfi, E.van der Muelen, 2001) \cite{paper10}, gives an overview of the properties of these various methods. Also, the paper \textit{Causality detection based on information-theoretic approaches in time series analysis} (K.Hlav\'{a}\v{c}kov\'{a}, M.Palu\v{s}, M.Vejmelka, and J.Bhattacharya, 2007) gives a more detailed look into these different types of estimators. I will outline a summary below to the types of estimators, which will lead us to understand why we choose the Kozachenko-Leonenko estimator for entropy. 
 
 First, I must set out the types of consistency, so we can see more obviously how it compares to the K-L estimator, for $X_{1}, ..., X_{N}$ a i.i.d sample from the distribution $f(X)$, where $H_{N}$ is the estimator of $H(f)$. Then we have (as $N \to \infty$);
 \begin{itemize}
@@ -46,9 +86,9 @@ This is the type of consistency shown with the K-L estimator in Theorem \ref{eff
 
 \end{itemize}
 
-The types of nonparametric estimators can be split into 3 categories; plug-in estimates, estimates based on sample-spacings and estimates based on nearest neighbour distances. The latter is the Kozachenko-Leonenko estimator, which is the main focus of this paper and will be explored in more detail in section TODO.
+The types of nonparametric estimators can be split into 3 categories; plug-in estimates, estimates based on sample-spacings and estimates based on nearest neighbour distances. The latter is the Kozachenko-Leonenko estimator, which is the main focus of this paper and will be explored in more detail in section \ref{motivation}.
 
-The plug-in estimates are based upon a consistent density estimate $f_{N}$, of density $f$, which depends on the sample $X_{1}, ..., X_{N}$, I will consider two of these; the most obvious estimator of this type if the integral estimate of entropy. Given by;
+The plug-in estimates \cite{paper10}, \cite{paper7} are based upon a consistent density estimate $f_{N}$, of density $f$, which depends on the sample $X_{1}, ..., X_{N}$, I will consider two of these; the most obvious estimator of this type if the integral estimate of entropy. Given by;
 \begin{equation}
 H_{N} = - \int_{A_{N}} f_{N}(x) log ( f_{N}(x) )dx
 \end{equation}
@@ -70,7 +110,7 @@ Firstly we look at this estimator of the form, with fixed $m$;
 \begin{equation}
 H_{m, N} = \frac{1}{N} \sum_{i=1}^{N-m} log \left(\frac{N}{m} (X_{N, i+m} - X_{n, i}) \right) - \Psi(m) + log(m)
 \end{equation}
-where $\Psi(x)$ is the digamma function - more detailed explanation in section \ref{TODO}. For a sample from a uniform distribution this estimator has been shown to be consistent; proved by Tarasenko \cite{spacest1}. Under some conditions on $f$, on its boundedness, the weak consistency and asymptotic normality was shown by Hall \cite{spacest2}.
+where $\Psi(x)$ is the digamma function - more detailed explanation in section \ref{motivation}. For a sample from a uniform distribution this estimator has been shown to be consistent; proved by Tarasenko \cite{spacest1}. Under some conditions on $f$, on its boundedness, the weak consistency and asymptotic normality was shown by Hall \cite{spacest2}.
 
 To decrease the asymptotic variance of the estimator, we consider the estimator when $m_{N} \to \infty$, which is defined slightly differently;
 \begin{equation}
