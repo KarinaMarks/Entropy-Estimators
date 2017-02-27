@@ -14,8 +14,7 @@
 \maketitle
 
 
-
-\section{Properties of Entropy}
+\section{Properties of Entropy} \label{entropyProperties}
 
 Kapur and Kesavan's book on \textit{Entropy Optimization Principles with Applications} \cite{paper8}, gives an account of some of the properties of the Shannon entropy $H$, which I will mention. First recall the definition of Shannon entropy (equation (\ref{ShaEnt});
 \begin{equation}
@@ -39,29 +38,22 @@ Entropy began as a concept in thermodynamics, about the idea of that within any 
 
 I will be concentrating on Shannon entropy - also mentioning R\'enyi and Tsallis entropies - which concern information theory; therefore the application thus considered are appropriate to this. I will give a short overview of some of its applications; however, this is not an exhaustive list, since the application of entropy are extensive.
 
-Wikipedia gives an appropriate overview of the applications, that the estimation of Shannon entropy is useful in ''various science/engineering applications, such as independent component analysis, image analysis, genetic analysis, speech recognition, manifold learning, and time delay estimation''.
+Wikipedia gives an appropriate overview of the applications, that the estimation of Shannon entropy is useful in ''various science/engineering applications, such as independent component analysis, image analysis, genetic analysis, speech recognition, manifold learning, and time delay estimation'' \cite{wiki1}.
 
-\subsection{independent component analysis}
+Independent component analysis (ICA), in signal processing, is a computational method for decomposing large, often very complex, multivariate data to find underlying/hidden factors or components. The computation of ICA depends on knowing the entropy of the sample; and in most cases this must be estimated, as an exact entropy is not always known. Kraskov, St\"{o}gbauer and Grassberger \cite{ICA1} discussed how estimating the mutual information (MI) using entropy estimators is useful for assessing the independence of components from ICA. Learned-Miller and Fisher \cite{ICA2} also presented another example of how to use estimation of entropy to obtain a new algorithm for the ICA problem. 
 
-signal processing ref from paper 2
+Image analysis is the investigation of an image and the extraction of useful information. Hero and Michel \cite{IM2} first discuss the applications of R\'enyi entropy in image processing, then Neemuchwala, Hero and Carson \cite{IM1} discuss how in image analysis an important task is that of image retrieval, which uses entropy estimation to compute entropic similarities that are used to match a reference image to another image.  Moreover Du, Wang, Guo and Thouin, \cite{IM3} considered the importance of entropy-based image thresholding; using both Shannon and relative entropy.
 
-%22 - http://www.jasoncantarella.com/downloads/kg_mutual.pdf
-%23 - http://www.jmlr.org/papers/volume4/learned-miller03a/learned-miller03a.pdf
+Genetic analysis is the study and research of genes and molecules to find information on biological systems. Statistical analysis of specific cells can help us understand how genomic entropy can help diagnose diseases and cancers. Wieringen and Vaart, \cite{gen1} discuss how chromosomal disorganisation increases as cancer progresses, they mention how the K-L estimator can be used to help find this disorganisation/entropy; thus finding that "as cancer evolves, and the genomic entropy increases, the transcriptomic entropy is also expected to surge". 
 
-\subsection{Image analysis}
- ref from paper 2
- 
- %16 -  https://www.math.ucdavis.edu/~saito/data/acha.read.w12/hero-ma-michel-gorman-entropic-graphs.pdf
- %17 - https://pdfs.semanticscholar.org/a9f0/1eb347c477bd5c5cd74e75cb791d574e2ca5.pdf
- %29 - https://pdfs.semanticscholar.org/3819/c13df6619b593bd0d510c02b1b978f6c6171.pdf
- 
+''Speech recognition (SR) is the inter-disciplinary sub-field of computational linguistics that develops methodologies and technologies that enables the recognition and translation of spoken language into text by computers'' \cite{wiki2}. Shen, Hung and Lee \cite{speech1} discuss how an entropy based algorithm can conduct accurate SR in noisy environments. Moreover, Kuo and Gao \cite{speech2} focus on a method where the probability of a state or word sequence given an observation sequence is computed directly from the maximum entropy direct model.
+
+There are many more applications of entropy, it is important to note the statistical applications of entropy; there are some tests on goodness-of-fit established by the estimation of entropy. Vasicek explored the test for normality; that its entropy exceeds that of any other distributions with the same variance \cite{stat1}. Dudewicz and van der Meulen \cite{stat2} discussed the property mentioned in section \ref{entropyProperties}, that the uniform distribution maximises the entropy. Moreover, others have explored different distributions and their entropic properties; see \cite{stat3, stat4}
  
 
 
 
-
-
-\section{Estimation of Entropy}
+\section{Other Estimators of Entropy} \label{otherest}
 
 There are several estimation methods for the nonparametric estimation of the Shannon entropy of a continuous random sample. The paper \textit{Nonparametric Entropy Estimation: An Overview} (J.Beirlant, E.Dudewicz, L.Gyorfi, E.van der Muelen, 2001) \cite{paper10}, gives an overview of the properties of these various methods. Also, the paper \textit{Causality detection based on information-theoretic approaches in time series analysis} (K.Hlav\'{a}\v{c}kov\'{a}, M.Palu\v{s}, M.Vejmelka, and J.Bhattacharya, 2007) gives a more detailed look into these different types of estimators. I will outline a summary below to the types of estimators, which will lead us to understand why we choose the Kozachenko-Leonenko estimator for entropy. 
 
