@@ -29,11 +29,13 @@
 
 \chapter{Introduction}
 
-\cite{paper1} \cite{paper2} \cite{paper3} \cite{paper4} \cite{paper5} \cite{paper6} \cite{paper7} \cite{paper8} \cite{paper9} \cite{paper10}
+ \cite{paper5} \cite{paper6}  \cite{paper9}
 
 \section{Entropy}
 
-Entropy can be thought of as a representation of the average information content of an observation; sometimes referred to as a measure of unpredictability or disorder. 
+Entropy can be thought of as a representation of the average information content of an observation; sometimes referred to as a measure of unpredictability or disorder.
+
+''$H(S)$ is the quantity of surprise you should feel upon reading the result of a measurement'' (Fraser and Swinney, 1986) \cite{entdef}. Thus the ''entropy of S can be seen as the uncertainty of S'' \cite{paper7}. 
 
 \subsection{Shannon Entropy}
 The Shannon entropy of a random vector X with density function f is given by;
@@ -58,22 +60,8 @@ H_{q} &= \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  
 &=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{R}^d} f^q (x) \right) \nonumber 
 \end{align}
 
-When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. There are also other special cases, sometimes the R\'enyi entropy is considered for the special case, $q=2$, and known as the quadratic R\'enyi entropy;
-\begin{align} 
-H_{2}^{*} &= - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right) \label{QuadRenEnt} \\
-&= - log \left( \sum_{x \in \mathbb{R}^d} f^2 (x) \right) \nonumber 
-\end{align}
-As $q \to \infty$, the limit of the R\'enyi entropy exists, and is defined as the minimum entropy, since it's the smallest possible value of $H_{q}^{*}$;
-\begin{equation}
-H_{\infty}^{*} = - \log \sup_{x \in \mathbb{R}^d} f (x) \nonumber
-\end{equation}
-Thus, it follows that; $H_{\infty}^{*} \leq H_{2}^{*} \leq 2H_{\infty}^{*}$.
+When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. 
 
-There is also an approximate relationship between the Shannon entropy and the quadratic R\'enyi entropy;
-\begin{equation}
-H_{2}^{*} \leq H \leq \log(d) + \frac{1}{d} - e^{-H_{2}^{*}} \nonumber
-\end{equation}
-where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the Shannon entropy (\ref{ShaEnt}) and d is the dimension of the distribution.
 
 
 \chapter{Background}
@@ -81,7 +69,7 @@ where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the 
 
 \section{Properties of Entropy} \label{entropyProperties}
 
-Kapur and Kesavan's book on \textit{Entropy Optimization Principles with Applications} \cite{paper8}, gives an account of some of the properties of the Shannon entropy $H$, which I will mention. First recall the definition of Shannon entropy (equation (\ref{ShaEnt});
+I will begin by exploring properties specific to the Shannon entropy; and then progress to those for other types of entropy. Kapur and Kesavan's book on \textit{Entropy Optimization Principles with Applications} \cite{paper8}, gives an account of some properties of the Shannon entropy $H$. First recall the definition of Shannon entropy (equation (\ref{ShaEnt}));
 \begin{equation}
 H = - \int_{x : f(x) > 0} f(x) log(f(x)) dx \nonumber
 \end{equation}
@@ -91,17 +79,47 @@ where $f$ is the density of the distribution of $x$. Some properties are as foll
 \item For $f(x)$ continuous on some interval; H is also continuous everywhere in the same interval
 \item Entropy doesn't change by the inclusion of an impossible event
 \item $H > 0$ for all circumstances unless if $f$ is any of the $N$ degenerate distributions; where $f(x_{i}) = 1$ if $i = k, k \in [1, N]$ otherwise $f(x_{i}) = 0$, then $H=0$
-\item H is a concave function, \textit{for R\'enyi and Tsallis entropies, when $q > 0$ they're concave; however, if $q<0$ then they're convex}
-\item The maximum value of $H$ is attained when $f$ is the uniform distribution
+\item H is a concave function
+\item The maximum value of $H$ is attained by different distributions depending on how the distribution $f$ is supported. For example, the maximum of $H$ is attained when $f$ is the;
+\begin{itemize}
+\item	Uniform distribution, if $supp\{f\} = [a, b]$, for $a, b, \in \mathbb{R}$
+\item	Exponential distribution, if $supp\{f\} = [0, \infty)$
+\item	Normal distribution, if $supp\{f\} = \mathbb{R} = (-\infty, \infty)$	
+\end{itemize}
 \item For two independent distributions ($f_{X}(x)$ and $f_{Y}(y)$), the entropy of their joint distribution ($f_{X,Y}(x,y)$) is just the sum of the entropies of the two distributions; $H(f_{X,Y}) = H(f_{X}) + H(f_{Y})$
 \end{itemize}
+
+Shannon entropy, as mentioned earlier, is a special case of the R\'enyi and Tsallis entropies as $q \to 1$. There are also other special cases that have certain properties; for example the R\'enyi entropy with $q=2$ is known as the quadratic R\'enyi entropy;
+\begin{align} 
+H_{2}^{*} &= - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right) \label{QuadRenEnt} \\
+&= - log \left( \sum_{x \in \mathbb{R}^d} f^2 (x) \right) \nonumber 
+\end{align}
+
+Moreover, another special case is considering the R\'enyi entropy as $q \to \infty$, if the limit exists, is defined as the minimum entropy, since it's the smallest possible value of $H_{q}^{*}$;
+\begin{equation}
+H_{\infty}^{*} = - \log \sup_{x \in \mathbb{R}^d} f (x) \nonumber
+\end{equation}
+
+Furthermore, there are some interesting relationships between the different specific types of entropy, for example Leonenko and Seleznjev \cite{paper5} show the following relationship between $H_{2}^{*}$ and $H_{\infty}^{*}$;
+\begin{equation}
+H_{\infty}^{*} \leq H_{2}^{*} \leq 2H_{\infty}^{*}
+\end{equation}
+Additionally, they show an approximate relationship between the Shannon entropy, $H$, and the quadratic R\'enyi entropy, $ H_{2}^{*}$ ;
+\begin{equation}
+H_{2}^{*} \leq H \leq \log(d) + \frac{1}{d} - e^{-H_{2}^{*}} \nonumber
+\end{equation}
+where d is the dimension of the distribution.
+
+There are also some interesting properties of the general $q$-entropy; firstly, $H_{q}$ is concave when $q > 0$ (convex when $q<0$), implying for Shannon entropy, $H$ is concave - as stated earlier. Also, the maximising distribution is the uniform distribution, for all  $q$-entropies, as well as for Shannon, with a finite support. Lastly, for any $d$-dimensional sample ($d \geq 1$), given $\frac{d}{d+2} < q < 1$ and a covariance matrix, the $q$-entropy maximising distribution is of the multidimensional Student-t distribution \cite{paper2}.
+
+
 
 
 \section{Applications of Entropy}
 
 Entropy began as a concept in thermodynamics, about the idea of that within any irreversible system, a small amount of heat energy is aways lost. Entropy has more recently found application in the field of information theory, where it describes a similar loss, this time of missing information or data in systems of information transmission. Thus, entropy has many applications across both these areas.
 
-I will be concentrating on Shannon entropy - also mentioning R\'enyi and Tsallis entropies - which concern information theory; therefore the application thus considered are appropriate to this. I will give a short overview of some of its applications; however, this is not an exhaustive list, since the application of entropy are extensive.
+I will be concentrating on Shannon entropy - also mentioning R\'enyi and Tsallis entropies - which concern information theory; therefore I will consider applications accordingly. I will give a short overview of some of its applications; however, this is not an exhaustive list, since the application of entropy are extensive.
 
 Wikipedia gives an appropriate overview of the applications, that the estimation of Shannon entropy is useful in ''various science/engineering applications, such as independent component analysis, image analysis, genetic analysis, speech recognition, manifold learning, and time delay estimation'' \cite{wiki1}.
 
@@ -113,7 +131,7 @@ Genetic analysis is the study and research of genes and molecules to find inform
 
 ''Speech recognition (SR) is the inter-disciplinary sub-field of computational linguistics that develops methodologies and technologies that enables the recognition and translation of spoken language into text by computers'' \cite{wiki2}. Shen, Hung and Lee \cite{speech1} discuss how an entropy based algorithm can conduct accurate SR in noisy environments. Moreover, Kuo and Gao \cite{speech2} focus on a method where the probability of a state or word sequence given an observation sequence is computed directly from the maximum entropy direct model.
 
-There are many more applications of entropy, it is important to note the statistical applications of entropy; there are some tests on goodness-of-fit established by the estimation of entropy. Vasicek explored the test for normality; that its entropy exceeds that of any other distributions with the same variance \cite{stat1}. Dudewicz and van der Meulen \cite{stat2} discussed the property mentioned in section \ref{entropyProperties}, that the uniform distribution maximises the entropy. Moreover, others have explored different distributions and their entropic properties; see \cite{stat3, stat4}
+It is also important to note the statistical applications of entropy; there are some tests on goodness-of-fit established by the estimation of entropy. Vasicek explored the test for normality; that its entropy exceeds that of any other distributions with the same variance \cite{stat1}. Dudewicz and van der Meulen \cite{stat2} discussed the property mentioned in section \ref{entropyProperties}, that the uniform distribution maximises the entropy. Moreover, others have explored different distributions and their entropic properties; see \cite{stat3, stat4}
  
 
 
@@ -159,7 +177,7 @@ which was first proposed in 1976, by Ahmad and Lin \cite{resest1} who showed the
 
 There are also two more plug-in estimates discussed in this paper; the splitting data and cross-validation estimates. Where in the first estimator, strong consistency is shown for a general dimension $d$, under some conditions on $f$. And in the latter estimator, strong consistency holds for a kernel estimate of $f$ and for other estimates of $f$ under some conditions we have root-n consistency when $1 \leq d \leq 3$.
 
-Thus, so far the estimates for entropy looked at are only consistent whilst under strong conditions on $f$ and $f_{N}$ and mostly for a 1-dimensional distribution. So it is important to look at the next category of estimates - estimates of entropy based on sample-spacings; namely the m-spacing estimate. Sometimes it in not practical to estimate $f_{N}$, so this estimate is found based on spacings between the sample observations. 
+Hence, so far the estimates for entropy looked at are only consistent whilst under strong conditions on $f$ and $f_{N}$ and mostly for a 1-dimensional distribution. So it is important to look at the next category of estimates - estimates of entropy based on sample-spacings; namely the m-spacing estimate. Sometimes it in not practical to estimate $f_{N}$, so this estimate is found based on spacings between the sample observations. 
 
 This estimator is only defined for samples of 1-dimension, where we assume $X_{1}, ..., X_{N}$ are an i.i.d sample, and let $X_{N, 1} \leq X_{N, 2} \leq ... \leq X_{N, N}$ be the corresponding ordered sample, then $X_{N, i+m} - X_{N, m}$ is the m-spacing.
 
@@ -175,8 +193,7 @@ H_{m, N} = \frac{1}{N} \sum_{i=1}^{N-m_{N}} log \left(\frac{N}{m_{N}} (X_{N, i+m
 \end{equation}
 for this estimator the weak and strong consistencies are proved under the assumption that as $N \to \infty$, $m_{N} \to \infty$ and $\frac{m_{N}}{N} \to 0$, for densities with bounded support.
 
-The last category of estimators discussed by Beirlant, Dudewicz, Gyorfi and Muelen are those based on nearest neighbour distances. The main focus of my paper is on the Kozachenko-Leonenko estimator for entropy; which is the estimator covered in this section of their paper. I will not go into detail for this estimator now; however, I will mention that strong consistency holds for dimension $d \leq 3$, but higher dimensions can cause problems. Thus, it is important to note that recently a new estimator has been proposed by Berrerrt, Samworth and Yuan \cite{paper4}, formed as a weighted average of k-nearest neighbour estimators for different values of k. This estimator has shown promising results in higher dimensions, where under the same assumptions as for the K-L estimator, the strong consistency condition holds.
-
+The last category of estimators discussed by Beirlant, Dudewicz, Gyorfi and Muelen are those based on nearest neighbour distances. The main focus of my paper is on the Kozachenko-Leonenko estimator for entropy; which is the estimator covered in this section of their paper. I will not go into detail for this estimator now; however, I will mention that strong consistency holds for dimension $d \leq 3$, but higher dimensions can cause problems. Henceforth, it is important to note that recently a new estimator has been proposed by Berrerrt, Samworth and Yuan \cite{paper4}, formed as a weighted average of k-nearest neighbour estimators for different values of k. This estimator has shown promising results in higher dimensions, where under the same assumptions as for the K-L estimator, the strong consistency condition holds.
 
 
 
