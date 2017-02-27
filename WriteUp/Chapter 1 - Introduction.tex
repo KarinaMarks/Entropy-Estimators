@@ -46,21 +46,6 @@ H_{q} &= \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  
 &=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{R}^d} f^q (x) \right) \nonumber 
 \end{align}
 
-When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. There are also other special cases, sometimes the R\'enyi entropy is considered for the special case, $q=2$, and known as the quadratic R\'enyi entropy;
-\begin{align} 
-H_{2}^{*} &= - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right) \label{QuadRenEnt} \\
-&= - log \left( \sum_{x \in \mathbb{R}^d} f^2 (x) \right) \nonumber 
-\end{align}
-As $q \to \infty$, the limit of the R\'enyi entropy exists, and is defined as the minimum entropy, since it's the smallest possible value of $H_{q}^{*}$;
-\begin{equation}
-H_{\infty}^{*} = - \log \sup_{x \in \mathbb{R}^d} f (x) \nonumber
-\end{equation}
-Thus, it follows that; $H_{\infty}^{*} \leq H_{2}^{*} \leq 2H_{\infty}^{*}$.
-
-There is also an approximate relationship between the Shannon entropy and the quadratic R\'enyi entropy;
-\begin{equation}
-H_{2}^{*} \leq H \leq \log(d) + \frac{1}{d} - e^{-H_{2}^{*}} \nonumber
-\end{equation}
-where $H_{2}^{*}$ is the quadratic R\'enyi entropy (\ref{QuadRenEnt}), H is the Shannon entropy (\ref{ShaEnt}) and d is the dimension of the distribution.
+When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. 
 
 \end{document}
