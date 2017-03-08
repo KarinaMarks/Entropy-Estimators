@@ -68,7 +68,6 @@ df <- normalInfo %>%
 # plot
 g <- ggplot(data=df, aes(x=`k^a`, y=c)) +
   geom_point() +
-  theme_minimal() +
-  scale_x_continuous(labels = (1:11), breaks = (1:11))
+  theme_minimal() 
 
 
