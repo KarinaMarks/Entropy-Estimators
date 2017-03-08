@@ -29,6 +29,22 @@ newdf7 <- data.frame(n = seq(100, 50000, 100)) %>%
   dplyr::group_by(n) %>%
   summarise(Ent = mean(normalsmth(M=500, N=n, k=7), na.rm=TRUE))
 
+newdf8 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(normalsmth(M=500, N=n, k=8), na.rm=TRUE))
+
+newdf9 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(normalsmth(M=500, N=n, k=9), na.rm=TRUE))
+
+newdf10 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(normalsmth(M=500, N=n, k=10), na.rm=TRUE))
+
+newdf11 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(normalsmth(M=500, N=n, k=11), na.rm=TRUE))
+
 write_csv(df, "./Data/data_normal.csv")
 
 df <- left_join(df, newdf11, by="n")

@@ -24,9 +24,49 @@ cppFunction('
             ')
 
 # creating the data frame with n and entropy
-newdf <- data.frame(n = seq(100, 50000, 500)) %>% 
+newdf2 <- data.frame(n = seq(100, 50000, 100)) %>% 
   dplyr::group_by(n) %>%
-  summarise(Ent = mean(uniformsmth(M=500, N=n, k=k, min=0, max=100), na.rm=TRUE))
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=2, min=0, max=100), na.rm=TRUE))
 
-write_csv(newdf, "./Data/data_uniform_1.csv")
+newdf3 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=3, min=0, max=100), na.rm=TRUE))
+
+
+newdf4 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=4, min=0, max=100), na.rm=TRUE))
+
+
+newdf5 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=5, min=0, max=100), na.rm=TRUE))
+
+newdf6 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=6, min=0, max=100), na.rm=TRUE))
+
+newdf7 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=7, min=0, max=100), na.rm=TRUE))
+
+newdf8 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=8, min=0, max=100), na.rm=TRUE))
+
+newdf9 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=9, min=0, max=100), na.rm=TRUE))
+
+newdf10 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=10, min=0, max=100), na.rm=TRUE))
+
+newdf11 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(uniformsmth(M=500, N=n, k=11, min=0, max=100), na.rm=TRUE))
+
+
+write_csv(newdf7, "./Data/data_uniform_7.csv")
+
 
