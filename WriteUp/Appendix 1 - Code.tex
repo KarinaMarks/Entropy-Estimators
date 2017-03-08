@@ -1,0 +1,69 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+
+
+
+\title{Statistical Inference for Estimation of Entropy}
+\author{Karina Marks}
+
+
+\usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext}
+\usepackage[format=plain,
+            textfont=it]{caption}
+
+
+\begin{document}
+
+\chapter{Code}
+
+For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics''. %https://www.r-project.org/about.html
+I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in section \ref{TODO}.
+
+To create my package \texttt{Entropy-Estimators}, I used two of Hadley's \ref{TODO} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs of the estimator bias against the sample size.  \texttt{Entropy-Estimators} also has 2 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data and \texttt{FNN} for the kth nearest neighbour function. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
+
+\section{The Estimator}
+
+\section{Exact Entropies}
+
+To consider the bias of the estimator, I had to find the exact value of entropy from a 1-dimensional normal, uniform and exponential distribution. The function written to return this for the normal distribution is \texttt{NormalEnt} with parameter \texttt{sd}, the standard deviation of the sample, we do not need the mean value for finding the entropy of the normal distribution. The function is defined as follows;
+
+\lstinputlisting[language=R]{./Code/NormalEnt.R}
+
+With \texttt{sd =1}, as is true in the samples considered here, we find the entropy to be given by;
+
+\begin{verbatim}
+> NormalEnt(sd=1)
+[1] 1.418939
+\end{verbatim}
+
+The function for the uniform distribution is \texttt{UniformEnt}, with parameters \texttt{min} and \texttt{max}, is defined as;
+
+\lstinputlisting[language=R]{./Code/UniformEnt.R}
+
+Here we use \texttt{min=0} and \texttt{max=100} in the samples considered; thus we find the exact entropy to be given by;
+
+\begin{verbatim}
+> UniformEnt(min = 0, max = 100)
+[1] 4.60517
+\end{verbatim}
+
+Lastly, for the exponential distribution we have the function \texttt{ExpoEnt}, with only one parameter \texttt{rate}, defined below;
+
+\lstinputlisting[language=R]{./Code/ExpoEnt.R}
+
+In this paper we are using the exponential distribution with parameter \texttt{rate=1.5}, thus;
+
+\begin{verbatim}
+> ExpoEnt(rate = 1.5)
+[1] 0.5945349
+\end{verbatim}
+
+\section{Simulations}
+
+
+
+
+
+
+
+\end{document}
