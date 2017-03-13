@@ -3,7 +3,7 @@
 %\usepackage{titling}
 
 %\pretitle{MMath Project}
-\title{Statistical Inference for Estimation of Entropy}
+\title{Statistical Inference for Entropy}
 \author{Karina Marks}
 %\postauthor{C1324197}
 
@@ -33,27 +33,38 @@ Entropy $H(S)$, can be thought of as a representation of the average information
 ''$H(S)$ is the quantity of surprise you should feel upon reading the result of a measurement'' (Fraser and Swinney, 1986) \cite{entdef}. Thus the ''entropy of S can be seen as the uncertainty of S'' \cite{paper7}.
 
 \subsection{Shannon Entropy}
-The Shannon entropy of a random vector X with density function f is given by;
-\begin{align} 
-H &= - \mathbb{E} \{log(f(x))\} \nonumber \\
-&= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \nonumber \\
-&= - \sum_{x \in \mathbb{R}^{d}} f(x) log(f(x)) \label{ShaEnt}
-\end{align} 
+The Shannon entropy of a random vector $X \in \mathbb{R}^d$, from a continuous distribution, with density function $f$ is given by;
+\begin{equation} \label{ShaEnt}
+H = - \int_{x \in \mathbb{R}^d} f(x) log(f(x)) dx 
+\end{equation}
+\textit{(This is often referred to as the differential entropy.)}
+
+If a random vector $X$ has a discrete distribution with probability mass function $f(x)$, $x \in \mathbb{Z}^d$, then we have the Shannon entropy ;
+\begin{equation} 
+H = - \sum_{x \in \mathbb{Z}^{d}} f(x) log(f(x)) \nonumber
+\end{equation}
+
+
 
 \subsection{R\'enyi and Tsallis Entropy}
-These entropies are for the order $q \neq 1$ and the construction of them relies upon the generalisation of the Shannon entropy \ref{ShaEnt}. For a random vector $X \in \mathbb{R}^d$ with density function f, we define;
+The R\'enyi and Tsallis entropies are for the order $q \neq 1$ and the construction of them relies upon the generalisation of the Shannon entropy \ref{ShaEnt}. For a random vector $X \in \mathbb{R}^d$, from a continuous distribution with density function $f$, we define;
 
 R\'enyi entropy
-\begin{align} 
-H_{q}^{*} &= \frac{1}{1-q} log \left( \int_{\mathbb{R}^d} f^q (x) dx \right) \quad  \quad (q \neq 1) \label{RenEnt} \\
-&=  \frac{1}{1-q} log \left( \sum_{x \in \mathbb{R}^{d}} f^q (x) \right) \nonumber 
-\end{align}
+\begin{equation} \label{RenEnt} 
+H_{q}^{*} = \frac{1}{1-q} log \left( \int_{\mathbb{R}^d} f^q (x) dx \right) \quad  \quad (q \neq 1) 
+\end{equation}
 
 Tsallis entropy
-\begin{align} 
-H_{q} &= \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  \quad (q \neq 1) \label{TsaEnt} \\
-&=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{R}^d} f^q (x) \right) \nonumber 
-\end{align}
+\begin{equation} \label{TsaEnt} 
+H_{q} = \frac{1}{q-1} \left(1 - \int_{\mathbb{R}^d} f^q (x) dx \right)  \quad  \quad (q \neq 1) 
+\end{equation} 
+
+Moreover, if we consider a random vector $X$ from a discrete distribution, with probability mass function $f(x)$ for $x \in \mathbb{Z}^d$, then for $q \neq 1$, the R\'enyi and Tsallis entropies are defined as follows;
+
+\begin{align*}
+H_{q}^{*} &=  \frac{1}{1-q} log \left( \sum_{x \in \mathbb{Z}^{d}} f^q (x) \right) \\
+H_{q} &=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{Z}^d} f^q (x) \right)  
+\end{align*}
 
 When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. 
 
@@ -64,31 +75,37 @@ When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and T
 
 \subsection{Properties of Entropy} \label{entropyProperties}
 
-I will begin by exploring properties specific to the Shannon entropy; and then progress to those for other types of entropy. Kapur and Kesavan's book on \textit{Entropy Optimization Principles with Applications} \cite{paper8}, gives an account of some properties of the Shannon entropy $H$. First recall the definition of Shannon entropy (equation (\ref{ShaEnt}));
-\begin{equation}
-H = - \int_{x : f(x) > 0} f(x) log(f(x)) dx \nonumber
-\end{equation}
-where $f$ is the density of the distribution of $x$. Some properties are as follows; 
-\begin{itemize}
-\item $H$ is permutationally symmetric
-\item For $f(x)$ continuous on some interval; H is also continuous everywhere in the same interval
-\item Entropy doesn't change by the inclusion of an impossible event
-\item $H > 0$ for all circumstances unless if $f$ is any of the $N$ degenerate distributions; where $f(x_{i}) = 1$ if $i = k, k \in [1, N]$ otherwise $f(x_{i}) = 0$, then $H=0$
-\item H is a concave function
-\item The maximum value of $H$ is attained by different distributions depending on how the distribution $f$ is supported. For example, the maximum of $H$ is attained when $f$ is the;
-\begin{itemize}
-\item	Uniform distribution, if $supp\{f\} = [a, b]$, for $a, b, \in \mathbb{R}$
-\item	Exponential distribution, if $supp\{f\} = [0, \infty)$
-\item	Normal distribution, if $supp\{f\} = \mathbb{R} = (-\infty, \infty)$	
-\end{itemize}
-\item For two independent distributions ($f_{X}(x)$ and $f_{Y}(y)$), the entropy of their joint distribution ($f_{X,Y}(x,y)$) is just the sum of the entropies of the two distributions; $H(f_{X,Y}) = H(f_{X}) + H(f_{Y})$
-\end{itemize}
+I will begin by exploring properties specific to the Shannon entropy; and then progress to those for other types of entropy. Kapur and Kesavan's book on \textit{Entropy Optimization Principles with Applications} \cite{paper8}, gives an account of some properties of the discrete Shannon entropy $H$. Whilst Johnson \cite{book1}, discusses properties for the continuous Shannon entropy - the Differential entropy, and compares them to the discrete properties in his book on \textit{Information Theory and The Central Limit Theorem}.
 
-Shannon entropy, as mentioned earlier, is a special case of the R\'enyi and Tsallis entropies as $q \to 1$. There are also other special cases that have certain properties; for example the R\'enyi entropy with $q=2$ is known as the quadratic R\'enyi entropy;
-\begin{align} 
-H_{2}^{*} &= - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right) \label{QuadRenEnt} \\
-&= - log \left( \sum_{x \in \mathbb{R}^d} f^2 (x) \right) \nonumber 
-\end{align}
+The Shannon entropy of a discrete random variable is always non-negative $H \geq 0$, and is strictly positive unless if $f$ is any of the $N$ degenerate distributions ($X$ is deterministic). That is, the only case for which $H=0$ is when $f(x_{i}) = 1$ if $i = k$, $k \in [1, N]$ and $f(x_{i}) = 0$ otherwise, for a discrete distribution. However, for the continuous Shannon entropy, $H$ can be either positive of negative. This is obvious to see if we consider a random variable $Y$ with the continuous uniform distribution on $[0, c]$, then;
+\begin{equation}
+H = - \int_{0}^{c} \frac{1}{c} \log \left( \frac{1}{c} \right) dx = \log c \nonumber
+\end{equation}
+thus, depending on the value of $c$ we can obviously have either a positive or negative entropy.
+
+Moreover, for a discrete random variable $X$, the Shannon entropy is both shift and scale invariant, which means for all $a \neq 0$ and $b \in \mathbb{R}$ we have;
+\begin{equation}
+H(aX + b) = H(X)
+\end{equation}
+On the contrary, for a continuous random variable $Y$, only the shift invariance holds, thus for  all $a \neq 0$ and $b \in \mathbb{R}$ we have the following relationship;
+\begin{equation}
+H(aY + b) = H(Y) + \log a
+\end{equation}
+
+The maximum value of the continuous entropy $H$ is attained with different distributions, dependent on a number of factors. The maximising distribution $f$ depends on how it is supported, and what conditions hold on the moments of $X$. For example, when $supp\{f\} = \mathbb{R}$, for a fixed variance $\sigma^2$, the maximum of $H$ is attained when $f$ is from the Normal/Gaussian distribution, in comparison to any other distribution with the same $\sigma^2$ \cite{paper8}.
+
+Additionally, for the Shannon entropy, there is an interesting result on an upper bound of $H$, one which depends on the distribution of $X$, which can be used to show if the entropy of a sample $X$ is finite. Consider a random variable $X$, then for $s > 0$ we have;
+\begin{equation}
+H(X) \leq \frac{1}{s} \log \left( \frac{2^s e \Gamma^s (\frac{1}{s}) \mathbb{E}(|X|^s)}{s^{s-1}}  \right)
+\end{equation}
+This indicates that if the $s$-th moment of $X$ if finite, $ \mathbb{E}(|X|^s) < \infty$, for some $s > 0$ then the Shannon entropy of $X$ will also be finite, $H(X) < \infty$ \cite{book3}.
+
+Shannon entropy, as mentioned earlier, is a special case of the R\'enyi and Tsallis entropies as $q \to 1$. Thus, for a general $q$-entropy, other properties hold. Namely, $H_{q}$ is concave when $q > 0$ (and convex when $q<0$), implying for the Shannon entropy, when $q=1$, that $H$ is concave.
+
+There are also other special cases that have certain properties; for example the R\'enyi entropy with $q=2$ is known as the quadratic R\'enyi entropy, which is defined as follows for a continuous random variable $X$ with density function $f$;
+\begin{equation} 
+H_{2}^{*} = - log\left( \int_{\mathbb{R}^{d}} f^2(x) dx \right) \label{QuadRenEnt} 
+\end{equation} 
 
 Moreover, another special case is considering the R\'enyi entropy as $q \to \infty$, if the limit exists, is defined as the minimum entropy, since it's the smallest possible value of $H_{q}^{*}$;
 \begin{equation}
@@ -105,8 +122,6 @@ H_{2}^{*} \leq H \leq \log(d) + \frac{1}{d} - e^{-H_{2}^{*}} \nonumber
 \end{equation}
 where d is the dimension of the distribution.
 
-There are also some interesting properties of the general $q$-entropy; firstly, $H_{q}$ is concave when $q > 0$ (convex when $q<0$), implying for Shannon entropy, $H$ is concave - as stated earlier. Also, the maximising distribution is the uniform distribution, for all  $q$-entropies, as well as for Shannon, with a finite support. Lastly, for any $d$-dimensional sample ($d \geq 1$), given $\frac{d}{d+2} < q < 1$ and a covariance matrix, the $q$-entropy maximising distribution is of the multidimensional Student-t distribution \cite{paper2}.
-
 
 
 
@@ -116,7 +131,7 @@ Entropy began as a concept in thermodynamics, about the idea of that within any 
 
 I will be concentrating on Shannon entropy - also mentioning R\'enyi and Tsallis entropies - which concern information theory; therefore I will consider applications accordingly. I will give a short overview of some of its applications; however, this is not an exhaustive list, since the application of entropy are extensive.
 
-Wikipedia gives an appropriate overview of the applications, that the estimation of Shannon entropy is useful in ''various science/engineering applications, such as independent component analysis, image analysis, genetic analysis, speech recognition, manifold learning, and time delay estimation'' \cite{wiki1}.
+The estimation of Shannon entropy is useful in various science/engineering applications, such as independent component analysis, image analysis, genetic analysis, speech recognition, manifold learning, and time delay estimation.
 
 Independent component analysis (ICA), in signal processing, is a computational method for decomposing large, often very complex, multivariate data to find underlying/hidden factors or components. The computation of ICA depends on knowing the entropy of the sample; and in most cases this must be estimated, as an exact entropy is not always known. Kraskov, St\"{o}gbauer and Grassberger \cite{ICA1} discussed how estimating the mutual information (MI) using entropy estimators is useful for assessing the independence of components from ICA. Learned-Miller and Fisher \cite{ICA2} also presented another example of how to use estimation of entropy to obtain a new algorithm for the ICA problem. 
 
@@ -124,7 +139,7 @@ Image analysis is the investigation of an image and the extraction of useful inf
 
 Genetic analysis is the study and research of genes and molecules to find information on biological systems. Statistical analysis of specific cells can help us understand how genomic entropy can help diagnose diseases and cancers. Wieringen and Vaart, \cite{gen1} discuss how chromosomal disorganisation increases as cancer progresses, they mention how the K-L estimator can be used to help find this disorganisation/entropy; thus finding that "as cancer evolves, and the genomic entropy increases, the transcriptomic entropy is also expected to surge". 
 
-''Speech recognition (SR) is the inter-disciplinary sub-field of computational linguistics that develops methodologies and technologies that enables the recognition and translation of spoken language into text by computers'' \cite{wiki2}. Shen, Hung and Lee \cite{speech1} discuss how an entropy based algorithm can conduct accurate SR in noisy environments. Moreover, Kuo and Gao \cite{speech2} focus on a method where the probability of a state or word sequence given an observation sequence is computed directly from the maximum entropy direct model.
+Speech recognition (SR) is the inter-disciplinary sub-field of computational linguistics that develops methodologies and technologies that enables the recognition and translation of spoken language into text by computers. Shen, Hung and Lee \cite{speech1} discuss how an entropy based algorithm can conduct accurate SR in noisy environments. Moreover, Kuo and Gao \cite{speech2} focus on a method where the probability of a state or word sequence given an observation sequence is computed directly from the maximum entropy direct model.
 
 It is also important to note the statistical applications of entropy; there are some tests on goodness-of-fit established by the estimation of entropy. Vasicek explored the test for normality; that its entropy exceeds that of any other distributions with the same variance \cite{stat1}. Dudewicz and van der Meulen \cite{stat2} discussed the property mentioned in section \ref{entropyProperties}, that the uniform distribution maximises the entropy. Moreover, others have explored different distributions and their entropic properties; see \cite{stat3, stat4}
  
@@ -137,6 +152,13 @@ There are several estimation methods for the nonparametric estimation of the Sha
 
 First, I must set out the types of consistency, so we can see more obviously how it compares to the K-L estimator, for $X_{1}, ..., X_{N}$ a i.i.d sample from the distribution $f(X)$, where $H_{N}$ is the estimator of $H(f)$. Then we have (as $N \to \infty$);
 \begin{itemize}
+
+\item Asymptotic Unbias
+\begin{equation}
+\mathbb{E} (H_{N}) - H(f) \to 0
+\end{equation}
+
+
 \item Weak Consistency 
 \begin{equation}
 H_{N} \xrightarrow{p} H(f)
@@ -147,10 +169,11 @@ H_{N} \xrightarrow{p} H(f)
 \mathbb{E}\{(H_{N} - H(f))^2\} \to 0
 \end{equation}
 
-\item Strong Consistency
+\item Strong Consistency (Asymptotic Normality) %TODO - look at the second/third line of this? What should it be ask leonenko!
 \begin{align}
 \sqrt{N}(\hat{H}_{N, k} - H) &\xrightarrow{d} N(0, \sigma^2) \\
-N \mathbb{E}{(\hat{H}_{N, k} - H)^2} &\xrightarrow{} \sigma^2 \\ \nonumber
+N \mathbb{E}{(\hat{H}_{N, k} - H)^2} &\xrightarrow{} \sigma^2 \\ 
+\mathbb{E}{(\hat{H}_{N, k} - H)^2} &= \frac{\sigma^2}{N} \left( 1 + O(N) \right) \\ \nonumber
 \end{align}
 \textit{This is the consistency shown with the K-L estimator in Theorem \ref{efficient}.}
 
@@ -210,7 +233,7 @@ Lastly, also in 2016, S.Delattre and N.Fournier wrote the paper; \textit{On the 
 
 \subsection{Estimator with k=1}
 
-Firstly, I considered an article \textit{On Statistical Estimation of Entropy of Random Vector} (N.Leonenko and L.Kozachenko, 1987), which considers estimating the Shannon entropy of an absolutely continuous random sample of independent observations, with unknown probability density $f(x), x \in \mathbb{R}^{d}$. As $f(x)$ is unknown this is not easily estimated accurately for a random sample, and by just estimating the density $\hat{f}(x)$ to replace the actual density $f(x)$ in the formula for the entropy we get highly restrictive consistency conditions. 
+Firstly, I considered an article \textit{On Statistical Estimation of Entropy of Random Vector} (N.Leonenko and L.Kozachenko, 1987) \cite{paper1}, which considers estimating the Shannon entropy of an absolutely continuous random sample of independent observations, with unknown probability density $f(x), x \in \mathbb{R}^{d}$. As $f(x)$ is unknown this is not easily estimated accurately for a random sample, and by just estimating the density $\hat{f}(x)$ to replace the actual density $f(x)$ in the formula for the entropy we get highly restrictive consistency conditions. 
 
 Therefore, the following estimator was proposed for the Shannon entropy of a random sample $X_{1}, X_{2}, ..., X_{N}$ of d-dimensional observations;
 \begin{equation}
@@ -235,7 +258,7 @@ The estimator here is in a simple form, which is later developed into something 
 
 \subsection{Estimator with k fixed} \label{fixed_k}
 
-The next paper I am exploring on estimation is \textit{a Class of Renyi Information Estimators for Multidimensional densities} (N.Leonenko, L.Pronzato, V.Savani, 2007), which looks at estimating the R\'enyi ($H_{q}^{*}$) and Tsallis ($H_{q}$) entropies, when $q \neq 1$, and the Shannon ($\hat{H}_{N, k, 1}$) entropy. Where these are taken for a random vector $X \in \mathbb{R}^d$ with density function $f(x)$, by using the kth nearest neighbour method, with a fixed values of k. 
+The next paper I am exploring on estimation is \textit{a Class of Renyi Information Estimators for Multidimensional densities} (N.Leonenko, L.Pronzato, V.Savani, 2007) \cite{paper2}, which looks at estimating the R\'enyi ($H_{q}^{*}$) and Tsallis ($H_{q}$) entropies, when $q \neq 1$, and the Shannon ($\hat{H}_{N, k, 1}$) entropy. Where these are taken for a random vector $X \in \mathbb{R}^d$ with density function $f(x)$, by using the kth nearest neighbour method, with a fixed values of k. 
 
 For the R\'enyi and Tsallis entropies, this is achieved by considering the integral  $I_{q} = \int_{\mathbb{R}^d} f^q (x) dx$, and generating its estimator, which is defined as $\hat{I}_{N, k, q} = \frac{1}{N} \sum_{i=1}^{N} (\zeta_{N, k, q})^{1-q}$. Where, $\zeta_{N, k ,q} = (N-1)C_{k}V_{d}(\rho_{k, N-1}^{(i)})^d$,  $V_{d} = \frac{\pi^{\frac{d}{2}}}{\Gamma(\frac{d}{2} + 1 )}$ is the volume of d-dimensional unit ball, $C_{k} = \left[ \frac{\Gamma(k)}{\Gamma(k+1-q)} \right]^{\frac{1}{1-q}}$ and $\rho_{k, N-1}^{(i)}$ is the kth nearest neighbour distance from the observation $X_{i}$ to some other $X_{j}$.
 
@@ -258,7 +281,7 @@ where $\xi_{N, i, k} = (N-1)\exp[-\Psi(k)]V_{d}(\rho_{k, N-1}^{(i)})^{d}$, with 
 
 \subsection{Estimator with k dependent on N} \label{dependent_k}
 
-The last main paper, whose results I will be exploring is \textit{Efficient Multivariate Entropy Estimation via k-Nearest Neighbour Distances} (T.Berrett, R.Samworth, M.Yuan, 2016), which initially studies the K-L estimator, and the conditions under which it is efficient and asymptotically unbiased (for a value of $k$ depending on the sample size $N$). 
+The last main paper, whose results I will be exploring is \textit{Efficient Multivariate Entropy Estimation via k-Nearest Neighbour Distances} (T.Berrett, R.Samworth, M.Yuan, 2016) \cite{paper4}, which initially studies the K-L estimator, and the conditions under which it is efficient and asymptotically unbiased (for a value of $k$ depending on the sample size $N$). 
 
 Considering dimensions $d \leq 3$, and a sample size $N$ from distribution with density $f(x)$, they defined the k-nearest neighbour estimator of entropy - just as in section \ref{fixed_k} - to be;
 \begin{equation}
@@ -271,7 +294,7 @@ Here, some conditions on the finiteness of the $\alpha$ moment of $f$ and the co
 \mathbb{E} ( \hat{H}_{N} ) - H = O \left( max \left\{ \frac{k^{\frac{\alpha}{\alpha + d} - \epsilon}}{N^{\frac{\alpha}{\alpha + d} - \epsilon}}, \frac{k^{\frac{\beta}{d}}}{N^{\frac{\beta}{d}}} \right\} \right) \quad \quad N \to \infty
 \end{equation}
 
-Also, they considered the asymptotic normality of the estimator, given the $\alpha$ moment of $f$ is finite (for $\alpha > d$), and some conditions on the continuity and differentaibility of $f$ hold and with $k \in \{k_{0}, ..., k_{1}\}$. Then the variance of the estimator is given by;
+Also, they considered the asymptotic normality of the estimator, given the $\alpha$ moment of $f$ is finite (for $\alpha > d$), and some conditions on the continuity and differentiability of $f$ hold and with $k \in \{k_{0}, ..., k_{1}\}$. Then the variance of the estimator is given by;
 \begin{equation}
 Var(\hat{H}_{N, k}) = \frac{\sigma^2}{N} + o(\frac{1}{N})
 \end{equation}
@@ -452,7 +475,7 @@ H &= - \int_{x : f(x) > 0} f(x) log(f(x)) dx \nonumber \\
 &= \frac{log(\sqrt{(2\pi)}\sigma)}{\sqrt{(2\pi)} \sigma} \int_{\mathbb{R}} \exp{ \left( \frac{-x^2}{2\sigma^2} \right)} dx +  \frac{1}{2\sqrt{(2\pi)} \sigma} \int_{\mathbb{R}} \frac{x^2}{2\sigma^2}  \exp{ \left( \frac{-x^2}{\sigma^2} \right)} dx \nonumber \\
 &=  log(\sqrt{(2\pi)}\sigma) + \frac{1}{2} \nonumber 
 \end{align}
-Thus the exact entropy for the normal distribution is given by 
+Thus the exact entropy for the normal distribution is given by;
 \begin{equation}\label{NormalEnt}
 H =  log(\sqrt{(2\pi e)}\sigma) 
 \end{equation}
