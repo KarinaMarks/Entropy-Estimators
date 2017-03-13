@@ -8,10 +8,12 @@ library(dplyr)
 options(scipen = 999)
 
 # read in the data as a data frame
-data <- as.data.frame(read_csv("../Data/data_normal.csv"))
+#data <- as.data.frame(read_csv("../Data/data_normal.csv"))
+data <- as.data.frame(read_csv("../Data/data_uniform.csv"))
 
 # find the modulus of the bias for all n and k
-data[-1] <- abs(data[-1] - NormalEnt(1))
+#data[-1] <- abs(data[-1] - NormalEnt(1))
+data[-1] <- abs(data[-1] - UniformEnt(min=0, max=100))
 
 # creating the summary data
 SumData <- data %>%
