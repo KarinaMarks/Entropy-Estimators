@@ -75,7 +75,7 @@ Since, I am first considering the 1-dimensional normal distribution, the estimat
 
 
 
-\subsection{Estimator Conditions} 
+\subsection{Estimator Conditions} \label{N_conditions}
 
 The density of the normal distribution satisfies Conditions \ref{A1}, \ref{A2} and \ref{A3}, due to the below analysis. Firstly, to satisfy Condition \ref{A1}, for density function $f(x) = \frac{1}{\sqrt{(2\pi)}} \exp{ \left( \frac{-x^2}{2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and $\sigma^2 = 1$, it must be such that;
 \begin{itemize}
@@ -703,6 +703,80 @@ This graph shows that for large $N \leq 50,000$, the lowest line on the graph is
 
 
 \section{1-dimensional Exponential Distribution} \label{Expo_d=1}
+
+I will now be looking at the entropy of samples from the exponential distribution $exp(\lambda)$, where $\lambda > 0$ is the rate or inverse scale parameter. In a similar fashion to the previous distributions, the exponential also has an exact formula for the entropy, given the rate parameter $\lambda$. Using equation (\ref{ShaEnt}) and the density function for the exponential distribution $f(x) = \lambda e^{-\lambda x}$ for $x \in [0, \infty)$ and for $\lambda >0$, we can write the exact entropy;
+\begin{align*}
+H &= - \int_{x \in \mathbb{R}^d} f(x) log(f(x)) dx \\ 
+&= - \int_{0}^{\infty} \lambda e^{-\lambda x} log [ \lambda e^{-\lambda x} ] dx  \\
+&= - \lambda \int_{0}^{\infty} \lambda e^{-\lambda x} [log(\lambda) - \lambda x] dx  \\
+&= \lambda \int_{0}^{\infty} \lambda e^{-\lambda x} - log(\lambda) e^{-\lambda x} dx \\
+&= - \lambda \left[x e^{-\lambda x}\right]_{0}^{\infty} + \int_{0}^{\infty}\lambda e^{-\lambda x} dx + log(\lambda) \left[ e^{-\lambda x}\right]_{0}^{\infty} \\
+&= 0 + (log(\lambda) - 1) \left[e^{-\lambda x} \right]_{0}^{\infty} \\
+&= -(log(\lambda) - 1)
+\end{align*}
+
+Thus we have the the exact value of entropy for the exponential distribution, given the rate parameter $\lambda > 0$, is;
+\begin{equation} \label{ExpEnt}
+H = 1 - log(\lambda)
+\end{equation}
+
+Moreover, I am again considering a 1-dimensional distribution; thus $V_{d} = V_{1} = 2$, and;
+\begin{equation}
+\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
+\end{equation}
+is the form of the Kozachenko-Leonenko estimator that I will be considering here, equation (\ref{KLest_d=1}).
+
+I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 0.5$, this is because, we know that for the exponential distribution we must have the rate parameter $\lambda >0$ and if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$. This will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy. Also, for $\lambda \geq 1$, we have a very small value of entropy, $0 \leq H \leq 1$, which would cause problems when calculating large samples and their entropy. Therefore, I have chosen the rate parameter such that $\lambda \in (0, 1)$, so $\lambda=0.5$, the exact entropy is given by;
+\begin{equation} \label{exponential_exact}
+H = 1 - log(0.5) \approx 1.693147
+\end{equation}
+
+
+
+\subsection{Estimator Conditions} \label{E_Conditions}
+
+Samples from the exponential distribution must satisfy the conditions of Theorem \ref{efficient} and \ref{unbias}, to  be an asymptotically unbiased and consistent estimator. For these theorems to hold, this distribution must satisfy the Conditions \ref{A1}, \ref{A2} and \ref{A3}. 
+
+Firstly, to satisfy Condition \ref{A1}, the density function $f(x) =  \frac{e^{\frac{-x}{2}}}{2}$ for $x \in [0, \infty)$, where we have chosen $\lambda = 0.5$, must be such that;
+\begin{itemize}
+\item $f$ is bounded - this is true, since for any probability distribution we have $f(x) \geq 0$, also for the exponential distribution we always have for $x \in [0, \infty)$ that $f(x) \leq 1$, so $f$ is a bounded function.
+
+\item $f$ is m-times differentiable - using Laguerre Polynomials;
+\begin{equation}
+L_{m}(x) = \frac{1}{m!} e^x \frac{d^m}{dx^m}(e^{-x} x^m) \nonumber
+\end{equation}
+we can see that by taking $x := \frac{x}{2}$, and multiplying the equation through by $\lambda = \frac{1}{2}$ we can formulate an equation containing the m-th derivative of the exponential distribution;
+\begin{align*}
+\frac{d^m}{dx^m}\left(\frac{e^{\frac{-x}{2}}}{2} \left(\frac{x}{2}\right)^m\right) &= L_{m}\left(\frac{x}{2}\right) m! \frac{e^{\frac{-x}{2}}}{2} \\
+\frac{d^m}{dx^m}(f(x) x^m) &=  2^m L_{m}\left(\frac{x}{2}\right) m! f(x)
+\end{align*}
+TODO .. use Leibniz rule? rearrange and write something like $\frac{d^m}{dx^m}(f(x)) = G(x) f(x)$..
+
+\item $\exists r_{*} > 0$ and a Borel measurable function $g_{*}$, with $\|y-x\| \leq r_{*}$ so that $\|f^{(t)}(x)\| \leq g_{*}(x) f(x)$ and $\|f^{(m)}(x) - f^{(m)}(x)\| \leq g_{*}(x) f(x)\|y - x\|^{\eta}$, for some $g_{*}$ such that $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$
+
+TODO.. can be done once previous point has been written out correctly
+\end{itemize}
+
+Next, to satisfy Condition \ref{A2}, for the density function $f$ of the exponential distribution, must fulfill that;
+\begin{itemize}
+\item The $\alpha$-moment of $f$ must be finite, so $\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty$ - this is true since the moments of the exponential distribution are given by;
+\begin{align*}
+\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx &= \int_{0}^{\infty} | x |^{\alpha} \lambda e^{-\lambda x} dx\\
+&= \frac{\alpha !}{\lambda ^{\alpha}} < \infty
+\end{align*}
+for all $\alpha \in \mathbb{N}$, which is obviously finite.
+\end{itemize}
+
+Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{paper4_T4} and \ref{paper4_T5}. As previously, these values are independent of the distribution that the sample is from, and only depends on the size of the sample, the dimension of the distribution that sample is taken from and the value chosen for $\alpha$, where we have chosen $\alpha = 2$. Thus, the values of $k$ found in section \ref{N_conditions} are $\{1, 2, ..., 11\}$.
+
+Due to the above conditions for Theorems \ref{unbias} and \ref{efficient} being met, we can say that the Kozachenko-Leonenko estimator, of a sample from the exponential distribution is an asymptotically unbiased and consistent estimator for entropy. 
+
+
+
+\subsection{Simulation Results} \label{Expo_results}
+
+I will be exploring the simulation results using the same process as for the previous two distributions, which begins with examining the values of the bias of the estimator at certain values of $N$ for all different $k \in \{1, 2, ..., 11\}$.
+
 
 
 
