@@ -348,7 +348,7 @@ $k$ &  $k^{a_{k}}$ & $c_{k}$ & $\frac{k^{a_{k}}}{c_{k}}$ \\
 \end{center}
 \end{table}
 
-This shows that the proportional behaviour between $k^{a_{k}}$ and $c_{k}$ also has a large jump when $k$ goes from $3 \to 4$. This agrees with the claim of $c_{k}$ depending on $k$ in this fashion; however, in table \ref{} we mentioned another jump between $k=9$ and $k=10$, and the evidence here does not show a large jump in the same area. We cannot yet make any conclusions about the dependence of $c_{k}$ on $k$; this motivates a graphical representation of the value of $c_{k}$ against $k$ to see if there is any relation, Figure \ref{c_k_normal}.
+This shows that the proportional behaviour between $k^{a_{k}}$ and $c_{k}$ also has a large jump when $k$ goes from $3 \to 4$. This agrees with the claim of $c_{k}$ depending on $k$ in this fashion; however, in table \ref{normal_a_c_compare} we mentioned another jump between $k=9$ and $k=10$, and the evidence here does not show a large jump in the same area. We cannot yet make any conclusions about the dependence of $c_{k}$ on $k$; this motivates a graphical representation of the value of $c_{k}$ against $k$ to see if there is any relation, Figure \ref{c_k_normal}.
 
 \begin{figure}
 \makebox[\linewidth][c]{%
@@ -388,12 +388,7 @@ From this we can see obviously that for smaller values of $N$, smaller values of
   \label{normal_comparison_graph_zoomed}
 \end{figure}
 
-From this graph we can obviously discount $k=1$ for large $N$, since this is the most gradual descent; thus the bias will be largest for this $k$. Also, both the lines for $k=2$ and $k=3$ are more gradual in their descent at larger $N$, so are probably not the best to choose. Even though, for $k=9, 10$ and $11$, the slope is the steepest - $a_{k}$ is largest - the intercept is larger so around the biggest sample size considered $N=50,000$, $log(N) \approx 10.8$, there is not the smallest bias. Actually, for large values of $N \leq 50,000$ we can see from this graph that the best lines appear to be those which are blue/green; $k = 4, 5, 6, 7, 8$. Where the lowest lines around the maximal sample size are those for $k=5$ and $k=7$; thus these values of $k$ could possible be the best nearest neighbour value to choose, when looking at a sample of size $N \approx 50,000$ from the normal distribution.
-
-
-
-
-
+From this graph we can obviously discount $k=1$ for large $N$, since this is the most gradual descent; thus the bias will be largest for this $k$. Also, both the lines for $k=2$ and $k=3$ are more gradual in their descent at larger $N$, so are probably not the best to choose. Even though, for $k=9, 10$ and $11$, the slope is the steepest - $a_{k}$ is largest - the intercept is larger so around the biggest sample size considered $N=50,000$, $log(N) \approx 10.8$, there is not the smallest bias. Actually, for large values of $N \leq 50,000$ we can see from this graph that the best lines appear to be those which are blue/green; $k = 4, 5, 6, 7, 8$. Where the lowest lines around the maximal sample size are those for $k=5$ and $k=7$; thus these values of $k$ could possibly be the best nearest neighbour value to choose, when looking at a sample of size $N \approx 50,000$ from the normal distribution.
 
 
 
@@ -505,7 +500,7 @@ When looking at the larger values of $N$, it is first important to note that \te
 
 Thus, looking at the results shown in table \ref{uniform_kcompare_table}, ignoring $k=1$ and considering $N=25,000$, it appears to show smallest bias for values of $k \in \{4, 5, 6 \}$; more specifically $k=5$ appears to have the smallest bias. This fits with the previous analysis done on the value of $k$ for different sample sizes, which stated that we must have $k \in \{1, 2, ..., 9\}$. Next, examining the table for $N=50,000$, we can see that the smallest bias looks to be when $k \in \{ 4, 5, 6, 7, 8, 11\}$, however, for all other values of $k$ we still have a small bias $< 0.000012$. Thus, we cannot yet draw any conclusions about the optimal value of $k$ for large $N$ and this distribution.
 
-Next I wish to examine the graphs showing the relationship in equation \ref{logbias}, by plotting the simulated data and fitting a regression line for each value of $k$ separately, in figures \ref{Uniform_graphs27} and \ref{Uniform_graphs811}. Thus showing a negative linear relationship between the logarithm of the bias of the estimator and the logarithm of the sample size $N$. Also, looking more closely, the regression lines fitted to the data appear to become more steep for higher values of $k$, whilst the standard error bars appear to become smaller. 
+Next I wish to examine the graphs showing the relationship in equation \ref{logbias}, by plotting the simulated data and fitting a regression line for each value of $k$ separately, in figures \ref{Uniform_graphs26} and \ref{Uniform_graphs711}. Thus showing a negative linear relationship between the logarithm of the bias of the estimator and the logarithm of the sample size $N$. Also, looking more closely, the regression lines fitted to the data appear to become more steep for higher values of $k$, whilst the standard error bars appear to become smaller. 
 
 \begin{figure}
 \makebox[\linewidth][c]{%
@@ -536,13 +531,8 @@ Next I wish to examine the graphs showing the relationship in equation \ref{logb
 \includegraphics[width=\textwidth]{./Graphs/Best/Uniform_k=6.png}
 \caption{k=6}
 \end{subfigure}%
-\begin{subfigure}[b]{.8\textwidth}
-\centering
-\includegraphics[width=\textwidth]{./Graphs/Best/Uniform_k=7.png}
-\caption{k=7}
-\end{subfigure}%
 }
-\caption{1-dimensional Uniform distribution with different $k = 2, ..., 7$} \label{Uniform_graphs27}
+\caption{1-dimensional Uniform distribution with different $k = 2, ..., 6$} \label{Uniform_graphs26}
 \end{figure}
 
 
@@ -550,27 +540,33 @@ Next I wish to examine the graphs showing the relationship in equation \ref{logb
 \makebox[\linewidth][c]{%
 \begin{subfigure}[b]{.8\textwidth}
 \centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Uniform_k=7.png}
+\caption{k=7}
+\end{subfigure}%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
 \includegraphics[width=\textwidth]{./Graphs/Best/Uniform_k=8.png}
 \caption{k=8}
 \end{subfigure}%
+}\    \makebox[\linewidth][c]{%
 \begin{subfigure}[b]{.8\textwidth}
 \centering
 \includegraphics[width=\textwidth]{./Graphs/Best/Uniform_k=9.png}
 \caption{k=9}
 \end{subfigure}%
-}\    \makebox[\linewidth][c]{%
 \begin{subfigure}[b]{.8\textwidth}
 \centering
 \includegraphics[width=\textwidth]{./Graphs/Best/Uniform_k=10.png}
 \caption{k=10}
 \end{subfigure}%
+}\    \makebox[\linewidth][c]{%
 \begin{subfigure}[b]{.8\textwidth}
 \centering
 \includegraphics[width=\textwidth]{./Graphs/Best/Uniform_k=11.png}
 \caption{k=11}
 \end{subfigure}%
 }
-\caption{1-dimensional Uniform distribution with different $k = 8, ...,11$} \label{Uniform_graphs811}
+\caption{1-dimensional Uniform distribution with different $k = 7, ..., 11 $} \label{Uniform_graphs711}
 \end{figure}
 
 Another important thing to consider, before looking at the equations of the regression lines, is to see how well these lines actually fit the data. To do this I have, as before, examined the coefficient of determination and the standard deviation of the lines, Table \ref{uniform_rsq}.
@@ -629,10 +625,52 @@ $k$ &  $a_{k}$ & $c_{k}$ \\
 
 We wish to have a value of $a_{k} \geq 0.5$ to show the relationship desired, and this is true for all values of $k$ in this table. As $k$ increases, we have that both $a_{k}$ and $c_{k}$ increase, expect for $k=8$, which has larger values that $k=9$. However, this slight change around $k=8$ does not necessarily imply anything dramatic since the overall trend seems to fit with that found for the normal distribution.
 
-TODO - talk about $a_{k}$ and $c_{k}$ in table \ref{uniform_a_c_compare_table}
+To better see if the relationship of the bias of the estimator and the sample size is of the form of equations \ref{fixedkbias} and \ref{dependentkbias}; either $O \left( \frac{1}{N^{a}} \right)$ or $O\left( \left( \frac{k}{N} \right)^{a} \right)$. Thus I will consider the value of $c_{k}$ for each $k$, to see if it is dependent on $k^a_{k}$ or not, shown in table \ref{uniform_dependentk}.
 
-TODO - talk about graph in Figure \ref{uniform_comparison_graph}
+\begin{table}
+\caption{Considering the dependence of $k$ on $c_{k}$} \label{uniform_dependentk}
+\begin{center}
+\begin{tabular}{| l | l l l |} 
+\toprule
+$k$ &  $k^{a_{k}}$ & $c_{k}$ & $\frac{k^{a_{k}}}{c_{k}}$ \\
+\midrule[1pt]
+2     &  1.4265    & 0.0258    &    55.291   \\
+3     &  1.7412    & 0.0199    &    87.498   \\
+4     &  2.4942    & 0.0779    &    32.019   \\
+5     &  3.2305    & 0.1531    &    21.101   \\
+6     &  4.7066    & 0.6090    &     7.729   \\
+7     &  5.3807    & 0.5758    &     9.345   \\
+8     &  7.4975    & 1.8377    &     4.080   \\
+9     &  8.0495    & 1.5095    &     5.332   \\
+10    &  9.5521    & 2.4041    &     3.973   \\
+11    & 13.2148    & 6.6932    &     1.974   \\
+\hline
+\end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
 
+This shows that the proportional behaviour between $k^{a_{k}}$ and $c_{k}$ does not imply that $c_{k} = O(k^a_{k})$, since there is no exact trend in the numbers, other than a slight decrease as $k$ increases. However, this increase is not uniform so we can make little assumptions about the behaviour of $c_{k}$, perhaps a better way to show this relationship is through a graphical representation of $c_{k}$ against $k$ to see what form it takes.
+
+\begin{figure}
+\makebox[\linewidth][c]{%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/UniformcVk.png}
+\caption{The values of $k$ against the values of $c_{k}$}
+\end{subfigure}%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/UniformcVk2.png}
+\caption{The values of $k^{a_{k}}$ against the corresponding values of $c_{k}$}
+\end{subfigure}%
+}
+\caption{Graphically representing the relationship between $c_{k}$ and $k$ for the uniform distribution} \label{c_k_uniform}
+\end{figure}
+
+Figure \ref{c_k_uniform}, for the uniform distribution tells a slightly different story to that of the normal. It does seem to show an almost exponential relationship, as before, however, there are a larger number of outlier values that do not fit within a smooth line in these graphs than in those for the normal distribution, Figure \ref{c_k_normal}. However, the relationship that is shown leads me to believe that there is something important between the two variables, which could possibly be of the form stated in equation \ref{kdependentbias}.
+
+To better study the linear relationship between the logarithm of the bias and the logarithm of the sample size, I have generated a comparison plot, shown in Figure \ref{normal_comparison_graph}. 
 
 \begin{figure}
   \begin{center}
@@ -641,6 +679,32 @@ TODO - talk about graph in Figure \ref{uniform_comparison_graph}
 \caption{Plot of regression lines for $\log|Bias(\hat{H}_{N, k})|$ against $\log(N)$, for $k=2, 3,..., 11$, for samples from the uniform distribution}
   \label{uniform_comparison_graph}
 \end{figure}
+
+For the smaller values of $N$, when $N \approx 100$, we can see obviously from this plot that the lowest line occurs from $k=3$, and this value of $k$ stays the best for the estimator until $log(N) \approx 8.5$, so the sample size $N \approx 5,000$. Above this value, it appears to be that the smallest bias occurs from when $k \in \{7, 8, 9, 11\}$, to see this more accurately consider an enlarged version of this graph for $5,000 < N < 50,000$, Figure \ref{uniform_comparison_graph_zoom}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Best/UniformComparisonZoom.png}
+  \end{center}
+\caption{Figure \ref{uniform_comparison_graph} zoomed in around large $N$.}
+  \label{uniform_comparison_graph}
+\end{figure}
+
+This graph shows that for large $N \leq 50,000$, the lowest line on the graph is when the estimator is found using $k=7$; thus there is a possibility that this value of $k$ could be the best nearest neighbour value to choose, when considering sample size $N \approx 50,000$ from the uniform distribution.
+
+
+
+
+
+
+
+
+
+
+
+\section{1-dimensional Exponential Distribution} \label{Expo_d=1}
+
+
 
 
 \end{document}
