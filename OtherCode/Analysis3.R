@@ -58,8 +58,20 @@ rownames(rsqdf) <- 2:11
 
 
 
+# make a df with a_k and c_k in latex format
+LatexDf <- data.frame(col1 = rep("&", N), R2 = Info$powera,
+                      col3 = rep("&", N), SE = Info$c, 
+                      col7 = rep("\\", N))
+
+rownames(LatexDf) <- 2:11
+
+
+
+
+
 # remove k as a factor for this plot
 Info$k <- as.integer(Info$k)
+
 
 # plot c against k
 g <- ggplot(data=Info, aes(x=k, y=c)) +
@@ -73,9 +85,34 @@ df <- Info %>%
   mutate("k^a" = k^-a) %>%
   select(c, `k^a`)
 
-# plot
-g <- ggplot(data=df, aes(x=`k^a`, y=c)) +
+
+# create the latex table for k, k^a, c, and k^a/c
+LatexTable2 <- data.frame(col1 = rep("&", N), ktoa = df$`k^a`,
+                          col3 = rep("&", N), c = df$c,
+                          col5 = rep("&", N), ktoaoverc = ((df$`k^a`)/(df$c)),
+                          col7 = rep("\\", N))
+rownames(LatexTable2) <- 2:11
+LatexTable2[c(2, 4)] <- round(LatexTable2[c(2, 4)], 4)
+LatexTable2[c(6)] <- round(LatexTable2[c(6)], 3)
+
+df <- LatexTable2 %>%
+  mutate(k = 2:11)
+
+# plot 1
+ggplot(data=df, aes(x=k, y=c)) +
   geom_point() +
+  scale_x_continuous(breaks = c(2:11), labels = c(2:11)) +
   theme_minimal() 
+
+#plot 2
+ggplot(data=df, aes(x=ktoa, y=c)) +
+  xlab("k^a") +
+  geom_point() +
+  scale_x_continuous(breaks = c(2.5, 5.0, 7.5, 10.0, 12.5), 
+                     labels = c("2.5", "5.0", "7.5", "10.0", "12.5")) +
+  scale_y_continuous(breaks = c(0.0, 2.5, 5.0, 7.5), 
+                     labels = c("0.0", "2.5", "5.0", "7.5")) +
+  theme_minimal() 
+
 
 

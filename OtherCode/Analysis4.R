@@ -28,6 +28,10 @@ ymin <- -15 # this is because there are only 5 values smaller than -15
 #ymax <- ceiling(max(logdata[-1]))
 ymax <- ceiling(max(logdata[-c(1, 2, 3)]))
 
+# make k a factor
+Info$k <- as.factor(Info$k)
+
+
 # plot graph of comparison for each k
 ggplot()+
   geom_abline(aes(intercept=zeta, slope=a, colour=k), data=Info, size=1) +
@@ -36,4 +40,15 @@ ggplot()+
   xlab("log(N)") +
   ylab("log(Bias(H))") +
   ggtitle("Comparison of the regression lines for Uniform distribution")
+
+
+# plot graph of comparison for each k - zoomed in
+ggplot()+
+  geom_abline(aes(intercept=zeta, slope=a, colour=k), data=Info, size=1) +
+  ylim(c(-10.5, -7.5)) +
+  xlim(c(9, 11))+
+  xlab("log(N)") +
+  ylab("log(Bias(H))") +
+  ggtitle("Comparison of the regression lines for Uniform distribution")
+
 
