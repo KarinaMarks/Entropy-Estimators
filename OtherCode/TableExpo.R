@@ -32,8 +32,37 @@ newdf2 <- data.frame(n = seq(100, 50000, 100)) %>%
   dplyr::group_by(n) %>%
   summarise(Ent = mean(exposmth(M=500, N=n, k=2, rate=0.5), na.rm=TRUE))
 
-df <- left_join(newdf1, newdf2)
+newdf3 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=3, rate=0.5), na.rm=TRUE))
 
-write_csv(newdf1, "../Data/data_expo_1.csv")
+newdf4 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=4, rate=0.5), na.rm=TRUE))
+
+newdf5 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=5, rate=0.5), na.rm=TRUE))
+
+newdf6 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=6, rate=0.5), na.rm=TRUE))
+
+newdf7 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=7, rate=0.5), na.rm=TRUE))
+
+newdf8 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=8, rate=0.5), na.rm=TRUE))
+
+newdf9 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=9, rate=0.5), na.rm=TRUE))
 
 
+df <- left_join(df, newdf9, by="n")
+
+write_csv(newdf9, "../Data/data_expo_9.csv")
+
+write_csv(df, "../Data/data_expo123456789.csv")
