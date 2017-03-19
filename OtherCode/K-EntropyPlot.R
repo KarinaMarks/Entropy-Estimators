@@ -11,8 +11,6 @@ for (i in 1:20){
 
 ActEnt <- NormalEnt(0.5)
 
-library(ggplot2)
-
 g <- ggplot() +
   geom_point(aes(k, Ent)) +
   geom_hline(yintercept = ActEnt) +
