@@ -169,11 +169,10 @@ H_{N} \xrightarrow{p} H(f)
 \mathbb{E}\{(H_{N} - H(f))^2\} \to 0
 \end{equation}
 
-\item Strong Consistency (Asymptotic Normality) %TODO - look at the second/third line of this? What should it be ask leonenko!
+\item Strong Consistency (Asymptotic Normality) 
 \begin{align}
 \sqrt{N}(\hat{H}_{N, k} - H) &\xrightarrow{d} N(0, \sigma^2) \\
-N \mathbb{E}{(\hat{H}_{N, k} - H)^2} &\xrightarrow{} \sigma^2 \\ 
-\mathbb{E}{(\hat{H}_{N, k} - H)^2} &= \frac{\sigma^2}{N} \left( 1 + O(N) \right) \\ \nonumber
+\mathbb{E}{(\hat{H}_{N, k} - H)^2} &= \frac{\sigma^2}{N} \left( 1 + O\left( \frac{1}{N} \right) \right) \\ \nonumber
 \end{align}
 \textit{This is the consistency shown with the K-L estimator in Theorem \ref{efficient}.}
 
@@ -457,7 +456,7 @@ I will conduct a range of analysis, for each distribution, to consider how this 
 \item Graphical representations of the linear relationship shown in equation \ref{logbias}, of $log(N)$ against $log|Bias(\hat{H}_{N, k})|$ for sample sizes $N=100, 200, 300, ..., 50000$ (which are taken $500$ times and averaged), for each value of $k$.
 
 \item Tabulate the results from the regression analysis; I will first discuss the coefficient of determination ($R^2$), this is a measure
-of how well the regression model describes the observed data \cite{regression1}. Next I will consider the standard error/deviation of the model ($\sigma^2$), this is a measure of accuracy of predictions. Lastly, I will go onto consider the values of $a_{k}$ and $c_{k}$ from relationship shown in equation \ref{bias}, for each $k$, which is the regression line that minimizes the sum of squared deviations ($\sigma^2$) of prediction.
+of how well the regression model describes the observed data \cite{regression1}. Next I will consider the standard error/deviation of the model ($\sigma$), this is a measure of accuracy of predictions. Lastly, I will go onto consider the values of $a_{k}$ and $c_{k}$ from relationship shown in equation \ref{bias}, for each $k$, which is the regression line that minimizes the sum of squared deviations ($\sigma$) of prediction.
 
 \item Graphically compare the values of $a_{k}$ and $c_{k}$ for each $k$.
 
@@ -489,7 +488,7 @@ Since, I am first considering the 1-dimensional normal distribution, the estimat
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
 \end{equation}
 
-\subsection{Estimator Conditions} 
+\subsection{Estimator Conditions} \label{N_conditions}
 
 The density of the normal distribution satisfies Conditions \ref{A1}, \ref{A2} and \ref{A3}, due to the below analysis. Firstly, to satisfy Condition \ref{A1}, for density function $f(x) = \frac{1}{\sqrt{(2\pi)}} \exp{ \left( \frac{-x^2}{2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and $\sigma^2 = 1$, it must be such that;
 \begin{itemize}
@@ -674,14 +673,14 @@ I now wish to consider the equation \ref{logbias} and plot the simulated data, t
 \caption{1-dimensional normal distribution with different $k = 7, ...,11$} \label{normal_graphs711}
 \end{figure}
 
-Moreover, I would like to consider the coefficient of determination ($R^2$) for each of the above regression lines, this value provides an estimate of the strength of the relationship between the model and the response variable. Also, I would like to consider the standard error/deviation ($\sigma^2$), for each of the different graphs, which shows a measure of the predictions' accuracy. These are all depicted for each value of $k$ in table \ref{normal_rsq}.
+Moreover, I would like to consider the coefficient of determination ($R^2$) for each of the above regression lines, this value provides an estimate of the strength of the relationship between the model and the response variable. Also, I would like to consider the standard error/deviation ($\sigma$), for each of the different graphs, which shows a measure of the predictions' accuracy. These are all depicted for each value of $k$ in table \ref{normal_rsq}.
 
 \begin{table}
 \caption{Comparison of the coefficient of determination and the standard deviations of the regression for each value of $k$ for the 1-dimensional normal distribution} \label{normal_rsq}
 \begin{center}
 \begin{tabular}{| l | c c |} 
 \toprule
-$k$ & $R^2$ & $\sigma^2$ \\
+$k$ & $R^2$ & $\sigma$ \\
 \midrule[1pt]
 1     & 0.1766    & 1.0661    \\
 2     & 0.1793    & 1.1477    \\
@@ -700,7 +699,7 @@ $k$ & $R^2$ & $\sigma^2$ \\
 \end{center}
 \end{table}
 
-Both columns of this table essentially point to the same conclusion; the larger the value of $k$, the more accurate the linear model is to fitting the data. This is shown by the $R^2$ value increasing towards $1$ and the $\sigma^2$ values decreasing positively. 
+Both columns of this table essentially point to the same conclusion; the larger the value of $k$, the more accurate the linear model is to fitting the data. This is shown by the $R^2$ value increasing towards $1$ and the $\sigma$ values decreasing positively. 
 
 The $R^2$ is very small for $k \leq 3$ , which points towards the line being a poor fir to the data; however, due the the standard deviation being $\sigma^2 \approx 1.1$, we cannot say that these lines are poorly fitting; since the majoring of the data is within a very small range of the line.
 
@@ -788,14 +787,14 @@ To better study the linear relationship between the logarithm of the bias and th
   \label{normal_comparison_graph}
 \end{figure}
 
-From this we can see obviously that for smaller values of $N$, smaller values of $log(N)$, the smallest bias occurs when $k=2$, since this line is the lowest for the data up until $log(N) \approx 9$ - i.e. $N \approx 13,000$. For a larger sample size, we cannot accurately see in this graph which line is the best. This motivates us to look at a section of the graph when $9 \leq log(N) \leq 11$ - i.e. $8,000 \leq N \leq 50,000$, which is shown in Figure \ref{normal_comparison_graph_zoomed}.
+From this we can see obviously that for smaller values of $N$, smaller values of $log(N)$, the smallest bias occurs when $k=2$, since this line is the lowest for the data up until $log(N) \approx 9$ - i.e. $N \approx 13,000$. For a larger sample size, we cannot accurately see in this graph which line is the best. This motivates us to look at a section of the graph when $9 \leq log(N) \leq 11$ - i.e. $8,000 \leq N \leq 50,000$, which is shown in Figure \ref{normal_comparison_graph_zoom}.
 
 \begin{figure}
   \begin{center}
     \includegraphics[width=\textwidth]{./Graphs/Best/NormalComparisonZoom.png}
   \end{center}
 \caption{Figure \ref{normal_comparison_graph} zoomed in around large $N$}
-  \label{normal_comparison_graph_zoomed}
+  \label{normal_comparison_graph_zoom}
 \end{figure}
 
 From this graph we can obviously discount $k=1$ for large $N$, since this is the most gradual descent; thus the bias will be largest for this $k$. Also, both the lines for $k=2$ and $k=3$ are more gradual in their descent at larger $N$, so are probably not the best to choose. Even though, for $k=9, 10$ and $11$, the slope is the steepest - $a_{k}$ is largest - the intercept is larger so around the biggest sample size considered $N=50,000$, $log(N) \approx 10.8$, there is not the smallest bias. Actually, for large values of $N \leq 50,000$ we can see from this graph that the best lines appear to be those which are blue/green; $k = 4, 5, 6, 7, 8$. Where the lowest lines around the maximal sample size are those for $k=5$ and $k=7$; thus these values of $k$ could possible be the best nearest neighbour value to choose, when looking at a sample of size $N \approx 50,000$ from the normal distribution.
@@ -983,7 +982,7 @@ Another important thing to consider, before looking at the equations of the regr
 \begin{center}
 \begin{tabular}{| l | c c |} 
 \toprule
-$k$ & $R^2$ & $\sigma^2$ \\
+$k$ & $R^2$ & $\sigma$ \\
 \midrule[1pt]
 2     & 0.1721    & 1.0982   \\
 3     & 0.1576    & 1.1402   \\
@@ -1001,9 +1000,9 @@ $k$ & $R^2$ & $\sigma^2$ \\
 \end{center}
 \end{table}
 
-This table is very similar to that for the normal distribution in that both columns point towards the same conclusion; the larger that $k$ is, the more accurate the linear model is to fitting the data. This is shown by the $R^2$ value generally increasing towards $1$ and the $\sigma^2$ values decreasing positively - the deviation about the line is decreasing for higher $k$. There is slight fluctuation in the middle values of $k$, where for $k = \{6, 7, 8\}$ there is not an exact direction that the relationship is going. However, there is nothing to say that this isn't normal behaviour, since we do not yet know the relationship between the bias and $k$.
+This table is very similar to that for the normal distribution in that both columns point towards the same conclusion; the larger that $k$ is, the more accurate the linear model is to fitting the data. This is shown by the $R^2$ value generally increasing towards $1$ and the $\sigma$ values decreasing positively - the deviation about the line is decreasing for higher $k$. There is slight fluctuation in the middle values of $k$, where for $k = \{6, 7, 8\}$ there is not an exact direction that the relationship is going. However, there is nothing to say that this isn't normal behaviour, since we do not yet know the relationship between the bias and $k$.
 
-Moreover, $R^2$ is very small for $k \leq 4$ , which points towards the line being a poor fir to the data; however, due the the standard deviation being $\sigma^2 \approx 1.1$, we cannot discard the importance of these lines; since most of the data is in a very small range about the line. Additionally, for $k=11$ we have the strongest relationship seen so far - the largest $R^2$ and smallest $\sigma^2$ values appear - this could indicate that for this distribution, when $k=11$ the linear relationship between the logarithm of the bias and the logarithm of the sample size is most likely to be true.
+Moreover, $R^2$ is very small for $k \leq 4$ , which points towards the line being a poor fir to the data; however, due the the standard deviation being $\sigma \approx 1.1$, we cannot discard the importance of these lines; since most of the data is in a very small range about the line. Additionally, for $k=11$ we have the strongest relationship seen so far - the largest $R^2$ and smallest $\sigma$ values appear - this could indicate that for this distribution, when $k=11$ the linear relationship between the logarithm of the bias and the logarithm of the sample size is most likely to be true.
 
 Possibly the most important information found from the regression analysis, is shown in Table \ref{uniform_a_c_compare_table}; where the values of $a_{k}$ and $c_{k}$ are given for each value of $k = \{ 2, 3, ..., 11\}$.
 
@@ -1105,9 +1104,312 @@ This graph shows that for large $N \leq 50,000$, the lowest line on the graph is
 
 
 
-\section{1-dimensional Exponential Distribution}
 
-\section{2-dimensional Gaussian/Normal Distribution}
+
+\section{1-dimensional Exponential Distribution} \label{Expo_d=1}
+
+I will now be looking at the entropy of samples from the exponential distribution $exp(\lambda)$, where $\lambda > 0$ is the rate or inverse scale parameter. In a similar fashion to the previous distributions, the exponential also has an exact formula for the entropy, given the rate parameter $\lambda$. Using equation (\ref{ShaEnt}) and the density function for the exponential distribution $f(x) = \lambda e^{-\lambda x}$ for $x \in [0, \infty)$ and for $\lambda >0$, we can write the exact entropy;
+\begin{align*}
+H &= - \int_{x \in \mathbb{R}^d} f(x) log(f(x)) dx \\ 
+&= - \int_{0}^{\infty} \lambda e^{-\lambda x} log [ \lambda e^{-\lambda x} ] dx  \\
+&= - \lambda \int_{0}^{\infty} \lambda e^{-\lambda x} [log(\lambda) - \lambda x] dx  \\
+&= \lambda \int_{0}^{\infty} \lambda e^{-\lambda x} - log(\lambda) e^{-\lambda x} dx \\
+&= - \lambda \left[x e^{-\lambda x}\right]_{0}^{\infty} + \int_{0}^{\infty}\lambda e^{-\lambda x} dx + log(\lambda) \left[ e^{-\lambda x}\right]_{0}^{\infty} \\
+&= 0 + (log(\lambda) - 1) \left[e^{-\lambda x} \right]_{0}^{\infty} \\
+&= -(log(\lambda) - 1)
+\end{align*}
+
+Thus we have the the exact value of entropy for the exponential distribution, given the rate parameter $\lambda > 0$, is;
+\begin{equation} \label{ExpEnt}
+H = 1 - log(\lambda)
+\end{equation}
+
+Moreover, I am again considering a 1-dimensional distribution; thus $V_{d} = V_{1} = 2$, and;
+\begin{equation}
+\hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
+\end{equation}
+is the form of the Kozachenko-Leonenko estimator that I will be considering here, equation (\ref{KLest_d=1}).
+
+I have decided to choose to explore the exponential distribution with rate parameter $\lambda = 0.5$, this is because, we know that for the exponential distribution we must have the rate parameter $\lambda >0$ and if I choose $\lambda > e \approx 2.7183$ we get a negative values of entropy, $H < 0$. This will introduce problems when considering the modulus of the bias; hence, for this analysis it will be more beneficial to consider a positive value of entropy. Also, for $\lambda \geq 1$, we have a very small value of entropy, $0 \leq H \leq 1$, which would cause problems when calculating large samples and their entropy. Therefore, I have chosen the rate parameter such that $\lambda \in (0, 1)$, so $\lambda=0.5$, the exact entropy is given by;
+\begin{equation} \label{exponential_exact}
+H = 1 - log(0.5) \approx 1.693147
+\end{equation}
+
+
+
+\subsection{Estimator Conditions} \label{E_Conditions}
+
+Samples from the exponential distribution must satisfy the conditions of Theorem \ref{efficient} and \ref{unbias}, to  be an asymptotically unbiased and consistent estimator. For these theorems to hold, this distribution must satisfy the Conditions \ref{A1}, \ref{A2} and \ref{A3}. 
+
+Firstly, to satisfy Condition \ref{A1}, the density function $f(x) =  \frac{e^{\frac{-x}{2}}}{2}$ for $x \in [0, \infty)$, where we have chosen $\lambda = 0.5$, must be such that;
+\begin{itemize}
+\item $f$ is bounded - this is true, since for any probability distribution we have $f(x) \geq 0$, also for the exponential distribution we always have for $x \in [0, \infty)$ that $f(x) \leq 1$, so $f$ is a bounded function.
+
+\item $f$ is m-times differentiable - this is obvious, since if we consider the $m$th derivative of the density function $f$ we get;
+\begin{align*}
+\frac{d^m}{dx^m}(f(x)) &= (-1)^{m} \lambda^{m+1} e^{\frac{-x}{\lambda}} \\
+&= (-1)^{m} \lambda^{m} f(x)
+\end{align*}
+ where $(-1)^{m} \lambda^{m}$ is a polynomial, which exists for all $x \in [0, \infty)$, thus $f$ is m-times differentiable.
+
+\item $\exists r_{*} > 0$ and a Borel measurable function $g_{*}$, with $\|y-x\| \leq r_{*}$ so that $\|f^{(t)}(x)\| \leq g_{*}(x) f(x)$ and $\|f^{(m)}(x) - f^{(m)}(x)\| \leq g_{*}(x) f(x)\|y - x\|^{\eta}$, for some $g_{*}$ such that $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$
+
+Since we are considering a 1-dimensional distribution, the norm $\| \cdot \|$ can be written as $|.|$. Moreover, considering that for Theorems \ref{unbias} and \ref{efficient}, we have the value of $\beta \geq 2$; thus choosing $\beta = 2$, and since $m = \lfloor \beta \rfloor =  \lfloor 2 \rfloor = 2 = \beta$ and $\eta = \beta -m$, we have that $\eta =0$, just as previously. Thus we need  $|f^{(t)}(x)| \leq g_{*}(x) f(x)$, which is obvious by above, in view of writing $|\frac{d^t}{dx^t} f(x)| = g_{*}(x) f(x)$, where we choose $ g_{*}(x) = |(-1)^{m} \lambda^{m}| = |\lambda^{m}| = \lambda^{m}$, for $t=1,2,...,m$, and $|f(x)| = f(x)$, since $f(x) >0$. Also, $g_{*}$ is a polynomial and is hence Borel measurable over $\mathbb{R}$, and for any polynomial we obviously have $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$. Additionally, we need $|f^{(m)}(x) - f^{(m)}(y)| \leq g_{*}(x) f(x)|y - x|^{0} = g_{*}(x) f(x)$. We currently have;
+\begin{align*}
+|f^{(m)}(x) - f^{(m)}(y)| &= | (-1)^{m} \lambda^{m} f(x) - (-1)^{m} \lambda^{m} f(y) | \\
+&\leq \lambda^{m} | f(x) + f(y) | \\
+&\leq g_{*}(x) (| f(x)| + |f(y)| )\\
+&\leq g_{*}(x)f(x)
+\end{align*}
+since we know that $f(x) >0$ for all $x \in \mathbb{R}$, and $g_{*}(x) = \lambda^{m} >0$, which is the $g_{*}$ before; thus satisfies the conditions for it.
+
+\end{itemize}
+
+Next, to satisfy Condition \ref{A2}, for the density function $f$ of the exponential distribution, must fulfill that;
+\begin{itemize}
+\item The $\alpha$-moment of $f$ must be finite, so $\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty$ - this is true since the moments of the exponential distribution are given by;
+\begin{align*}
+\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx &= \int_{0}^{\infty} | x |^{\alpha} \lambda e^{-\lambda x} dx\\
+&= \frac{\alpha !}{\lambda ^{\alpha}} < \infty
+\end{align*}
+for all $\alpha \in \mathbb{N}$, which is obviously finite.
+\end{itemize}
+
+Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{paper4_T4} and \ref{paper4_T5}. As previously, these values are independent of the distribution that the sample is from, and only depends on the size of the sample, the dimension of the distribution that sample is taken from and the value chosen for $\alpha$, where we have chosen $\alpha = 2$. Thus, the values of $k$ found in section \ref{N_conditions} are $\{1, 2, ..., 11\}$.
+
+Due to the above conditions for Theorems \ref{unbias} and \ref{efficient} being met, we can say that the Kozachenko-Leonenko estimator, of a sample from the exponential distribution is an asymptotically unbiased and consistent estimator for entropy. 
+
+
+
+\subsection{Simulation Results} \label{Expo_results}
+
+I will be exploring the simulation results using the same process as for the previous two distributions, which begins with examining the values of the bias of the estimator at certain values of $N$ for all different $k \in \{1, 2, ..., 11\}$.
+
+In a similar manner to before, using $N=100$, $N=25,000$ and $N=50,000$, from \ref{TODO-appendix data}, we can create a table to compare the mean values of the bias of the estimator for the different values of $k$ considered. Recall that the information is taken over 500 sample of size $N$ and the mean of these estimators is considered, then the bias is found by taking the modulus of this value minus the exact entropy, equation \ref{exponential_exact}.
+
+\begin{table}
+\caption{1-dimensional exponential distribution, comparison of $k$} \label{exponential_kcompare_table}
+\begin{center}
+\begin{tabular}{| l | c c c |} 
+\toprule
+$k$ &  $|Bias(\hat{H}_{100, k})|$ & $|Bias(\hat{H}_{25000, k})|$  &  $|Bias(\hat{H}_{50000, k})|$ \\
+\midrule[1pt]
+1     & 0.0008253    &       Inf    &       Inf   \\
+2     & 0.0210589    & 0.0008092    & 0.0000643   \\
+3     & 0.0173133    & 0.0001295    & 0.0004322   \\
+4     & 0.0146824    & 0.0000769    & 0.0000023   \\
+5     & 0.0155819    & 0.0000654    & 0.0000749   \\
+6     & 0.0194462    & 0.0000117    & 0.0001435   \\
+7     & 0.0127644    & 0.0005499    & 0.0000490   \\
+8     & 0.0174169    & 0.0000440    & 0.0004291   \\
+9     & 0.0216625    & 0.0003314    & 0.0000560   \\
+10    & 0.0177220    & 0.0004974    & 0.0000544   \\
+11    & 0.0162163    & 0.0000472    & 0.0006244   \\
+\hline
+\end{tabular}
+\\[10pt]
+\caption*{This table is comparing the values of $|Bias(\hat{H}_{N, k})|$ for the values of $k$ with $N=100$, $N=25,000$ and $N=50,000$, when the estimator is taken over $500$ samples}
+\end{center}
+\end{table}
+
+For the sample size $N=100$, Table \ref{exponential_kcompare_table} shows that the optimal value of $k$ to choose for the estimator is obviously given by $k=1$, since the value of the bias is $\approx 10^{-3}$ smaller than that for all the other values of $k$. Considering $k=1$ for larger sample sizes, we have $\infty$ - an error, similar to that for uniform distribution. This happens due to limitations in computer programs; since, we cannot have continuous data, it must be discretised, so for infinitely small distances between two points, we get a $-\infty$ value for the distance to the values closest neighbour, which only has to happen between two points for the whole estimator to become infinite. Because of this, I will not be examining the value of the estimator for $k=1$, when considering large sample sizes.
+
+Looking at the magnitude of the bias for sample sizes $N=25,000$, when $k \in \{2, 3, ..., 11\}$, we can see that the smallest bias occurs at $k=6$; but it is also quite small for the estimator found with $k=4, 5$ and $11$. Because of the closeness of the size of the bias for all the values of $k$ just mentioned, we cannot currently draw up any conclusions about which value of $k$ is definitly better to use - in terms of reducing the bias.
+
+Considering the information found from samples of size $N=50,000$, it appears to show that the estimator for $k=4$ has a significantly smaller bias than that for the other values of $k$. The next smallest bias is $\approx 10^1$ larger than that for $k=4$, and occurs when $k=2, 5, 7, 9$ and $10$. Since we are only considering the bias at this specific sample size, and not looking at the information about the value of the bias found for samples of a similar size, we cannot yet draw any conclusive decisions from this table.
+
+Considering the relationship shown in equation \ref{logbias}, we can plot the simulated data to see if the data does infact show this linear relationship proposed earlier. I have plotted the data seperately for each value of $k$, and have fitted a linear regression line to each plot to indicate the general trend of the plot. I have not considered $k=1$ since a large proportion of the simulated values are infinite; thus, the graph does not make much sense. These plots are shown in Figures \ref{Expo_graphs26} and \ref{Expo_graphs711}.
+
+\begin{figure}
+\makebox[\linewidth][c]{%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=2.png}
+\caption{k=2}
+\end{subfigure}%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=3.png}
+\caption{k=3}
+\end{subfigure}%
+}\    \makebox[\linewidth][c]{%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=4.png}
+\caption{k=4}
+\end{subfigure}%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=5.png}
+\caption{k=5}
+\end{subfigure}%
+}\    \makebox[\linewidth][c]{%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=6.png}
+\caption{k=6}
+\end{subfigure}%
+}
+\caption{1-dimensional Exponential distribution with different $k = 2, ..., 6$} \label{Expo_graphs26}
+\end{figure}
+
+
+\begin{figure}
+\makebox[\linewidth][c]{%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=7.png}
+\caption{k=7}
+\end{subfigure}%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=8.png}
+\caption{k=8}
+\end{subfigure}%
+}\    \makebox[\linewidth][c]{%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=9.png}
+\caption{k=9}
+\end{subfigure}%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=10.png}
+\caption{k=10}
+\end{subfigure}%
+}\    \makebox[\linewidth][c]{%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/Expo_k=11.png}
+\caption{k=11}
+\end{subfigure}%
+}
+\caption{1-dimensional Exponential distribution with different $k = 7, ..., 11 $} \label{Expo_graphs711}
+\end{figure}
+
+These graphs all show what we expected, and what has been confirmed with the previous two distributions, that the logarithm of the sample size against the logarithm of the bias of the estimator does indeed show a linear relationship. In these graphs there seems to be little difference between the values of $k$, in both the gradient of the line and in how close the data actually fits the line. This motivates us to consider both the coefficient of determination and the standard deviations of the regression for each value of $k$, which is given in Table \ref{expo_rsq}.
+
+\begin{table}
+\caption{Comparison of the coefficient of determination and the standard deviations of the regression for each value of $k$ for the 1-dimensional exponential distribution} \label{expo_rsq}
+\begin{center}
+\begin{tabular}{| l | c c |} 
+\toprule
+$k$ & $R^2$ & $\sigma$ \\
+\midrule[1pt]
+2     & 0.1843    & 1.1972   \\
+3     & 0.1596    & 1.1073   \\
+4     & 0.1538    & 1.1321   \\
+5     & 0.2151    & 1.0687   \\
+6     & 0.2277    & 1.1694   \\
+7     & 0.2474    & 1.1253   \\
+8     & 0.2107    & 1.1473   \\
+9     & 0.2509    & 1.0939   \\
+10    & 0.2200    & 1.2150   \\
+11    & 0.2017    & 1.2369   \\
+\hline
+\end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
+
+The $R^2$ value (coefficient of determination) is $\approx 0.207$, with very little variation, for all values of $k$. This is an indication that the regression line could be a poor fit to the data, since a value of 1 means a perfect fit. However, the standard error of the regression line is small, $\approx 1.15$ for all $k$, again with little variation. The standard error for the lines here is similar to that for both the uniform and normal distributions. Thus, this doesn't indicate a poor fit, just that .. TODO wtf does this show???
+
+The most important information found from these graphs is the equation of the regression line. I have collated all the data about the coefficients $a_{k}$ and $c_{k}$ and displayed them in Table \ref{expo_a_c_compare_table}.
+
+\begin{table}
+\caption{Comparison of coefficients of regression $a_{k}$ and $c_{k}$ from equation \ref{bias}, for 1-dimensional exponential distribution} \label{expo_a_c_compare_table}
+\begin{center}
+\begin{tabular}{| l | l l |} 
+\toprule
+$k$ &  $a_{k}$ & $c_{k}$ \\
+\midrule[1pt]
+2     & 0.5824    & 0.0739   \\
+3     & 0.4941    & 0.0310   \\
+4     & 0.4940    & 0.0266   \\
+5     & 0.5727    & 0.0602   \\
+6     & 0.6500    & 0.1199   \\
+7     & 0.6605    & 0.1324   \\
+8     & 0.6067    & 0.0739   \\
+9     & 0.6480    & 0.1189   \\
+10    & 0.6606    & 0.1267   \\
+11    & 0.6365    & 0.1042   \\
+\hline
+\end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
+
+This distribution shows interesting results, that are somewhat different to those previously shown in the other two distributions. In a similar fashion to previously there is a general increase in $a_{k}$ with $k$; however, in comparison to before where $c_{k}$ acted similarly, here $c_{k}$ does not increase uniformly with $k$. Both the values of $a_{k}$ and $c_{k}$ are unvaried between each $k$, with $a_{k}$ ranging from $0.4940$ to $0.6606$ and $c_{k}$ ranging from $0.0266$ to $0.1324$. Interestingly, the smallest values of $a_{k}$ and $c_{k}$, occur at $k=4$ then at $k=3$. Additionally, the largest two values occur at $k=7$ and $k=10$. The optimal value of $k$ will hopefully become more apparent when plotting all the regression lines against one and other in Figure \ref{Expo_comparison}.
+
+Firstly, I wish to look at the relationship between $k$ and $c_{k}$ in the exponential distribution. To do this, I will look at the values of $c_{k}$ for each $k$ and see if it depends on $k^{a_{k}}$ or not. This should help us to decipher if the bias is of $O \left( \frac{1}{N^{a}} \right)$ or $O\left( \left( \frac{k}{N} \right)^{a} \right)$. This information is shown in table \ref{expo_dependentk}.
+
+\begin{table}
+\caption{Considering the dependence of $k$ on $c_{k}$} \label{expo_dependentk}
+\begin{center}
+\begin{tabular}{| l | l l l |} 
+\toprule
+$k$ &  $k^{a_{k}}$ & $c_{k}$ & $\frac{k^{a_{k}}}{c_{k}}$ \\
+\midrule[1pt]
+2     & 1.0000    & 0.0739    &    13.532   \\
+3     & 1.4084    & 0.0310    &    45.434   \\
+4     & 1.7207    & 0.0266    &    64.687   \\
+5     & 2.2121    & 0.0602    &    36.745   \\
+6     & 2.8466    & 0.1199    &    23.742   \\
+7     & 3.2656    & 0.1324    &    24.665   \\
+8     & 3.2563    & 0.0739    &    44.063   \\
+9     & 3.8477    & 0.1189    &    32.361   \\
+10    & 4.2695    & 0.1267    &    33.697   \\
+11    & 4.3301    & 0.1042    &    41.556   \\
+\hline
+\end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
+
+For the previous distributions there has been an obvious increase when looking at the values of $\frac{k^{a_{k}}}{c_{k}}$ for increasing $k$. However, for the exponential distribution this is not the case, the values seem to be all over the place, and plotting these in Figure \ref{c_k_expo} confirms this. 
+
+\begin{figure}
+\makebox[\linewidth][c]{%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/ExpocVk.png}
+\caption{The values of $k$ against the values of $c_{k}$}
+\end{subfigure}%
+\begin{subfigure}[b]{.8\textwidth}
+\centering
+\includegraphics[width=\textwidth]{./Graphs/Best/ExpocVk2.png}
+\caption{The values of $k^{a_{k}}$ against the corresponding values of $c_{k}$}
+\end{subfigure}%
+}
+\caption{Graphically representing the relationship between $c_{k}$ and $k$ for the exponential distribution} \label{c_k_expo}
+\end{figure}
+
+These graphs do not show the almost exponential relationship seen before, they don't appear to show any relationship between $k$ and $c_{k}$. This could imply that for the exponential distribution we have $Bias| \hat{H}_{N, k} | = O \left( \frac{1}{N^{a}} \right)$, in comparison the normal and uniform which showed results in favour of the opposing idea;  $Bias| \hat{H}_{N, k} | = O\left( \left( \frac{k}{N} \right)^{a} \right)$.
+
+To find the optimal value of $k$ for this distribution, I have generated a comparison plot of all of the regression lines, shown in Figure \ref{expo_comparison_graph}. Hopefully this can shed some light on which value of $k$ appears to be the best for use for the estimator, depending on the sample size $N$.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Best/ExpoComparison.png}
+  \end{center}
+\caption{Plot of regression lines for $\log|Bias(\hat{H}_{N, k})|$ against $\log(N)$, for $k=2, 3,..., 11$, for samples from the exponential distribution}
+  \label{expo_comparison_graph}
+\end{figure}
+
+At smaller sample size $N \leq 5,000$, the graph appears to show that the estimator with $k=4$ has the lowest line; hence, the smallest bias and the best one to use for the estimation. However, for larger $N$ this is not true, to better visualise what is happening for large $N$, I have created an enlarged version in Figure \ref{expo_comparison_graph_zoom}.
+
+\begin{figure}
+  \begin{center}
+    \includegraphics[width=\textwidth]{./Graphs/Best/ExpoComparisonZoom.png}
+  \end{center}
+\caption{Figure \ref{expo_comparison_graph} zoomed in around large $N$.}
+  \label{expo_comparison_graph_zoom}
+\end{figure}
+
+This graph shows that for large sample sizes, $5,000 \leq N \leq 50,000$ that the estimator with $k=10$ has the smallest bias; thus appears to be the best one to use for estimating entropy from this distribution.
+
+
+
 
 
 \chapter{Conclusion}
@@ -1120,11 +1422,13 @@ This graph shows that for large $N \leq 50,000$, the lowest line on the graph is
 \chapter{Code}
 
 For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics''. %https://www.r-project.org/about.html
-I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in sections \ref{Uniform_results}, \ref{Normal_results} and \ref{Expo_results}.
+I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in this paper.
 
-To create my package \texttt{Entropy-Estimators}, I used two of Hadley's \ref{TODO} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs of the estimator bias against the sample size.  \texttt{Entropy-Estimators} also has 2 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data and \texttt{FNN} for the kth nearest neighbour function. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
+To create my package \texttt{Entropy-Estimators}, I used two of Hadley Wickham's \cite{TODO} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs in this paper. \texttt{Entropy-Estimators} also has 3 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data, \texttt{FNN} for the kth nearest neighbour function, and \texttt{Rcpp} to create a C++ for loop for faster computation. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
 
 \section{The Estimator}
+
+About KLE
 
 \section{Exact Entropies}
 
@@ -1134,10 +1438,10 @@ To consider the bias of the estimator, I had to find the exact value of entropy 
 
 With \texttt{sd =1}, as is true in the samples considered here, we find the entropy to be given by;
 
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 > NormalEnt(sd=1)
 [1] 1.418939
-\end{verbatim}
+\end{lstlisting}
 
 The function for the uniform distribution is \texttt{UniformEnt}, with parameters \texttt{min} and \texttt{max}, is defined as;
 
@@ -1145,10 +1449,10 @@ The function for the uniform distribution is \texttt{UniformEnt}, with parameter
 
 Here we use \texttt{min=0} and \texttt{max=100} in the samples considered; thus we find the exact entropy to be given by;
 
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 > UniformEnt(min = 0, max = 100)
 [1] 4.60517
-\end{verbatim}
+\end{lstlisting}
 
 Lastly, for the exponential distribution we have the function \texttt{ExpoEnt}, with only one parameter \texttt{rate}, defined below;
 
@@ -1156,12 +1460,61 @@ Lastly, for the exponential distribution we have the function \texttt{ExpoEnt}, 
 
 In this paper we are using the exponential distribution with parameter \texttt{rate=1.5}, thus;
 
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 > ExpoEnt(rate = 1.5)
 [1] 0.5945349
-\end{verbatim}
+\end{lstlisting}
+
+
 
 \section{Simulations}
+
+\textit{In this section I used the packages \texttt{readr} to save the data, \texttt{dplyr} for the manipulation of data and \texttt{Rcpp} for creating a fast loop over hundreds of iterations.} % TODO - find word to replace iterations
+
+I created functions \texttt{normalloop}, \texttt{uniformloop} and \texttt{expoloop}, in C++ which, for each sample size $N$ creates $M$ samples of that size, finds the estimator for sample and puts the result in a vector of length $M$. These functions are as follows;
+
+\lstinputlisting[language=R]{./Code/NormalLoop.R} % TODO - change th elanguage to c++
+
+for the normal distribution, and for the uniform distribution;
+
+\lstinputlisting[language=R]{./Code/UniformLoop.R}
+
+Lastly for the exponential distribution;
+
+\lstinputlisting[language=R]{./Code/ExpoLoop.R}
+
+Using these functions I created each column of the tables, where each table is a different distribution, each column is a different value of $k \in \{1, 2, ..., 11\}$ and each row is a different sample size $N \in \{100, 200, 300, ..., 50000\}$. Below is how the column with $k=1$ for the normal distribution was created, all other columns were done similarly;
+
+\lstinputlisting[language=R]{./Code/ColumnOfData.R}
+
+
+\section{Analysis}
+
+\textit{In this section I use the packages \texttt{ggplot2} for the graphs, \texttt{dplyr} for the data manipulation and \texttt{readr} to read in my csv data files.}
+
+Once I obtained all the simulated data, I found the modulus of the bias for each sample size $N$, each $k$ and each distribution. I then selected the information for all $k$ with $N=100, 25000$ and $50000$, to display in Tables \ref{normal_kcompare_table}, \ref{uniform_kcompare_table} and \ref{expo_kcompare_table}, this involved taking \texttt{Data} and subtracting either \texttt{NormalEnt(sd=1)}, \texttt{UniformEnt(min=0, max=100)} or \texttt{ExpoEnt(rate=0.5)} from the estimators, depending on the distribution.
+
+Next, I plotted graphs for each $k$ of the logarithm of the bias of the estimator $\hat{H}_{N, k}$ against the logarithm of the sample size $N$, shown in Figures \ref{normal_graphs16}, \ref{normal_graphs711}, \ref{Uniform_graphs26}, \ref{Uniform_graphs711}, \ref{Expo_graphs26} and \ref{Expo_graphs711}. I used the following code to do this, changing the \texttt{y} value to either \texttt{k1, k2, ..., k11} depending on which value of $k$ I was plotting. Also the \texttt{data} would be read in from a different file for each distribution, the code below shows plotting the simulations from the normal distribution with $k=1$.
+
+\lstinputlisting[language=R]{./Code/logGraphEachK.R}
+
+Additionally, I created a summary table of the useful information needed, containing the coefficients of the intercept $\zeta$ and the gradient $-a_{k}$ from the regression analysis, the coefficient of determination $R^2$ and the standard error $\sigma$ also from the regression analysis. I also modified $\zeta$ and$-a_{k}$ to find both $a_{k}$ and $c_{k}$. The code below shows how I did this for the normal distribution, and it is similar for the other two distributions, just changing the data inputted and th exact value of entropy used to find the bias.
+
+\lstinputlisting[language=R]{./Code/SummaryTables.R}
+
+These tables are shown in Appendix \ref{}, and from these I found the information in Tables \ref{normal_rsq}, \ref{normal_a_c_compare_table}, \ref{uniform_rsq}, \ref{uniform_a_c_compare_table}, \ref{expo_rsq} and \ref{expo_a_c_compare_table}. Then to create Tables \ref{normal_dependentk}, \ref{uniform_dependentk} and \ref{expo_dependentk}, I just had to modify the summary tables found above to include two extra columns with the $k^{a_{k}}$ and $\frac{k^{a_{k}}}{c_{k}}$, which was done by the following;
+
+\lstinputlisting[language=R]{./Code/Findingktoa.R}
+
+From this table I than created the graphs shown in Figures \ref{c_k_normal}, \ref{c_k_uniform} and \ref{c_k_expo}, using the below code.
+
+\lstinputlisting[language=R]{./Code/cVkGraphs.R}
+
+The last part of analysis conducted, was plotting all the regression lines of the logarithm of $N$ against the logarithm of the bias, for each $k$ on the same graph. To do this I used the summary data, read in as \texttt{Info}, and the \texttt{xmin}, \texttt{xmax}, \texttt{ymin} and \texttt{ymax} found when plotting the graphs for each $k$ separately. The following code was then used to create the graphs in Figures \ref{normal_comparison_graph}, \ref{uniform_comparison_graph} and \ref{expo_comparison_graph};
+
+\lstinputlisting[language=R]{./Code/ComparisonGraphs.R}
+
+
 
 
 \end{appendix}
