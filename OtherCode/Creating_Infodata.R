@@ -6,11 +6,15 @@ options(scipen = 999)
 
 # read in the data as a data frame
 #data <- as.data.frame(read_csv("../Data/data_normal.csv"))
-data <- as.data.frame(read_csv("../Data/data_uniform.csv"))
+#data <- as.data.frame(read_csv("../Data/data_uniform.csv"))
+data <- as.data.frame(read_csv("../Data/data_expo.csv"))
+
 
 # find the modulus of the bias for all n and k
 #data[-1] <- abs(data[-1] - NormalEnt(1))
-data[-1] <- abs(data[-1] - UniformEnt(min=0, max=100))
+#data[-1] <- abs(data[-1] - UniformEnt(min=0, max=100))
+data[-1] <- abs(data[-1] -ExpoEnt(rate=0.5))
+
 
 # take the logarithm of everything
 logdata <- log(data)
@@ -26,11 +30,11 @@ Info <- data.frame(k = 1:11, a = rep(0, 11),
 # for uniform distribution it is different because of the -Inf values
 # we do not use k=1
 # for k=2, remove the one -Inf value, and run the inside of the below loop
-i <- 2
-logdata <- logdata[-454,]
+#i <- 2
+#logdata <- logdata[-454,]
 
 # fill in data frame
-for (i in 3:11){
+for (i in 2:11){
   # find linear relationship of logarithm of bias against logrithm of n
   reg <- lm(logdata[[i+1]] ~ logdata$n)
   
@@ -55,6 +59,8 @@ for (i in 3:11){
   Info[i,] <- c(i, a, zeta, corcoef, powera, c, rsquared, se)
 }
 
+
 # save the Info data
 #write_csv(Info, "../Data/normal_info.csv")
-write_csv(Info, "../Data/uniform_info.csv")
+#write_csv(Info, "../Data/uniform_info.csv")
+write_csv(Info, "../Data/expo_info.csv")

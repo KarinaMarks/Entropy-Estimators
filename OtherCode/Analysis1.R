@@ -9,11 +9,14 @@ options(scipen = 999)
 
 # read in the data as a data frame
 #data <- as.data.frame(read_csv("../Data/data_normal.csv"))
-data <- as.data.frame(read_csv("../Data/data_uniform.csv"))
+#data <- as.data.frame(read_csv("../Data/data_uniform.csv"))
+data <- as.data.frame(read_csv("../Data/data_expo.csv"))
+
 
 # find the modulus of the bias for all n and k
 #data[-1] <- abs(data[-1] - NormalEnt(1))
-data[-1] <- abs(data[-1] - UniformEnt(min=0, max=100))
+#data[-1] <- abs(data[-1] - UniformEnt(min=0, max=100))
+data[-1] <- abs(data[-1] -ExpoEnt(rate=0.5))
 
 # creating the summary data
 SumData <- data %>%
@@ -45,7 +48,7 @@ LatexData <- data.frame(col1 = rep("&", 11), `100` = SumData$`100`,
                         col7 = rep("\\", 11))
 
 
-
+##### for the normal distribution
 # finding just when k=3
 k5Data <- data.frame(n = data$n, k5 = data$k5)
 

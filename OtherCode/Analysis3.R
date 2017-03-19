@@ -8,11 +8,15 @@ options(scipen = 999)
 
 # read in the data as a data frame
 #data <- as.data.frame(read_csv("../Data/data_normal.csv"))
-data <- as.data.frame(read_csv("../Data/data_uniform.csv"))
+#data <- as.data.frame(read_csv("../Data/data_uniform.csv"))
+data <- as.data.frame(read_csv("../Data/data_expo.csv"))
+
 
 # find the modulus of the bias for all n and k
 #data[-1] <- abs(data[-1] - NormalEnt(1))
-data[-1] <- abs(data[-1] - UniformEnt(min=0, max=100))
+#data[-1] <- abs(data[-1] - UniformEnt(min=0, max=100))
+data[-1] <- abs(data[-1] -ExpoEnt(rate=0.5))
+
 
 # take the logarithm of everything
 logdata <- log(data)
@@ -23,10 +27,10 @@ xmax <- max(logdata$n)
 
 # the min and max y values
 ymin <- -15 # this is because there are only 5 values smaller than -15
-ymax <- ceiling(max(logdata[-c(1,2,3)])) # this is because there are only 6 values larger than -4
+ymax <- ceiling(max(logdata[-c(1,2)])) # this is because there are only 6 values larger than -4
 
 # plot the graph for k=1
-ggplot(data=logdata, aes(x=n, y=k1)) +
+ggplot(data=logdata, aes(x=n, y=k11)) +
   geom_point(size=0.8) +
   geom_smooth(method="lm") +
   xlab("log(N)") +
@@ -41,11 +45,12 @@ ggplot(data=logdata, aes(x=n, y=k1)) +
 # the r squared values for the goodness of fit for each line
 # read in the summary data as a data frame
 #Info <- as.data.frame(read_csv("../Data/normal_info.csv"))
-Info <- as.data.frame(read_csv("../Data/uniform_info.csv"))[-1,] # removing the 0 rows for k=1
+#Info <- as.data.frame(read_csv("../Data/uniform_info.csv"))[-1,] # removing the 0 rows for k=1
+Info <- as.data.frame(read_csv("../Data/expo_info.csv"))[-1,] # removing the 0 rows for k=1
 
 # number of rows
 #N <- 11 # for normal distribution
-N <- 10 # for uniform distribution
+N <- 10 # for uniform and expo distribution
 
 # make a df with rsquared, corr and SE values in latex format
 rsqdf <- data.frame(col1 = rep("&", N), R2 = Info$rsquared,
@@ -74,7 +79,7 @@ Info$k <- as.integer(Info$k)
 
 
 # plot c against k
-g <- ggplot(data=Info, aes(x=k, y=c)) +
+ggplot(data=Info, aes(x=k, y=c)) +
   geom_point() +
   theme_minimal() +
   scale_x_continuous(labels = (1:11), breaks = (1:11))
@@ -108,10 +113,6 @@ ggplot(data=df, aes(x=k, y=c)) +
 ggplot(data=df, aes(x=ktoa, y=c)) +
   xlab("k^a") +
   geom_point() +
-  scale_x_continuous(breaks = c(2.5, 5.0, 7.5, 10.0, 12.5), 
-                     labels = c("2.5", "5.0", "7.5", "10.0", "12.5")) +
-  scale_y_continuous(breaks = c(0.0, 2.5, 5.0, 7.5), 
-                     labels = c("0.0", "2.5", "5.0", "7.5")) +
   theme_minimal() 
 
 

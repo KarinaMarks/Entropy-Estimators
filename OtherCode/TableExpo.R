@@ -60,9 +60,21 @@ newdf9 <- data.frame(n = seq(100, 50000, 100)) %>%
   dplyr::group_by(n) %>%
   summarise(Ent = mean(exposmth(M=500, N=n, k=9, rate=0.5), na.rm=TRUE))
 
+newdf10 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=10, rate=0.5), na.rm=TRUE))
 
-df <- left_join(df, newdf9, by="n")
+newdf11 <- data.frame(n = seq(100, 50000, 100)) %>% 
+  dplyr::group_by(n) %>%
+  summarise(Ent = mean(exposmth(M=500, N=n, k=11, rate=0.5), na.rm=TRUE))
 
-write_csv(newdf9, "../Data/data_expo_9.csv")
 
-write_csv(df, "../Data/data_expo123456789.csv")
+df <- left_join(df, newdf11, by="n")
+colnames(df) <- c("n", "k1", "k2", "k3", "k4", "k5", "k6", "k7", "k8", "k9", 
+                  "k10", "k11")
+
+write_csv(newdf10, "../Data/data_expo_10.csv")
+
+write_csv(df, "../Data/data_expo.csv")
+
+
