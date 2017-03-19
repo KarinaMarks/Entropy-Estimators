@@ -1,5 +1,5 @@
 # Graph (a) k against c
-ggplot(data=Info2, aes(x=k, y=c)) +
+ggplot(data=Info2, aes(x=k, y=ck)) +
   # plotting the points
   geom_point() +
   # x axis labels
@@ -7,7 +7,7 @@ ggplot(data=Info2, aes(x=k, y=c)) +
   theme_minimal() 
 
 # Graph (b) k^a against c
-ggplot(data=Info2, aes(x=`k^a`, y=c)) +
+ggplot(data=Info2, aes(x=`k^a`, y=ck)) +
   # plotting the points
   geom_point() +
   theme_minimal() 

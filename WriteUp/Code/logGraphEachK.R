@@ -1,5 +1,5 @@
 # read in the data as a data frame
-data <- as.data.frame(read_csv("../Data/data_normal.csv"))
+data <- as.data.frame(read_csv("./Data/data_normal.csv"))
 
 # find the modulus of the bias for all n and k
 data[-1] <- abs(data[-1] - NormalEnt(1))

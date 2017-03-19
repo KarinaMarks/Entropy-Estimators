@@ -1,5 +1,5 @@
 cppFunction('
-            NumericVector normalloop(int M, int N, int k){
+          NumericVector normalloop(int M, int N, int k){
             NumericVector est(M);
             NumericVector x(N);
             for (int i = 0; i < M; i++) {
