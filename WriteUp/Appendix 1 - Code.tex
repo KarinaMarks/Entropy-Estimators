@@ -2,7 +2,6 @@
 \usepackage[utf8]{inputenc}
 
 
-
 \title{Statistical Inference for Estimation of Entropy}
 \author{Karina Marks}
 
@@ -17,11 +16,13 @@
 \chapter{Code}
 
 For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics''. %https://www.r-project.org/about.html
-I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in section \ref{TODO}.
+I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in this paper.
 
-To create my package \texttt{Entropy-Estimators}, I used two of Hadley's \ref{TODO} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs of the estimator bias against the sample size.  \texttt{Entropy-Estimators} also has 2 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data and \texttt{FNN} for the kth nearest neighbour function. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
+To create my package \texttt{Entropy-Estimators}, I used two of Hadley Wickham's \cite{TODO} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs in this paper. \texttt{Entropy-Estimators} also has 3 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data, \texttt{FNN} for the kth nearest neighbour function, and \texttt{Rcpp} to create a C++ for loop for faster computation. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
 
 \section{The Estimator}
+
+About KLEE
 
 \section{Exact Entropies}
 
@@ -31,10 +32,10 @@ To consider the bias of the estimator, I had to find the exact value of entropy 
 
 With \texttt{sd =1}, as is true in the samples considered here, we find the entropy to be given by;
 
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 > NormalEnt(sd=1)
 [1] 1.418939
-\end{verbatim}
+\end{lstlisting}
 
 The function for the uniform distribution is \texttt{UniformEnt}, with parameters \texttt{min} and \texttt{max}, is defined as;
 
@@ -42,10 +43,10 @@ The function for the uniform distribution is \texttt{UniformEnt}, with parameter
 
 Here we use \texttt{min=0} and \texttt{max=100} in the samples considered; thus we find the exact entropy to be given by;
 
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 > UniformEnt(min = 0, max = 100)
 [1] 4.60517
-\end{verbatim}
+\end{lstlisting}
 
 Lastly, for the exponential distribution we have the function \texttt{ExpoEnt}, with only one parameter \texttt{rate}, defined below;
 
@@ -53,14 +54,59 @@ Lastly, for the exponential distribution we have the function \texttt{ExpoEnt}, 
 
 In this paper we are using the exponential distribution with parameter \texttt{rate=1.5}, thus;
 
-\begin{verbatim}
+\begin{lstlisting}[language=R]
 > ExpoEnt(rate = 1.5)
 [1] 0.5945349
-\end{verbatim}
+\end{lstlisting}
+
+
 
 \section{Simulations}
 
+\textit{In this section I used the packages \texttt{readr} to save the data, \texttt{dplyr} for the manipulation of data and \texttt{Rcpp} for creating a fast loop over hundreds of iterations.} % TODO - find word to replace iterations
 
+I created functions \texttt{normalloop}, \texttt{uniformloop} and \texttt{expoloop}, in C++ which, for each sample size $N$ creates $M$ samples of that size, finds the estimator for sample and puts the result in a vector of length $M$. These functions are as follows;
+
+\lstinputlisting[language=R]{./Code/NormalLoop.R} % TODO - change th elanguage to c++
+
+for the normal distribution, and for the uniform distribution;
+
+\lstinputlisting[language=R]{./Code/UniformLoop.R}
+
+Lastly for the exponential distribution;
+
+\lstinputlisting[language=R]{./Code/ExpoLoop.R}
+
+Using these functions I created each column of the tables, where each table is a different distribution, each column is a different value of $k \in \{1, 2, ..., 11\}$ and each row is a different sample size $N \in \{100, 200, 300, ..., 50000\}$. Below is how the column with $k=1$ for the normal distribution was created, all other columns were done similarly;
+
+\lstinputlisting[language=R]{./Code/ColumnOfData.R}
+
+
+\section{Analysis}
+
+\textit{In this section I use the packages \texttt{ggplot2} for the graphs, \texttt{dplyr} for the data manipulation and \texttt{readr} to read in my csv data files.}
+
+Once I obtained all the simulated data, I found the modulus of the bias for each sample size $N$, each $k$ and each distribution. I then selected the information for all $k$ with $N=100, 25000$ and $50000$, to display in Tables \ref{normal_kcompare_table}, \ref{uniform_kcompare_table} and \ref{expo_kcompare_table}, this involved taking \texttt{Data} and subtracting either \texttt{NormalEnt(sd=1)}, \texttt{UniformEnt(min=0, max=100)} or \texttt{ExpoEnt(rate=0.5)} from the estimators, depending on the distribution.
+
+Next, I plotted graphs for each $k$ of the logarithm of the bias of the estimator $\hat{H}_{N, k}$ against the logarithm of the sample size $N$, shown in Figures \ref{normal_graphs16}, \ref{normal_graphs711}, \ref{Uniform_graphs26}, \ref{Uniform_graphs711}, \ref{Expo_graphs26} and \ref{Expo_graphs711}. I used the following code to do this, changing the \texttt{y} value to either \texttt{k1, k2, ..., k11} depending on which value of $k$ I was plotting. Also the \texttt{data} would be read in from a different file for each distribution, the code below shows plotting the simulations from the normal distribution with $k=1$.
+
+\lstinputlisting[language=R]{./Code/logGraphEachK.R}
+
+Additionally, I created a summary table of the useful information needed, containing the coefficients of the intercept $\zeta$ and the gradient $-a_{k}$ from the regression analysis, the coefficient of determination $R^2$ and the standard error $\sigma$ also from the regression analysis. I also modified $\zeta$ and$-a_{k}$ to find both $a_{k}$ and $c_{k}$. The code below shows how I did this for the normal distribution, and it is similar for the other two distributions, just changing the data inputted and th exact value of entropy used to find the bias.
+
+\lstinputlisting[language=R]{./Code/SummaryTables.R}
+
+These tables are shown in Appendix \ref{}, and from these I found the information in Tables \ref{normal_rsq}, \ref{normal_a_c_compare_table}, \ref{uniform_rsq}, \ref{uniform_a_c_compare_table}, \ref{expo_rsq} and \ref{expo_a_c_compare_table}. Then to create Tables \ref{normal_dependentk}, \ref{uniform_dependentk} and \ref{expo_dependentk}, I just had to modify the summary tables found above to include two extra columns with the $k^{a_{k}}$ and $\frac{k^{a_{k}}}{c_{k}}$, which was done by the following;
+
+\lstinputlisting[language=R]{./Code/Findingktoa.R}
+
+From this table I than created the graphs shown in Figures \ref{c_k_normal}, \ref{c_k_uniform} and \ref{c_k_expo}, using the below code.
+
+\lstinputlisting[language=R]{./Code/cVkGraphs.R}
+
+The last part of analysis conducted, was plotting all the regression lines of the logarithm of $N$ against the logarithm of the bias, for each $k$ on the same graph. To do this I used the summary data, read in as \texttt{Info}, and the \texttt{xmin}, \texttt{xmax}, \texttt{ymin} and \texttt{ymax} found when plotting the graphs for each $k$ separately. The following code was then used to create the graphs in Figures \ref{normal_comparison_graph}, \ref{uniform_comparison_graph} and \ref{expo_comparison_graph};
+
+\lstinputlisting[language=R]{./Code/ComparisonGraphs.R}
 
 
 
