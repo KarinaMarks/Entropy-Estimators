@@ -1,26 +1,42 @@
-# plot of Bias against k
-library(ggplot2)
-library(readr)
-library(dplyr)
-library(tidyr)
+## Plot of Bias against k
 
 # remove the e notation
 options(scipen = 999)
 
-# choose a sample size
-N <- 5000
+# choose a sample size - either choose a value or a range of values
+#N <- 5000
+N <- seq(40000, 50000, 100)
 
 # read in the data as a data frame for each distribtuion 
 # select the row with N=50,000 and remove the column n
 Ndata <- as.data.frame(read_csv("../Data/data_normal.csv")) %>%
-  filter(n==N) %>%
+  filter(n %in% N) %>%
   select(-n)
 Udata <- as.data.frame(read_csv("../Data/data_uniform.csv"))%>%
-  filter(n==N) %>%
+  filter(n %in% N) %>%
   select(-n)
 Edata <- as.data.frame(read_csv("../Data/data_expo.csv"))%>%
-  filter(n==N) %>%
+  filter(n %in% N) %>%
   select(-n)
+
+# if statement for if we choose a range of numbers instead of a single number
+if (length(N) == 1){
+  # do nothing to dfs
+  # make name of graphs
+  GraphName <- pasteo("Bias for sample size N=", N)
+} else {
+  # work out the mean of the estimated entropy
+  Ndata <- Ndata %>% 
+    summarise_each(funs(mean))
+  Udata <- Udata %>% 
+    summarise_each(funs(mean))
+  Edata <- Edata %>% 
+    summarise_each(funs(mean))
+  # make name of graph
+  GraphName <- paste0("Average bias for samples of size N=", min(N), 
+                      " to N=", max(N))
+}
+
 
 # turning data around rows become columns and adding the k column
 Ndata <- as.data.frame(t(Ndata)) %>%
@@ -55,5 +71,5 @@ ggplot(aes(x=k, y=bias, col = distribution), data=df) +
   scale_x_continuous(labels = (1:11), breaks = (1:11)) +
   ylim(0, ymax) +
   ylab("Bias of estimator") +
-  ggtitle(paste0("Bias for sample size N=", N))
+  ggtitle(GraphName)
 
