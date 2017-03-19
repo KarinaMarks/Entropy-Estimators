@@ -6,19 +6,20 @@
 \author{Karina Marks}
 
 
-\usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext}
+\usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext, url}
 \usepackage[format=plain,
             textfont=it]{caption}
 
 
 \begin{document}
 
+\lstset{showstringspaces=false, breaklines=true}
+
 \chapter{Code}
 
-For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics''. %https://www.r-project.org/about.html
-I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in this paper.
+For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics'' \cite{code1}. I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in this paper.
 
-To create my package \texttt{Entropy-Estimators}, I used two of Hadley Wickham's \cite{TODO} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs in this paper. \texttt{Entropy-Estimators} also has 3 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data, \texttt{FNN} for the kth nearest neighbour function, and \texttt{Rcpp} to create a C++ for loop for faster computation. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
+To create my package \texttt{Entropy-Estimators}, I used two of Hadley Wickham's \cite{code2} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs in this paper. \texttt{Entropy-Estimators} also has 3 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data, \texttt{FNN} for the kth nearest neighbour function, and \texttt{Rcpp} to create a C++ for loop for faster computation. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
 
 \section{The Estimator}
 
@@ -63,19 +64,19 @@ In this paper we are using the exponential distribution with parameter \texttt{r
 
 \section{Simulations}
 
-\textit{In this section I used the packages \texttt{readr} to save the data, \texttt{dplyr} for the manipulation of data and \texttt{Rcpp} for creating a fast loop over hundreds of iterations.} % TODO - find word to replace iterations
+\textit{In this section I used the packages \texttt{readr} to save the data, \texttt{dplyr} for the manipulation of data and \texttt{Rcpp} for creating a fast loop over hundreds of iterations.} 
 
 I created functions \texttt{normalloop}, \texttt{uniformloop} and \texttt{expoloop}, in C++ which, for each sample size $N$ creates $M$ samples of that size, finds the estimator for sample and puts the result in a vector of length $M$. These functions are as follows;
 
-\lstinputlisting[language=R]{./Code/NormalLoop.R} % TODO - change th elanguage to c++
+\lstinputlisting[language=C++]{./Code/NormalLoop.R}
 
 for the normal distribution, and for the uniform distribution;
 
-\lstinputlisting[language=R]{./Code/UniformLoop.R}
+\lstinputlisting[language=C++]{./Code/UniformLoop.R}
 
 Lastly for the exponential distribution;
 
-\lstinputlisting[language=R]{./Code/ExpoLoop.R}
+\lstinputlisting[language=C++]{./Code/ExpoLoop.R}
 
 Using these functions I created each column of the tables, where each table is a different distribution, each column is a different value of $k \in \{1, 2, ..., 11\}$ and each row is a different sample size $N \in \{100, 200, 300, ..., 50000\}$. Below is how the column with $k=1$ for the normal distribution was created, all other columns were done similarly;
 
@@ -92,7 +93,7 @@ Next, I plotted graphs for each $k$ of the logarithm of the bias of the estimato
 
 \lstinputlisting[language=R]{./Code/logGraphEachK.R}
 
-Additionally, I created a summary table of the useful information needed, containing the coefficients of the intercept $\zeta$ and the gradient $-a_{k}$ from the regression analysis, the coefficient of determination $R^2$ and the standard error $\sigma$ also from the regression analysis. I also modified $\zeta$ and$-a_{k}$ to find both $a_{k}$ and $c_{k}$. The code below shows how I did this for the normal distribution, and it is similar for the other two distributions, just changing the data inputted and th exact value of entropy used to find the bias.
+Additionally, I created a summary table of the useful information needed, containing the coefficients of the intercept $\zeta$ and the gradient $-a_{k}$ from the regression analysis, the coefficient of determination $R^2$ and the standard error $\sigma$ also from the regression analysis. I also modified $\zeta$ and$-a_{k}$ to find both $a_{k}$ and $c_{k}$. The code below shows how I did this for the normal distribution, and it is similar for the other two distributions, just changing the data inputted and the exact value of entropy used to find the bias.
 
 \lstinputlisting[language=R]{./Code/SummaryTables.R}
 
@@ -108,6 +109,9 @@ The last part of analysis conducted, was plotting all the regression lines of th
 
 \lstinputlisting[language=R]{./Code/ComparisonGraphs.R}
 
+
+\bibliographystyle{plain}
+\bibliography{Bibliography}
 
 
 
