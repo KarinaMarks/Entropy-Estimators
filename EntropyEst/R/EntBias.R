@@ -27,7 +27,9 @@ EntBias <- function(X, k, dist = c("normal", "uniform", "exponential"),
     # working out the actual value of entropy for this distribution
     Act <- UniformEnt(min=min, max=max)
   } else if (dist == "exponential"){
-    paste("not ready for this jelly", rate)
+    Act <- ExpoEnt(rate=rate)
+  } else {
+    return("Choose one of normal, uniform or exponential as the distribution")
   }
   
   # The bias
