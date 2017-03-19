@@ -1,7 +1,7 @@
 #' Bias of entropy estimator
 #' 
 #' Works out the bias of the Kozachenko Leonenko estimator for entropy against
-#' the actual value, given that the sample is from a normal or uniform
+#' the actual value, given that the sample is from a normal, uniform or exponentail
 #' distribution
 #' @param X the sample 
 #' @param k the order of nearest neighbour distances to work out
@@ -10,6 +10,8 @@
 #' sample is from, given that distribution is "normal"
 #' @param max/min, the parameters for the unifrom distribution, provided
 #' that the distribution is "uniform"
+#' @param rate the parameter for the exponential distribution, provided the 
+#' distribution is "exponential"
 #' @export
 
 

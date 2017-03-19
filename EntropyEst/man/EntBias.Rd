@@ -17,12 +17,15 @@ EntBias(X, k, dist = c("normal", "uniform", "exponential"), sd = 1,
 \item{sd}{the standard deviation of the normal distribution the 
 sample is from, given that distribution is "normal"}
 
+\item{rate}{the parameter for the exponential distribution, provided the 
+distribution is "exponential"}
+
 \item{max/min, }{the parameters for the unifrom distribution, provided
 that the distribution is "uniform"}
 }
 \description{
 Works out the bias of the Kozachenko Leonenko estimator for entropy against
-the actual value, given that the sample is from a normal or uniform
+the actual value, given that the sample is from a normal, uniform or exponentail
 distribution
 }
 
