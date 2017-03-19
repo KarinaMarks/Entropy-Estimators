@@ -1,0 +1,44 @@
+\documentclass{report}
+\usepackage[utf8]{inputenc}
+
+\title{Statistical Inference for Entropy}
+\author{Karina Marks}
+
+\usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext, subcaption}
+\usepackage[format=plain,
+            textfont=it]{caption}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}{Condition}
+
+\begin{document}
+\chapter{Conclusion}
+
+This table shows what the best k for large and small $N$ is, depending on the distributions. Then whether the distributions imply the bias is of equations \ref{fixedkbias} and \ref{dependentkbias}; thus, either $O \left( \frac{1}{N^{a}} \right)$ or $O\left( \left( \frac{k}{N} \right)^{a} \right)$.
+
+\begin{table}
+\caption{Summary of Distributions} \label{distribution_comparison}
+\begin{center}
+\begin{tabular}{| l || c | c | c|} 
+\toprule
+ &  Normal, $N(0,1)$ & Uniform, $U[0,100]$ & Exponential, $exp(0.5)$ \\
+\midrule[1pt]
+Optimal $k$ for $N \leq 10,000$   & $2$ & $3$  &  $4$ \\
+Optimal $k$ for $10,000 \leq N \leq 50,000$ &  $5 or 7 $ & $7$  & $10$ \\
+Suspected behaviour of $Bias |\hat{H}_{N, k} |$ & $O\left( \left( \frac{k}{N} \right)^{a} \right)$ & $O\left( \left( \frac{k}{N} \right)^{a} \right)$ &  $O \left( \frac{1}{N^{a}} \right)$ \\
+\hline
+\end{tabular}
+\\[10pt]
+\end{center}
+\end{table}
+
+TODO - check the values of $k$ maybe there is more that one?
+TODO - look up how to make two lines in table for left column
+difference in which k is best
+
+difference in the order of the bias
+
+
+
+\end{document}
