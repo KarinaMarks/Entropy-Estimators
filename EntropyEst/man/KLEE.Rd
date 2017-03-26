@@ -2,7 +2,7 @@
 % Please edit documentation in R/KLEE.R
 \name{KLEE}
 \alias{KLEE}
-\title{KLEE1 - Kozachenko-Leonenko Estimator of Entropy}
+\title{KLEE - Kozachenko-Leonenko Estimator of Entropy}
 \usage{
 KLEE(X, k, d = 1)
 }

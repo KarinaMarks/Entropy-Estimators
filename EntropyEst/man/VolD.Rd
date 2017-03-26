@@ -10,6 +10,6 @@ VolD(d)
 \item{d}{the dimension}
 }
 \description{
-Only works for dimensions 1 or 2
+The volume of the unit d-dimensional Euclidean ball
 }
 
