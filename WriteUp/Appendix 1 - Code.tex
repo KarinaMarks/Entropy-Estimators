@@ -17,13 +17,78 @@
 
 \chapter{Code}
 
-For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics'' \cite{code1}. I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in this paper.
+For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics'' \cite{code1}. I created a package called \texttt{EntropyEst}, with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE). The functions exported form this package are; \texttt{KLEE}, \texttt{GammaFun}, \texttt{Rho}, \texttt{VolD}, \texttt{NormalEnt}, \texttt{UniformEnt}, \texttt{ExpoEnt} and \texttt{EntBias}. The functions in this package I then used to run simulations on samples from different statistical distributions to create the results in this paper.
 
-To create my package \texttt{Entropy-Estimators}, I used two of Hadley Wickham's \cite{code2} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs in this paper. \texttt{Entropy-Estimators} also has 3 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data, \texttt{FNN} for the kth nearest neighbour function, and \texttt{Rcpp} to create a C++ for loop for faster computation. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
+To create my package \texttt{Entropy-Estimators}, I used two of Hadley Wickham's \cite{code2} packages; \texttt{devtools} and \texttt{roxygen2}. \texttt{Entropy-Estimators} also has only 1 dependent package (alongside the base R packages); \texttt{FNN}, which was used for the kth nearest neighbour function. 
+
+When running simulations and creating the graphical information in this paper, I also used 4 more packages;  \texttt{ggplot2} for the graphical representation of the data, \texttt{Rcpp} to create a C++ for loop for faster computation, \texttt{dplyr} for the manipulation of data, and \texttt{readr} to read and write the csv files of data.
+
+I will outline the important code used for the simulations in this appendix; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
 
 \section{The Estimator}
 
-About KLEE
+Using the definition of the Kozachenko-Leonenko estimator, found in Section \ref{}, I created the function \texttt{KLEE}. To do this I first had to make the following functions; \texttt{GammaFun}, \texttt{Rho}, \texttt{VolD}. For the purpose of this paper, I have only created the function to work out the estimator for a 1-dimensional sample.
+
+Firstly, I created the function \texttt{Rho}, defined in equation \ref{Rho}, which takes three arguments;
+\begin{itemize}
+\item \texttt{X}; a vector of a sample to work out the distance between a value and its kth nearest neighbour
+\item \texttt{k}; the order or nearest neighbour to be used
+\item \texttt{d}; the dimension of the sample, default value 1 - since currently can only work for 1-dimensional samples
+\end{itemize}
+and returns a vector of distances, where its first entry is the distance from the first value of \texttt{X} to its kth nearest neighbour. The function is given by the following code;
+\lstinputlisting[language=R]{./Code/Rho.R}
+
+Next, I created the function \texttt{GammaFun}, defined in equation \ref{Gamma}, which takes one argument \texttt{m} and returns a numeric value, using the following code;
+\lstinputlisting[language=R]{./Code/GammaFun.R}
+
+Then, using the function above for $\Gamma$, we can define the function \texttt{VolD}, equation \ref{}, which is the volume of the d-dimensional unit euclidean ball. This function takes one argument \texttt{d} which is the dimension and returns a numeric value using the following code;
+\lstinputlisting[language=R]{./Code/VolD.R}
+
+The only other function needed for the estimator is the digamma function which is defined in base R; thus, we can now define the estimator \texttt{KLEE}. This takes three arguments;
+\begin{itemize}
+\item \texttt{X}; a vector of a sample to estimate the entropy of
+\item \texttt{k}; the order or nearest neighbour to be used
+\item \texttt{d}; the dimension of the sample, default value 1 as before for \texttt{Rho}
+\end{itemize}
+and returns a numeric value which is the estimator of entropy for this distribution. The code written to define this function is as follows;
+\lstinputlisting[language=R]{./Code/KLEE.R}
+
+
+\subsection{Example}
+To show that the \texttt{KLEE} function works, I am giving the example below where I can work out the estimation of entropy by hand, and check that my function works for this. 
+
+Consider a sample $X = \{3, 6, 1, 7, 2\}$, from this we can easily find the estimator of entropy for $k=1$ and $k=2$. For both estimators the sample szie $n=5$, the volume of the d-dimensional euclidean ball is $V_{d} = V_{1} = 2$. Then for $k=1$, the vector of nearest neighbour distances is given by $NN_{1} = \{1, 1, 1, 1, 1\}$ and the digamma function is given by $\Psi(1) = -\gamma \approx -0.57722$. Thus we have;
+
+\begin{align*}
+\hat{H}_{5, 1} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{1, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma)} \\
+&=\frac{1}{5 \exp(-\gamma)} \sum_{i=1}^{5} \log(8) \\
+&= \frac{1}{\exp(-\gamma)} \log(8) \\
+&\approx something wrong
+\end{align*}
+
+For $k=2$ we have the vector of nearest neighbour distances is given by $NN_{2} = \{2, 3, 2, 4, 1\}$ and the digamma function is given by $\Psi(2) = -\gamma + 1 \approx 0.42278$. Thus we have;
+
+\begin{align*}
+\hat{H}_{5, 2} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{2, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma + 1)} \\
+&=\frac{1}{5 \exp(-\gamma + 1)} \sum_{i=1}^{5} \log(8 NN_{2, i}) \\
+&= \frac{1}{5 \exp(-\gamma + 1)} \left(\log(16) + \log(24) + \log(16) + \log(32) + \log(8) \right)\\
+&\approx something? wrong
+\end{align*}
+
+
+TODO- look at both above?
+
+We can also find this using the function \texttt{KLEE}, by the following code;
+\begin{lstlisting}[language=R]
+> x <- c(3, 6, 1, 7, 2)
+> KLEE(x, k=1)
+[1] 2.656658
+> KLEE(x, k=2)
+[1] 2.430898
+\end{lstlisting}
+
+
+
 
 \section{Exact Entropies}
 
