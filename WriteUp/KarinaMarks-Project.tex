@@ -12,6 +12,7 @@
             textfont=it]{caption}
 \usepackage[toc,page]{appendix}
 
+\linespread{1.3}
 
 \newtheorem{theorem}{Theorem}
 \newtheorem{remark}{Condition}
@@ -47,7 +48,7 @@ H = - \sum_{x \in \mathbb{Z}^{d}} f(x) log(f(x)) \nonumber
 
 
 \subsection{R\'enyi and Tsallis Entropy}
-The R\'enyi and Tsallis entropies are for the order $q \neq 1$ and the construction of them relies upon the generalisation of the Shannon entropy \ref{ShaEnt}. For a random vector $X \in \mathbb{R}^d$, from a continuous distribution with density function $f$, we define;
+The R\'enyi and Tsallis entropies are for the order $q \neq 1$ and the construction of them relies upon the generalisation of the Shannon entropy, equation \ref{ShaEnt}. For a random vector $X \in \mathbb{R}^d$, from a continuous distribution with density function $f$, we define;
 
 R\'enyi entropy
 \begin{equation} \label{RenEnt} 
@@ -66,7 +67,7 @@ H_{q}^{*} &=  \frac{1}{1-q} log \left( \sum_{x \in \mathbb{Z}^{d}} f^q (x) \righ
 H_{q} &=  \frac{1}{q-1} \left(1 - \sum_{x \in \mathbb{Z}^d} f^q (x) \right)  
 \end{align*}
 
-When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), this is a special case for when $q=1$. 
+When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and Tsallis, (\ref{TsaEnt}), entropies tend to the Shannon entropy, (\ref{ShaEnt}), as this is a special case for when $q=1$. 
 
 
 
@@ -75,7 +76,7 @@ When the order of the entropy $q \to 1$, both the R\'enyi, (\ref{RenEnt}), and T
 
 \subsection{Properties of Entropy} \label{entropyProperties}
 
-I will begin by exploring properties specific to the Shannon entropy; and then progress to those for other types of entropy. Kapur and Kesavan's book on \textit{Entropy Optimization Principles with Applications} \cite{paper8}, gives an account of some properties of the discrete Shannon entropy $H$. Whilst Johnson \cite{book1}, discusses properties for the continuous Shannon entropy - the Differential entropy, and compares them to the discrete properties in his book on \textit{Information Theory and The Central Limit Theorem}.
+I will begin by exploring properties specific to the Shannon entropy; and then progress to those for other types of entropy. Kapur and Kesavan's book on \textit{Entropy Optimization Principles with Applications} \cite{paper8}, gives an account of some properties of the discrete Shannon entropy $H$. Whilst Johnson \cite{book1}, discusses properties for the continuous Shannon entropy - the differential entropy, and compares them to the discrete properties in his book on \textit{Information Theory and The Central Limit Theorem}.
 
 The Shannon entropy of a discrete random variable is always non-negative $H \geq 0$, and is strictly positive unless if $f$ is any of the $N$ degenerate distributions ($X$ is deterministic). That is, the only case for which $H=0$ is when $f(x_{i}) = 1$ if $i = k$, $k \in [1, N]$ and $f(x_{i}) = 0$ otherwise, for a discrete distribution. However, for the continuous Shannon entropy, $H$ can be either positive of negative. This is obvious to see if we consider a random variable $Y$ with the continuous uniform distribution on $[0, c]$, then;
 \begin{equation}
@@ -98,7 +99,7 @@ Additionally, for the Shannon entropy, there is an interesting result on an uppe
 \begin{equation}
 H(X) \leq \frac{1}{s} \log \left( \frac{2^s e \Gamma^s (\frac{1}{s}) \mathbb{E}(|X|^s)}{s^{s-1}}  \right)
 \end{equation}
-This indicates that if the $s$-th moment of $X$ if finite, $ \mathbb{E}(|X|^s) < \infty$, for some $s > 0$ then the Shannon entropy of $X$ will also be finite, $H(X) < \infty$ \cite{book3}.
+This indicates that if the $s$-th moment of $X$ if finite, $ \mathbb{E}(|X|^s) < \infty$, for some $s > 0$ then the Shannon entropy of $X$ will also be finite, $H(X) < \infty$ \cite{book3}.  %TODO - fix this ref
 
 Shannon entropy, as mentioned earlier, is a special case of the R\'enyi and Tsallis entropies as $q \to 1$. Thus, for a general $q$-entropy, other properties hold. Namely, $H_{q}$ is concave when $q > 0$ (and convex when $q<0$), implying for the Shannon entropy, when $q=1$, that $H$ is concave.
 
@@ -328,6 +329,10 @@ I now wish to more explicitly introduce the Kozachenko-Leonenko estimator of the
 \item  For dimension d, the volume of the unit d-dimensional Euclidean ball is defined as;
 \begin{equation} \label{Volume}
 V_{d} = \frac{\pi^\frac{d}{2}}{\Gamma(1 + \frac{d}{2})}
+\end{equation}
+where the $\Gamma$ function is defined as;
+\begin{equation} \label{Gamma}
+\Gamma(m) = \int_{0}^{\infty} x^{m-1} e^{-x} dx
 \end{equation}
 
 \item For the kth nearest neighbour, the digamma function is defined as;
@@ -1419,19 +1424,82 @@ This graph shows that for large sample sizes, $5,000 \leq N \leq 50,000$ that th
 
 \chapter{Data}
 
-\chapter{Code}
-
 \lstset{showstringspaces=false, breaklines=true}
 
 \chapter{Code}
 
-For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics'' \cite{code1}. I created a package with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE), and then used this package to run simulations on samples from different statistical distributions to create the results in this paper.
+For the simulations in this project, I used R; ''a language and environment for statistical computing and graphics'' \cite{code1}. I created a package called \texttt{EntropyEst}, with the functions needed to created the Kozachenko-Leonenko entropy estimator (KLEE). The functions exported form this package are; \texttt{KLEE}, \texttt{GammaFun}, \texttt{Rho}, \texttt{VolD}, \texttt{NormalEnt}, \texttt{UniformEnt}, \texttt{ExpoEnt} and \texttt{EntBias}. The functions in this package I then used to run simulations on samples from different statistical distributions to create the results in this paper.
 
-To create my package \texttt{Entropy-Estimators}, I used two of Hadley Wickham's \cite{code2} packages; \texttt{devtools} and \texttt{roxygen2}, I also used \texttt{ggplot2} to plot the graphs in this paper. \texttt{Entropy-Estimators} also has 3 dependency packages (alongside the base R packages); \texttt{dplyr} for the manipulation of data, \texttt{FNN} for the kth nearest neighbour function, and \texttt{Rcpp} to create a C++ for loop for faster computation. I will outline the important code used for the simulations; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
+To create my package \texttt{Entropy-Estimators}, I used two of Hadley Wickham's \cite{code2} packages; \texttt{devtools} and \texttt{roxygen2}. \texttt{Entropy-Estimators} also has only 1 dependent package (alongside the base R packages); \texttt{FNN}, which was used for the kth nearest neighbour function. 
+
+When running simulations and creating the graphical information in this paper, I also used 4 more packages;  \texttt{ggplot2} for the graphical representation of the data, \texttt{Rcpp} to create a C++ for loop for faster computation, \texttt{dplyr} for the manipulation of data, and \texttt{readr} to read and write the csv files of data.
+
+I will outline the important code used for the simulations in this appendix; however, the full package and a complete account of the code used can be found on my GitHub page \textit{https://github.com/KarinaMarks/Entropy-Estimators}.
 
 \section{The Estimator}
 
-About KLEE
+Using the definition of the Kozachenko-Leonenko estimator, found in Section \ref{}, I created the function \texttt{KLEE}. To do this I first had to make the following functions; \texttt{GammaFun}, \texttt{Rho}, \texttt{VolD}. For the purpose of this paper, I have only created the function to work out the estimator for a 1-dimensional sample.
+
+Firstly, I created the function \texttt{Rho}, defined in equation \ref{Rho}, which takes three arguments;
+\begin{itemize}
+\item \texttt{X}; a vector of a sample to work out the distance between a value and its kth nearest neighbour
+\item \texttt{k}; the order or nearest neighbour to be used
+\item \texttt{d}; the dimension of the sample, default value 1 - since currently can only work for 1-dimensional samples
+\end{itemize}
+and returns a vector of distances, where its first entry is the distance from the first value of \texttt{X} to its kth nearest neighbour. The function is given by the following code;
+\lstinputlisting[language=R]{./Code/Rho.R}
+
+Next, I created the function \texttt{GammaFun}, defined in equation \ref{Gamma}, which takes one argument \texttt{m} and returns a numeric value, using the following code;
+\lstinputlisting[language=R]{./Code/GammaFun.R}
+
+Then, using the function above for $\Gamma$, we can define the function \texttt{VolD}, equation \ref{}, which is the volume of the d-dimensional unit euclidean ball. This function takes one argument \texttt{d} which is the dimension and returns a numeric value using the following code;
+\lstinputlisting[language=R]{./Code/VolD.R}
+
+The only other function needed for the estimator is the digamma function which is defined in base R; thus, we can now define the estimator \texttt{KLEE}. This takes three arguments;
+\begin{itemize}
+\item \texttt{X}; a vector of a sample to estimate the entropy of
+\item \texttt{k}; the order or nearest neighbour to be used
+\item \texttt{d}; the dimension of the sample, default value 1 as before for \texttt{Rho}
+\end{itemize}
+and returns a numeric value which is the estimator of entropy for this distribution. The code written to define this function is as follows;
+\lstinputlisting[language=R]{./Code/KLEE.R}
+
+
+\subsection{Example}
+To show that the \texttt{KLEE} function works, I am giving the example below where I can work out the estimation of entropy by hand, and check that my function works for this. 
+
+Consider a sample $X = \{3, 6, 1, 7, 2\}$, from this we can easily find the estimator of entropy for $k=1$ and $k=2$. For both estimators the sample szie $n=5$, the volume of the d-dimensional euclidean ball is $V_{d} = V_{1} = 2$. Then for $k=1$, the vector of nearest neighbour distances is given by $NN_{1} = \{1, 1, 1, 1, 1\}$ and the digamma function is given by $\Psi(1) = -\gamma \approx -0.57722$. Thus we have;
+
+\begin{align*}
+\hat{H}_{5, 1} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{1, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma)} \\
+&=\frac{1}{5 \exp(-\gamma)} \sum_{i=1}^{5} \log(8) \\
+&= \frac{1}{\exp(-\gamma)} \log(8) \\
+&\approx something wrong
+\end{align*}
+
+For $k=2$ we have the vector of nearest neighbour distances is given by $NN_{2} = \{2, 3, 2, 4, 1\}$ and the digamma function is given by $\Psi(2) = -\gamma + 1 \approx 0.42278$. Thus we have;
+
+\begin{align*}
+\hat{H}_{5, 2} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{2, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma + 1)} \\
+&=\frac{1}{5 \exp(-\gamma + 1)} \sum_{i=1}^{5} \log(8 NN_{2, i}) \\
+&= \frac{1}{5 \exp(-\gamma + 1)} \left(\log(16) + \log(24) + \log(16) + \log(32) + \log(8) \right)\\
+&\approx something? wrong
+\end{align*}
+
+
+TODO- look at both above?
+
+We can also find this using the function \texttt{KLEE}, by the following code;
+\begin{lstlisting}[language=R]
+> x <- c(3, 6, 1, 7, 2)
+> KLEE(x, k=1)
+[1] 2.656658
+> KLEE(x, k=2)
+[1] 2.430898
+\end{lstlisting}
+
+
+
 
 \section{Exact Entropies}
 
@@ -1516,6 +1584,7 @@ From this table I than created the graphs shown in Figures \ref{c_k_normal}, \re
 The last part of analysis conducted, was plotting all the regression lines of the logarithm of $N$ against the logarithm of the bias, for each $k$ on the same graph. To do this I used the summary data, read in as \texttt{Info}, and the \texttt{xmin}, \texttt{xmax}, \texttt{ymin} and \texttt{ymax} found when plotting the graphs for each $k$ separately. The following code was then used to create the graphs in Figures \ref{normal_comparison_graph}, \ref{uniform_comparison_graph} and \ref{expo_comparison_graph};
 
 \lstinputlisting[language=R]{./Code/ComparisonGraphs.R}
+
 
 
 
