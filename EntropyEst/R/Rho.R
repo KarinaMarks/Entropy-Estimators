@@ -1,6 +1,7 @@
 #' Distance of kth nearest neighbour
 #' 
-#' @param X the sample from a distribution
+#' @param X the sample to work out the distance between a value and its kth 
+#' nearest neighbour
 #' @param k the order of nearest neighbour to be used
 #' @param d the dimension of the sample
 #' @export
@@ -8,7 +9,7 @@
 
 
 # The kth NN function
-Roe <- function(X, k, d=1) {
+Rho <- function(X, k, d=1) {
   if (d == 1){
     # creating the matrix of kth nn distances for X
     NNdist <- FNN::knn.dist(data=X, k=k)
