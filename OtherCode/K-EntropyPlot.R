@@ -4,8 +4,13 @@
 options(scipen = 999)
 
 # choose a sample size - either choose a value or a range of values
-#N <- 5000
-N <- seq(40000, 50000, 100)
+#N <- 100
+#N <- seq(49000, 50000, 100) ## gives interesting results?
+#N <- seq(100, 1000, 100) ##
+#N <- seq(9500, 10500, 100)
+#N <- seq(29500, 30500 , 100)
+N <- seq(100, 10000 , 100)
+
 
 # read in the data as a data frame for each distribtuion 
 # select the row with N=50,000 and remove the column n
@@ -19,6 +24,11 @@ Edata <- as.data.frame(read_csv("../Data/data_expo.csv"))%>%
   filter(n %in% N) %>%
   select(-n)
 
+# setting all Inf values to NA, so that we can use na.rm in mean function
+Udata$k1[is.infinite(Udata$k1)] <- NA
+Udata$k2[is.infinite(Udata$k2)] <- NA
+Edata$k1[is.infinite(Edata$k1)] <- NA
+
 # if statement for if we choose a range of numbers instead of a single number
 if (length(N) == 1){
   # do nothing to dfs
@@ -29,9 +39,9 @@ if (length(N) == 1){
   Ndata <- Ndata %>% 
     summarise_each(funs(mean))
   Udata <- Udata %>% 
-    summarise_each(funs(mean))
+    summarise_each(funs(mean(., na.rm = TRUE)))
   Edata <- Edata %>% 
-    summarise_each(funs(mean))
+    summarise_each(funs(mean(., na.rm = TRUE)))
   # make name of graph
   GraphName <- paste0("Average bias for samples of size N=", min(N), 
                       " to N=", max(N))
@@ -58,8 +68,8 @@ colnames(df) <- c("Normal", "Uniform", "Exponential", "k")
 # change to different format
 df <- gather(df, key= distribution, value=bias, Normal, Uniform, Exponential)
 
-# removing rows with Inf values
-df <- df[is.finite(df$bias),]
+# Remove any rows which = NaN - this occurs when all values are NA
+df <- df[!is.na(df$bias),]
 
 # find the maximum value of bias
 ymax <- max(df$bias)
