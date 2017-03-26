@@ -99,7 +99,7 @@ Additionally, for the Shannon entropy, there is an interesting result on an uppe
 \begin{equation}
 H(X) \leq \frac{1}{s} \log \left( \frac{2^s e \Gamma^s (\frac{1}{s}) \mathbb{E}(|X|^s)}{s^{s-1}}  \right)
 \end{equation}
-This indicates that if the $s$-th moment of $X$ if finite, $ \mathbb{E}(|X|^s) < \infty$, for some $s > 0$ then the Shannon entropy of $X$ will also be finite, $H(X) < \infty$ \cite{book3}.  %TODO - fix this ref
+This indicates that if the $s$-th moment of $X$ if finite, $ \mathbb{E}(|X|^s) < \infty$, for some $s > 0$ then the Shannon entropy of $X$ will also be finite, $H(X) < \infty$ \cite{book3}.
 
 Shannon entropy, as mentioned earlier, is a special case of the R\'enyi and Tsallis entropies as $q \to 1$. Thus, for a general $q$-entropy, other properties hold. Namely, $H_{q}$ is concave when $q > 0$ (and convex when $q<0$), implying for the Shannon entropy, when $q=1$, that $H$ is concave.
 
@@ -858,7 +858,7 @@ Firstly, to satisfy Condition \ref{A1}, for the density function $f(x) = 0.01$ f
 \item f is m-times differentiable - as $f$ is constant this holds
 
 \item $\exists r_{*} > 0$ and a Borel measurable function $g_{*}$, with $\|y-x\| \leq r_{*}$ so that $\|f^{(t)}(x)\| \leq g_{*}(x) f(x)$ and $\|f^{(m)}(x) - f^{(m)}(x)\| \leq g_{*}(x) f(x)\|y - x\|^{\eta}$, for some $g_{*}$ such that $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$.
-Since we are considering a 1-dimensional distribution, we can write the norms $\| \cdotp \|$ as  $| \cdotp |$. Moreover, considering that for Theorems \ref{unbias} and \ref{efficient}, we have the value of $\beta \geq 2$; thus choosing $\beta = 2$, and since $m = \lfloor \beta \rfloor =  \lfloor 2 \rfloor = 2 = \beta$ and $\eta = \beta -m$, we have that $\eta =0$. Thus we need  $|f^{(t)}(x)| \leq g_{*}(x) f(x)$, which is obvious since $f$ is constant for $f^{(t)}(x) = 0$ for all $t \geq 1$ TODO - sort this out
+This is elementary since $f$ is constant, thus $f^{(t)}(x) = 0$ for all $t \geq 1$, so we can always fins an appropriate $g_{*}(x)$.
 
 \end{itemize}
 
@@ -1317,7 +1317,7 @@ $k$ & $R^2$ & $\sigma$ \\
 \end{center}
 \end{table}
 
-The $R^2$ value (coefficient of determination) is $\approx 0.207$, with very little variation, for all values of $k$. This is an indication that the regression line could be a poor fit to the data, since a value of 1 means a perfect fit. However, the standard error of the regression line is small, $\approx 1.15$ for all $k$, again with little variation. The standard error for the lines here is similar to that for both the uniform and normal distributions. Thus, this doesn't indicate a poor fit, just that .. TODO wtf does this show???
+The $R^2$ value (coefficient of determination) is $\approx 0.207$, with very little variation, for all values of $k$. This is an indication that the regression line could be a poor fit to the data, since a value of 1 means a perfect fit. However, the standard error of the regression line is small, $\approx 1.15$ for all $k$, again with little variation. The standard error for the lines here is similar to that for both the uniform and normal distributions; thus, this doesn't necessarily indicate an extremely poorly fitting line.
 
 The most important information found from these graphs is the equation of the regression line. I have collated all the data about the coefficients $a_{k}$ and $c_{k}$ and displayed them in Table \ref{expo_a_c_compare_table}.
 
@@ -1591,7 +1591,7 @@ and returns a vector of distances, where its first entry is the distance from th
 Next, I created the function \texttt{GammaFun}, defined in equation \ref{Gamma}, which takes one argument \texttt{m} and returns a numeric value, using the following code;
 \lstinputlisting[language=R]{./Code/GammaFun.R}
 
-Then, using the function above for $\Gamma$, we can define the function \texttt{VolD}, equation \ref{}, which is the volume of the d-dimensional unit euclidean ball. This function takes one argument \texttt{d} which is the dimension and returns a numeric value using the following code;
+Then, using the function above for $\Gamma$, we can define the function \texttt{VolD}, equation \ref{Volume}, which is the volume of the d-dimensional unit euclidean ball. This function takes one argument \texttt{d} which is the dimension and returns a numeric value using the following code;
 \lstinputlisting[language=R]{./Code/VolD.R}
 
 The only other function needed for the estimator is the digamma function which is defined in base R; thus, we can now define the estimator \texttt{KLEE}. This takes three arguments;
@@ -1604,38 +1604,38 @@ and returns a numeric value which is the estimator of entropy for this distribut
 \lstinputlisting[language=R]{./Code/KLEE.R}
 
 
-\subsection{Example}
-To show that the \texttt{KLEE} function works, I am giving the example below where I can work out the estimation of entropy by hand, and check that my function works for this. 
+%\subsection{Example}
+%To show that the \texttt{KLEE} function works, I am giving the example below where I can work out the estimation of entropy by hand, and check that my function works for this. 
 
-Consider a sample $X = \{3, 6, 1, 7, 2\}$, from this we can easily find the estimator of entropy for $k=1$ and $k=2$. For both estimators the sample szie $n=5$, the volume of the d-dimensional euclidean ball is $V_{d} = V_{1} = 2$. Then for $k=1$, the vector of nearest neighbour distances is given by $NN_{1} = \{1, 1, 1, 1, 1\}$ and the digamma function is given by $\Psi(1) = -\gamma \approx -0.57722$. Thus we have;
+%Consider a sample $X = \{3, 6, 1, 7, 2\}$, from this we can easily find the estimator of entropy for $k=1$ and $k=2$. For both estimators the sample szie $n=5$, the volume of the d-dimensional euclidean ball is $V_{d} = V_{1} = 2$. Then for $k=1$, the vector of nearest neighbour distances is given by $NN_{1} = \{1, 1, 1, 1, 1\}$ and the digamma function is given by $\Psi(1) = -\gamma \approx -0.57722$. Thus we have;
 
-\begin{align*}
-\hat{H}_{5, 1} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{1, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma)} \\
-&=\frac{1}{5 \exp(-\gamma)} \sum_{i=1}^{5} \log(8) \\
-&= \frac{1}{\exp(-\gamma)} \log(8) \\
-&\approx something wrong
-\end{align*}
+%\begin{align*}
+%\hat{H}_{5, 1} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{1, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma)} \\
+%&=\frac{1}{5 \exp(-\gamma)} \sum_{i=1}^{5} \log(8) \\
+%&= \frac{1}{\exp(-\gamma)} \log(8) \\
+%&\approx something wrong
+%\end{align*}
 
-For $k=2$ we have the vector of nearest neighbour distances is given by $NN_{2} = \{2, 3, 2, 4, 1\}$ and the digamma function is given by $\Psi(2) = -\gamma + 1 \approx 0.42278$. Thus we have;
+%For $k=2$ we have the vector of nearest neighbour distances is given by $NN_{2} = \{2, 3, 2, 4, 1\}$ and the digamma function is given by $\Psi(2) = -\gamma + 1 \approx 0.42278$. Thus we have;
 
-\begin{align*}
-\hat{H}_{5, 2} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{2, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma + 1)} \\
-&=\frac{1}{5 \exp(-\gamma + 1)} \sum_{i=1}^{5} \log(8 NN_{2, i}) \\
-&= \frac{1}{5 \exp(-\gamma + 1)} \left(\log(16) + \log(24) + \log(16) + \log(32) + \log(8) \right)\\
-&\approx something? wrong
-\end{align*}
+%\begin{align*}
+%\hat{H}_{5, 2} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{2, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma + 1)} \\
+%&=\frac{1}{5 \exp(-\gamma + 1)} \sum_{i=1}^{5} \log(8 NN_{2, i}) \\
+%&= \frac{1}{5 \exp(-\gamma + 1)} \left(\log(16) + \log(24) + \log(16) + \log(32) + \log(8) \right)\\
+%&\approx something? wrong
+%\end{align*}
 
 
-TODO- look at both above?
+%TODO- look at both above?
 
-We can also find this using the function \texttt{KLEE}, by the following code;
-\begin{lstlisting}[language=R]
-> x <- c(3, 6, 1, 7, 2)
-> KLEE(x, k=1)
-[1] 2.656658
-> KLEE(x, k=2)
-[1] 2.430898
-\end{lstlisting}
+%We can also find this using the function \texttt{KLEE}, by the following code;
+%\begin{lstlisting}[language=R]
+%> x <- c(3, 6, 1, 7, 2)
+%> KLEE(x, k=1)
+%[1] 2.656658
+%> KLEE(x, k=2)
+%[1] 2.430898
+%\end{lstlisting}
 
 
 
@@ -1698,6 +1698,7 @@ Using these functions I created each column of the tables, where each table is a
 \lstinputlisting[language=R]{./Code/ColumnOfData.R}
 
 
+
 \section{Analysis}
 
 \textit{In this section I use the packages \texttt{ggplot2} for the graphs, \texttt{dplyr} for the data manipulation and \texttt{readr} to read in my csv data files.}
@@ -1723,6 +1724,13 @@ From this table I than created the graphs shown in Figures \ref{c_k_normal}, \re
 The last part of analysis conducted, was plotting all the regression lines of the logarithm of $N$ against the logarithm of the bias, for each $k$ on the same graph. To do this I used the summary data, read in as \texttt{Info}, and the \texttt{xmin}, \texttt{xmax}, \texttt{ymin} and \texttt{ymax} found when plotting the graphs for each $k$ separately. The following code was then used to create the graphs in Figures \ref{normal_comparison_graph}, \ref{uniform_comparison_graph} and \ref{expo_comparison_graph};
 
 \lstinputlisting[language=R]{./Code/ComparisonGraphs.R}
+
+
+
+\section{Conclusion}
+
+TODO - Talk about how I made the other graphs 
+
 
 
 
