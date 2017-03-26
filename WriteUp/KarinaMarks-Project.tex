@@ -878,7 +878,7 @@ Thus, due to the above conditions for Theorems \ref{unbias} and \ref{efficient} 
 
 I will now conduct simulations, in a similar manner as for the normal distribution, where for each value of $k$ separately, I will consider $500$ samples of size $N$ from the uniform distribution, finding the estimator in each case and take the average of these estimators to find our entropy estimator. I will then consider the relationship show in equation (\ref{logbias}) for each sample and work out the average for the values of a and c, for each $k \in \{1, 2, ..., 11\}$. 
 
-For $N=100$, $N=25,000$ and $N=50,000$, using the results from \ref{TODO-appendix data}, we can create a table to compare the mean values of the bias of the estimator for the different values of $k$ considered. 
+For $N=100$, $N=25,000$ and $N=50,000$, using the results from \ref{appendix_data}, we can create a table to compare the mean values of the bias of the estimator for the different values of $k$ considered. 
 
 \begin{table}
 \caption{1-dimensional uniform distribution, comparison of $k$} \label{uniform_kcompare_table}
@@ -1079,7 +1079,7 @@ This shows that the proportional behaviour between $k^{a_{k}}$ and $c_{k}$ does 
 \caption{Graphically representing the relationship between $c_{k}$ and $k$ for the uniform distribution} \label{c_k_uniform}
 \end{figure}
 
-Figure \ref{c_k_uniform}, for the uniform distribution tells a slightly different story to that of the normal. It does seem to show an almost exponential relationship, as before, however, there are a larger number of outlier values that do not fit within a smooth line in these graphs than in those for the normal distribution, Figure \ref{c_k_normal}. However, the relationship that is shown leads me to believe that there is something important between the two variables, which could possibly be of the form stated in equation \ref{kdependentbias}.
+Figure \ref{c_k_uniform}, for the uniform distribution tells a slightly different story to that of the normal. It does seem to show an almost exponential relationship, as before, however, there are a larger number of outlier values that do not fit within a smooth line in these graphs than in those for the normal distribution, Figure \ref{c_k_normal}. However, the relationship that is shown leads me to believe that there is something important between the two variables, which could possibly be of the form stated in equation \ref{dependentkbias}.
 
 To better study the linear relationship between the logarithm of the bias and the logarithm of the sample size, I have generated a comparison plot, shown in Figure \ref{normal_comparison_graph}. 
 
@@ -1098,7 +1098,7 @@ For the smaller values of $N$, when $N \approx 100$, we can see obviously from t
     \includegraphics[width=\textwidth]{./Graphs/Best/UniformComparisonZoom.png}
   \end{center}
 \caption{Figure \ref{uniform_comparison_graph} zoomed in around large $N$.}
-  \label{uniform_comparison_graph}
+  \label{uniform_comparison_graph_zoom}
 \end{figure}
 
 This graph shows that for large $N \leq 50,000$, the lowest line on the graph is when the estimator is found using $k=7$; thus there is a possibility that this value of $k$ could be the best nearest neighbour value to choose, when considering sample size $N \approx 50,000$ from the uniform distribution.
@@ -1180,7 +1180,7 @@ Next, to satisfy Condition \ref{A2}, for the density function $f$ of the exponen
 for all $\alpha \in \mathbb{N}$, which is obviously finite.
 \end{itemize}
 
-Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{paper4_T4} and \ref{paper4_T5}. As previously, these values are independent of the distribution that the sample is from, and only depends on the size of the sample, the dimension of the distribution that sample is taken from and the value chosen for $\alpha$, where we have chosen $\alpha = 2$. Thus, the values of $k$ found in section \ref{N_conditions} are $\{1, 2, ..., 11\}$.
+Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{unbias} and \ref{efficient}. As previously, these values are independent of the distribution that the sample is from, and only depends on the size of the sample, the dimension of the distribution that sample is taken from and the value chosen for $\alpha$, where we have chosen $\alpha = 2$. Thus, the values of $k$ found in section \ref{N_conditions} are $\{1, 2, ..., 11\}$.
 
 Due to the above conditions for Theorems \ref{unbias} and \ref{efficient} being met, we can say that the Kozachenko-Leonenko estimator, of a sample from the exponential distribution is an asymptotically unbiased and consistent estimator for entropy. 
 
@@ -1190,10 +1190,10 @@ Due to the above conditions for Theorems \ref{unbias} and \ref{efficient} being 
 
 I will be exploring the simulation results using the same process as for the previous two distributions, which begins with examining the values of the bias of the estimator at certain values of $N$ for all different $k \in \{1, 2, ..., 11\}$.
 
-In a similar manner to before, using $N=100$, $N=25,000$ and $N=50,000$, from \ref{TODO-appendix data}, we can create a table to compare the mean values of the bias of the estimator for the different values of $k$ considered. Recall that the information is taken over 500 sample of size $N$ and the mean of these estimators is considered, then the bias is found by taking the modulus of this value minus the exact entropy, equation \ref{exponential_exact}.
+In a similar manner to before, using $N=100$, $N=25,000$ and $N=50,000$, from \ref{appendix_data}, we can create a table to compare the mean values of the bias of the estimator for the different values of $k$ considered. Recall that the information is taken over 500 sample of size $N$ and the mean of these estimators is considered, then the bias is found by taking the modulus of this value minus the exact entropy, equation \ref{exponential_exact}.
 
 \begin{table}
-\caption{1-dimensional exponential distribution, comparison of $k$} \label{exponential_kcompare_table}
+\caption{1-dimensional exponential distribution, comparison of $k$} \label{expo_kcompare_table}
 \begin{center}
 \begin{tabular}{| l | c c c |} 
 \toprule
@@ -1217,7 +1217,7 @@ $k$ &  $|Bias(\hat{H}_{100, k})|$ & $|Bias(\hat{H}_{25000, k})|$  &  $|Bias(\hat
 \end{center}
 \end{table}
 
-For the sample size $N=100$, Table \ref{exponential_kcompare_table} shows that the optimal value of $k$ to choose for the estimator is obviously given by $k=1$, since the value of the bias is $\approx 10^{-3}$ smaller than that for all the other values of $k$. Considering $k=1$ for larger sample sizes, we have $\infty$ - an error, similar to that for uniform distribution. This happens due to limitations in computer programs; since, we cannot have continuous data, it must be discretised, so for infinitely small distances between two points, we get a $-\infty$ value for the distance to the values closest neighbour, which only has to happen between two points for the whole estimator to become infinite. Because of this, I will not be examining the value of the estimator for $k=1$, when considering large sample sizes.
+For the sample size $N=100$, Table \ref{expo_kcompare_table} shows that the optimal value of $k$ to choose for the estimator is obviously given by $k=1$, since the value of the bias is $\approx 10^{-3}$ smaller than that for all the other values of $k$. Considering $k=1$ for larger sample sizes, we have $\infty$ - an error, similar to that for uniform distribution. This happens due to limitations in computer programs; since, we cannot have continuous data, it must be discretised, so for infinitely small distances between two points, we get a $-\infty$ value for the distance to the values closest neighbour, which only has to happen between two points for the whole estimator to become infinite. Because of this, I will not be examining the value of the estimator for $k=1$, when considering large sample sizes.
 
 Looking at the magnitude of the bias for sample sizes $N=25,000$, when $k \in \{2, 3, ..., 11\}$, we can see that the smallest bias occurs at $k=6$; but it is also quite small for the estimator found with $k=4, 5$ and $11$. Because of the closeness of the size of the bias for all the values of $k$ just mentioned, we cannot currently draw up any conclusions about which value of $k$ is definitly better to use - in terms of reducing the bias.
 
@@ -1344,7 +1344,7 @@ $k$ &  $a_{k}$ & $c_{k}$ \\
 \end{center}
 \end{table}
 
-This distribution shows interesting results, that are somewhat different to those previously shown in the other two distributions. In a similar fashion to previously there is a general increase in $a_{k}$ with $k$; however, in comparison to before where $c_{k}$ acted similarly, here $c_{k}$ does not increase uniformly with $k$. Both the values of $a_{k}$ and $c_{k}$ are unvaried between each $k$, with $a_{k}$ ranging from $0.4940$ to $0.6606$ and $c_{k}$ ranging from $0.0266$ to $0.1324$. Interestingly, the smallest values of $a_{k}$ and $c_{k}$, occur at $k=4$ then at $k=3$. Additionally, the largest two values occur at $k=7$ and $k=10$. The optimal value of $k$ will hopefully become more apparent when plotting all the regression lines against one and other in Figure \ref{Expo_comparison}.
+This distribution shows interesting results, that are somewhat different to those previously shown in the other two distributions. In a similar fashion to previously there is a general increase in $a_{k}$ with $k$; however, in comparison to before where $c_{k}$ acted similarly, here $c_{k}$ does not increase uniformly with $k$. Both the values of $a_{k}$ and $c_{k}$ are unvaried between each $k$, with $a_{k}$ ranging from $0.4940$ to $0.6606$ and $c_{k}$ ranging from $0.0266$ to $0.1324$. Interestingly, the smallest values of $a_{k}$ and $c_{k}$, occur at $k=4$ then at $k=3$. Additionally, the largest two values occur at $k=7$ and $k=10$. The optimal value of $k$ will hopefully become more apparent when plotting all the regression lines against one and other in Figure \ref{expo_comparison_graph}.
 
 Firstly, I wish to look at the relationship between $k$ and $c_{k}$ in the exponential distribution. To do this, I will look at the values of $c_{k}$ for each $k$ and see if it depends on $k^{a_{k}}$ or not. This should help us to decipher if the bias is of $O \left( \frac{1}{N^{a}} \right)$ or $O\left( \left( \frac{k}{N} \right)^{a} \right)$. This information is shown in table \ref{expo_dependentk}.
 
@@ -1577,7 +1577,7 @@ I will outline the important code used for the simulations in this appendix; how
 
 \section{The Estimator}
 
-Using the definition of the Kozachenko-Leonenko estimator, found in Section \ref{}, I created the function \texttt{KLEE}. To do this I first had to make the following functions; \texttt{GammaFun}, \texttt{Rho}, \texttt{VolD}. For the purpose of this paper, I have only created the function to work out the estimator for a 1-dimensional sample.
+Using the definition of the Kozachenko-Leonenko estimator, found in Section \ref{focus}, I created the function \texttt{KLEE}. To do this I first had to make the following functions; \texttt{GammaFun}, \texttt{Rho}, \texttt{VolD}. For the purpose of this paper, I have only created the function to work out the estimator for a 1-dimensional sample.
 
 Firstly, I created the function \texttt{Rho}, defined in equation \ref{Rho}, which takes three arguments;
 \begin{itemize}
@@ -1712,7 +1712,7 @@ Additionally, I created a summary table of the useful information needed, contai
 
 \lstinputlisting[language=R]{./Code/SummaryTables.R}
 
-These tables are shown in Appendix \ref{}, and from these I found the information in Tables \ref{normal_rsq}, \ref{normal_a_c_compare_table}, \ref{uniform_rsq}, \ref{uniform_a_c_compare_table}, \ref{expo_rsq} and \ref{expo_a_c_compare_table}. Then to create Tables \ref{normal_dependentk}, \ref{uniform_dependentk} and \ref{expo_dependentk}, I just had to modify the summary tables found above to include two extra columns with the $k^{a_{k}}$ and $\frac{k^{a_{k}}}{c_{k}}$, which was done by the following;
+These tables are shown in Appendix \ref{appendix_data}, and from these I found the information in Tables \ref{normal_rsq}, \ref{normal_a_c_compare_table}, \ref{uniform_rsq}, \ref{uniform_a_c_compare_table}, \ref{expo_rsq} and \ref{expo_a_c_compare_table}. Then to create Tables \ref{normal_dependentk}, \ref{uniform_dependentk} and \ref{expo_dependentk}, I just had to modify the summary tables found above to include two extra columns with the $k^{a_{k}}$ and $\frac{k^{a_{k}}}{c_{k}}$, which was done by the following;
 
 \lstinputlisting[language=R]{./Code/Findingktoa.R}
 
