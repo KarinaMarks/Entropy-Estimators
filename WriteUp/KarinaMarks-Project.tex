@@ -1,16 +1,12 @@
 \documentclass{report}
+
 \usepackage[utf8]{inputenc}
-%\usepackage{titling}
-
-%\pretitle{MMath Project}
-\title{Statistical Inference for Entropy}
-\author{Karina Marks}
-%\postauthor{C1324197}
-
 \usepackage{amsmath, amsfonts, graphicx, listings, booktabs, amstext, subcaption, url, filecontents, csvsimple}
 \usepackage[format=plain,
             textfont=it]{caption}
 \usepackage[toc,page]{appendix}
+\usepackage[english]{babel}
+\usepackage[colorinlistoftodos]{todonotes}
 
 \linespread{1.3}
 
@@ -72,8 +68,42 @@ k,a,zeta,corr,powera,c,rsquared,se
 \begin{document}
 
 \begin{titlepage}
-\maketitle
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+
+\textsc{\LARGE Cardiff University}\\[1.5cm] % Name of your university/college
+\textsc{\Large MMath Project}\\[0.5cm] % Major heading such as course name
+\textsc{\large C1324197}\\[0.5cm] % Minor heading such as course title
+
+\HRule \\[0.4cm]
+{ \huge \bfseries Statistical Inference of Entropy}\\[0.4cm] % Title of your document
+\HRule \\[1.5cm]
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+Karina \textsc{Marks} % Your name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Supervisor:} \\
+Dr. Nikolai \textsc{Leonenko} % Supervisor's Name
+\end{flushright}
+\end{minipage}\\[2cm]
+
+{\large \today}\\[2cm] % Date, change the \today to a set date if you want to be precise
+
+\includegraphics[width=0.3\textwidth]{logo.png}\\ % Include a department/university logo - this will require the graphicx package
+ 
+\vfill 
 \end{titlepage}
+
+%\begin{abstract}
+%TODO - write an abstract.
+%\end{abstract}
 
 \tableofcontents
 
