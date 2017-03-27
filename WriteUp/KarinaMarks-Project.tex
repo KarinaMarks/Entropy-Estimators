@@ -1473,7 +1473,7 @@ This graph shows that for large sample sizes, $5,000 \leq N \leq 50,000$ that th
 
 
 
-\chapter{Conclusion}
+\chapter{Conclusion} \label{chapter_conclusion}
 
 As seen from the analysis undertaken in Chapter \ref{Chapter_simulations}, taking an estimation of entropy from samples of the normal, uniform and exponential distributions, appear to act differently. There is no conclusive answer, that agrees across all three distributions,  as for the best value of $k$ for the estimator, or if the bias of the estimator is of $O \left( \frac{1}{N^{a}} \right)$ or $O\left( \left( \frac{k}{N} \right)^{a} \right)$. 
 
@@ -1775,7 +1775,10 @@ The last part of analysis conducted, was plotting all the regression lines of th
 
 \section{Conclusion}
 
-TODO - Talk about how I made the other graphs 
+The following code is what I created to make the graphs in Chapter \ref{chapter_conclusion}. I changed \texttt{N} depending on what range of numbers I wished to have in my graph. I used the packages \texttt{readr} to read in my simulated data, \texttt{ggplot2} to plot the graphs and \texttt{dplyr} and \texttt{tidyr} to change the shape of my data. I have to work with \texttt{Inf} values in the uniform data for $k=1$ and $2$ and in the exponential data for $k=1$, so I set these to \texttt{NA} values to make use of the \texttt{na.rm} argument, which is used in many functions. The following code plots an example graph for the range of data from $N=100,..., 1000$;
+
+\lstinputlisting[language=R]{./Code/ConclusionGraphs.R}
+
 
 
 

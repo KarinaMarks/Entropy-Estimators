@@ -175,6 +175,16 @@ The last part of analysis conducted, was plotting all the regression lines of th
 \lstinputlisting[language=R]{./Code/ComparisonGraphs.R}
 
 
+
+\section{Conclusion}
+
+The following code is what I created to make the graphs in Chapter \ref{chapter_conclusion}. I changed \texttt{N} depending on what range of numbers I wished to have in my graph. I used the packages \texttt{readr} to read in my simulated data, \texttt{ggplot2} to plot the graphs and \texttt{dplyr} and \texttt{tidyr} to change the shape of my data. I have to work with \texttt{Inf} values in the uniform data for $k=1$ and $2$ and in the exponential data for $k=1$, so I set these to \texttt{NA} values to make use of the \texttt{na.rm} argument, which is used in many functions. The following code plots an example graph for the range of data from $N=100,..., 1000$;
+
+\lstinputlisting[language=R]{./Code/ConclusionGraphs.R}
+
+
+
+
 \bibliographystyle{plain}
 \bibliography{Bibliography}
 
