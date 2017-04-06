@@ -526,7 +526,9 @@ Moreover, I will be exploring analytically the optimal value of $k$, for reducin
 
 \chapter{Monte-Carlo Simulations} \label{Chapter_simulations}
 
-In this chapter I will explore simulations of the bias of the K-L estimator (\ref{KLest}), in comparison to the size of the sample estimated from, with respect to different values of k; by exploring 1-dimensional distributions. Firstly, the distributions considered will be analysed to determine if they satisfy Conditions \ref{A1}, \ref{A2} and \ref{A3} stated for Theorems \ref{unbias} and \ref{efficient} to hold. Then, I will explore the bias of this estimator of entropy for simulations of samples from certain distributions, for different values of $k$.
+In this chapter, I will explore simulations 
+
+In this chapter, I will explore simulations on the bias of the K-L estimator (\ref{KLest}) on a sample from a 1-dimensional distribution, in comparison to its sample size, with respect to different values of k. Firstly, the distributions considered will be analysed to determine if they satisfy Conditions \ref{A1}, \ref{A2} and \ref{A3} stated for Theorems \ref{unbias} and \ref{efficient} to hold. Then, I will explore in depth the bias of this estimator of entropy for simulations of samples from certain distributions, for different values of $k$.
 
 The motivation for these simulations is to analytically explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. Using Theorem \ref{unbias}, we can write that the bias of the estimator approaches 0 as $N \to \infty$. This is because we can write $Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H$, which in equation (\ref{unbias_equation}) implies $Bias(\hat{H}_{N, k}) \to 0$ as $N \to \infty$. Thus, there must be a type of inverse relationship between the bias of the estimator, $Bias(\hat{H}_{N, k})$, and $N$. We believe this relationship is of the form:
 \begin{equation} \label{bias}
@@ -539,17 +541,17 @@ log|Bias(\hat{H}_{N, k})| &\approx log(c) - a [log(N)] + \epsilon \nonumber \\
 \end{align}
 where $\epsilon > 0$ is some small error term. I will investigate the consistency of this estimator for a sample from a specified distribution, dependent on the value of $k$. This involves finding the optimum value of $k$ for which $|Bias(\hat{H}_{N, k})| \to 0$ for $N \to \infty$. For the relationship in equation (\ref{bias}), this will happen for larger values of $a$ and relatively small $c$, as $N \to \infty$. As previously mentioned, there is evidence supporting that the bias becomes either of order $(\frac{1}{N})^a$ (\ref{fixedkbias}) or $(\frac{k}{N})^a$ (\ref{dependentkbias}). This leads to also examining the dependence of $c$ / $\zeta$ on the value of $k$. 
 
-As I wish to consider the difference in accuracy of the estimator when using different values of k, let us denote the approximate values for $a$ and $c$ dependent on $k$ as $a_{k}$ and $c_{k}$.
+As I wish to consider the difference in accuracy of the estimator when using different values of k, let us denote the approximate values for $a$ and $c$, for each $k$, as $a_{k}$ and $c_{k}$ respectively.
 
-I will conduct a range of analysis, for each distribution, to consider how this estimator acts in reality, the process of analysis will be as follows;
+I will conduct a range of analyses, for each distribution, to consider how this estimator acts in reality, the process of analysis will be as follows:
 \begin{enumerate}
-\item Create a summary table of the mean absolute value of the bias of the estimator just looking at the sample sizes $N=100, 25000$ and $50000$ for all values of $k$ that satisfy Condition \ref{A3}. I could also at this point consider the variance of the bias at the values of $N$ stated above, for all applicable values of $k$. However, we will find that the $Var|Bias(\hat{H}_{50000, k})| \to 0$ for $k \to 10$, by the definition of the estimator using the nearest neighbour method. Taking a larger $k$ in the nearest neighbour method will produce less varied results, this is because more smoothing takes place for a larger $k$, eventually - if $k$ is made large enough - the output will be constant and the variance negligible regardless of the inputted values. Thus, considering the variance of the bias of the estimator in comparison to $k$ is not necessarily informative. 
+\item Create a summary table of the mean absolute value of the bias of the estimator just observing the sample sizes $N=100, 25000$ and $50000$ for all values of $k$ that satisfy Condition \ref{A3}. I could also at this point consider the variance of the bias at the values of $N$ stated above, for all applicable values of $k$. However, we will find that the $Var|Bias(\hat{H}_{50000, k})| \to 0$ for $k \to 10$, by the definition of the estimator using the nearest neighbour method. Taking a larger $k$ in the nearest neighbour method will produce less varied results. This is because more smoothing takes place for a larger $k$, eventually - if $k$ is made large enough - the output will be constant and the variance negligible regardless of the inputted values. Thus, considering the variance of the bias of the estimator in comparison to $k$ is not necessarily informative. 
 
 \item From simulations run to obtain the data, we can plot graphical representations of the linear relationship shown in equation \ref{logbias}, of $log(N)$ against $log|Bias(\hat{H}_{N, k})|$ for sample sizes $N=100, 200, 300, ..., 50000$, for each value of $k$. I will take 500 samples of size $N$, and find the average estimator for each sample size, making use of the Mean Value Theorem to attain a more accurate representation of the estimator from that sample size.
 
 \item Tabulate the results from the regression analysis; I will first discuss the coefficient of determination ($R^2$), a measure of how well the regression model describes the observed data \cite{regression1}. Next I will consider the standard error/deviation of the model ($\sigma$), this is a measure of accuracy of predictions. Lastly, I will go onto consider the values of $a_{k}$ and $c_{k}$ from the relationship shown in equation \ref{bias}, for each $k$, which is the regression line that minimizes the sum of squared deviations ($\sigma$) of prediction.
 
-\item Lastly, graphically compare the values of $a_{k}$ and $c_{k}$ for each $k$. From this I can try to analyse the optimal value of $k$, and can hopefully explore the relationship between $c_{k}$ and $k$.
+\item Lastly, graphically compare the values of $a_{k}$ and $c_{k}$, for each $k$. From this I can examine the results for the optimal value of $k$, and can hopefully explore the relationship between $c_{k}$ and $k$.
 
 \end{enumerate}
 
@@ -557,7 +559,7 @@ I will conduct a range of analysis, for each distribution, to consider how this 
 
 \section{1-dimensional Gaussian/Normal Distribution} \label{Normal_d=1}
 
-I will begin by exploring entropy of samples from the normal distribution $N(0, \sigma^2)$, where without loss of generality we can use the mean $\mu = 0$ and change the variance $\sigma^2$ as needed. The normal distribution has an exact formula to work out the entropy, given the variance $\sigma^2$. Using the definition of the Shannon entropy for a continuous distribution (\ref{ShaEnt}) and the density function for the normal distribution $f(x) = \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, when $\mu = 0$. We can write the exact entropy for the normal distribution:
+I will begin by exploring entropy of samples from the normal distribution $N(0, \sigma^2)$, where without loss of generality, we can use the mean $\mu = 0$ and change the variance $\sigma^2$ as needed. The normal distribution has an exact formula to work out the entropy, given the variance $\sigma^2$. Using the definition of the Shannon entropy for a continuous distribution (\ref{ShaEnt}) and the density function for the normal distribution $f(x) = \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)}$ for $x \in \mathbb{R}$, when $\mu = 0$. We can write the exact entropy for the normal distribution:
 \begin{align}
 H &= - \int_{x \in \mathbb{R}^d} f(x) log(f(x)) dx \nonumber \\
 &= - \int_{\mathbb{R}} \frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} log \left[\frac{1}{\sqrt{(2\pi)} \sigma}\exp{ \left( \frac{-x^2}{2\sigma^2} \right)} \right] dx \nonumber \\
@@ -582,15 +584,15 @@ I am considering the 1-dimensional normal distribution; whence, the estimator ta
 
 \subsection{Estimator conditions} \label{N_conditions}
 
-The analysis set out below shows that the density of the normal distribution satisfies Conditions \ref{A1}, \ref{A2} and \ref{A3}. Firstly, to satisfy Condition \ref{A1}, for density function $f(x) = \frac{1}{\sqrt{(2\pi)}} \exp{ \left( \frac{-x^2}{2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and $\sigma^2 = 1$, it must be such that:
+The analysis set out below demonstrates how the density of the normal distribution satisfies Conditions \ref{A1}, \ref{A2} and \ref{A3}. Firstly, to satisfy Condition \ref{A1}, for density function $f(x) = \frac{1}{\sqrt{(2\pi)}} \exp{ \left( \frac{-x^2}{2} \right)}$ for $x \in \mathbb{R}$, given $\mu = 0$ and $\sigma^2 = 1$, it must be such that:
 \begin{itemize}
-\item $f$ is bounded - obvious, since for any probability distribution we always have $f(x) \geq 0$, additionally for the normal distribution we have that the density $f(x) = \frac{1}{\sqrt{(2\pi)}} \exp{ \left( \frac{-x^2}{2} \right)} < 0.4$, $\forall x \in \mathbb{R}$. Hence, $f$ is bounded above and below; so bounded.
+\item $f$ is bounded - obvious, since for any probability distribution we always have $f(x) \geq 0$, additionally for the normal distribution we have that the density $f(x) = \frac{1}{\sqrt{(2\pi)}} \exp{ \left( \frac{-x^2}{2} \right)} < 0.4$, $\forall x \in \mathbb{R}$. Hence, $f$ is bounded above and below - so is bounded.
 
 \item $f$ is m-times differentiable - using Hermite polynomials, defined as:
 \begin{equation}
 H_{m}(x) = (-1)^m e^{\frac{x^2}{2}} \frac{d^m}{dx^m} \left(e^{\frac{-x^2}{2}} \right) \nonumber
 \end{equation}
-multiplying this by the coefficient in the distribution of $f(x)$, $\frac{1}{\sqrt{(2 \pi)}}$, we then get:
+Multiplying this by the coefficient in the distribution of $f(x)$, $\frac{1}{\sqrt{(2 \pi)}}$, we then get:
 \begin{align*}
 \frac{1}{\sqrt{(2 \pi)}} H_{m}(x) &= (-1)^m e^{\frac{x^2}{2}} \frac{d^m}{dx^m} \left(\frac{1}{\sqrt{(2 \pi)}} e^{\frac{-x^2}{2}} \right) \nonumber\\
 &= (-1)^m e^{\frac{x^2}{2}} \frac{d^m}{dx^m} \left(f(x) \right) \nonumber\\
@@ -604,17 +606,17 @@ where $\frac{H_{m}(x)}{(-1)^m}$ is a polynomial; thus $f$ is m-times differentia
 
 \item $\exists r_{*} > 0$ and a Borel measurable function $g_{*}$, with $\|x-y\| \leq r_{*}$ so that $\|f^{(t)}(x)\| \leq g_{*}(x) f(x)$ and $\|f^{(m)}(x) - f^{(m)}(y)\| \leq g_{*}(x) f(x)\|x-y\|^{\eta}$, for some $g_{*}$ such that $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$. 
 
-Since we are considering a 1-dimensional distribution, we can write the norms $\| \cdotp \|$ as  $| \cdotp |$. Moreover, for Theorems \ref{unbias} and \ref{efficient} we have that the value of $\beta \geq 2$. Choosing $\beta = 2$ this is satisfied, so $m = \lfloor \beta \rfloor =  \lfloor 2 \rfloor = 2 = \beta$ and $\eta = \beta -m =0$. Thus to have $|f^{(t)}(x)| \leq g_{*}(x) f(x)$, is obvious by above, in view of writing $|\frac{d^t}{dx^t} f(x)| = g_{*}(x) f(x)$, where we choose $ g_{*}(x) = |\frac{H_{t}(x)}{(-1)^t}| = |H_{t}(x)|$, for $t=1,2,...,m$, and $|f(x)| = f(x)$, since $f(x) >0$. Also, $g_{*}$ is a polynomial and is hence Borel measurable over $\mathbb{R}$, and for any polynomial we obviously have $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$. Additionally, we need $|f^{(m)}(x) - f^{(m)}(y)| \leq g_{*}(x) f(x)| x-y|^{0} = g_{*}(x) f(x)$. We currently have;
+Since we are considering a 1-dimensional distribution, we can write the norms $\| \cdotp \|$ as  $| \cdotp |$. Moreover, for Theorems \ref{unbias} and \ref{efficient} we have that the value of $\beta \geq 2$. Choosing $\beta = 2$ this is satisfied, so $m = \lfloor \beta \rfloor =  \lfloor 2 \rfloor = 2 = \beta$ and $\eta = \beta -m =0$. Thus to have $|f^{(t)}(x)| \leq g_{*}(x) f(x)$, is obvious by above, in view of writing $|\frac{d^t}{dx^t} f(x)| = g_{*}(x) f(x)$, where we choose $ g_{*}(x) = |\frac{H_{t}(x)}{(-1)^t}| = |H_{t}(x)|$, for $t=1,2,...,m$, and $|f(x)| = f(x)$, since $f(x) >0$. Also, $g_{*}$ is a polynomial and is hence Borel measurable over $\mathbb{R}$, and for any polynomial we obviously have $\sup_{\{x : f(x) < \delta\}} g_{*}(x) = O(\delta^{-\epsilon})$ as $\delta \searrow 0$ for some $\epsilon >0$. Additionally, we need $|f^{(m)}(x) - f^{(m)}(y)| \leq g_{*}(x) f(x)| x-y|^{0} = g_{*}(x) f(x)$. We currently have:
 \begin{align*}
 |f^{(m)}(x) - f^{(m)}(y)| &= \left| \frac{H_{m}(x)}{(-1)^m} f(x) - \frac{H_{m}(y)}{(-1)^m} f(y) \right| \\
 &\leq \left| \frac{H_{m}(x)}{(-1)^m} f(x) \right| + \left| \frac{H_{m}(y)}{(-1)^m} f(y) \right| \\
 &= g_{*}(x)f(x) + g_{*}(y)f(y) \\
 &\leq g_{*}(x)f(x)
 \end{align*}
-since we know that $f(x) >0$ for all $x \in \mathbb{R}$, and $g_{*}(x) = |H_{m}(x)| >0$, which the same as the $g_{*}$ before; thus satisfies the conditions for it.
+since we know that $f(x) >0$ for all $x \in \mathbb{R}$, and $g_{*}(x) = |H_{m}(x)| >0$, which the same as the $g_{*}$ before; thus satisfies the conditions placed on $g_{*}$.
 \end{itemize}
 
-Therefore, the normal distribution satisfies Condition \ref{A1}. Next, to satisfy Condition \ref{A2}, for the density function $f$ of the normal distribution, must fulfill that;
+Therefore, the normal distribution satisfies Condition \ref{A1}. Next, to satisfy Condition \ref{A2}, the density function $f$ of the normal distribution must fulfill the following:
 \begin{itemize}
 \item The $\alpha$-moment of $f$ must be finite; $\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty$ - this is always true for the normal distribution. All of its moments are finite, since they are defined with respect to $\sigma^n$, for some $n$, and $\sigma < \infty$.
 
@@ -630,12 +632,12 @@ Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which 
 
 Thus, on account of the sample size, $N$, being considered in the simulations; $N=100, 200, ..., 50000$, we have that for the smallest $N=100$, the values of $k$ for which Theorem \ref{unbias} and \ref{efficient} both hold, are $k \in \{k_{0}^{*}, ..., k_{1}^{*} \} = \{1, ... , 100^{\frac{2}{9}}\} = \{1, ..., 2.782\}$, so $k \in \{1, 2\}$. Also, for the middle sample size $N=25,000$, we have the values of $k$ to be in $\{k_{0}^{*}, ..., k_{1}^{*} \}$, where $ k_{1}^{*} \approx 25000^{\frac{2}{9}} = 9.491 \approx 9$, thus $k \in \{ 1, ..., 9\}$. Moreover, for the largest sample size being considered, $N=50,000$, we must have $k \in \{1, ..., k_{1}^{*} \} = \{1, ... , 50000^{\frac{2}{9}}\} = \{1, ..., 11.072\}$; thus, $k \in \{1, 2, ..., 11\}$.
 
-Overall, due to Conditions \ref{A1}, \ref{A2} and \ref{A3} being met, we can say that for the normal distribution, Theorems \ref{unbias} and \ref{efficient} hold; henceforth, the K-L estimator, of a sample from the 1-dimensional normal distribution is an asymptotically unbiased and consistent estimator for entropy, for some values of $k \in \{1, 2, ..., 11\}$, depending on the sample size $N$. 
+Overall, due to Conditions \ref{A1}, \ref{A2} and \ref{A3} being met, we can say that for the normal distribution, Theorems \ref{unbias} and \ref{efficient} hold. Henceforth, the K-L estimator, of a sample from the 1-dimensional normal distribution is an asymptotically unbiased and consistent estimator for entropy, for some values of $k \in \{1, 2, ..., 11\}$, depending on the sample size $N$. 
 
 
 \subsection{Simulation results} \label{Normal_results}
 
-I will now conduct some simulations to analyse the K-L estimator for each value of $k$ separately. Where each time considering $500$ samples of size $N$ from this distribution, finding the estimator in each case and taking the average of these estimators to find our entropy estimator. I will then consider the relationship show in equation \ref{logbias} of the logarithm of the bias against the sample size, for each sample and work out the analytical values of a and c, for each $k \in \{1, 2, ..., 11\}$. 
+I will now conduct some simulations to analyse the K-L estimator for each value of $k$ separately. For each $N$, I will be considering $500$ samples from this distribution, finding the estimator in each case and taking the average of these estimators to find our entropy estimator. I will then consider the relationship shown in equation \ref{logbias} of the logarithm of the bias against the sample size, for each sample and work out the analytical values of a and c, for each $k \in \{1, 2, ..., 11\}$. 
 
 \begin{table}
 \caption{1-dimensional normal distribution, comparison of $k$} \label{normal_kcompare_table}
@@ -666,9 +668,9 @@ For $N=100$, $N=25,000$ and $N=50,000$, using the results from Appendix \ref{app
 
 For the smallest sample size taken; $N=100$, we expect the best value of $k$ to be either $1$ or $2$; and the table agrees with this showing that the smallest bias occurs at $k=1$ for this sample size. 
 
-When $N=25,000$ we have that for $k \in \{2,..., 8\}$ that the bias is very small, especially for the values of $k=3, 4, 7, 8$ with the smallest bias appearing when $k=3$; which fits with the previous analysis that the best value of $k$ will lie within $1$ and $9$.
+When $N=25,000$ we have that for $k \in \{2,..., 8\}$ that the bias is very small, especially for the values of $k=3, 4, 7, 8$ with the smallest bias appearing when $k=3$. This fits with the previous analysis that the best value of $k$ will lie within $1$ and $9$.
 
-Now considering the largest sample size, $N=50,000$, the bias when $k=5$ sticks out since it is $\approx 10^{-3}$ smaller than the other bias values in the table. However, for all other values of $k$ the bias is still extremely small in comparison to the bias for $N=100$ and even in comparison to $N=25,000$ in some places. This extreme difference could be an outlier in my data; thus in table \ref{normal_k5_table} I have shown the values for the modulus of the bias, when $k=5$, for different large values of $N$. This table does indeed show that $|Bias(\hat{H}_{50000, 5})| \approx 0.0000003$ is an anomaly in the data, and that $k=5$ is not necessarily the best value of $k$ for $N \approx 50,000$. Thus, we cannot yet draw any major conclusions about the best value of $k$ for the estimator of a sample this size.
+Now considering the largest sample size, $N=50,000$, the bias when $k=5$ differs significantly since it is $\approx 10^{-3}$ smaller than the other bias values in the table. However, for all other values of $k$, the bias is still extremely small in comparison to the bias for $N=100$, and even in comparison to $N=25,000$ in some places. This extreme difference could be an outlier in my data; thus in table \ref{normal_k5_table} I have shown the values for the modulus of the bias, when $k=5$, for different large values of $N$. This table does indeed show that $|Bias(\hat{H}_{50000, 5})| \approx 0.0000003$ is an anomaly in the data, and that $k=5$ is not necessarily the best value of $k$ for $N \approx 50,000$. Thus, we cannot yet draw any major conclusions about the best value of $k$ for the estimator of a sample this size.
 
 \begin{table}
 \caption{1-dimensional normal distribution, $k=5$ for large N} \label{normal_k5_table}
@@ -694,7 +696,7 @@ $N$ &  $|Bias(\hat{H}_{N, 5})|$ \\
 \end{center}
 \end{table}
 
-I now wish to consider the equation \ref{logbias} and plot the simulated data, to fit a regression line for each value of $k$ separately, these are shown in Figures \ref{normal_graphs16} and \ref{normal_graphs711}. All of these graphs agree with the relationship previously stated between the sample size and the bias of the estimator; they all show that the logarithm of this equations gives a negative linear relationship - with relatively small error bars.
+I now wish to consider the equation \ref{logbias} and plot the simulated data, to fit a regression line for each value of $k$ separately, as shown in Figures \ref{normal_graphs16} and \ref{normal_graphs711}. All of these graphs agree with the relationship previously stated between the sample size and the bias of the estimator; they all show that the logarithm of this equation gives a negative linear relationship - with relatively small error bars.
 
 \begin{figure}
 \makebox[\linewidth][c]{%
@@ -768,7 +770,7 @@ I now wish to consider the equation \ref{logbias} and plot the simulated data, t
 \caption{1-dimensional normal distribution with different $k = 7, ...,11$} \label{normal_graphs711}
 \end{figure}
 
-For this, I would like to consider the coefficient of determination ($R^2$) for each of the above regression lines, this value provides an estimate of the strength of the relationship between the model and the response variable. Also, I would like to consider the standard error/deviation ($\sigma$), for each of the different graphs, which shows a measure of the predictions' accuracy. These are depicted for each value of $k$ in table \ref{normal_rsq}.
+For this, I would like to consider the coefficient of determination ($R^2$) for each of the above regression lines; this value provides an estimate of the strength of the relationship between the model and the response variable. Also, I would like to consider the standard error/deviation ($\sigma$), for each of the different graphs, which shows a measure of the predictions' accuracy. These are depicted for each value of $k$ in table \ref{normal_rsq}.
 
 \begin{table}
 \caption{Comparison of the coefficient of determination and the standard deviations of the regression for each value of $k$ for the 1-dimensional normal distribution} \label{normal_rsq}
@@ -824,9 +826,9 @@ $k$ &  $a_{k}$ & $c_{k}$ \\
 \end{center}
 \end{table}
 
-As $k$ runs from $1 \to 11$, we have that $a_{k}$ and $c_{k}$ both increase, with smooth values of $a_{k}$ and a large jump, in the value of $c_{k}$, between $k=3$ and $4$, and $k=9$ and $10$. The higher the value of $a_{k}$, the stronger the negative relationship is between the two variables in question. So for a larger values of $a_{k}$, we have that $|Bias(\hat{H}_{N, k})| \to 0$ for large $N$ faster than smaller values of $a_{k}$. This is due to the relationship between $|Bias(\hat{H}_{N, k})|$ and $a_{k}$ shown in equation (\ref{bias})
+As $k$ runs from $1 \to 11$, we have that $a_{k}$ and $c_{k}$ both increase, with smooth values of $a_{k}$ and a large jump, in the value of $c_{k}$, between $k=3$ and $4$, and $k=9$ and $10$. The higher the value of $a_{k}$, the stronger the negative relationship is between the two variables in question. So for larger values of $a_{k}$, we have that $|Bias(\hat{H}_{N, k})| \to 0$ for large $N$ faster than smaller values of $a_{k}$. This is due to the relationship between $|Bias(\hat{H}_{N, k})|$ and $a_{k}$ shown in equation (\ref{bias})
 
-Recall, from section \ref{focus} we have that the bias acts in one of two ways; either of $O \left( \frac{1}{N^{a}} \right)$ (\ref{fixedkbias}) or $O\left( \left( \frac{k}{N} \right)^{a} \right)$ (\ref{dependentkbias}). Thus we have $|Bias(\hat{H}_{N, k})|\approx \frac{c_{k}}{N^{a_{k}}}$ where either $c_{k}$ is constant or it depends on $k$ and $a_{k}$ - more specifically is $O( k^{a_{k}})$. There is evidence here to support the latter claim; the jump between $k=3$ and $4$ shown in the value of $c_{k}$, and consider the results in table \ref{normal_dependentk}. This shows that the proportional behaviour between $k^{a_{k}}$ and $c_{k}$ also has a large jump when $k$ goes from $3 \to 4$. This agrees with the claim of $c_{k}$ depending on $k$ in this fashion; however, in table \ref{normal_a_c_compare_table} we mentioned another jump between $k=9$ and $k=10$, and the evidence here does not show a large jump in the same area. We cannot yet make any conclusions about the dependence of $c_{k}$ on $k$; this motivates a graphical representation of the value of $c_{k}$ against $k$ to see if there is any relation, Figure \ref{c_k_normal}.
+Recall, from section \ref{focus} we have that the bias acts in one of two ways; either of $O \left( \frac{1}{N^{a}} \right)$ (\ref{fixedkbias}) or $O\left( \left( \frac{k}{N} \right)^{a} \right)$ (\ref{dependentkbias}). Thus, we have $|Bias(\hat{H}_{N, k})|\approx \frac{c_{k}}{N^{a_{k}}}$ where either $c_{k}$ is constant or it depends on $k$ and $a_{k}$ - more specifically is $O( k^{a_{k}})$. There is evidence here to support the latter claim: the jump between $k=3$ and $4$ shown in the value of $c_{k}$, and consider the results in table \ref{normal_dependentk}. This shows that the proportional behaviour between $k^{a_{k}}$ and $c_{k}$ also has a large jump when $k$ goes from $3 \to 4$. This agrees with the claim of $c_{k}$ depending on $k$ in this fashion; however, in table \ref{normal_a_c_compare_table} we mentioned another jump between $k=9$ and $k=10$, and the evidence here does not show a large jump in the same area. We cannot yet make any conclusions about the dependence of $c_{k}$ on $k$; this motivates a graphical representation of the value of $c_{k}$ against $k$ to see if there is any relation, Figure \ref{c_k_normal}.
 
 \begin{table}
 \caption{Considering the dependence of $k$ on $c_{k}$} \label{normal_dependentk}
@@ -881,7 +883,7 @@ To better study the linear relationship between the logarithm of the bias and th
   \label{normal_comparison_graph}
 \end{figure}
 
-From this we can see obviously that for smaller values of $N$ (i.e - smaller values of $log(N)$), the smallest bias occurs when $k=2$, since this line is the lowest for the data up until $log(N) \approx 9$ (i.e. $N \approx 13,000$). For a larger sample size, we cannot accurately see in this graph which line is the best. This motivates us to look at a section of the graph when $9 \leq log(N) \leq 11$ - i.e. $8,000 \leq N \leq 50,000$ - Figure \ref{normal_comparison_graph_zoom}.
+From this, we can obviously see that for smaller values of $N$ (i.e - smaller values of $log(N)$), the smallest bias occurs when $k=2$, since this line is the lowest for the data up until $log(N) \approx 9$ (i.e. $N \approx 13,000$). For a larger sample size, we cannot accurately see in this graph which line is the best. This motivates us to look at a section of the graph when $9 \leq log(N) \leq 11$ - i.e. $8,000 \leq N \leq 50,000$ - Figure \ref{normal_comparison_graph_zoom}.
 
 \begin{figure}
   \begin{center}
@@ -891,7 +893,7 @@ From this we can see obviously that for smaller values of $N$ (i.e - smaller val
   \label{normal_comparison_graph_zoom}
 \end{figure}
 
-From this graph we can obviously discount $k=1$ for large $N$, since this is the most gradual descent; thus the bias will be largest for this $k$. Also, both the lines for $k=2$ and $k=3$ are more gradual in their descent at larger $N$, so are probably not the best to choose. Even though, for $k=9, 10$ and $11$, the slope is the steepest - $a_{k}$ is largest - the intercept is larger so around the biggest sample size considered $N=50,000$, $log(N) \approx 10.8$, the smallest bias does not occur. Actually, for large values of $N \leq 50,000$ we can see from this graph that the best lines appear to be those which are blue/green; $k = 4, 5, 6, 7, 8$. Where the lowest lines around the maximal sample size are those for $k=5$ and $k=7$; thus these values of $k$ analytically appears to be the best nearest neighbour value to choose, when looking at a sample of size $N \approx 50,000$ from the normal distribution.
+From this graph, we can obviously discount $k=1$ for large $N$, since this is the most gradual descent; thus the bias will be largest for this $k$. Also, both the lines for $k=2$ and $k=3$ are more gradual in their descent at larger $N$, so are probably not the best to choose. Even though, for $k=9, 10$ and $11$, the slope is the steepest - $a_{k}$ is largest - the intercept is larger so around the biggest sample size considered $N=50,000$, $log(N) \approx 10.8$, the smallest bias does not occur. Actually, for large values of $N \leq 50,000$ we can see from this graph that the best lines appear to be those which are blue/green; $k = 4, 5, 6, 7, 8$. The lowest lines around the maximal sample size are those for $k=5$ and $k=7$; thus these values of $k$ analytically appears to be the best nearest neighbour value to choose, when looking at a sample of size $N \approx 50,000$ from the normal distribution.
 
 
 
@@ -929,7 +931,7 @@ Similarly to the 1-dimensional normal distribution, we have for the 1-dimensiona
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
 \end{equation}
 
-Moreover, the samples considered will not be from the standard uniform, but from the uniform distribution $U[0,100]$. This is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems as the density function would be $f(x) = 1$, $0 \leq x \leq 1$, which would incur working on a very small scale; i.e taking a points with distance between them. This would cause problems due to the limitations that occur when using computer programs to run simulations. Thus, I will be using the density function $f(x) = 0.01$, $0 \leq x \leq 100$, which is from the $U[0,100]$ distribution and gives the exact entropy of:
+Moreover, the samples considered will not be from the standard uniform, but from the uniform distribution $U[0,100]$. This is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems as the density function would be $f(x) = 1$, $0 \leq x \leq 1$. This would incur working on a very small scale (i.e taking a points with distance between them) causing problems due to the limitations that occur when using computer programs to run simulations. Thus, I will be using the density function $f(x) = 0.01$, $0 \leq x \leq 100$, which is from the $U[0,100]$ distribution and gives the exact entropy of:
 \begin{equation} \label{uniform_exact}
 H = log(100) \approx 4.605170
 \end{equation}
@@ -951,21 +953,21 @@ This is elementary since $f$ is constant, thus $f^{(t)}(x) = 0$ for all $t \geq 
 
 \end{itemize}
 
-Next, to satisfy Condition \ref{A2}, for the density function $f$ of the uniform distribution, must fulfill that:
+Next, to satisfy Condition \ref{A2}, the density function $f$ of the uniform distribution, must fulfill the following:
 \begin{itemize}
 \item The $\alpha$-moment of $f$ must be finite, so $\int_{\mathbb{R}^{d}} \| x \|^{\alpha} f(x) dx < \infty$ - this is true, since for the 1-dimensional uniform distribution, $f(x)$ is constant; thus we would be integrating a polynomial $|x|^{\alpha}$, over a finite interval $a \leq x \leq b$, which is always finite.
 \end{itemize}
 
-Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{unbias} and \ref{efficient}. These values are independent of the distribution that the sample is from, and only depends on the size of the sample, the dimension of the distribution that sample is taken from and the value chosen for $\alpha$. The values of $k$ found in section \ref{N_conditions}, for the normal distribution, are $\{1,2\}$ for $N=100$, $\{1, 2, ..., 9\}$ for $N=25,000$ and $\{1, 2, ..., 11\}$ for $N=50,000$. These are the same for this distribution, and for all distributions considered.
+Lastly, to satisfy Condition \ref{A3}, we must find the values of $k$ for which the estimator provides a uniform convergence for Theorems \ref{unbias} and \ref{efficient}. These values are independent of the distribution that the sample is from, and only depends on the size of the sample, the dimension of the distribution that sample is taken from, and the value chosen for $\alpha$. The values of $k$ found in section \ref{N_conditions}, for the normal distribution, are $\{1,2\}$ for $N=100$, $\{1, 2, ..., 9\}$ for $N=25,000$ and $\{1, 2, ..., 11\}$ for $N=50,000$. These are the same for this distribution, and for all distributions considered.
 
-Thus, due to the above conditions for Theorems \ref{unbias} and \ref{efficient} being met, we can say that the K-L estimator, of a sample from the uniform distribution is an asymptotically unbiased and consistent estimator for entropy, for specific $k \in \{1, 2, ..., 11 \}$, depending on the sample size, $N$.
+Thus, due to the above conditions for Theorems \ref{unbias} and \ref{efficient} being met, we can say that the K-L estimator of a sample from the uniform distribution is an asymptotically unbiased and consistent estimator for entropy, for specific $k \in \{1, 2, ..., 11 \}$, depending on the sample size, $N$.
 
 
 
 
 \subsection{Simulation results} \label{Uniform_results}
 
-I will now conduct simulations, in the same manner as for the normal distribution. For each value of $k$ separately, I will consider $500$ samples of size $N$, from the uniform distribution, finding the estimator in each case and take the average of these estimators to find our entropy estimator. I will then consider the relationship between the bias of the estimator and the sample size (\ref{logbias}) for each sample and work out the average for the values of a and c, for each $k \in \{1, 2, ..., 11\}$. 
+I will now conduct simulations, in the same manner as for the normal distribution. For each value of $k$ separately, I will consider $500$ samples of size $N$, from the uniform distribution, finding the estimator in each case and taking the average of these estimators to find our entropy estimator. I will then consider the relationship between the bias of the estimator and the sample size (\ref{logbias}) for each sample and work out the average for the values of a and c, for each $k \in \{1, 2, ..., 11\}$. 
 
 For $N=100$, $N=25,000$ and $N=50,000$, using the results from Appendix \ref{appendix_data}, we can create a table to compare the mean values of the bias of the estimator for the different values of $k$ considered. 
 
