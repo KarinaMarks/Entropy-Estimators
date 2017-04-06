@@ -13,17 +13,3 @@ ggplot()+
   ylab("log(Bias(H))") +
   # set the graph title
   ggtitle("Comparison of the regression lines for Normal distribution")
-
-
-# plot graph of comparison for each k - enlarged
-ggplot()+
-  # add the ines for each k
-  geom_abline(aes(intercept=zeta, slope=a, colour=k), data=Info, size=1) +
-  # set tha axis limits - smaller this time for the enlarged plot
-  ylim(c(-9.5, -7.5)) + 
-  xlim(c(9, 11))+
-  # set the axis labels
-  xlab("log(N)") +
-  ylab("log(Bias(H))") +
-  # set the graph title
-  ggtitle("Comparison of the regression lines for Normal distribution")
