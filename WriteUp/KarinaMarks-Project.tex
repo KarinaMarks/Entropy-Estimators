@@ -1006,7 +1006,7 @@ When looking at the larger values of $N$, it is first important to note that the
 
 Thus, looking at the results shown in table \ref{uniform_kcompare_table}, ignoring $k=1$ and considering $N=25,000$, it appears to show smallest bias for values of $k \in \{4, 5, 6 \}$; more specifically $k=5$ appears to have the smallest bias. This fits with the previous analysis done on the value of $k$ for different sample sizes, which stated that we must have $k \in \{1, 2, ..., 9\}$. Next, examining the table for $N=50,000$, we can see that the smallest bias appears to be when $k \in \{ 4, 5, 6, 7, 8, 11\}$, however, for all other values of $k$ we still have a small bias $< 0.000012$. Thus, we cannot yet draw any conclusions about the optimal value of $k$ for a large sample size, $N$, from this distribution.
 
-Next I wish to examine the graphs showing the relationship between the logarithm of the bias of the estimator and the logarithm of the sample size (\ref{logbias}). This is shown by plotting the simulated data and fitting a regression line for each value of $k$ separately, in Figures \ref{Uniform_graphs26} and \ref{Uniform_graphs711}. These show a negative linear relationship for all values of $k$ in a similar fashion to the normal distribution, Figures \ref{normal_graphs16} and \ref{normal_graph711}. Also, looking more closely, the regression lines fitted to the data appear to become steeper for higher values of $k$, whilst the standard error bars appear to become smaller. 
+Next I wish to examine the graphs showing the relationship between the logarithm of the bias of the estimator and the logarithm of the sample size (\ref{logbias}). This is shown by plotting the simulated data and fitting a regression line for each value of $k$ separately, in Figures \ref{Uniform_graphs26} and \ref{Uniform_graphs711}. These show a negative linear relationship for all values of $k$ in a similar fashion to the normal distribution, Figures \ref{normal_graphs16} and \ref{normal_graphs711}. Also, looking more closely, the regression lines fitted to the data appear to become steeper for higher values of $k$, whilst the standard error bars appear to become smaller. 
 
 \begin{figure}
 \makebox[\linewidth][c]{%
@@ -1698,41 +1698,6 @@ This returns a numeric value which is the estimator of entropy for this sample. 
 \lstinputlisting[language=R]{./Code/KLEE.R}
 
 
-%\subsection{Example}
-%To show that the \texttt{KLEE} function works, I am giving the example below where I can work out the estimation of entropy by hand, and check that my function works for this. 
-
-%Consider a sample $X = \{3, 6, 1, 7, 2\}$, from this we can easily find the estimator of entropy for $k=1$ and $k=2$. For both estimators the sample szie $n=5$, the volume of the d-dimensional euclidean ball is $V_{d} = V_{1} = 2$. Then for $k=1$, the vector of nearest neighbour distances is given by $NN_{1} = \{1, 1, 1, 1, 1\}$ and the digamma function is given by $\Psi(1) = -\gamma \approx -0.57722$. Thus we have;
-
-%\begin{align*}
-%\hat{H}_{5, 1} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{1, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma)} \\
-%&=\frac{1}{5 \exp(-\gamma)} \sum_{i=1}^{5} \log(8) \\
-%&= \frac{1}{\exp(-\gamma)} \log(8) \\
-%&\approx something wrong
-%\end{align*}
-
-%For $k=2$ we have the vector of nearest neighbour distances is given by $NN_{2} = \{2, 3, 2, 4, 1\}$ and the digamma function is given by $\Psi(2) = -\gamma + 1 \approx 0.42278$. Thus we have;
-
-%\begin{align*}
-%\hat{H}_{5, 2} (X) &= \frac{1}{5} \sum_{i=1}^{5} \frac{\log(NN_{2, i} \cdot 2 \cdot (5-1))}{\exp(-\gamma + 1)} \\
-%&=\frac{1}{5 \exp(-\gamma + 1)} \sum_{i=1}^{5} \log(8 NN_{2, i}) \\
-%&= \frac{1}{5 \exp(-\gamma + 1)} \left(\log(16) + \log(24) + \log(16) + \log(32) + \log(8) \right)\\
-%&\approx something? wrong
-%\end{align*}
-
-
-%TODO- look at both above?
-
-%We can also find this using the function \texttt{KLEE}, by the following code;
-%\begin{lstlisting}[language=R]
-%> x <- c(3, 6, 1, 7, 2)
-%> KLEE(x, k=1)
-%[1] 2.656658
-%> KLEE(x, k=2)
-%[1] 2.430898
-%\end{lstlisting}
-
-
-
 
 \section{Exact entropies}
 
@@ -1835,7 +1800,7 @@ The following code is how I created the graphs in Chapter \ref{chapter_conclusio
 
 \chapter{Data} \label{appendix_data}
 
-For all the data from the simulations visit \url{https://github.com/KarinaMarks/Entropy-Estimators/blob/master/Data/data_normal.csv} for the normal distribution, \url{https://github.com/KarinaMarks/Entropy-Estimators/blob/master/Data/data_uniform.csv} for the uniform distribution and \url{https://github.com/KarinaMarks/Entropy-Estimators/blob/master/Data/data_expo.csv} for the exponential distribution. %TODO - breakline=True or smth for url
+For all the data from the simulations visit \url{https://github.com/KarinaMarks/Entropy-Estimators/blob/master/Data/data_normal.csv} for the normal distribution, \url{https://github.com/KarinaMarks/Entropy-Estimators/blob/master/Data/data_uniform.csv} for the uniform distribution and \url{https://github.com/KarinaMarks/Entropy-Estimators/blob/master/Data/data_expo.csv} for the exponential distribution. 
 
 The data included here is the summary data created from the above simulated data, by the code set out in Appendix \ref{appendix_code}. Note that for the uniform and exponential tables, there is no data for $k=1$, the reasons for this are set out previously in the appropriate chapters.
 
