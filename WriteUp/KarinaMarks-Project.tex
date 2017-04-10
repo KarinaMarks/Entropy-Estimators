@@ -530,8 +530,6 @@ Moreover, I will be exploring analytically the optimal value of $k$, for reducin
 
 \chapter{Monte-Carlo Simulations} \label{Chapter_simulations}
 
-In this chapter, I will explore simulations 
-
 In this chapter, I will explore simulations on the bias of the K-L estimator (\ref{KLest}) on a sample from a 1-dimensional distribution, in comparison to its sample size, with respect to different values of k. Firstly, the distributions considered will be analysed to determine if they satisfy Conditions \ref{A1}, \ref{A2} and \ref{A3} stated for Theorems \ref{unbias} and \ref{efficient} to hold. Then, I will explore in depth the bias of this estimator of entropy for simulations of samples from certain distributions, for different values of $k$.
 
 The motivation for these simulations is to analytically explore the consistency of this estimator for different values of $k$; the relationship between the size of the bias of the estimator $\hat{H}_{N, k}$, $Bias(\hat{H}_{N, k})$,  and the sample size, $N$. Using Theorem \ref{unbias}, we can write that the bias of the estimator approaches 0 as $N \to \infty$. This is because we can write $Bias(\hat{H}_{N, k} ) = \mathbb{E}(\hat{H}_{N, k}) - H$, which in equation (\ref{unbias_equation}) implies $Bias(\hat{H}_{N, k}) \to 0$ as $N \to \infty$. Thus, there must be a type of inverse relationship between the bias of the estimator, $Bias(\hat{H}_{N, k})$, and $N$. We believe this relationship is of the form:
