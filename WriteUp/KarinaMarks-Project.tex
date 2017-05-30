@@ -108,7 +108,7 @@ Prof. Nikolai \textsc{Leonenko} % Supervisor's Name
 \end{titlepage}
 
 \begin{abstract}
-The Kozachenko-Leonenko (K-L) estimator, $\hat{H}_{N, k}$, \cite{paper1} (1987) is used to estimate the entropy of a random vector $x \in \mathbb{R}^d$ of size $N$, based upon the $k$th nearest neighbour sample spacings. There is extensive theoretical research into the conditions under which the asymptotic unbias and consistency of this estimator holds \cite{paper4, paper3, paper1, paper2}. However, this paper focuses on the investigation of how the estimator works analytically, by exploring two main research questions: ``How does the bias of the estimator act, $Bias|\hat{H}_{N, k}| = O \left( \frac{1}{N^{a}} \right)$ \cite{paper3} or $Bias|\hat{H}_{N, k}| = O\left( \left( \frac{k}{N} \right)^{a} \right)$ \cite{paper4}?'' and ``What is the optimal value to choose for k in terms of reducing the bias?'' This research utilised a programming software, R \cite{code1} (Appendix \ref{appendix_code}), to run simulations to generate a large number of samples, of different sizes $N$, from the 1-dimensional uniform, normal and exponential distributions, for the K-L estimator to be calculated from, with varying $k$. Then, the findings were summarised (Appendix \ref{appendix_data}), linear regression analysis and other techniques were conducted to study the research questions, and lastly, the interpretations of the data were written up in LaTeX. In general, the investigation found varying results between distributions and sample sizes, thus creating difficulty in making any conclusive answers. One irrefutable result, found for all distributions and values of $k$, was that $Bias|\hat{H}_{N, k}| = \frac{c}{N^a}$, with $a \geq 0.49$, where the only discrepancies found being in the analysis of the behaviour of $c$. For samples from the uniform and normal distributions, the analysis suggests that bias of the estimator acts of $O\left( \left( \frac{k}{N} \right)^{a} \right)$ ($c = O(k ^a) $). Conversely, for samples from the exponential distribution, the analysis implied a relation of the other form, $O \left( \frac{1}{N^{a}} \right)$ ($c$ is constant). Moreover, some conclusions have been drawn about the optimal choice of $k$ in reducing the bias for a sample size $N$; yet, there was variability for all $N$, giving a range of values of $k$ - not one choice that always works.
+The Kozachenko-Leonenko (K-L) estimator, $\hat{H}_{N, k}$, \cite{paper1} (1987) is used to estimate the entropy of a sample made up of $N$ vectors $x \in \mathbb{R}^d$, based upon the $k$th nearest neighbour sample spacings. There is extensive theoretical research into the conditions under which the asymptotic unbias and consistency of this estimator holds \cite{paper4, paper3, paper1, paper2}. However, this paper focuses on the investigation of how the estimator works analytically, by exploring two main research questions: ``How does the bias of the estimator act, $Bias|\hat{H}_{N, k}| = O \left( \frac{1}{N^{a}} \right)$ \cite{paper3} or $Bias|\hat{H}_{N, k}| = O\left( \left( \frac{k}{N} \right)^{a} \right)$ \cite{paper4}?'' and ``What is the optimal value to choose for k in terms of reducing the bias?'' This research utilised a programming software, R \cite{code1} (Appendix \ref{appendix_code}), to run simulations to generate a large number of samples, of different sizes $N$, from the 1-dimensional uniform, normal and exponential distributions, for the K-L estimator to be calculated from, with varying $k$. Then, the findings were summarised (Appendix \ref{appendix_data}), linear regression analysis and other techniques were conducted to study the research questions, and lastly, the interpretations of the data were written up in LaTeX. In general, the investigation found varying results between distributions and sample sizes, thus creating difficulty in making any conclusive answers. One irrefutable result, found for all distributions and values of $k$, was that $Bias|\hat{H}_{N, k}| = \frac{c}{N^a}$, with $a \geq 0.49$, where the only discrepancies found being in the analysis of the behaviour of $c$. For samples from the uniform and normal distributions, the analysis suggests that bias of the estimator acts of $O\left( \left( \frac{k}{N} \right)^{a} \right)$ ($c = O(k ^a) $). Conversely, for samples from the exponential distribution, the analysis implied a relation of the other form, $O \left( \frac{1}{N^{a}} \right)$ ($c$ is constant). Moreover, some conclusions have been drawn about the optimal choice of $k$ in reducing the bias for a sample size $N$; yet, there was variability for all $N$, giving a range of values of $k$ - not one choice that always works.
 \end{abstract}
 
 \tableofcontents
@@ -216,7 +216,7 @@ where d is the dimension of the distribution that the entropy is taken from.
 
 \subsection{Applications of entropy}
 
-Entropy began as a concept in thermodynamics - about the idea that within any irreversible system, a small amount of heat energy is aways lost. Entropy has more recently found application in the field of information theory, where it describes a similar loss, this time of missing information or data in systems of information transmission. Thus, entropy has many applications across both these areas.
+Entropy began as a concept in thermodynamics - about the idea that within any irreversible system, a small amount of heat energy is always lost. Entropy has more recently found application in the field of information theory, where it describes a similar loss, this time of missing information or data in systems of information transmission. Thus, entropy has many applications across both these areas.
 
 I will be concentrating on Shannon entropy - also mentioning R\'enyi and Tsallis entropies - which concern information theory; therefore I will consider applications accordingly. The following is a short overview of some of its applications; however, this is not an exhaustive list, since the applications of entropy are extensive.
 
@@ -260,8 +260,8 @@ H_{N} \xrightarrow{p} H(f)
 
 \item Strong Consistency (Asymptotic Normality) 
 \begin{align}
-\sqrt{N}(\hat{H}_{N, k} - H) &\xrightarrow{d} N(0, \sigma^2) \\
-\mathbb{E}{(\hat{H}_{N, k} - H)^2} &= \frac{\sigma^2}{N} \left( 1 + O\left( \frac{1}{N} \right) \right) \\ \nonumber
+\sqrt{N}(H_{N} - H(f)) &\xrightarrow{d} N(0, \sigma^2) \\
+\mathbb{E}{(H_{N} - H(f))^2} &= \frac{\sigma^2}{N} \left( 1 + O\left( \frac{1}{N} \right) \right) \\ \nonumber
 \end{align}
 \textit{(This is the consistency shown with the Kozachenko-Leonenko estimator in Theorem \ref{efficient})}
 
@@ -310,7 +310,7 @@ The last category of estimators discussed by Beirlant, Dudewicz, Gyorfi and Muel
 
 \section{History} \label{history}
 
-The Kozachenko-Leonenko (K-L) estimator was first introduced by L.Kozachenko and N.Leonenko, in 1987, in the article \textit{Sample Estimate of the Entropy of a Random Vector}, in the journal \textit{Problems of Information Transmission} \cite{paper1}. Using the nearest neighbour method, they created a simple estimator for the Shannon entropy of an absolutely continuous random vector from a independent sample of observations. They then established conditions under which asymptotic unbiasedness and consistency hold.
+The Kozachenko-Leonenko (K-L) estimator was first introduced by L.Kozachenko and N.Leonenko, in 1987, in the article \textit{Sample Estimate of the Entropy of a Random Vector}, in the journal \textit{Problems of Information Transmission} \cite{paper1}. Using the nearest neighbour method, they created a simple estimator for the Shannon entropy of an absolutely continuous random vector from a independent sample of observations. They then established conditions under which asymptotic unbiasedness and weak consistency ($\hat{H}_{N, k} \xrightarrow{p} H$) hold.
 
 Since then, there has been major developments in the estimator; firstly in 2007, N.Leonenko, L.Pronzato, V.Savani, proposed a similar alternative to this estimator in their paper \textit{a Class of Renyi Information Estimators for Mulitdimensional Densities}, this time using the k-nearest neighbour method, to consider estimators for the R\'enyi and Tsallis entropies \cite{paper2}. Then, as the order of these entropies $q \to 1$, they defined the k-nearest neighbour estimator for the Shannon entropy, where k is fixed, and these estimators (under less rigorous conditions) are both consistent and asymptotically unbiased.
 
@@ -327,7 +327,7 @@ Therefore, the following estimator was proposed for the Shannon entropy of a ran
 \begin{equation}
 H_{N} = d \log(\bar{\rho } ) + \log (c(d)) + \log (\gamma) + \log (N-1)
 \end{equation}
-where $c(d) = \frac{\pi^{\frac{d}{2}}}{\Gamma ( \frac{d}{2} + 1 )}$ is the volume of the d-dimensional unit ball, the Euler constant is $\log (\gamma) = \exp \left[ - \int_{0}^{\infty} e^{-t} \log(t) dt \right] = -\Psi(1)$ and $\bar{\rho} = \left[ \prod_{i=1}^{N} \rho_{i} \right]^{\frac{1}{N}}$, with $\rho_{i}$ the nearest neighbour distance from $X_{i}$ to another member of the sample $X_{j}$, $i \neq j$. 
+where $c(d) = \frac{\pi^{\frac{d}{2}}}{\Gamma ( \frac{d}{2} + 1 )}$ is the volume of the d-dimensional unit ball, the Euler constant is $\log (\gamma) = \log \left( \exp \left[ - \int_{0}^{\infty} e^{-t} \log(t) dt \right] \right) =  - \int_{0}^{\infty} e^{-t} \log(t) dt = -\Psi(1)$ and $\bar{\rho} = \left[ \prod_{i=1}^{N} \rho_{i} \right]^{\frac{1}{N}}$, with $\rho_{i}$ the nearest neighbour distance from $X_{i}$ to another member of the sample $X_{j}$, $i \neq j$. 
 
 It is important to note that one can write the Euler constant $-\Psi(1) = \log (\exp(-\Psi(1))) = \log (\frac{1}{\exp(\Psi(1))})$ - this notation is used in the latter papers, so it is useful to introduce it here. $\Psi(x)$ is the Digamma function, and when $x=1$, this is the negative Euler constant. Thus this estimator can be written in the following form:
 \begin{align}
@@ -491,7 +491,7 @@ as $N \to \infty$ uniformly for $k \in \{ k_{0}^{*}, ...,  k_{1}^{*} \}$, where 
 \end{theorem}
 
 
-By the above, we can now say that the -L estimator, $\hat{H}_{N, k}$, that satisfies Conditions \ref{A1}, \ref{A2}, \ref{A3} is a consistent and asymptotically unbiased estimator of exact entropy $H$; thus is a efficient estimator. This is due to using the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$ \cite{paper6}, which states that:
+By the above, we can now say that the K-L estimator, $\hat{H}_{N, k}$, that satisfies Conditions \ref{A1}, \ref{A2}, \ref{A3} is a consistent and asymptotically unbiased estimator of exact entropy $H$; thus is a efficient estimator. This is due to using the central limit theorem, on the estimator for entropy $\hat{H}_{N, k}$ \cite{paper6}, which states that:
 \begin{equation}
 \frac{\hat{H}_{N, k} - \mathbb{E}{\hat{H}_{N, k}}}{\sqrt{Var(\hat{H}_{N, k})}} \xrightarrow{d} N(0, 1) \nonumber
 \end{equation}
@@ -505,12 +505,12 @@ So we can see that from Theorem \ref{efficient}, $\sqrt{N}(\hat{H}_{N, k} - H) \
 
 I will be exploring the bias in more detail later to see, analytically, which one of the two ideas show to be more true for the behaviour of the bias for a large sample size, $N$, in dimension $d=1$. Where I will be considering samples from the 1-dimensional normal, uniform and exponential distributions. 
 \begin{itemize}
-\item With a fixed k, by \cite{paper3}, for $\beta \in (0, 2] \cap (0, d]$, we choose $a \in (0, \frac{\beta}{d} ]$, then:
+\item With a fixed k, by \cite{paper3}, for $a >0.5$ we have:
 \begin{equation} \label{fixedkbias}
 Bias(\hat{H}_{N, k})= O \left( \frac{1}{N^{a}} \right)
 \end{equation}
 
-\item With k depending on N, by \cite{paper4}, for $\beta \in (0, 2]$, we again choose $a \in (0, \frac{\beta}{d} ]$, then:
+\item With k depending on N, by \cite{paper4}, for $a >0.5$ we have:
  \begin{equation} \label{dependentkbias}
 Bias(\hat{H}_{N, k}) = O\left( \left( \frac{k}{N} \right)^{a} \right)
 \end{equation}
@@ -547,7 +547,7 @@ As I wish to consider the difference in accuracy of the estimator when using dif
 
 I will conduct a range of analyses, for each distribution, to consider how this estimator acts in reality, the process of analysis will be as follows:
 \begin{enumerate}
-\item Create a summary table of the mean absolute value of the bias of the estimator just observing the sample sizes $N=100, 25000$ and $50000$ for all values of $k$ that satisfy Condition \ref{A3}. I could also at this point consider the variance of the bias at the values of $N$ stated above, for all applicable values of $k$. However, we will find that the $Var|Bias(\hat{H}_{50000, k})| \to 0$ for $k \to 10$, by the definition of the estimator using the nearest neighbour method. Taking a larger $k$ in the nearest neighbour method will produce less varied results. This is because more smoothing takes place for a larger $k$, eventually - if $k$ is made large enough - the output will be constant and the variance negligible regardless of the inputted values. Thus, considering the variance of the bias of the estimator in comparison to $k$ is not necessarily informative. 
+\item Create a summary table of the mean absolute value of the bias of the estimator just observing the sample sizes $N=100, 25000$ and $50000$ for all values of $k$ that satisfy Condition \ref{A3}. I could also at this point consider the variance of the bias at the values of $N$ stated above, for all applicable values of $k$. However, we will find that the $Var|Bias(\hat{H}_{50000, k})| \to 0$ for $k \to 11$, by the definition of the estimator using the nearest neighbour method. Taking a larger $k$ in the nearest neighbour method will produce less varied results. This is because more smoothing takes place for a larger $k$, eventually - if $k$ is made large enough - the output will be constant and the variance negligible regardless of the inputted values. Thus, considering the variance of the bias of the estimator in comparison to $k$ is not necessarily informative. 
 
 \item From simulations run to obtain the data, we can plot graphical representations of the linear relationship shown in equation \ref{logbias}, of $log(N)$ against $log|Bias(\hat{H}_{N, k})|$ for sample sizes $N=100, 200, 300, ..., 50000$, for each value of $k$. I will take 500 samples of size $N$, and find the average estimator for each sample size, making use of the Mean Value Theorem to attain a more accurate representation of the estimator from that sample size.
 
@@ -800,7 +800,7 @@ $k$ & $R^2$ & $\sigma$ \\
 
 Both columns of this table essentially point to the same conclusion; the larger the value of $k$, the more accurate the linear model is to fitting the data. This is shown by the $R^2$ value increasing towards $1$ and the $\sigma$ values decreasing positively. 
 
-The $R^2$ is very small for $k \leq 3$ , which suggests that the line is a poor fit to the data; however, due the the standard deviation being $\sigma^2 \approx 1.1$, we cannot say that these lines are poorly fitting; since the majoring of the data is within a very small range of the line.
+The $R^2$ is very small for $k \leq 3$ , which suggests that the line is a poor fit to the data; however, due the the standard deviation being $\sigma^2 \approx 1.1$, we cannot say that these lines are poorly fitting; since the majority of the data is within a very small range of the line.
 
 The most important information found from the regression analysis is shown in table \ref{normal_a_c_compare_table}; where the values of $a_{k}$ and $c_{k}$ are given for each value of $k$.
 
@@ -885,7 +885,7 @@ To better study the linear relationship between the logarithm of the bias and th
   \label{normal_comparison_graph}
 \end{figure}
 
-From this, we can obviously see that for smaller values of $N$ (i.e - smaller values of $log(N)$), the smallest bias occurs when $k=2$, since this line is the lowest for the data up until $log(N) \approx 9$ (i.e. $N \approx 13,000$). For a larger sample size, we cannot accurately see in this graph which line is the best. This motivates us to look at a section of the graph when $9 \leq log(N) \leq 11$ - i.e. $8,000 \leq N \leq 50,000$ - Figure \ref{normal_comparison_graph_zoom}.
+From this, we can obviously see that for smaller values of $N$ (i.e - smaller values of $log(N)$), the smallest bias occurs when $k=2$, since this line is the lowest for the data up until $log(N) \approx 9.5$ (i.e. $N \approx 13,000$). For a larger sample size, we cannot accurately see in this graph which line is the best. This motivates us to look at a section of the graph when $9 \leq log(N) \leq 11$ - i.e. $8,000 \leq N \leq 50,000$ - Figure \ref{normal_comparison_graph_zoom}.
 
 \begin{figure}
   \begin{center}
@@ -933,7 +933,7 @@ Similarly to the 1-dimensional normal distribution, we have for the 1-dimensiona
 \hat{H}_{N, k} =  \frac{1}{N} \sum_{i=1}^{N} log \left[ \frac{2\rho_{(k),i}(N-1)}{e^{\Psi(k)}} \right]\nonumber
 \end{equation}
 
-Moreover, the samples considered will not be from the standard uniform, but from the uniform distribution $U[0,100]$. This is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems as the density function would be $f(x) = 1$, $0 \leq x \leq 1$. This would incur working on a very small scale (i.e taking a points with distance between them) causing problems due to the limitations that occur when using computer programs to run simulations. Thus, I will be using the density function $f(x) = 0.01$, $0 \leq x \leq 100$, which is from the $U[0,100]$ distribution and gives the exact entropy of:
+Moreover, the samples considered will not be from the standard uniform, but from the uniform distribution $U[0,100]$. This is because, using the standard uniform, $U[0,1]$, would fail since taking $N=50,000$ samples between 0 and 1 would generate problems as the density function would be $f(x) = 1$, $0 \leq x \leq 1$. This would incur working on a very small scale (i.e taking points with an $\infty$-small distances between them) causing problems due to the limitations that occur when using computer programs to run simulations. Thus, I will be using the density function $f(x) = 0.01$, $0 \leq x \leq 100$, which is from the $U[0,100]$ distribution and gives the exact entropy of:
 \begin{equation} \label{uniform_exact}
 H = log(100) \approx 4.605170
 \end{equation}
@@ -1473,12 +1473,12 @@ For the previous distributions there has been an obvious increase when looking a
 \makebox[\linewidth][c]{%
 \begin{subfigure}[b]{.6\textwidth}
 \centering
-\includegraphics[width=\textwidth]{./Graphs/Best/ExpocVk.png}
+\includegraphics[width=\textwidth]{./Graphs/Best/ExpocVkFixed.png}
 \caption{The values of $k$ against the values of $c_{k}$}
 \end{subfigure}%
 \begin{subfigure}[b]{.6\textwidth}
 \centering
-\includegraphics[width=\textwidth]{./Graphs/Best/ExpocVk2.png}
+\includegraphics[width=\textwidth]{./Graphs/Best/ExpocVk2Fixed.png}
 \caption{The values of $k^{a_{k}}$ against the corresponding values of $c_{k}$}
 \end{subfigure}%
 }
@@ -1620,7 +1620,7 @@ Perhaps an interesting graph to look at is that depicted in Figure \ref{k_bias_a
 
 From this, we can see that for a sample distributed like the normal, the safest value of $k$ to choose for any sample size is $k=1$, since on average, this gives the smallest bias of $\approx 0.000125$, regardless of its sample size. Then for all other values of $k$, the bias of the estimator increases with $k$; hence, if in doubt, I would recommend choosing $k=1$ if you suspect your 1-dimensional data to be normally distributed.
 
-Considering the uniform distribution, we can see that the smallest average bias occurs at $k=2$, with the same behaviour as the normal for $k \geq 3$, whereby the bias increases with $k$. The average bias at $k=2$ is $\approx 0.0000625$, which is about half the size of that for the normal distribution. However, even though the relative size of the bias within a distribution is important to look at, the size between distributions is not as informative, due to the variability of the samples. Where for the normal distribution we have variance $\sigma^2 = 1$ and for the uniform we have variance $\frac{12}{100^2} = 0.0012$, which is significantly smaller - so we would expect a more accurate estimator due to this. Thus, when uncertain of which $k$ to choose, if the 1-dimensional data appears to be uniformly distributed, then it seems to be that $k=2$ would be the safest choice.
+Considering the uniform distribution, we can see that the smallest average bias occurs at $k=2$, with the same behaviour as the normal for $k \geq 3$, whereby the bias increases with $k$. The average bias at $k=2$ is $\approx 0.0000625$, which is about half the size of that for the normal distribution. However, even though the relative size of the bias within a distribution is important to look at, the size between distributions is not as informative, due to the variability of the samples. Where for the normal distribution we have variance $\sigma^2 = 1$ and for the uniform we have variance $\frac{100^2}{12} \approx 833$, which is much larger than the normal - however, this could be irrelevant, since there is not yet extensive research into the relationship between variance and entropy. Thus, when uncertain of which $k$ to choose, if the 1-dimensional data appears to be uniformly distributed, then it seems to be that $k=2$ would be the safest choice.
 
 Lastly, looking at the most interesting result of the exponential distribution, which shows that, on average, the smallest bias occurs when $k=4$, with the bias generally increasing on both sides as $k$ increases/decreases away from $4$. The bias here is $\approx 0.000125$ - similar to that of the normal distribution, which is surprising owing to the fact that the samples from the exponential distribution were taken with a variability of $\frac{1}{0.5^2} = 4$, which is four times larger than the variance of samples from the normal distribution. This is something very interesting about the exponential distribution, and I have noticed throughout my analysis that samples from this distribution do indeed act quite differently to those from the other two.
 
